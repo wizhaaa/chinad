@@ -10,8 +10,19 @@ body{
     color: #f0f0f0;
 }
 
+nav{
+    background-color: #202020;
+    padding: 20px;
+}
+.nav_button {
+    float: right;
+    margin: -25px 20px;
+
+}
+
 h1{
     font-size: 125%;
+    
 }
 
 a{
