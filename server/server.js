@@ -40,7 +40,7 @@ let ItemSchema = new mongoose.Schema(
 // Create Model 
 let itemModel = db.model("ItemModel", ItemSchema); 
 
-app.get("/api/people", (req, res) => {
+app.get("/api/items", (req, res) => {
     itemModel.find( {}, {__v: 0}, (err, docs) => {
         if (!err) { 
             res.json(docs); 
@@ -51,7 +51,7 @@ app.get("/api/people", (req, res) => {
 })
 
 // Route to add Item
-app.post("/api/person/add", (req, res) => {
+app.post("/api/items/add", (req, res) => {
     let item = new itemModel(req.body); 
 
     personalbar.save( (err, result) => { 
