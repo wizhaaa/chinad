@@ -12,15 +12,23 @@ function Home() {
           </Typography>
           <Typography textAlign="center" variant="body" gutterBottom>
             {" "}
-            Welcome to China Delight's Online Web Store. Navigate to the side
-            menu to browse our menu and add items to your cart. When you are
-            finished, goto your cart to checkout!{" "}
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
           </Typography>
           <br />
           <Typography textAlign="center" variant="body" gutterBottom>
-            {" "}
-            We are a Chinese take-out located in Forest Hill, Maryland. Hours
-            Here: Address Here: Click Here to find directions!{" "}
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
           </Typography>
         </Box>
       </Typography>
