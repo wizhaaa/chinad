@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 
-function Cart() {
+function Menu() {
   return (
     <div className="Cart">
       <Typography component="div">
         <Box textAlign="center" m={1}>
           <Typography textAlign="center" variant="h4" gutterBottom>
-            My Cart
+            Menu
           </Typography>
         </Box>
       </Typography>
@@ -16,4 +16,4 @@ function Cart() {
   );
 }
 
-export default Cart;
+export default Menu;

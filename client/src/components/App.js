@@ -3,12 +3,11 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
 
-import Navbar from "./Navbar";
 import Home from "./Home";
 import About from "./About";
-import NavBarMenu from "./NavBarMenu";
-import NavAppBar from "./NavAppBar";
+import HeaderNav from "./HeaderNav";
 import Cart from "./Cart";
+import Menu from "./Menu";
 
 //import "bootstrap";
 //import "fontsource-roboto";
@@ -20,7 +19,7 @@ function App() {
 
       <Router>
         <div className="App">
-          <NavAppBar />
+          <HeaderNav />
           {/* <NavBarMenu /> */}
           {/* <Navbar /> */}
           <div className="content">
@@ -36,6 +35,9 @@ function App() {
               </Route>
               <Route path="/cart">
                 <Cart />
+              </Route>
+              <Route path="/menu">
+                <Menu />
               </Route>
             </Switch>
           </div>

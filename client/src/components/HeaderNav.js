@@ -12,9 +12,10 @@ import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import HomeIcon from "@material-ui/icons/Home";
+import InfoIcon from "@material-ui/icons/Info";
+import RestaurantMenuIcon from "@material-ui/icons/RestaurantMenu";
 import { withRouter } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
@@ -35,21 +36,29 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ButtonAppBar = (props) => {
+const HeaderNav = (props) => {
   const classes = useStyles();
   const [state, setState] = React.useState(false);
 
   //react-router setups
   const { history } = props;
   const itemsList = [
-    { text: "Home", icon: <MailIcon />, onClick: () => history.push("/") },
+    { text: "Home", icon: <HomeIcon />, onClick: () => history.push("/") },
     {
       text: "About",
-      icon: <MailIcon />,
+      icon: <InfoIcon />,
       onClick: () => history.push("/about"),
     },
-    { text: "Cart", icon: <MailIcon />, onClick: () => history.push("/cart") },
-    { text: "Menu", icon: <MailIcon />, onClick: () => history.push("/menu") },
+    {
+      text: "Cart",
+      icon: <ShoppingCartIcon />,
+      onClick: () => history.push("/cart"),
+    },
+    {
+      text: "Menu",
+      icon: <RestaurantMenuIcon />,
+      onClick: () => history.push("/menu"),
+    },
   ];
 
   // for our drawer
@@ -68,6 +77,7 @@ const ButtonAppBar = (props) => {
   // list of items for drawer
   const list = () => (
     <div
+      className={classes.list}
       role="presentation"
       onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
@@ -82,27 +92,6 @@ const ButtonAppBar = (props) => {
             </ListItem>
           );
         })}
-      </List>
-      <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
       </List>
     </div>
   );
@@ -151,4 +140,4 @@ const ButtonAppBar = (props) => {
   );
 };
 
-export default withRouter(ButtonAppBar);
+export default withRouter(HeaderNav);
