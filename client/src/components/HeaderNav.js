@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -16,14 +16,19 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import HomeIcon from "@material-ui/icons/Home";
 import InfoIcon from "@material-ui/icons/Info";
 import RestaurantMenuIcon from "@material-ui/icons/RestaurantMenu";
+import Hidden from "@material-ui/core/Hidden";
 import { withRouter } from "react-router";
 
+const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
   menuButton: {
     marginRight: theme.spacing(2),
+    [theme.breakpoints.up("sm")]: {
+      display: "none",
+    },
   },
   title: {
     flexGrow: 1,
@@ -34,11 +39,39 @@ const useStyles = makeStyles((theme) => ({
   fullList: {
     width: "auto",
   },
+  toolbar: theme.mixins.toolbar,
+  drawerPaper: {
+    width: drawerWidth,
+  },
+  drawer: {
+    [theme.breakpoints.up("sm")]: {
+      width: drawerWidth,
+      flexShrink: 0,
+    },
+  },
+  appBar: {
+    [theme.breakpoints.up("sm")]: {
+      width: `calc(100% - ${drawerWidth}px)`,
+      marginLeft: drawerWidth,
+    },
+  },
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing(3),
+  },
 }));
 
 const HeaderNav = (props) => {
   const classes = useStyles();
   const [state, setState] = React.useState(false);
+
+  //responsive drawer
+  const { window } = props;
+  const theme = useTheme();
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
 
   //react-router setups
   const { history } = props;
@@ -77,7 +110,7 @@ const HeaderNav = (props) => {
   // list of items for drawer
   const list = () => (
     <div
-      className={classes.list}
+      className={(classes.list, classes.toolbar)}
       role="presentation"
       onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
@@ -96,16 +129,21 @@ const HeaderNav = (props) => {
     </div>
   );
 
+  const container =
+    window !== undefined ? () => window().document.body : undefined;
+
   return (
     <div className={classes.root}>
       <AppBar position="fixed">
         <Toolbar>
           <React.Fragment>
             <Button
+              arial-label="open drawer"
               edge="start"
               className={classes.menuButton}
               color="inherit"
-              onClick={toggleDrawer(true)}
+              // onClick={toggleDrawer(true)}
+              onClick={handleDrawerToggle}
             >
               <MenuIcon />
             </Button>
@@ -135,7 +173,39 @@ const HeaderNav = (props) => {
           </IconButton>
         </Toolbar>
       </AppBar>
+      <nav className={classes.drawer} aria-label="mailbox folders">
+        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+        <Hidden smUp implementation="css">
+          <SwipeableDrawer
+            container={container}
+            variant="temporary"
+            anchor={theme.direction === "rtl" ? "right" : "left"}
+            open={mobileOpen}
+            onClose={handleDrawerToggle}
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+            ModalProps={{
+              keepMounted: true, // Better open performance on mobile.
+            }}
+          >
+            {list()}
+          </SwipeableDrawer>
+        </Hidden>
+        <Hidden xsDown implementation="css">
+          <SwipeableDrawer
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+            variant="permanent"
+            open
+          >
+            {list()}
+          </SwipeableDrawer>
+        </Hidden>
+      </nav>
       <Toolbar />
+      
     </div>
   );
 };

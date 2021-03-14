@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Container from "@material-ui/core/Container";
 
 import Home from "./Home";
 import About from "./About";
