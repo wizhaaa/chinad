@@ -6,7 +6,7 @@ import cors from "cors";
 import path from "path";
 const app = express();
 
-const PORT = process.env.PORT || 4747;
+const PORT = process.env.PORT;
 const DB_URI = process.env.SECRET_DB_URI;
 //const DB = "reactDB;
 
