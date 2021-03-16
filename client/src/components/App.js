@@ -1,58 +1,46 @@
+// react library
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+// material-ui library
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { makeStyles } from "@material-ui/core/styles";
 
-import Home from "./Home";
-import About from "./About";
+// self made components
 import HeaderNav from "./HeaderNav";
-import Cart from "./Cart";
-import Menu from "./Menu";
+import Routes from "./Routes";
 
 //import test module
-import Demo from "./demo";
-
-//import "bootstrap";
-//import "fontsource-roboto";
+import Zz from "./demonr";
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+  },
+  toolbar: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3),
+    padding: theme.spacing(1),
   },
 }));
 
 function App() {
   const classes = useStyles();
   return (
-    <React.Fragment>
+    <div className={classes.root}>
+      <Zz />
       <CssBaseline />
 
       <Router>
         <div className="App">
-          <HeaderNav />
-          <div className={("content", classes.content)}>
-            <Switch>
-              <Route exact path="/">
-                <Home />
-              </Route>
-              <Route path="/home">
-                <Home />
-              </Route>
-              <Route path="/about">
-                <About />
-              </Route>
-              <Route path="/cart">
-                <Cart />
-              </Route>
-              <Route path="/menu">
-                <Menu />
-              </Route>
-            </Switch>
-          </div>
+          {/* <HeaderNav /> */}
+
+          <main className={classes.content}>
+            <div className={classes.toolbar} />
+            <Routes />
+          </main>
         </div>
       </Router>
-    </React.Fragment>
+    </div>
   );
 }
 

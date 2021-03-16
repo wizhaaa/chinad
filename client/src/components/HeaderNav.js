@@ -1,38 +1,47 @@
 import React from "react";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
-import List from "@material-ui/core/List";
-import Divider from "@material-ui/core/Divider";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import HomeIcon from "@material-ui/icons/Home";
-import InfoIcon from "@material-ui/icons/Info";
-import RestaurantMenuIcon from "@material-ui/icons/RestaurantMenu";
-import Hidden from "@material-ui/core/Hidden";
+import { makeStyles } from "@material-ui/core/styles";
+
+import CloseIcon from "@material-ui/icons/Close";
+
+// import MenuIcon from "@material-ui/icons/Menu";
+// import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+// import HomeIcon from "@material-ui/icons/Home";
+// import InfoIcon from "@material-ui/icons/Info";
+// import RestaurantMenuIcon from "@material-ui/icons/RestaurantMenu";
+import {
+  Add as AddIcon,
+  Menu as MenuIcon,
+  ShoppingCart as ShoppingCartIcon,
+  Home as HomeIcon,
+  Info as InfoIcon,
+  RestaurantMenu as RestaurantMenuIcon,
+} from "@material-ui/icons";
+
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  IconButton,
+  SwipeableDrawer,
+  List,
+  Divider,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+} from "@material-ui/core";
+
 import { withRouter } from "react-router";
 
-const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    width: "100%",
   },
   menuButton: {
     marginRight: theme.spacing(2),
-    [theme.breakpoints.up("sm")]: {
-      display: "none",
-    },
   },
-  title: {
-    flexGrow: 1,
-  },
+
   list: {
     width: 250,
   },
@@ -40,38 +49,21 @@ const useStyles = makeStyles((theme) => ({
     width: "auto",
   },
   toolbar: theme.mixins.toolbar,
-  drawerPaper: {
-    width: drawerWidth,
-  },
-  drawer: {
-    [theme.breakpoints.up("sm")]: {
-      width: drawerWidth,
-      flexShrink: 0,
-    },
-  },
-  appBar: {
-    [theme.breakpoints.up("sm")]: {
-      width: `calc(100% - ${drawerWidth}px)`,
-      marginLeft: drawerWidth,
-    },
-  },
-  content: {
+  title: {
     flexGrow: 1,
-    padding: theme.spacing(3),
+    textAlign: "center",
+  },
+  flexBox: {
+    display: "flex",
+    justifyContent: "flex-start",
+    marginLeft: theme.spacing(4),
+    // margin: theme.spacing(1),
   },
 }));
 
 const HeaderNav = (props) => {
   const classes = useStyles();
   const [state, setState] = React.useState(false);
-
-  //responsive drawer
-  const { window } = props;
-  const theme = useTheme();
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
 
   //react-router setups
   const { history } = props;
@@ -93,6 +85,98 @@ const HeaderNav = (props) => {
       onClick: () => history.push("/menu"),
     },
   ];
+  const menuList = [
+    {
+      text: "Lunch Specials",
+      icon: <AddIcon />,
+      onClick: () => history.push("/"),
+    },
+    {
+      text: "Combination Platters",
+      icon: <RestaurantMenuIcon />,
+      onClick: () => history.push("/about"),
+    },
+    {
+      text: "Fried Rice",
+      icon: <RestaurantMenuIcon />,
+      onClick: () => history.push("/cart"),
+    },
+    {
+      text: "Lo Mein",
+      icon: <RestaurantMenuIcon />,
+      onClick: () => history.push("/menu"),
+    },
+    {
+      text: "Beef",
+      icon: <RestaurantMenuIcon />,
+      onClick: () => history.push("/menu"),
+    },
+    {
+      text: "Seafood",
+      icon: <RestaurantMenuIcon />,
+      onClick: () => history.push("/menu"),
+    },
+    {
+      text: "Pork",
+      icon: <RestaurantMenuIcon />,
+      onClick: () => history.push("/menu"),
+    },
+    {
+      text: "Poultry",
+      icon: <RestaurantMenuIcon />,
+      onClick: () => history.push("/menu"),
+    },
+    {
+      text: "Vegetable",
+      icon: <RestaurantMenuIcon />,
+      onClick: () => history.push("/menu"),
+    },
+    {
+      text: "Mu Shu",
+      icon: <RestaurantMenuIcon />,
+      onClick: () => history.push("/menu"),
+    },
+    {
+      text: "Udon Noodles",
+      icon: <RestaurantMenuIcon />,
+      onClick: () => history.push("/menu"),
+    },
+    {
+      text: "Chow Mein/Chop Suey",
+      icon: <RestaurantMenuIcon />,
+      onClick: () => history.push("/menu"),
+    },
+    {
+      text: "Mei Fun/Rice Noodles",
+      icon: <RestaurantMenuIcon />,
+      onClick: () => history.push("/menu"),
+    },
+    {
+      text: "Egg Foo Young",
+      icon: <RestaurantMenuIcon />,
+      onClick: () => history.push("/menu"),
+    },
+    {
+      text: "Sweet and Sour",
+      icon: <RestaurantMenuIcon />,
+      onClick: () => history.push("/menu"),
+    },
+    {
+      text: "Appetizers",
+      icon: <RestaurantMenuIcon />,
+      onClick: () => history.push("/menu"),
+    },
+    {
+      text: "Sides",
+      icon: <RestaurantMenuIcon />,
+      onClick: () => history.push("/menu"),
+    },
+    {
+      text: "Special Health Diet Dishes",
+      icon: <RestaurantMenuIcon />,
+      onClick: () => history.push("/menu"),
+    },
+  ];
 
   // for our drawer
   const toggleDrawer = (open) => (event) => {
@@ -109,54 +193,78 @@ const HeaderNav = (props) => {
 
   // list of items for drawer
   const list = () => (
-    <div
-      className={(classes.list, classes.toolbar)}
-      role="presentation"
-      onClick={toggleDrawer(false)}
-      onKeyDown={toggleDrawer(false)}
-    >
-      <List>
-        {itemsList.map((item, index) => {
-          const { text, icon, onClick } = item;
-          return (
-            <ListItem button key={text} onClick={onClick}>
-              {icon && <ListItemIcon> {icon} </ListItemIcon>}
-              <ListItemText primary={text} />
-            </ListItem>
-          );
-        })}
-      </List>
+    <div>
+      {/* <div className={classes.toolbar}>
+        <div className={classes.flexBox}>
+          <IconButton onClick={toggleDrawer(false)}>
+            {" "}
+            <CloseIcon />{" "}
+          </IconButton>
+        </div>
+      </div> */}
+
+      <div
+        className={classes.list}
+        role="presentation"
+        onClick={toggleDrawer(false)}
+        onKeyDown={toggleDrawer(false)}
+      >
+        <List>
+          <ListItem>
+            <IconButton onClick={toggleDrawer(false)}>
+              {" "}
+              <CloseIcon />{" "}
+            </IconButton>
+          </ListItem>
+        </List>
+        <Divider />
+        <List>
+          {itemsList.map((item, index) => {
+            const { text, icon, onClick } = item;
+            return (
+              <ListItem button key={text} onClick={onClick}>
+                {icon && <ListItemIcon> {icon} </ListItemIcon>}
+                <ListItemText primary={text} />
+              </ListItem>
+            );
+          })}
+        </List>
+        <Divider />
+        <List>
+          {menuList.map((item, index) => {
+            const { text, icon, onClick } = item;
+            return (
+              <ListItem button key={text} onClick={onClick}>
+                {icon && <ListItemIcon> {icon} </ListItemIcon>}
+                <ListItemText primary={text} />
+              </ListItem>
+            );
+          })}
+        </List>
+      </div>
     </div>
   );
-
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
 
   return (
     <div className={classes.root}>
       <AppBar position="fixed">
         <Toolbar>
-          <React.Fragment>
-            <Button
-              arial-label="open drawer"
-              edge="start"
-              className={classes.menuButton}
-              color="inherit"
-              // onClick={toggleDrawer(true)}
-              onClick={handleDrawerToggle}
-            >
-              <MenuIcon />
-            </Button>
-            <SwipeableDrawer
-              anchor={"left"}
-              open={state}
-              onClose={toggleDrawer(false)}
-              onOpen={toggleDrawer(true)}
-            >
-              {list()}
-            </SwipeableDrawer>
-          </React.Fragment>
-
+          <Button
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            onClick={toggleDrawer(true)}
+          >
+            <MenuIcon />
+          </Button>
+          <SwipeableDrawer
+            anchor={"left"}
+            open={state}
+            onClose={toggleDrawer(false)}
+            onOpen={toggleDrawer(true)}
+          >
+            {list()}
+          </SwipeableDrawer>
           <Typography variant="h6" className={classes.title}>
             <IconButton onClick={() => history.push("/home")} color="inherit">
               {" "}
@@ -173,39 +281,7 @@ const HeaderNav = (props) => {
           </IconButton>
         </Toolbar>
       </AppBar>
-      <nav className={classes.drawer} aria-label="mailbox folders">
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-        <Hidden smUp implementation="css">
-          <SwipeableDrawer
-            container={container}
-            variant="temporary"
-            anchor={theme.direction === "rtl" ? "right" : "left"}
-            open={mobileOpen}
-            onClose={handleDrawerToggle}
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-            ModalProps={{
-              keepMounted: true, // Better open performance on mobile.
-            }}
-          >
-            {list()}
-          </SwipeableDrawer>
-        </Hidden>
-        <Hidden xsDown implementation="css">
-          <SwipeableDrawer
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-            variant="permanent"
-            open
-          >
-            {list()}
-          </SwipeableDrawer>
-        </Hidden>
-      </nav>
       <Toolbar />
-      
     </div>
   );
 };
