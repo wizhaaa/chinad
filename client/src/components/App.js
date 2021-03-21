@@ -1,6 +1,6 @@
 // react library
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 // material-ui library
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { makeStyles } from "@material-ui/core/styles";
@@ -27,10 +27,10 @@ function App() {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <Zz />
-      <CssBaseline />
-
       <Router>
+        <Zz />
+        <CssBaseline />
+
         <div className="App">
           {/* <HeaderNav /> */}
 
