@@ -1,13 +1,6 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { React, useState } from "react";
+import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 
-import CloseIcon from "@material-ui/icons/Close";
-
-// import MenuIcon from "@material-ui/icons/Menu";
-// import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-// import HomeIcon from "@material-ui/icons/Home";
-// import InfoIcon from "@material-ui/icons/Info";
-// import RestaurantMenuIcon from "@material-ui/icons/RestaurantMenu";
 import {
   Add as AddIcon,
   Menu as MenuIcon,
@@ -15,275 +8,188 @@ import {
   Home as HomeIcon,
   Info as InfoIcon,
   RestaurantMenu as RestaurantMenuIcon,
+  Close as CloseIcon,
 } from "@material-ui/icons";
 
 import {
   AppBar,
   Toolbar,
+  Drawer,
   Typography,
   Button,
   IconButton,
-  SwipeableDrawer,
   List,
   Divider,
   ListItem,
   ListItemIcon,
   ListItemText,
+  CssBaseline,
+  Hidden,
 } from "@material-ui/core";
 
-import { withRouter } from "react-router";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+
+import { topList, menuList } from "./Data/NavList";
+
+const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
-    width: "100%",
+    display: "flex",
+  },
+  drawer: {
+    [theme.breakpoints.up("md")]: {
+      width: drawerWidth,
+      flexShrink: 0,
+    },
+  },
+  appBar: {
+    [theme.breakpoints.up("md")]: {
+      width: `calc(100% - ${drawerWidth}px)`,
+      marginLeft: drawerWidth,
+    },
   },
   menuButton: {
     marginRight: theme.spacing(2),
+    [theme.breakpoints.up("md")]: {
+      display: "none",
+    },
   },
-
-  list: {
-    width: 250,
-  },
-  fullList: {
-    width: "auto",
-  },
+  // necessary for content to be below app bar
   toolbar: theme.mixins.toolbar,
+  drawerPaper: {
+    width: drawerWidth,
+  },
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing(3),
+  },
+  navLinks: {
+    textDecoration: "none",
+    color: "inherit",
+  },
+  menuNavLink: {
+    marginRight: theme.spacing(2),
+  },
   title: {
     flexGrow: 1,
-    textAlign: "center",
-  },
-  flexBox: {
-    display: "flex",
-    justifyContent: "flex-start",
-    marginLeft: theme.spacing(4),
-    // margin: theme.spacing(1),
   },
 }));
 
-const HeaderNav = (props) => {
+function ResponsiveDrawer(props) {
+  const { window } = props;
   const classes = useStyles();
-  const [state, setState] = React.useState(false);
+  const theme = useTheme();
+  const [mobileOpen, setMobileOpen] = useState(false);
 
-  //react-router setups
-  const { history } = props;
-  const itemsList = [
-    { text: "Home", icon: <HomeIcon />, onClick: () => history.push("/") },
-    {
-      text: "About",
-      icon: <InfoIcon />,
-      onClick: () => history.push("/about"),
-    },
-    {
-      text: "Cart",
-      icon: <ShoppingCartIcon />,
-      onClick: () => history.push("/cart"),
-    },
-    {
-      text: "Menu",
-      icon: <RestaurantMenuIcon />,
-      onClick: () => history.push("/menu"),
-    },
-  ];
-  const menuList = [
-    {
-      text: "Lunch Specials",
-      icon: <AddIcon />,
-      onClick: () => history.push("/"),
-    },
-    {
-      text: "Combination Platters",
-      icon: <RestaurantMenuIcon />,
-      onClick: () => history.push("/about"),
-    },
-    {
-      text: "Fried Rice",
-      icon: <RestaurantMenuIcon />,
-      onClick: () => history.push("/cart"),
-    },
-    {
-      text: "Lo Mein",
-      icon: <RestaurantMenuIcon />,
-      onClick: () => history.push("/menu"),
-    },
-    {
-      text: "Beef",
-      icon: <RestaurantMenuIcon />,
-      onClick: () => history.push("/menu"),
-    },
-    {
-      text: "Seafood",
-      icon: <RestaurantMenuIcon />,
-      onClick: () => history.push("/menu"),
-    },
-    {
-      text: "Pork",
-      icon: <RestaurantMenuIcon />,
-      onClick: () => history.push("/menu"),
-    },
-    {
-      text: "Poultry",
-      icon: <RestaurantMenuIcon />,
-      onClick: () => history.push("/menu"),
-    },
-    {
-      text: "Vegetable",
-      icon: <RestaurantMenuIcon />,
-      onClick: () => history.push("/menu"),
-    },
-    {
-      text: "Mu Shu",
-      icon: <RestaurantMenuIcon />,
-      onClick: () => history.push("/menu"),
-    },
-    {
-      text: "Udon Noodles",
-      icon: <RestaurantMenuIcon />,
-      onClick: () => history.push("/menu"),
-    },
-    {
-      text: "Chow Mein/Chop Suey",
-      icon: <RestaurantMenuIcon />,
-      onClick: () => history.push("/menu"),
-    },
-    {
-      text: "Mei Fun/Rice Noodles",
-      icon: <RestaurantMenuIcon />,
-      onClick: () => history.push("/menu"),
-    },
-    {
-      text: "Egg Foo Young",
-      icon: <RestaurantMenuIcon />,
-      onClick: () => history.push("/menu"),
-    },
-    {
-      text: "Sweet and Sour",
-      icon: <RestaurantMenuIcon />,
-      onClick: () => history.push("/menu"),
-    },
-    {
-      text: "Appetizers",
-      icon: <RestaurantMenuIcon />,
-      onClick: () => history.push("/menu"),
-    },
-    {
-      text: "Sides",
-      icon: <RestaurantMenuIcon />,
-      onClick: () => history.push("/menu"),
-    },
-    {
-      text: "Special Health Diet Dishes",
-      icon: <RestaurantMenuIcon />,
-      onClick: () => history.push("/menu"),
-    },
-  ];
-
-  // for our drawer
-  const toggleDrawer = (open) => (event) => {
-    if (
-      event &&
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
-
-    setState(open);
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
   };
 
-  // list of items for drawer
-  const list = () => (
+  const drawer = (
     <div>
-      {/* <div className={classes.toolbar}>
-        <div className={classes.flexBox}>
-          <IconButton onClick={toggleDrawer(false)}>
-            {" "}
-            <CloseIcon />{" "}
-          </IconButton>
-        </div>
-      </div> */}
+      <div className={classes.toolbar} />
+      <Divider />
 
-      <div
-        className={classes.list}
-        role="presentation"
-        onClick={toggleDrawer(false)}
-        onKeyDown={toggleDrawer(false)}
-      >
-        <List>
-          <ListItem>
-            <IconButton onClick={toggleDrawer(false)}>
+      <List>
+        {topList.map((item, index) => {
+          const { text, icon, routeTo } = item;
+
+          return (
+            <Link className={classes.navLinks} to={routeTo}>
               {" "}
-              <CloseIcon />{" "}
-            </IconButton>
-          </ListItem>
-        </List>
-        <Divider />
-        <List>
-          {itemsList.map((item, index) => {
-            const { text, icon, onClick } = item;
-            return (
-              <ListItem button key={text} onClick={onClick}>
+              <ListItem button key={text}>
                 {icon && <ListItemIcon> {icon} </ListItemIcon>}
                 <ListItemText primary={text} />
               </ListItem>
-            );
-          })}
-        </List>
-        <Divider />
-        <List>
-          {menuList.map((item, index) => {
-            const { text, icon, onClick } = item;
-            return (
-              <ListItem button key={text} onClick={onClick}>
+            </Link>
+          );
+        })}
+      </List>
+      <Divider />
+      <List>
+        {menuList.map((item, index) => {
+          const { text, icon, routeTo } = item;
+          return (
+            <Link className={classes.navLinks} to={routeTo}>
+              {" "}
+              <ListItem button key={text}>
                 {icon && <ListItemIcon> {icon} </ListItemIcon>}
                 <ListItemText primary={text} />
               </ListItem>
-            );
-          })}
-        </List>
-      </div>
+            </Link>
+          );
+        })}
+      </List>
     </div>
   );
 
+  const container =
+    window !== undefined ? () => window().document.body : undefined;
+
   return (
     <div className={classes.root}>
-      <AppBar position="fixed">
+      <CssBaseline />
+      <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
-          <Button
-            edge="start"
-            className={classes.menuButton}
+          <IconButton
             color="inherit"
-            onClick={toggleDrawer(true)}
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            className={classes.menuButton}
           >
             <MenuIcon />
-          </Button>
-          <SwipeableDrawer
-            anchor={"left"}
-            open={state}
-            onClose={toggleDrawer(false)}
-            onOpen={toggleDrawer(true)}
-          >
-            {list()}
-          </SwipeableDrawer>
+          </IconButton>
           <Typography variant="h6" className={classes.title}>
-            <IconButton onClick={() => history.push("/home")} color="inherit">
+            <IconButton color="inherit" href="/">
               {" "}
               China Delight{" "}
             </IconButton>
           </Typography>
-          <IconButton
-            color="inherit"
-            button
-            onClick={() => history.push("/cart")}
-          >
+
+          <Link className={classes.navLinks} to="/cart">
             {" "}
-            <ShoppingCartIcon />{" "}
-          </IconButton>
+            <IconButton color="inherit" button>
+              {" "}
+              <ShoppingCartIcon />{" "}
+            </IconButton>
+          </Link>
         </Toolbar>
       </AppBar>
-      <Toolbar />
+      <nav className={classes.drawer} aria-label="mailbox folders">
+        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+        <Hidden mdUp implementation="css">
+          <Drawer
+            container={container}
+            variant="temporary"
+            anchor={theme.direction === "rtl" ? "right" : "left"}
+            open={mobileOpen}
+            onClose={handleDrawerToggle}
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+            ModalProps={{
+              keepMounted: true, // Better open performance on mobile.
+            }}
+          >
+            {drawer}
+          </Drawer>
+        </Hidden>
+        <Hidden smDown implementation="css">
+          <Drawer
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+            variant="permanent"
+            open
+          >
+            {drawer}
+          </Drawer>
+        </Hidden>
+      </nav>
     </div>
   );
-};
+}
 
-export default withRouter(HeaderNav);
+export default ResponsiveDrawer;

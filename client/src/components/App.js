@@ -28,12 +28,11 @@ function App() {
   return (
     <div className={classes.root}>
       <Router>
-        <Zz />
+        {/* <Zz /> */}
+        <HeaderNav />
         <CssBaseline />
 
         <div className="App">
-          {/* <HeaderNav /> */}
-
           <main className={classes.content}>
             <div className={classes.toolbar} />
             <Routes />
