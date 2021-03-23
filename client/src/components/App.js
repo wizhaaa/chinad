@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 // material-ui library
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
+import theme from "./Theme";
 
 // self made components
 import HeaderNav from "./HeaderNav";
@@ -27,18 +28,20 @@ function App() {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <Router>
-        {/* <Zz /> */}
-        <HeaderNav />
-        <CssBaseline />
+      <ThemeProvider theme={theme}>
+        <Router>
+          {/* <Zz /> */}
+          <HeaderNav />
+          <CssBaseline />
 
-        <div className="App">
-          <main className={classes.content}>
-            <div className={classes.toolbar} />
-            <Routes />
-          </main>
-        </div>
-      </Router>
+          <div className="App">
+            <main className={classes.content}>
+              <div className={classes.toolbar} />
+              <Routes />
+            </main>
+          </div>
+        </Router>
+      </ThemeProvider>
     </div>
   );
 }

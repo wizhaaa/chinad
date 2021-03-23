@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 
 import {
   Add as AddIcon,
@@ -16,7 +16,6 @@ import {
   Toolbar,
   Drawer,
   Typography,
-  Button,
   IconButton,
   List,
   Divider,
@@ -31,50 +30,8 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 
 import { topList, menuList } from "./Data/NavList";
 
-const drawerWidth = 240;
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-  },
-  drawer: {
-    [theme.breakpoints.up("md")]: {
-      width: drawerWidth,
-      flexShrink: 0,
-    },
-  },
-  appBar: {
-    [theme.breakpoints.up("md")]: {
-      width: `calc(100% - ${drawerWidth}px)`,
-      marginLeft: drawerWidth,
-    },
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-    [theme.breakpoints.up("md")]: {
-      display: "none",
-    },
-  },
-  // necessary for content to be below app bar
-  toolbar: theme.mixins.toolbar,
-  drawerPaper: {
-    width: drawerWidth,
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-  },
-  navLinks: {
-    textDecoration: "none",
-    color: "inherit",
-  },
-  menuNavLink: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-  },
-}));
+//styling
+import useStyles from "./MaterialStyles";
 
 function ResponsiveDrawer(props) {
   const { window } = props;
@@ -86,6 +43,7 @@ function ResponsiveDrawer(props) {
     setMobileOpen(!mobileOpen);
   };
 
+  // defining our drawer. loops through imported lists
   const drawer = (
     <div>
       <div className={classes.toolbar} />
@@ -141,6 +99,8 @@ function ResponsiveDrawer(props) {
           >
             <MenuIcon />
           </IconButton>
+
+          {/* Our Heading  */}
           <Typography variant="h6" className={classes.title}>
             <IconButton color="inherit" href="/">
               {" "}
@@ -148,6 +108,7 @@ function ResponsiveDrawer(props) {
             </IconButton>
           </Typography>
 
+          {/* Shopping Cart Icon */}
           <Link className={classes.navLinks} to="/cart">
             {" "}
             <IconButton color="inherit" button>
@@ -159,7 +120,9 @@ function ResponsiveDrawer(props) {
       </AppBar>
       <nav className={classes.drawer} aria-label="mailbox folders">
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-        <Hidden mdUp implementation="css">
+
+        {/* Temp drawer that hides on large and higher screens */}
+        <Hidden lgUp implementation="css">
           <Drawer
             container={container}
             variant="temporary"
@@ -176,7 +139,9 @@ function ResponsiveDrawer(props) {
             {drawer}
           </Drawer>
         </Hidden>
-        <Hidden smDown implementation="css">
+
+        {/* Perm drawer that is hidden on md & down screens= */}
+        <Hidden mdDown implementation="css">
           <Drawer
             classes={{
               paper: classes.drawerPaper,
