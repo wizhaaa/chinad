@@ -11,7 +11,6 @@ import Cart from "./Cart";
 import Menu from "./Menu";
 
 //import test module
-import DemoNR from "./demonr";
 
 //import "bootstrap";
 //import "fontsource-roboto";
@@ -33,7 +32,6 @@ function App() {
     <React.Fragment>
       <CssBaseline />
 
-      <DemoNR />
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Typography paragraph>

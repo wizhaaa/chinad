@@ -8,7 +8,7 @@ function About() {
       <Typography component="div">
         <Box textAlign="center" m={1}>
           <Typography textAlign="center" variant="h4" gutterBottom>
-            About
+            about
           </Typography>
           <Typography textAlign="center" variant="body" gutterBottom>
             {" "}

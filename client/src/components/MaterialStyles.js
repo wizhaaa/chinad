@@ -47,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
   },
   alignToCenter: {
     alignSelf: "center",
+    width: "100%",
   },
 }));
 

@@ -26,7 +26,7 @@ import {
   Hidden,
 } from "@material-ui/core";
 
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { useTheme } from "@material-ui/core/styles";
 
 import { topList, menuList } from "./Data/NavList";
 
@@ -104,7 +104,7 @@ function ResponsiveDrawer(props) {
           <Typography variant="h6" className={classes.title}>
             <IconButton color="inherit" href="/">
               {" "}
-              China Delight{" "}
+               china delight{" "}
             </IconButton>
           </Typography>
 

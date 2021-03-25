@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Typography, Box } from "@material-ui/core";
 
-import { Button } from "@material-ui/core";
+import { Button, Chip } from "@material-ui/core";
 
 import { Button as ButtonIcon } from "@material-ui/icons";
 
@@ -14,17 +14,22 @@ function Cart() {
 
   return (
     <div className="Cart">
-      <Box textAlign="center">
+      <Box textAlign="center" className={classes.alignToCenter}>
+        <Box> Box 1 </Box>
         <Typography component="div">
           <Typography variant="h4" gutterBottom>
-            My Cart
+            my cart
           </Typography>
           <Typography variant="subheading"> counter: {count} </Typography>
-
           <Button color="inherit" onClick={() => setCount(count + 1)}>
             {" "}
             Add{" "}
           </Button>
+          <Chip
+            onClick={() => setCount(count + 1)}
+            label="add"
+            onDelete={() => {}}
+          />{" "}
         </Typography>
       </Box>
     </div>

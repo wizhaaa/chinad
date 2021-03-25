@@ -8,7 +8,7 @@ function Home() {
       <Typography component="div">
         <Box textAlign="center" m={1}>
           <Typography textAlign="center" variant="h4" gutterBottom>
-            Welcome!
+            welcome!
           </Typography>
           <Typography textAlign="center" variant="body" gutterBottom>
             {" "}

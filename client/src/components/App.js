@@ -4,14 +4,13 @@ import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 // material-ui library
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
-import theme from "./Theme";
 
 // self made components
 import HeaderNav from "./HeaderNav";
 import Routes from "./Routes";
-
+import theme from "./Theme";
 //import test module
-import Zz from "./demonr";
+import Test from "./DemoTestModule";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,7 +29,7 @@ function App() {
     <div className={classes.root}>
       <ThemeProvider theme={theme}>
         <Router>
-          {/* <Zz /> */}
+          {/* <Test /> */}
           <HeaderNav />
           <CssBaseline />
 
