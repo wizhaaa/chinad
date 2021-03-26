@@ -5,6 +5,7 @@ import Home from "./Home";
 import About from "./About";
 import Cart from "./Cart";
 import Menu from "./Menu";
+import LunchSpecials from "./menuComponents/LunchSpecials";
 
 const Routes = () => {
   return (
@@ -15,6 +16,9 @@ const Routes = () => {
         <Route exact path="/about" component={About} />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/menu" component={Menu} />
+
+        {/* menu list */}
+        <Route exact path="/lunch" component={LunchSpecials} />
       </Switch>
     </div>
   );

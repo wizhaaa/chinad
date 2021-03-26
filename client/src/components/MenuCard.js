@@ -15,6 +15,8 @@ import {
 
 import { Add as AddIcon } from "@material-ui/icons";
 
+import ItemDialog from "./ItemDialog";
+
 const useStyles = makeStyles((theme) => ({
   root: { margin: 10 },
   cards: {
@@ -46,16 +48,12 @@ const MenuCard = (props) => {
           {" "}
           $ {props.priceSmall} / $ {props.priceLarge}
         </Box>{" "}
-        <Fab
-          variant="extended"
-          size="medium"
-          color="secondary"
-          aria-label="add"
-        >
-          {" "}
-          <AddIcon> </AddIcon>
-          Customize{" "}
-        </Fab>
+        <ItemDialog
+          title={props.menuItemName}
+          description={props.menuItemDescription}
+          priceSm={props.priceSmall}
+          priceLg={props.priceLarge}
+        />
       </CardActions>
     </Card>
   );
