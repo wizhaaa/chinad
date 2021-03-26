@@ -4,6 +4,7 @@ import {
   Card,
   CardActions,
   CardContent,
+  CardMedia,
   Button,
   Typography,
   CardHeader,
@@ -22,6 +23,10 @@ const useStyles = makeStyles((theme) => ({
   cards: {
     margin: 5,
   },
+  media: {
+    height: 0,
+    paddingTop: "56.25%",
+  },
   addIcon: {
     display: "flex",
     justifyContent: "flex-end",
@@ -37,22 +42,21 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const MenuCard = (props) => {
+  const { itemName, itemDescription, img, price, priceSm, priceLg } = props;
   const classes = useStyles();
 
   return (
     <Card className={classes.cards}>
-      <CardHeader title={props.menuItemName}> </CardHeader>{" "}
-      <CardContent> {props.menuItemDescription}</CardContent>
+      <CardHeader title={itemName}> </CardHeader>{" "}
+      <CardMedia className={classes.media} image={img} title="fried rice" />
+      <CardContent> {itemDescription}</CardContent>
       <CardActions className={classes.container} disableSpacing>
-        <Box className={classes.bottomText}>
-          {" "}
-          $ {props.priceSmall} / $ {props.priceLarge}
-        </Box>{" "}
+        <Box className={classes.bottomText}>{price}</Box>{" "}
         <ItemDialog
-          title={props.menuItemName}
-          description={props.menuItemDescription}
-          priceSm={props.priceSmall}
-          priceLg={props.priceLarge}
+          title={itemName}
+          description={itemDescription}
+          imgLink={img}
+          price={price}
         />
       </CardActions>
     </Card>

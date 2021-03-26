@@ -16,8 +16,6 @@ import {
   makeStyles,
 } from "@material-ui/core";
 
-import ItemDialog2 from "./ItemDialog2";
-
 const useStyles = makeStyles((theme) => ({
   root: { margin: 10 },
   cards: {
@@ -42,46 +40,31 @@ const useStyles = makeStyles((theme) => ({
   },
   img: {
     maxWidth: 200,
+    height: 500,
   },
 }));
 
-export default function ResponsiveDialog(props) {
-  const { title, description, priceSm, priceLg } = props;
-  const [open, setOpen] = React.useState(false);
+const ItemDialog2 = (props) => {
+  const {
+    onClose,
+    open,
+    title,
+    description,
+    imgLink,
+    priceSm,
+    priceLg,
+  } = props;
+
   const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
   const classes = useStyles();
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
   const handleClose = () => {
-    setOpen(false);
+    onClose();
   };
 
   return (
-    <div>
-      <Fab
-        variant="extended"
-        size="medium"
-        color="secondary"
-        aria-label="add"
-        onClick={handleClickOpen}
-      >
-        {" "}
-        <AddIcon> </AddIcon>
-        Customize{" "}
-      </Fab>
-
-      <ItemDialog2
-        open={open}
-        onClose={handleClose}
-        title={title}
-        description={description}
-        priceSm={priceSm}
-        priceLg={priceLg}
-      />
-      {/*       
+    <>
       <Dialog
         fullScreen={fullScreen}
         open={open}
@@ -92,11 +75,8 @@ export default function ResponsiveDialog(props) {
         <DialogContent dividers>
           <DialogContentText className={classes.container}>
             {" "}
-            <img
-              className={classes.img}
-              src="https://therecipecritic.com/wp-content/uploads/2019/07/easy_fried_rice-1-500x500.jpg"
-              alt="fried rice "
-            />{" "}
+            <CardMedia className={classes.img} image={imgLink} title="ss" />
+            <img className={classes.img} src={imgLink} alt=" sweet sour" />{" "}
             <Typography pl={50}>
               {description} {priceSm} {priceLg} Lorem ispum{" "}
             </Typography>
@@ -114,11 +94,13 @@ export default function ResponsiveDialog(props) {
             onClick={handleClose}
           >
             {" "}
-            <AddIcon> </AddIcon>
+            <AddIcon />
             Add to Cart{" "}
           </Fab>
         </DialogActions>
-      </Dialog> */}
-    </div>
+      </Dialog>
+    </>
   );
-}
+};
+
+export default ItemDialog2;

@@ -37,11 +37,11 @@ function Menu() {
           <Typography textAlign="center" variant="body" gutterBottom>
             {" "}
             hi there! welcome to the page where <em> every </em> menu item is
-            listed here. <br /> you will be able to customize some items and
-            then add them to your cart{" "}
-            <em> (see your top left, or under the menu) </em> <br /> it's quite
-            a long menu, so we recommend you navigate using the sidebar menu to
-            find what you are looking for!
+            listed. <br /> you will be able to customize some items and then add
+            them to your cart{" "}
+            <em> (see your top left, or under the menubar) </em> <br /> it's
+            quite a long menu, so we recommend you navigate using the sidebar
+            menu to find what you are looking for!
             <br />
             <em>
               {" "}

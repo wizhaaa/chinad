@@ -60,66 +60,72 @@ const LunchSpecials = (props) => {
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6} md={4}>
             <MenuCard
-              menuItemName={"fried rice"}
-              menuItemDescription={"some fried rice!"}
-              priceSmall={7.25}
-              priceLarge={9.95}
+              itemName={"sweet & sour chicken"}
+              itemDescription={
+                "crispy, breaded chicken with sweet and sour sauce on the side"
+              }
+              img={
+                "https://copykat.com/wp-content/uploads/2016/12/Sweet-and-Sour-Chicken-Pin.jpg"
+              }
+              price={6.25}
+              priceSm={null}
+              priceLg={null}
             />
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
             <MenuCard
-              menuItemName={"fried rice"}
-              menuItemDescription={"some fried rice!"}
-              priceSmall={7.25}
-              priceLarge={9.95}
+              itemName={"sweet & sour chicken"}
+              itemDescription={
+                "crispy, breaded chicken with sweet and sour sauce on the side"
+              }
+              img={
+                "https://therecipecritic.com/wp-content/uploads/2019/07/easy_fried_rice-1-500x500.jpg"
+              }
+              price={6.25}
+              priceSm={null}
+              priceLg={null}
             />
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
             <MenuCard
-              menuItemName={"fried rice"}
-              menuItemDescription={"some fried rice!"}
-              priceSmall={7.25}
-              priceLarge={9.95}
+              itemName={"sweet & sour chicken"}
+              itemDescription={
+                "crispy, breaded chicken with sweet and sour sauce on the side"
+              }
+              img={
+                "https://therecipecritic.com/wp-content/uploads/2019/07/easy_fried_rice-1-500x500.jpg"
+              }
+              price={6.25}
+              priceSm={null}
+              priceLg={null}
             />
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
             <MenuCard
-              menuItemName={"fried rice"}
-              menuItemDescription={"some fried rice!"}
-              priceSmall={7.25}
-              priceLarge={9.95}
+              itemName={"sweet & sour chicken"}
+              itemDescription={
+                "crispy, breaded chicken with sweet and sour sauce on the side"
+              }
+              img={
+                "https://therecipecritic.com/wp-content/uploads/2019/07/easy_fried_rice-1-500x500.jpg"
+              }
+              price={6.25}
+              priceSm={null}
+              priceLg={null}
             />
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
             <MenuCard
-              menuItemName={"fried rice"}
-              menuItemDescription={"some fried rice!"}
-              priceSmall={7.25}
-              priceLarge={9.95}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <MenuCard
-              menuItemName={"fried rice"}
-              menuItemDescription={"some fried rice!"}
-              priceSmall={7.25}
-              priceLarge={9.95}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <MenuCard
-              menuItemName={"fried rice"}
-              menuItemDescription={"some fried rice!"}
-              priceSmall={7.25}
-              priceLarge={9.95}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <MenuCard
-              menuItemName={"fried rice"}
-              menuItemDescription={"some fried rice!"}
-              priceSmall={7.25}
-              priceLarge={9.95}
+              itemName={"sweet & sour chicken"}
+              itemDescription={
+                "crispy, breaded chicken with sweet and sour sauce on the side"
+              }
+              img={
+                "https://therecipecritic.com/wp-content/uploads/2019/07/easy_fried_rice-1-500x500.jpg"
+              }
+              price={6.25}
+              priceSm={null}
+              priceLg={null}
             />
           </Grid>
         </Grid>
