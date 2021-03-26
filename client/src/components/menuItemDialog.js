@@ -15,8 +15,7 @@ import {
   useMediaQuery,
   makeStyles,
 } from "@material-ui/core";
-
-import ItemDialog2 from "./ItemDialog2";
+import Image from "material-ui-image";
 
 const useStyles = makeStyles((theme) => ({
   root: { margin: 10 },
@@ -40,48 +39,24 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(3),
     flexWrap: "wrap",
   },
-  img: {
-    maxWidth: 200,
-  },
+  img: { width: 150, height: 150 },
 }));
 
-export default function ResponsiveDialog(props) {
-  const { title, description, priceSm, priceLg } = props;
-  const [open, setOpen] = React.useState(false);
+const ItemDialog2 = (props) => {
+  const { onClose, open, title, description, img, priceSm, priceLg } = props;
+
+  console.log(props);
+
   const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
   const classes = useStyles();
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
   const handleClose = () => {
-    setOpen(false);
+    onClose();
   };
 
   return (
-    <div>
-      <Fab
-        variant="extended"
-        size="medium"
-        color="secondary"
-        aria-label="add"
-        onClick={handleClickOpen}
-      >
-        {" "}
-        <AddIcon> </AddIcon>
-        Customize{" "}
-      </Fab>
-
-      <ItemDialog2
-        open={open}
-        onClose={handleClose}
-        title={title}
-        description={description}
-        priceSm={priceSm}
-        priceLg={priceLg}
-      />
-      {/*       
+    <>
       <Dialog
         fullScreen={fullScreen}
         open={open}
@@ -90,13 +65,15 @@ export default function ResponsiveDialog(props) {
       >
         <DialogTitle id="responsive-dialog-title">{title}</DialogTitle>
         <DialogContent dividers>
+          {" "}
+          {/* <Image
+            // imageStyle={{ width: 200, height: 200 }}
+            style={{ width: 200, height: "auto" }}
+            src={img}
+          /> */}
+          <img className={classes.img} src={img} alt=" sweet sour" />{" "}
           <DialogContentText className={classes.container}>
             {" "}
-            <img
-              className={classes.img}
-              src="https://therecipecritic.com/wp-content/uploads/2019/07/easy_fried_rice-1-500x500.jpg"
-              alt="fried rice "
-            />{" "}
             <Typography pl={50}>
               {description} {priceSm} {priceLg} Lorem ispum{" "}
             </Typography>
@@ -114,11 +91,13 @@ export default function ResponsiveDialog(props) {
             onClick={handleClose}
           >
             {" "}
-            <AddIcon> </AddIcon>
+            <AddIcon />
             Add to Cart{" "}
           </Fab>
         </DialogActions>
-      </Dialog> */}
-    </div>
+      </Dialog>
+    </>
   );
-}
+};
+
+export default ItemDialog2;

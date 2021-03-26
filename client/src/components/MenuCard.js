@@ -9,14 +9,21 @@ import {
   Typography,
   CardHeader,
   makeStyles,
+  useTheme,
   IconButton,
   Fab,
   Box,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  useMediaQuery,
 } from "@material-ui/core";
 
 import { Add as AddIcon } from "@material-ui/icons";
 
-import ItemDialog from "./ItemDialog";
+import ItemDialog2 from "./menuItemDialog";
 
 const useStyles = makeStyles((theme) => ({
   root: { margin: 10 },
@@ -43,7 +50,17 @@ const useStyles = makeStyles((theme) => ({
 
 const MenuCard = (props) => {
   const { itemName, itemDescription, img, price, priceSm, priceLg } = props;
+  const [open, setOpen] = React.useState(false);
+  const theme = useTheme();
   const classes = useStyles();
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <Card className={classes.cards}>
@@ -52,11 +69,25 @@ const MenuCard = (props) => {
       <CardContent> {itemDescription}</CardContent>
       <CardActions className={classes.container} disableSpacing>
         <Box className={classes.bottomText}>{price}</Box>{" "}
-        <ItemDialog
+        <Fab
+          variant="extended"
+          size="medium"
+          color="secondary"
+          aria-label="add"
+          onClick={handleClickOpen}
+        >
+          {" "}
+          <AddIcon> </AddIcon>
+          Customize{" "}
+        </Fab>
+        <ItemDialog2
+          open={open}
+          onClose={handleClose}
           title={itemName}
           description={itemDescription}
-          imgLink={img}
-          price={price}
+          priceSm={priceSm}
+          priceLg={priceLg}
+          img={img}
         />
       </CardActions>
     </Card>
