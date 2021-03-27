@@ -9,6 +9,7 @@ import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
 import HeaderNav from "./HeaderNav";
 import Routes from "./Routes";
 import theme from "./Theme";
+import "./App.css";
 //import test module
 import Test from "./DemoTestModule";
 

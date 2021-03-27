@@ -19,11 +19,18 @@ import {
   DialogContentText,
   DialogTitle,
   useMediaQuery,
+  Snackbar,
 } from "@material-ui/core";
+
+import MuiAlert from "@material-ui/lab/Alert";
 
 import { Add as AddIcon } from "@material-ui/icons";
 
 import ItemDialog2 from "./menuItemDialog";
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const useStyles = makeStyles((theme) => ({
   root: { margin: 10 },
@@ -51,6 +58,7 @@ const useStyles = makeStyles((theme) => ({
 const MenuCard = (props) => {
   const { itemName, itemDescription, img, price, priceSm, priceLg } = props;
   const [open, setOpen] = React.useState(false);
+  const [alertOpen, setAlertOpen] = React.useState(false);
   const theme = useTheme();
   const classes = useStyles();
 
@@ -60,6 +68,15 @@ const MenuCard = (props) => {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleAdd = () => {
+    setAlertOpen(true);
+    setOpen(false);
+  };
+
+  const handleAlertClose = () => {
+    setAlertOpen(false);
   };
 
   return (
@@ -82,13 +99,27 @@ const MenuCard = (props) => {
         </Fab>
         <ItemDialog2
           open={open}
+          alertOpen={alertOpen}
+          // setAlertOpen={setAlertOpen}
           onClose={handleClose}
+          onAdd={handleAdd}
+          onAlertClose={handleAlertClose}
           title={itemName}
           description={itemDescription}
           priceSm={priceSm}
           priceLg={priceLg}
           img={img}
         />
+        <Snackbar
+          open={alertOpen}
+          autoHideDuration={2000}
+          onClose={handleAlertClose}
+        >
+          <Alert onClose={handleAlertClose} severity="success">
+            {" "}
+            Item added!{" "}
+          </Alert>
+        </Snackbar>
       </CardActions>
     </Card>
   );

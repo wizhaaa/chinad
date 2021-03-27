@@ -1,21 +1,25 @@
 import React from "react";
 import { useTheme } from "@material-ui/core/styles";
-import { Add as AddIcon } from "@material-ui/icons";
+import { Add as AddIcon, Close as CloseIcon } from "@material-ui/icons";
 import {
   CardMedia,
   Grid,
+  Box,
   Fab,
+  Form,
   Typography,
+  IconButton,
   Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
+  Snackbar,
   useMediaQuery,
   makeStyles,
 } from "@material-ui/core";
-import Image from "material-ui-image";
+import MuiAlert from "@material-ui/lab/Alert";
 
 const useStyles = makeStyles((theme) => ({
   root: { margin: 10 },
@@ -40,10 +44,28 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: "wrap",
   },
   img: { width: 150, height: 150 },
+  dialogWrapper: {
+    padding: theme.spacing(2),
+    position: "absolute",
+  },
+  dialogTitle: {
+    paddingRight: "0px",
+  },
 }));
 
 const ItemDialog2 = (props) => {
-  const { onClose, open, title, description, img, priceSm, priceLg } = props;
+  const {
+    onClose,
+    open,
+    onAlertClose,
+    alertOpen,
+    onAdd,
+    title,
+    description,
+    img,
+    priceSm,
+    priceLg,
+  } = props;
 
   console.log(props);
 
@@ -55,6 +77,12 @@ const ItemDialog2 = (props) => {
     onClose();
   };
 
+  const handleSubmit = () => {};
+
+  const handleAddItem = () => {
+    onAdd();
+  };
+
   return (
     <>
       <Dialog
@@ -62,15 +90,45 @@ const ItemDialog2 = (props) => {
         open={open}
         onClose={handleClose}
         aria-labelledby="responsive-dialog-title"
+        fullWidth="sm"
+        maxWidth="md"
+        classes={{ paper: classes.dialogWrapper }}
       >
-        <DialogTitle id="responsive-dialog-title">{title}</DialogTitle>
+        <DialogTitle
+          id="responsive-dialog-title"
+          className={classes.dialogTitle}
+        >
+          <div style={{ display: "flex" }}>
+            {" "}
+            <Typography variant="h6" style={{ flexGrow: 1 }}>
+              {title}{" "}
+            </Typography>{" "}
+            <IconButton color="primary" onClick={handleClose}>
+              {" "}
+              <CloseIcon />
+            </IconButton>
+          </div>
+        </DialogTitle>
         <DialogContent dividers>
           {" "}
-          {/* <Image
-            // imageStyle={{ width: 200, height: 200 }}
-            style={{ width: 200, height: "auto" }}
-            src={img}
-          /> */}
+          <Box textAlign="center">
+            {" "}
+            <Grid container>
+              {" "}
+              <Grid Item xs={6}>
+                {" "}
+                <img className={classes.img} src={img} alt=" sweet sour" />
+              </Grid>
+              <Grid Item xs={6}>
+                {" "}
+                xs 6
+              </Grid>
+              <Grid Item xs={6}>
+                {" "}
+                xs 6
+              </Grid>
+            </Grid>
+          </Box>
           <img className={classes.img} src={img} alt=" sweet sour" />{" "}
           <DialogContentText className={classes.container}>
             {" "}
@@ -79,21 +137,20 @@ const ItemDialog2 = (props) => {
             </Typography>
           </DialogContentText>
         </DialogContent>
-        <DialogActions mb={20}>
-          <Button autoFocus onClick={handleClose} color="primary">
-            close
-          </Button>
-          <Fab
-            variant="extended"
-            size="medium"
-            color="secondary"
-            aria-label="add"
-            onClick={handleClose}
-          >
-            {" "}
-            <AddIcon />
-            Add to Cart{" "}
-          </Fab>
+        <DialogActions>
+          <Box pt={2}>
+            <Fab
+              variant="extended"
+              size="medium"
+              color="secondary"
+              aria-label="add"
+              onClick={handleAddItem}
+            >
+              {" "}
+              <AddIcon />
+              Add to Cart{" "}
+            </Fab>
+          </Box>
         </DialogActions>
       </Dialog>
     </>
