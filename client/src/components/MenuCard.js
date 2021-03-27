@@ -99,8 +99,6 @@ const MenuCard = (props) => {
         </Fab>
         <ItemDialog2
           open={open}
-          alertOpen={alertOpen}
-          // setAlertOpen={setAlertOpen}
           onClose={handleClose}
           onAdd={handleAdd}
           onAlertClose={handleAlertClose}
@@ -112,12 +110,12 @@ const MenuCard = (props) => {
         />
         <Snackbar
           open={alertOpen}
-          autoHideDuration={2000}
+          autoHideDuration={4000}
           onClose={handleAlertClose}
         >
           <Alert onClose={handleAlertClose} severity="success">
             {" "}
-            Item added!{" "}
+            added to cart ! ~{" "}
           </Alert>
         </Snackbar>
       </CardActions>

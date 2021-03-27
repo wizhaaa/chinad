@@ -1,30 +1,41 @@
-import React from "react";
+import { React, useState } from "react";
 import { useTheme } from "@material-ui/core/styles";
-import { Add as AddIcon, Close as CloseIcon } from "@material-ui/icons";
 import {
-  CardMedia,
+  Add as AddIcon,
+  Close as CloseIcon,
+  ExpandMore as ExpandMoreIcon,
+} from "@material-ui/icons";
+import {
   Grid,
   Box,
   Fab,
-  Form,
   Typography,
   IconButton,
-  Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
-  Snackbar,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Radio,
+  RadioGroup,
+  FormControlLabel,
+  FormControl,
+  FormLabel,
+  InputLabel,
+  MenuItem,
+  Select,
   useMediaQuery,
   makeStyles,
+  Divider,
 } from "@material-ui/core";
-import MuiAlert from "@material-ui/lab/Alert";
 
 const useStyles = makeStyles((theme) => ({
   root: { margin: 10 },
-  cards: {
-    margin: 5,
+  gridPadding: {
+    padding: 15,
   },
   media: {
     height: 0,
@@ -43,7 +54,14 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(3),
     flexWrap: "wrap",
   },
-  img: { width: 150, height: 150 },
+  img: {
+    maxWidth: 300,
+    maxHeight: 300,
+    height: 230,
+    width: "100%",
+    objectFit: "cover",
+  },
+
   dialogWrapper: {
     padding: theme.spacing(2),
     position: "absolute",
@@ -51,14 +69,30 @@ const useStyles = makeStyles((theme) => ({
   dialogTitle: {
     paddingRight: "0px",
   },
+  heading: {
+    fontSize: theme.typography.pxToRem(15),
+    fontWeight: theme.typography.fontWeightRegular,
+  },
+  divider: { margin: theme.spacing(3) },
+  selectedValue: {
+    fontSize: theme.typography.pxToRem(15),
+    fontWeight: theme.typography.fontWeightRegular,
+    color: "#b5b5b5",
+    marginLeft: 10,
+  },
+  formControl: {
+    marginTop: theme.spacing(2),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
 }));
 
 const ItemDialog2 = (props) => {
   const {
     onClose,
     open,
-    onAlertClose,
-    alertOpen,
     onAdd,
     title,
     description,
@@ -69,6 +103,9 @@ const ItemDialog2 = (props) => {
 
   console.log(props);
 
+  const [riceValue, setRiceValue] = useState("white rice");
+  const [sideValue, setSideValue] = useState("none");
+  const [quantity, setQuantity] = useState(1);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
   const classes = useStyles();
@@ -77,10 +114,20 @@ const ItemDialog2 = (props) => {
     onClose();
   };
 
-  const handleSubmit = () => {};
-
   const handleAddItem = () => {
     onAdd();
+  };
+
+  const handleRiceChange = (e) => {
+    setRiceValue(e.target.value);
+  };
+
+  const handleSideChange = (e) => {
+    setSideValue(e.target.value);
+  };
+
+  const handleQuantityChange = (e) => {
+    setQuantity(e.target.value);
   };
 
   return (
@@ -115,30 +162,172 @@ const ItemDialog2 = (props) => {
             {" "}
             <Grid container>
               {" "}
-              <Grid Item xs={6}>
+              <Grid Item xs={12} sm={6} className={classes.gridPadding}>
                 {" "}
                 <img className={classes.img} src={img} alt=" sweet sour" />
               </Grid>
-              <Grid Item xs={6}>
-                {" "}
-                xs 6
-              </Grid>
-              <Grid Item xs={6}>
-                {" "}
-                xs 6
+              <Grid Item xs={12} sm={6}>
+                please choose from the options below:
+                <Accordion>
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                  >
+                    <Typography className={classes.heading}>rice: </Typography>
+                    <Typography className={classes.selectedValue}>
+                      {riceValue}
+                    </Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <Typography>
+                      <FormControl component="fieldset">
+                        <FormLabel component="legend"> select one: </FormLabel>
+                        <RadioGroup
+                          aria-label="rices"
+                          name="rices1"
+                          value={riceValue}
+                          onChange={handleRiceChange}
+                        >
+                          <FormControlLabel
+                            value="white rice"
+                            control={<Radio />}
+                            label="white rice"
+                          />
+                          <FormControlLabel
+                            value="fried rice"
+                            control={<Radio />}
+                            label="fried rice"
+                          />
+                          <FormControlLabel
+                            value="lo mein"
+                            control={<Radio />}
+                            label="lo mein (+1.75)"
+                          />
+                          <FormControlLabel
+                            value="pork fried rice"
+                            control={<Radio />}
+                            label="pork fried rice (+1.75)"
+                          />
+                        </RadioGroup>
+                      </FormControl>{" "}
+                    </Typography>
+                  </AccordionDetails>
+                </Accordion>
+                <Accordion>
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel2a-content"
+                    id="panel2a-header"
+                  >
+                    <Typography className={classes.heading}>
+                      sides (+.75):
+                    </Typography>
+                    <Typography className={classes.selectedValue}>
+                      {sideValue}
+                    </Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <Typography>
+                      <FormControl component="fieldset">
+                        <FormLabel component="legend"> select one: </FormLabel>
+                        <RadioGroup
+                          aria-label="rices"
+                          name="rices1"
+                          value={sideValue}
+                          onChange={handleSideChange}
+                        >
+                          <FormControlLabel
+                            value="none"
+                            control={<Radio />}
+                            label="none"
+                          />
+                          <FormControlLabel
+                            value="egg roll"
+                            control={<Radio />}
+                            label="egg roll"
+                          />
+                          <FormControlLabel
+                            value="soda"
+                            control={<Radio />}
+                            label="soda"
+                          />
+                          <FormControlLabel
+                            value="wonton soup"
+                            control={<Radio />}
+                            label="wonton soup"
+                          />
+                          <FormControlLabel
+                            value="egg drop soup"
+                            control={<Radio />}
+                            label="egg drop soup"
+                          />
+                          <FormControlLabel
+                            value="hot & sour soup"
+                            control={<Radio />}
+                            label="hot & sour soup"
+                          />
+                        </RadioGroup>
+                      </FormControl>
+                    </Typography>
+                  </AccordionDetails>
+                </Accordion>
               </Grid>
             </Grid>
           </Box>
-          <img className={classes.img} src={img} alt=" sweet sour" />{" "}
+          <Divider className={classes.divider} />
           <DialogContentText className={classes.container}>
             {" "}
             <Typography pl={50}>
-              {description} {priceSm} {priceLg} Lorem ispum{" "}
+              <Accordion>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1a-content"
+                  id="panel1a-header"
+                >
+                  <Typography className={classes.heading}>about</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Typography>
+                    {" "}
+                    {description} {priceSm} {priceLg}{" "}
+                  </Typography>
+                </AccordionDetails>
+              </Accordion>
+              <Accordion>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel2a-content"
+                  id="panel2a-header"
+                >
+                  <Typography className={classes.heading}>reviews</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Typography> feature work in progress </Typography>
+                </AccordionDetails>
+              </Accordion>{" "}
             </Typography>
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Box pt={2}>
+          <FormControl variant="outlined" className={classes.formControl}>
+            <InputLabel id="demo-simple-select-outlined-label">
+              {" "}
+              qty{" "}
+            </InputLabel>
+            <Select
+              labelId="demo-simple-select-outlined-label"
+              id="demo-simple-select-outlined"
+              value={quantity}
+              onChange={handleQuantityChange}
+              label="qty"
+            >
+              {[...Array(20)].map((_id, i) => (
+                <MenuItem value={i + 1}> {i + 1}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <Box pt={1.5} px={1.5}>
             <Fab
               variant="extended"
               size="medium"
