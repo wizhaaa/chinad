@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Typography, Box, Grid, makeStyles } from "@material-ui/core";
 
-import MenuCard from "../MenuParts/LunchMenuCard";
-import SoupMenuCard from "../MenuParts/SoupMenuCard";
+import DinnerMenuCard from "../MenuParts/DinnerMenuCard";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Soups = (props) => {
+const DinnerCombo = (props) => {
   const classes = useStyles();
 
   return (
@@ -43,19 +42,36 @@ const Soups = (props) => {
           className={(classes.menuHeadings, classes.bold)}
         >
           {" "}
-          soups{" "}
+          dinner combination platters{" "}
         </Typography>
         <Typography className={classes.subheadings}>
-          yummy & warm soups !
-          <br /> every soup comes with a bag of fried noodles !
-          <br /> pints come with 1 bag , quarts come with 2 bags
+          * aka combo platters or dinner platters *
+          <br /> can choose between <strong> fried or white rice </strong>
+          <em> (for free!) </em>
+          <br /> each comes with an <strong> egg roll </strong>{" "}
+          <em> (for free!) </em>
+          <br /> can choose to add a <strong>soup </strong> for +$1
         </Typography>{" "}
       </div>
 
       <Box marginTop={10}>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6} md={4}>
-            <SoupMenuCard
+            <DinnerMenuCard
+              itemName={"sweet and sour chicken"}
+              itemDescription={
+                "crispy, breaded chicken with sweet and sour sauce on the side"
+              }
+              img={
+                "https://copykat.com/wp-content/uploads/2016/12/Sweet-and-Sour-Chicken-Pin.jpg"
+              }
+              price={9.95}
+              priceSm={2.5}
+              priceLg={3.75}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <DinnerMenuCard
               itemName={"wonton soup"}
               itemDescription={"pork wrapped in wontons in a chicken broth"}
               img={
@@ -67,11 +83,11 @@ const Soups = (props) => {
             />
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
-            <SoupMenuCard
-              itemName={"hot & sour soup"}
+            <DinnerMenuCard
+              itemName={"wonton soup"}
               itemDescription={"pork wrapped in wontons in a chicken broth"}
               img={
-                "https://www.recipetineats.com/wp-content/uploads/2019/02/Hot-and-Sour-Soup_1_6.jpg"
+                "https://www.marionskitchen.com/wp-content/uploads/2019/05/Wonton-Soup1.jpg"
               }
               price={null}
               priceSm={2.5}
@@ -79,37 +95,13 @@ const Soups = (props) => {
             />
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
-            <SoupMenuCard
-              itemName={"egg drop soup"}
+            <DinnerMenuCard
+              itemName={"wonton soup"}
               itemDescription={"pork wrapped in wontons in a chicken broth"}
               img={
-                "https://healthyrecipesblogs.com/wp-content/uploads/2014/04/egg-drop-soup-featured.jpg"
+                "https://www.marionskitchen.com/wp-content/uploads/2019/05/Wonton-Soup1.jpg"
               }
               price={null}
-              priceSm={2.5}
-              priceLg={3.75}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <SoupMenuCard
-              itemName={"young chow wonton soup"}
-              itemDescription={"pork wrapped in wontons in a chicken broth"}
-              img={
-                "https://lh3.googleusercontent.com/proxy/H5t6oAxvE1lZjamjmkI0asmmCjr__9ugBfb_PohcrePUBWcJvzcxk6jPT5Bx169A0Mc_LhQQMEo3QWotqBhzIPv8Oja5ohAvMDnbvLvuQIZp4VBZjja3M-5LSfA"
-              }
-              price={6.5}
-              priceSm={2.5}
-              priceLg={3.75}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <SoupMenuCard
-              itemName={"house special soup"}
-              itemDescription={"pork wrapped in wontons in a chicken broth"}
-              img={
-                "https://i.pinimg.com/originals/91/12/3c/91123c1d0f7afaf26ccc3587e1da5d69.jpg"
-              }
-              price={6.5}
               priceSm={2.5}
               priceLg={3.75}
             />
@@ -120,4 +112,4 @@ const Soups = (props) => {
   );
 };
 
-export default Soups;
+export default DinnerCombo;

@@ -26,7 +26,7 @@ import MuiAlert from "@material-ui/lab/Alert";
 
 import { Add as AddIcon } from "@material-ui/icons";
 
-import LunchDialog from "./LunchDialog";
+import DinnerDialog from "./DinnerDialog";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LunchMenuCard = (props) => {
+const DinnerMenuCard = (props) => {
   const { itemName, itemDescription, img, price, priceSm, priceLg } = props;
   const [open, setOpen] = React.useState(false);
   const [alertOpen, setAlertOpen] = React.useState(false);
@@ -89,7 +89,8 @@ const LunchMenuCard = (props) => {
           {" "}
           <Typography>
             {" "}
-            from {price === null ? `$ ${priceSm} / $ ${priceLg}` : price}
+            from{" "}
+            {price === null ? `$ ${priceSm} / $ ${priceLg}` : `from ${price}`}
           </Typography>
         </Box>{" "}
         <Fab
@@ -103,13 +104,14 @@ const LunchMenuCard = (props) => {
           <AddIcon> </AddIcon>
           Customize{" "}
         </Fab>
-        <LunchDialog
+        <DinnerDialog
           open={open}
           onClose={handleClose}
           onAdd={handleAdd}
           onAlertClose={handleAlertClose}
           title={itemName}
           description={itemDescription}
+          price={price}
           priceSm={priceSm}
           priceLg={priceLg}
           img={img}
@@ -129,4 +131,4 @@ const LunchMenuCard = (props) => {
   );
 };
 
-export default LunchMenuCard;
+export default DinnerMenuCard;

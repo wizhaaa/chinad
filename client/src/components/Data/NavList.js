@@ -45,7 +45,7 @@ const menuList = [
   { text: "udon noodles", routeTo: "/udon" },
   { text: "chef's specials", routeTo: "/chef" },
   { text: "diet", routeTo: "/diet" },
-  { text: "combination platters", routeTo: "/combo" },
+  { text: "combination platters", routeTo: "/dinner-combo" },
   { text: "sides", routeTo: "/sides" },
 ];
 

@@ -7,6 +7,7 @@ import Cart from "./Pages/Cart";
 import Menu from "./Pages/Menu";
 import LunchSpecials from "./MenuPages/LunchSpecials";
 import Soups from "./MenuPages/Soups";
+import DinnerCombo from "./MenuPages/DinnerCombo";
 
 const Routes = () => {
   return (
@@ -21,6 +22,7 @@ const Routes = () => {
         {/* menu list */}
         <Route exact path="/lunch" component={LunchSpecials} />
         <Route exact path="/soups" component={Soups} />
+        <Route exact path="/dinner-combo" component={DinnerCombo} />
       </Switch>
     </div>
   );

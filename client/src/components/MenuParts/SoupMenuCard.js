@@ -87,7 +87,10 @@ const LunchMenuCard = (props) => {
       <CardActions className={classes.container} disableSpacing>
         <Box className={classes.bottomText}>
           {" "}
-          <Typography> from {price}</Typography>
+          <Typography>
+            {" "}
+            {price === null ? `$ ${priceSm} / $ ${priceLg}` : `$ ${price}`}
+          </Typography>
         </Box>{" "}
         <Fab
           variant="extended"

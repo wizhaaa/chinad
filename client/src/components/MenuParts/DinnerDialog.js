@@ -89,7 +89,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SoupDialog = (props) => {
+const DinnerDialog = (props) => {
   const {
     onClose,
     open,
@@ -97,13 +97,15 @@ const SoupDialog = (props) => {
     title,
     description,
     img,
+    price,
     priceSm,
     priceLg,
   } = props;
 
   console.log(props);
 
-  const [sizeValue, setSizeValue] = useState("pint");
+  const [riceValue, setRiceValue] = useState("white rice");
+  const [sideValue, setSideValue] = useState("none");
   const [quantity, setQuantity] = useState(1);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
@@ -117,8 +119,12 @@ const SoupDialog = (props) => {
     onAdd();
   };
 
-  const handleSizeChange = (e) => {
-    setSizeValue(e.target.value);
+  const handleRiceChange = (e) => {
+    setRiceValue(e.target.value);
+  };
+
+  const handleSideChange = (e) => {
+    setSideValue(e.target.value);
   };
 
   const handleQuantityChange = (e) => {
@@ -169,9 +175,9 @@ const SoupDialog = (props) => {
                     aria-controls="panel1a-content"
                     id="panel1a-header"
                   >
-                    <Typography className={classes.heading}>size: </Typography>
+                    <Typography className={classes.heading}>rice: </Typography>
                     <Typography className={classes.selectedValue}>
-                      {sizeValue}
+                      {riceValue}
                     </Typography>
                   </AccordionSummary>
                   <AccordionDetails>
@@ -181,21 +187,79 @@ const SoupDialog = (props) => {
                         <RadioGroup
                           aria-label="rices"
                           name="rices1"
-                          value={sizeValue}
-                          onChange={handleSizeChange}
+                          value={riceValue}
+                          onChange={handleRiceChange}
                         >
                           <FormControlLabel
-                            value="pint"
+                            value="white rice"
                             control={<Radio />}
-                            label="pint"
+                            label="white rice"
                           />
                           <FormControlLabel
-                            value="quart"
+                            value="fried rice"
                             control={<Radio />}
-                            label="quart"
+                            label="fried rice"
+                          />
+                          <FormControlLabel
+                            value="lo mein"
+                            control={<Radio />}
+                            label="lo mein ( + $2 )"
+                          />
+                          <FormControlLabel
+                            value="pork fried rice"
+                            control={<Radio />}
+                            label="pork fried rice ( + $2 )"
                           />
                         </RadioGroup>
                       </FormControl>{" "}
+                    </Typography>
+                  </AccordionDetails>
+                </Accordion>
+                <Accordion>
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel2a-content"
+                    id="panel2a-header"
+                  >
+                    <Typography className={classes.heading}>
+                      soup? ( + $1 ):
+                    </Typography>
+                    <Typography className={classes.selectedValue}>
+                      {sideValue}
+                    </Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <Typography>
+                      <FormControl component="fieldset">
+                        <FormLabel component="legend"> select one: </FormLabel>
+                        <RadioGroup
+                          aria-label="rices"
+                          name="rices1"
+                          value={sideValue}
+                          onChange={handleSideChange}
+                        >
+                          <FormControlLabel
+                            value="none"
+                            control={<Radio />}
+                            label="none"
+                          />
+                          <FormControlLabel
+                            value="wonton soup"
+                            control={<Radio />}
+                            label="wonton soup"
+                          />
+                          <FormControlLabel
+                            value="egg drop soup"
+                            control={<Radio />}
+                            label="egg drop soup"
+                          />
+                          <FormControlLabel
+                            value="hot & sour soup"
+                            control={<Radio />}
+                            label="hot & sour soup"
+                          />
+                        </RadioGroup>
+                      </FormControl>
                     </Typography>
                   </AccordionDetails>
                 </Accordion>
@@ -215,7 +279,10 @@ const SoupDialog = (props) => {
                   <Typography className={classes.heading}>about</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                  <Typography> {description} </Typography>
+                  <Typography>
+                    {" "}
+                    {description} {priceSm} {priceLg}{" "}
+                  </Typography>
                 </AccordionDetails>
               </Accordion>
               <Accordion>
@@ -234,6 +301,7 @@ const SoupDialog = (props) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
+          <Typography> {price} </Typography>
           <FormControl variant="outlined" className={classes.formControl}>
             <InputLabel id="demo-simple-select-outlined-label">
               {" "}
@@ -270,4 +338,4 @@ const SoupDialog = (props) => {
   );
 };
 
-export default SoupDialog;
+export default DinnerDialog;
