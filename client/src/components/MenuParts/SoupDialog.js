@@ -27,6 +27,7 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  TextField,
   useMediaQuery,
   makeStyles,
   Divider,
@@ -87,6 +88,12 @@ const useStyles = makeStyles((theme) => ({
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
+  textFields: {
+    "& .MuiTextField-root": {
+      margin: theme.spacing(1),
+      width: "25ch",
+    },
+  },
 }));
 
 const SoupDialog = (props) => {
@@ -105,6 +112,8 @@ const SoupDialog = (props) => {
 
   const [sizeValue, setSizeValue] = useState("pint");
   const [quantity, setQuantity] = useState(1);
+  const [finalPrice, setFinalPrice] = useState(priceSm);
+  const [textFieldValue, setTextFieldValue] = useState("");
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
   const classes = useStyles();
@@ -118,12 +127,31 @@ const SoupDialog = (props) => {
   };
 
   const handleSizeChange = (e) => {
-    setSizeValue(e.target.value);
+    const size = e.target.value;
+    setSizeValue(size);
+    if (size === "quart") {
+      setFinalPrice(priceLg);
+    } else if (size === "pint") {
+      setFinalPrice(priceSm);
+    }
   };
 
   const handleQuantityChange = (e) => {
     setQuantity(e.target.value);
   };
+
+  const handleTextFieldChange = (e) => {
+    var text = e.target.value;
+    setTextFieldValue(text);
+  };
+
+  const formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 2,
+  });
+
+  let cartPrice = quantity * finalPrice;
 
   return (
     <>
@@ -200,6 +228,24 @@ const SoupDialog = (props) => {
                   </AccordionDetails>
                 </Accordion>
               </Grid>
+              <Grid item xs={12}>
+                {" "}
+                <Box m={3} className={classes.textFields}>
+                  <TextField
+                    style={{ width: "100%" }}
+                    id="outlined-textarea"
+                    label="any special requests?"
+                    placeholder="we will try out best to accomodate your needs"
+                    rows={4}
+                    rowsMax={8}
+                    multiline
+                    variant="outlined"
+                    inputProps={{ maxLength: 250 }}
+                    value={textFieldValue}
+                    onChange={handleTextFieldChange}
+                  />{" "}
+                </Box>
+              </Grid>
             </Grid>
           </Box>
           <Divider className={classes.divider} />
@@ -234,6 +280,13 @@ const SoupDialog = (props) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
+          {" "}
+          <Box pr={9}>
+            <Typography variant="h4">
+              {" "}
+              {formatter.format(cartPrice)}{" "}
+            </Typography>
+          </Box>
           <FormControl variant="outlined" className={classes.formControl}>
             <InputLabel id="demo-simple-select-outlined-label">
               {" "}

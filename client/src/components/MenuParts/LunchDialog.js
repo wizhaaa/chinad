@@ -158,6 +158,14 @@ const LunchDialog = (props) => {
     setTextFieldValue(text);
   };
 
+  const formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 2,
+  });
+
+  let cartPrice = quantity * (finalPrice + addedPrice);
+
   return (
     <>
       <Dialog
@@ -357,7 +365,10 @@ const LunchDialog = (props) => {
         </DialogContent>
         <DialogActions>
           <Box pr={9}>
-            <Typography variant="h4"> ${finalPrice + addedPrice} </Typography>
+            <Typography variant="h4">
+              {" "}
+              {formatter.format(cartPrice)}{" "}
+            </Typography>
           </Box>
           <FormControl variant="outlined" className={classes.formControl}>
             <InputLabel id="demo-simple-select-outlined-label">
