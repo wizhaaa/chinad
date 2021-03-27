@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Typography, Box, Grid, makeStyles } from "@material-ui/core";
 
-import MenuCard from "../MenuCard";
+import MenuCard from "../MenuParts/MenuCard";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LunchSpecials = (props) => {
+const Soups = (props) => {
   const classes = useStyles();
 
   return (
@@ -42,7 +42,7 @@ const LunchSpecials = (props) => {
           className={(classes.menuHeadings, classes.bold)}
         >
           {" "}
-          lunch specials{" "}
+          soups{" "}
         </Typography>
         <Typography className={classes.subheadings}>
           served with the choice of{" "}
@@ -134,4 +134,4 @@ const LunchSpecials = (props) => {
   );
 };
 
-export default LunchSpecials;
+export default Soups;

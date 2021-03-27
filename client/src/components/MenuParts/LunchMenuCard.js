@@ -26,7 +26,7 @@ import MuiAlert from "@material-ui/lab/Alert";
 
 import { Add as AddIcon } from "@material-ui/icons";
 
-import ItemDialog2 from "./menuItemDialog";
+import LunchDialog from "./LunchDialog";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MenuCard = (props) => {
+const LunchMenuCard = (props) => {
   const { itemName, itemDescription, img, price, priceSm, priceLg } = props;
   const [open, setOpen] = React.useState(false);
   const [alertOpen, setAlertOpen] = React.useState(false);
@@ -85,7 +85,10 @@ const MenuCard = (props) => {
       <CardMedia className={classes.media} image={img} title="fried rice" />
       <CardContent> {itemDescription}</CardContent>
       <CardActions className={classes.container} disableSpacing>
-        <Box className={classes.bottomText}>{price}</Box>{" "}
+        <Box className={classes.bottomText}>
+          {" "}
+          <Typography> from {price}</Typography>
+        </Box>{" "}
         <Fab
           variant="extended"
           size="medium"
@@ -97,7 +100,7 @@ const MenuCard = (props) => {
           <AddIcon> </AddIcon>
           Customize{" "}
         </Fab>
-        <ItemDialog2
+        <LunchDialog
           open={open}
           onClose={handleClose}
           onAdd={handleAdd}
@@ -123,4 +126,4 @@ const MenuCard = (props) => {
   );
 };
 
-export default MenuCard;
+export default LunchMenuCard;

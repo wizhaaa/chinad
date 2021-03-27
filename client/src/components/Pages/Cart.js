@@ -6,7 +6,7 @@ import { Button, Chip } from "@material-ui/core";
 import { Button as ButtonIcon } from "@material-ui/icons";
 
 // styling
-import useStyles from "./MaterialStyles";
+import useStyles from "../MaterialStyles";
 
 function Cart() {
   const [count, setCount] = useLocalStorage("count", 0);

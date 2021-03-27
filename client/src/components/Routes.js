@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import Home from "./Home";
-import About from "./About";
-import Cart from "./Cart";
-import Menu from "./Menu";
-import LunchSpecials from "./menuComponents/LunchSpecials";
+import Home from "./Pages/Home";
+import About from "./Pages/About";
+import Cart from "./Pages/Cart";
+import Menu from "./Pages/Menu";
+import LunchSpecials from "./MenuPages/LunchSpecials";
+import Soups from "./MenuPages/Soups";
 
 const Routes = () => {
   return (
@@ -19,6 +20,7 @@ const Routes = () => {
 
         {/* menu list */}
         <Route exact path="/lunch" component={LunchSpecials} />
+        <Route exact path="/soups" component={Soups} />
       </Switch>
     </div>
   );

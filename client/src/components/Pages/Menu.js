@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Typography, Box, Grid, makeStyles, Divider } from "@material-ui/core";
 
-import LunchSpecials from "./menuComponents/LunchSpecials";
+import LunchSpecials from "../MenuPages/LunchSpecials";
 
 const useStyles = makeStyles((theme) => ({
   root: {
