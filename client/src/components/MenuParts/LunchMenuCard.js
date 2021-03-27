@@ -110,6 +110,7 @@ const LunchMenuCard = (props) => {
           onAlertClose={handleAlertClose}
           title={itemName}
           description={itemDescription}
+          price={price}
           priceSm={priceSm}
           priceLg={priceLg}
           img={img}

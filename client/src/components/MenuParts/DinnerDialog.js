@@ -293,7 +293,7 @@ const DinnerDialog = (props) => {
               </Grid>
               <Grid item xs={12}>
                 {" "}
-                <Box m={5}>
+                <Box m={3} className={classes.textFields}>
                   <TextField
                     style={{ width: "100%" }}
                     id="outlined-textarea"

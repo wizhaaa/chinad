@@ -27,6 +27,7 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  TextField,
   useMediaQuery,
   makeStyles,
   Divider,
@@ -87,6 +88,12 @@ const useStyles = makeStyles((theme) => ({
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
+  textFields: {
+    "& .MuiTextField-root": {
+      margin: theme.spacing(1),
+      width: "25ch",
+    },
+  },
 }));
 
 const LunchDialog = (props) => {
@@ -97,6 +104,7 @@ const LunchDialog = (props) => {
     title,
     description,
     img,
+    price,
     priceSm,
     priceLg,
   } = props;
@@ -106,6 +114,9 @@ const LunchDialog = (props) => {
   const [riceValue, setRiceValue] = useState("white rice");
   const [sideValue, setSideValue] = useState("none");
   const [quantity, setQuantity] = useState(1);
+  const [addedPrice, setAddedPrice] = useState(0);
+  const [finalPrice, setFinalPrice] = useState(price);
+  const [textFieldValue, setTextFieldValue] = useState("");
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
   const classes = useStyles();
@@ -119,15 +130,32 @@ const LunchDialog = (props) => {
   };
 
   const handleRiceChange = (e) => {
-    setRiceValue(e.target.value);
+    var riceChosen = e.target.value;
+    setRiceValue(riceChosen);
+    if (riceChosen === "lo mein" || riceChosen === "pork fried rice") {
+      setAddedPrice(1.75);
+    } else {
+      setAddedPrice(0);
+    }
   };
 
   const handleSideChange = (e) => {
-    setSideValue(e.target.value);
+    const sideChosen = e.target.value;
+    setSideValue(sideChosen);
+    if (!(sideChosen === "none")) {
+      setFinalPrice(price + 0.75);
+    } else {
+      setFinalPrice(price);
+    }
   };
 
   const handleQuantityChange = (e) => {
     setQuantity(e.target.value);
+  };
+
+  const handleTextFieldChange = (e) => {
+    var text = e.target.value;
+    setTextFieldValue(text);
   };
 
   return (
@@ -273,6 +301,24 @@ const LunchDialog = (props) => {
                   </AccordionDetails>
                 </Accordion>
               </Grid>
+              <Grid item xs={12}>
+                {" "}
+                <Box m={3} className={classes.textFields}>
+                  <TextField
+                    style={{ width: "100%" }}
+                    id="outlined-textarea"
+                    label="any special requests?"
+                    placeholder="we will try out best to accomodate your needs"
+                    rows={4}
+                    rowsMax={8}
+                    multiline
+                    variant="outlined"
+                    inputProps={{ maxLength: 250 }}
+                    value={textFieldValue}
+                    onChange={handleTextFieldChange}
+                  />{" "}
+                </Box>
+              </Grid>
             </Grid>
           </Box>
           <Divider className={classes.divider} />
@@ -310,6 +356,9 @@ const LunchDialog = (props) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
+          <Box pr={9}>
+            <Typography variant="h4"> ${finalPrice + addedPrice} </Typography>
+          </Box>
           <FormControl variant="outlined" className={classes.formControl}>
             <InputLabel id="demo-simple-select-outlined-label">
               {" "}
