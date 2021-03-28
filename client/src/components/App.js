@@ -2,8 +2,13 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 // material-ui library
-import CssBaseline from "@material-ui/core/CssBaseline";
-import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
+import {
+  Box,
+  Container,
+  makeStyles,
+  ThemeProvider,
+  CssBaseline,
+} from "@material-ui/core/";
 
 // self made components
 import HeaderNav from "./HeaderNav";
@@ -36,8 +41,7 @@ function App() {
 
           <div className="App">
             <main className={classes.content}>
-              <div className={classes.toolbar} />
-              <Routes />
+              <div className={classes.toolbar} /> <Routes />
             </main>
           </div>
         </Router>

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Typography, Box, Grid, makeStyles, Divider } from "@material-ui/core";
 
 import LunchSpecials from "../MenuPages/LunchSpecials";
+import Soups from "../MenuPages/Soups";
+import DinnerCombo from "../MenuPages/DinnerCombo";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -59,6 +61,9 @@ function Menu() {
           <Divider className={classes.divider} />
           <LunchSpecials />
           <Divider className={classes.divider} />
+          <Soups />
+          <Divider className={classes.divider} />
+          <DinnerCombo />
         </Box>
       </Typography>
     </div>

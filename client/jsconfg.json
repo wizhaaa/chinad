@@ -7,5 +7,6 @@
             "@lib/*": ["lib/*"],
             "@menuParts/*": ["MenuParts/*"]
         }
+        
     }
 }

@@ -49,6 +49,9 @@ const useStyles = makeStyles((theme) => ({
     alignSelf: "center",
     width: "100%",
   },
+  table: {
+    minWidth: 700,
+  },
 }));
 
 export default useStyles;
