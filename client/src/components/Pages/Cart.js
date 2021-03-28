@@ -42,9 +42,9 @@ function priceRow(qty, unit) {
   return qty * unit;
 }
 
-function createRow(desc, qty, unit) {
+function createRow(itemName, desc, requests, qty, unit) {
   const price = priceRow(qty, unit);
-  return { desc, qty, unit, price };
+  return { itemName, desc, requests, qty, unit, price };
 }
 
 function subtotal(items) {
@@ -52,9 +52,27 @@ function subtotal(items) {
 }
 
 const rows = [
-  createRow("Paperclips (Box)", 100, 1.15),
-  createRow("Paper (Case)", 10, 45.99),
-  createRow("Waste Basket", 2, 17.99),
+  createRow(
+    "Sweet & Sour Chicken",
+    "dinner, small, fried rice, egg roll, hot & sour soup",
+    "extra spicy please",
+    20,
+    1.15
+  ),
+  createRow(
+    "General Tso Chicken",
+    "this is the description",
+    "extra spicy please",
+    10,
+    45.99
+  ),
+  createRow(
+    "Combination of Shrimp & Chicken",
+    "this is the description",
+    "extra spicy please",
+    2,
+    17.99
+  ),
 ];
 
 const invoiceSubtotal = subtotal(rows);
@@ -63,29 +81,18 @@ const invoiceTotal = invoiceTaxes + invoiceSubtotal;
 
 function Cart() {
   const [count, setCount] = useLocalStorage("count", 0);
+  const jsonRows = JSON.stringify(rows);
+  localStorage.setItem("orderItems", JSON.stringify(rows));
+  var storedOrderItems = JSON.parse(localStorage.getItem("orderItems"));
+  const [orderItems, setOrderItems] = useLocalStorage(jsonRows);
+  const getOrderItems = () => {
+    return JSON.parse(orderItems);
+  };
   const classes = useStyles();
   const tableClasses = tableStyles();
 
   return (
     <div className="Cart">
-      {/* <Box textAlign="center" className={classes.alignToCenter}>
-        <Typography component="div">
-          <Typography variant="h4" gutterBottom>
-            my cart
-          </Typography>
-          <Typography variant="subheading"> counter: {count} </Typography>
-          <Button color="inherit" onClick={() => setCount(count + 1)}>
-            {" "}
-            Add{" "}
-          </Button>
-          <Chip
-            onClick={() => setCount(count + 1)}
-            label="add"
-            onDelete={() => {}}
-          />{" "}
-        </Typography>
-        
-      </Box> */}
       <Typography component="div">
         <Box textAlign="center" m={1}>
           <Typography textAlign="center" variant="h4" gutterBottom>
@@ -103,24 +110,38 @@ function Cart() {
                     Details
                   </TableCell>
                   <TableCell align="right">Price</TableCell>
+                  <Table cell align="right">
+                    {" "}
+                  </Table>
                 </TableRow>
                 <TableRow>
                   <TableCell> Item </TableCell>
                   <TableCell align="right">Qty.</TableCell>
                   <TableCell align="right">Price</TableCell>
                   <TableCell align="right">Sum</TableCell>
+                  <TableCell align="right"></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows.map((row) => (
-                  <TableRow key={row.desc}>
-                    <TableCell>{row.desc}</TableCell>
+                {storedOrderItems.map((row) => (
+                  <TableRow key={row.itemName}>
+                    <TableCell>
+                      <Typography>{row.itemName} </Typography>
+                      <Typography style={{ color: "#d1d1d1" }} variant="body2">
+                        {" "}
+                        {row.desc}{" "}
+                      </Typography>{" "}
+                      <Typography style={{ color: "#d1d1d1" }} variant="body2">
+                        {" "}
+                        notes: {row.requests}{" "}
+                      </Typography>
+                    </TableCell>
                     <TableCell align="right">{row.qty}</TableCell>
                     <TableCell align="right">{row.unit}</TableCell>
                     <TableCell align="right">{ccyFormat(row.price)}</TableCell>
                     <TableCell align="right">
                       {" "}
-                      <IconButton>
+                      <IconButton onClick={() => console.log("deleted item")}>
                         <DeleteIcon> </DeleteIcon>
                       </IconButton>{" "}
                     </TableCell>
@@ -148,6 +169,15 @@ function Cart() {
               </TableBody>
             </Table>
           </TableContainer>
+          <Button onClick={() => console.log(rows)}> rows array </Button>
+          <Button onClick={() => console.log(JSON.stringify(rows))}>
+            {" "}
+            rows string{" "}
+          </Button>
+          <Button onClick={() => console.log(JSON.parse(jsonRows))}>
+            {" "}
+            rows parse{" "}
+          </Button>
         </Box>
       </Typography>
     </div>
