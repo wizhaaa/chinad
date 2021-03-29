@@ -89,7 +89,6 @@ const DinnerMenuCard = (props) => {
           {" "}
           <Typography>
             {" "}
-            from{" "}
             {price === null ? `$ ${priceSm} / $ ${priceLg}` : `from ${price}`}
           </Typography>
         </Box>{" "}

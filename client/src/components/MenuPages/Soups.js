@@ -95,7 +95,7 @@ const Soups = (props) => {
               itemName={"young chow wonton soup"}
               itemDescription={"pork wrapped in wontons in a chicken broth"}
               img={
-                "https://lh3.googleusercontent.com/proxy/H5t6oAxvE1lZjamjmkI0asmmCjr__9ugBfb_PohcrePUBWcJvzcxk6jPT5Bx169A0Mc_LhQQMEo3QWotqBhzIPv8Oja5ohAvMDnbvLvuQIZp4VBZjja3M-5LSfA"
+                "https://www.marionskitchen.com/wp-content/uploads/2019/05/Wonton-Soup1.jpg"
               }
               price={6.5}
               priceSm={2.5}

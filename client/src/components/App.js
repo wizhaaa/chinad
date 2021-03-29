@@ -1,14 +1,8 @@
 // react library
-import React, { useState } from "react";
+import React, { useState, createContext } from "react";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 // material-ui library
-import {
-  Box,
-  Container,
-  makeStyles,
-  ThemeProvider,
-  CssBaseline,
-} from "@material-ui/core/";
+import { makeStyles, ThemeProvider, CssBaseline } from "@material-ui/core/";
 
 // self made components
 import HeaderNav from "./HeaderNav";
@@ -29,8 +23,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 function App() {
   const classes = useStyles();
+
   return (
     <div className={classes.root}>
       <ThemeProvider theme={theme}>
@@ -41,7 +37,8 @@ function App() {
 
           <div className="App">
             <main className={classes.content}>
-              <div className={classes.toolbar} /> <Routes />
+              <div className={classes.toolbar} />
+              <Routes />{" "}
             </main>
           </div>
         </Router>

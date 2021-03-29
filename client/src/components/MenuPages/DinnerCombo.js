@@ -72,36 +72,70 @@ const DinnerCombo = (props) => {
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
             <DinnerMenuCard
-              itemName={"wonton soup"}
-              itemDescription={"pork wrapped in wontons in a chicken broth"}
-              img={
-                "https://www.marionskitchen.com/wp-content/uploads/2019/05/Wonton-Soup1.jpg"
+              itemName={"sweet and sour chicken"}
+              itemDescription={
+                "crispy, breaded chicken with sweet and sour sauce on the side"
               }
-              price={null}
+              img={
+                "https://copykat.com/wp-content/uploads/2016/12/Sweet-and-Sour-Chicken-Pin.jpg"
+              }
+              price={9.95}
               priceSm={2.5}
               priceLg={3.75}
             />
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
             <DinnerMenuCard
-              itemName={"wonton soup"}
-              itemDescription={"pork wrapped in wontons in a chicken broth"}
-              img={
-                "https://www.marionskitchen.com/wp-content/uploads/2019/05/Wonton-Soup1.jpg"
+              itemName={"sweet and sour chicken"}
+              itemDescription={
+                "crispy, breaded chicken with sweet and sour sauce on the side"
               }
-              price={null}
+              img={
+                "https://copykat.com/wp-content/uploads/2016/12/Sweet-and-Sour-Chicken-Pin.jpg"
+              }
+              price={9.95}
               priceSm={2.5}
               priceLg={3.75}
             />
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
             <DinnerMenuCard
-              itemName={"wonton soup"}
-              itemDescription={"pork wrapped in wontons in a chicken broth"}
-              img={
-                "https://www.marionskitchen.com/wp-content/uploads/2019/05/Wonton-Soup1.jpg"
+              itemName={"sweet and sour chicken"}
+              itemDescription={
+                "crispy, breaded chicken with sweet and sour sauce on the side"
               }
-              price={null}
+              img={
+                "https://copykat.com/wp-content/uploads/2016/12/Sweet-and-Sour-Chicken-Pin.jpg"
+              }
+              price={9.95}
+              priceSm={2.5}
+              priceLg={3.75}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <DinnerMenuCard
+              itemName={"sweet and sour chicken"}
+              itemDescription={
+                "crispy, breaded chicken with sweet and sour sauce on the side"
+              }
+              img={
+                "https://copykat.com/wp-content/uploads/2016/12/Sweet-and-Sour-Chicken-Pin.jpg"
+              }
+              price={9.95}
+              priceSm={2.5}
+              priceLg={3.75}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <DinnerMenuCard
+              itemName={"sweet and sour chicken"}
+              itemDescription={
+                "crispy, breaded chicken with sweet and sour sauce on the side"
+              }
+              img={
+                "https://copykat.com/wp-content/uploads/2016/12/Sweet-and-Sour-Chicken-Pin.jpg"
+              }
+              price={9.95}
               priceSm={2.5}
               priceLg={3.75}
             />
