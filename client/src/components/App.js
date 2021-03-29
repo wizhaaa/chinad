@@ -1,5 +1,5 @@
 // react library
-import React, { useState, createContext } from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 // material-ui library
 import { makeStyles, ThemeProvider, CssBaseline } from "@material-ui/core/";
@@ -9,6 +9,10 @@ import HeaderNav from "./HeaderNav";
 import Routes from "./Routes";
 import theme from "./Theme";
 import "./App.css";
+
+//Context Provider
+import { CartProvider } from "./CartContext";
+
 //import test module
 import Test from "./DemoTestModule";
 
@@ -22,7 +26,6 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1),
   },
 }));
-
 
 function App() {
   const classes = useStyles();
@@ -38,7 +41,9 @@ function App() {
           <div className="App">
             <main className={classes.content}>
               <div className={classes.toolbar} />
-              <Routes />{" "}
+              <CartProvider>
+                <Routes />{" "}
+              </CartProvider>
             </main>
           </div>
         </Router>

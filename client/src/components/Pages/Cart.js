@@ -1,12 +1,11 @@
 import React, { useState, useContext } from "react";
-import { Typography, Box } from "@material-ui/core";
-
-import { Button, Chip } from "@material-ui/core";
 
 import { Button as ButtonIcon, Delete as DeleteIcon } from "@material-ui/icons";
-
 import {
   IconButton,
+  Button,
+  Typography,
+  Box,
   Table,
   TableBody,
   TableCell,
@@ -16,6 +15,9 @@ import {
   Paper,
   makeStyles,
 } from "@material-ui/core";
+
+// context provider
+import { useCartContext } from "../CartContext";
 
 // styling
 import useStyles from "../MaterialStyles";
@@ -80,16 +82,13 @@ const invoiceTaxes = TAX_RATE * invoiceSubtotal;
 const invoiceTotal = invoiceTaxes + invoiceSubtotal;
 
 function Cart() {
-  const [count, setCount] = useLocalStorage("count", 0);
+  const tableClasses = tableStyles();
+
   const jsonRows = JSON.stringify(rows);
   localStorage.setItem("orderItems", JSON.stringify(rows));
   var storedOrderItems = JSON.parse(localStorage.getItem("orderItems"));
-  const [orderItems, setOrderItems] = useLocalStorage(jsonRows);
-  const getOrderItems = () => {
-    return JSON.parse(orderItems);
-  };
-  const classes = useStyles();
-  const tableClasses = tableStyles();
+
+  const { cart, setCart } = useCartContext();
 
   return (
     <div className="Cart">
@@ -99,7 +98,8 @@ function Cart() {
             my cart
           </Typography>
           <Typography textAlign="center" variant="body" gutterBottom>
-            {" "}
+            {cart}
+            <Button onClick={() => setCart([])}> Click me daddy ! </Button>
           </Typography>
 
           <TableContainer component={Paper}>

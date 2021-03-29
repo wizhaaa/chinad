@@ -1,4 +1,4 @@
-import React, { useState, createContext } from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Home from "./Pages/Home";
@@ -9,14 +9,12 @@ import LunchSpecials from "./MenuPages/LunchSpecials";
 import Soups from "./MenuPages/Soups";
 import DinnerCombo from "./MenuPages/DinnerCombo";
 
-export const CartContext = createContext();
 
 const Routes = () => {
-  const [text, setText] = useState("initial text");
 
   return (
     <div>
-      <CartContext.Provider value={"yay"}>
+      
         <Switch>
           <Route exact path="/">
             {" "}
@@ -52,7 +50,7 @@ const Routes = () => {
             <DinnerCombo />{" "}
           </Route>
         </Switch>
-      </CartContext.Provider>
+      
     </div>
   );
 };

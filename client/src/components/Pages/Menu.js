@@ -5,7 +5,6 @@ import LunchSpecials from "../MenuPages/LunchSpecials";
 import Soups from "../MenuPages/Soups";
 import DinnerCombo from "../MenuPages/DinnerCombo";
 
-import { CartContext } from "../Routes";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,14 +30,13 @@ const useStyles = makeStyles((theme) => ({
 function Menu() {
   const classes = useStyles();
 
-  const value = useContext(CartContext);
 
   return (
     <div className="Cart">
       <Typography component="div" className={classes.root}>
         <Box textAlign="center" m={1}>
           <Typography textAlign="center" variant="h1" gutterBottom>
-            ゜・ menu ・゜{value}
+            ゜・ menu ・゜
           </Typography>
           <Typography textAlign="center" variant="body" gutterBottom>
             {" "}

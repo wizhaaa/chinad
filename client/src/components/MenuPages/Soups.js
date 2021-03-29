@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Typography, Box, Grid, makeStyles } from "@material-ui/core";
 
-import MenuCard from "../MenuParts/LunchMenuCard";
 import SoupMenuCard from "../MenuParts/SoupMenuCard";
 
 const useStyles = makeStyles((theme) => ({
