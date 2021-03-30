@@ -27,7 +27,7 @@ export const useCartContext = () => {
 };
 
 export function CartProvider({ children }) {
-  const [cart, setCart] = useLocalStorage("userLocalCart", [1, 2, 3]);
+  const [cart, setCart] = useLocalStorage("userLocalCart", []);
   const userCartCount = cart.length;
 
   const addNewItem = (newItem) => {

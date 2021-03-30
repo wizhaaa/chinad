@@ -90,6 +90,15 @@ function Cart() {
 
   const { cart, setCart, userCartCount } = useCartContext();
 
+  const handleDelete = (i) => {
+    console.log("deleting item @ index : ", i);
+    setCart((prevItems) => {
+      return prevItems.filter((cartItem, index) => {
+        return index !== i;
+      });
+    });
+  };
+
   const filledCart = (
     <TableContainer component={Paper}>
       <Table className={tableClasses.table} aria-label="spanning table">
@@ -166,6 +175,30 @@ function Cart() {
     </Typography>
   );
 
+  const testCart = cart.map((item, index) => (
+    <div>
+      {" "}
+      item @ index {index} is called {item.title} ({item.quantity} of them) and
+      it costs {item.cartUnitPrice}.
+      <br />
+      Special requests: {item.textFieldValue}
+      <br /> Item options is: {item.options.riceValue} ;{" "}
+      {item.options.sideValue}. <br />{" "}
+      <Button onClick={() => handleDelete(index)}> delete this item! </Button>
+    </div>
+  ));
+
+  // every option object is not the same. They will have different options. some include option with sizes,or what not
+  const testMap = cart.map((item, index) => {
+    const optionArray = [];
+    const obj = item.options;
+    for (var key in obj) {
+      console.log(obj[key]);
+      optionArray.push(obj[key]);
+    }
+    return optionArray;
+  });
+
   return (
     <div className="Cart">
       <Typography component="div">
@@ -173,8 +206,8 @@ function Cart() {
           <Typography textAlign="center" variant="h4" gutterBottom>
             my cart ({userCartCount})
           </Typography>
+          <Typography> test map {testMap} </Typography>
           <Typography textAlign="center" variant="body" gutterBottom>
-            {cart}
             <Button onClick={() => setCart([])}> Confirm & Place Order </Button>
             <Button onClick={() => setCart([1, 2, 3])}>
               {" "}
@@ -182,7 +215,6 @@ function Cart() {
             </Button>
           </Typography>
           {userCartCount > 0 ? filledCart : emptyCart}
-          {console.log(cart, userCartCount)}
         </Box>
       </Typography>
     </div>

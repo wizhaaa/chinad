@@ -118,7 +118,9 @@ const LunchDialog = (props) => {
   const [quantity, setQuantity] = useState(1);
   const [addedPrice, setAddedPrice] = useState(0);
   const [finalPrice, setFinalPrice] = useState(price);
-  const [textFieldValue, setTextFieldValue] = useState("");
+  let cartUnitPrice = finalPrice + addedPrice;
+  // customer request
+  const [textFieldValue, setTextFieldValue] = useState("no requests");
 
   // context cart
   const { cart, setCart, addNewItem } = useCartContext();
@@ -133,7 +135,9 @@ const LunchDialog = (props) => {
 
   const handleAddItem = () => {
     onAdd();
-    addNewItem(4);
+    const options = { riceValue, sideValue };
+    const newItem = { title, cartUnitPrice, options, textFieldValue, quantity };
+    addNewItem(newItem);
   };
 
   //handling price changes
