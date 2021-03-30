@@ -114,13 +114,13 @@ const LunchDialog = (props) => {
   console.log(props);
 
   const [riceValue, setRiceValue] = useState("white rice");
-  const [sideValue, setSideValue] = useState("none");
+  const [sideValue, setSideValue] = useState("no side");
   const [quantity, setQuantity] = useState(1);
   const [addedPrice, setAddedPrice] = useState(0);
   const [finalPrice, setFinalPrice] = useState(price);
   let cartUnitPrice = finalPrice + addedPrice;
   // customer request
-  const [textFieldValue, setTextFieldValue] = useState("no requests");
+  const [textFieldValue, setTextFieldValue] = useState("");
 
   // context cart
   const { cart, setCart, addNewItem } = useCartContext();
@@ -328,7 +328,7 @@ const LunchDialog = (props) => {
                     style={{ width: "100%" }}
                     id="outlined-textarea"
                     label="any special requests?"
-                    placeholder="we will try out best to accomodate your needs"
+                    placeholder="we will try our best to accomodate your needs"
                     rows={4}
                     rowsMax={8}
                     multiline

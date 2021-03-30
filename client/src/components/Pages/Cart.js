@@ -49,8 +49,8 @@ function createRow(itemName, desc, requests, qty, unit) {
   return { itemName, desc, requests, qty, unit, price };
 }
 
-function subtotal(items) {
-  return items.map(({ price }) => price).reduce((sum, i) => sum + i, 0);
+function subtotal(cart) {
+  return cart.map(({ price }) => price).reduce((sum, i) => sum + i, 0);
 }
 
 const rows = [
@@ -83,10 +83,6 @@ const invoiceTotal = invoiceTaxes + invoiceSubtotal;
 
 function Cart() {
   const tableClasses = tableStyles();
-
-  const jsonRows = JSON.stringify(rows);
-  localStorage.setItem("orderItems", JSON.stringify(rows));
-  var storedOrderItems = JSON.parse(localStorage.getItem("orderItems"));
 
   const { cart, setCart, userCartCount } = useCartContext();
 
@@ -121,30 +117,50 @@ function Cart() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {storedOrderItems.map((row) => (
-            <TableRow key={row.itemName}>
-              <TableCell>
-                <Typography>{row.itemName} </Typography>
-                <Typography style={{ color: "#d1d1d1" }} variant="body2">
+          {cart.map((item, index) => {
+            const itemOptions = Object.entries(item.options)
+              .map(([key, value]) => {
+                console.log(`${key} : ${value}`);
+                return value;
+              })
+              .join(", ");
+            const itemTotalPrice = item.cartUnitPrice * item.quantity;
+
+            console.log(
+              "price: ",
+              item.cartUnitPrice,
+              "qty : ",
+              item.quantity,
+              "price * qty =",
+              itemTotalPrice
+            );
+            return (
+              <TableRow key={item.title}>
+                <TableCell>
+                  <Typography>{item.title} </Typography>
+                  <Typography style={{ color: "#d1d1d1" }} variant="body2">
+                    {" "}
+                    {itemOptions}{" "}
+                  </Typography>{" "}
+                  <Typography style={{ color: "#d1d1d1" }} variant="body2">
+                    {" "}
+                    requests? {item.textFieldValue}{" "}
+                  </Typography>
+                </TableCell>
+                <TableCell align="right">{item.quantity}</TableCell>
+                <TableCell align="right">{item.cartUnitPrice}</TableCell>
+                <TableCell align="right">
+                  {formatter.format(itemTotalPrice)}
+                </TableCell>
+                <TableCell align="right">
                   {" "}
-                  {row.desc}{" "}
-                </Typography>{" "}
-                <Typography style={{ color: "#d1d1d1" }} variant="body2">
-                  {" "}
-                  notes: {row.requests}{" "}
-                </Typography>
-              </TableCell>
-              <TableCell align="right">{row.qty}</TableCell>
-              <TableCell align="right">{row.unit}</TableCell>
-              <TableCell align="right">{ccyFormat(row.price)}</TableCell>
-              <TableCell align="right">
-                {" "}
-                <IconButton onClick={() => console.log("deleted item")}>
-                  <DeleteIcon> </DeleteIcon>
-                </IconButton>{" "}
-              </TableCell>
-            </TableRow>
-          ))}
+                  <IconButton onClick={() => handleDelete(index)}>
+                    <DeleteIcon> </DeleteIcon>
+                  </IconButton>{" "}
+                </TableCell>
+              </TableRow>
+            );
+          })}
 
           <TableRow>
             <TableCell rowSpan={3} />
@@ -175,18 +191,25 @@ function Cart() {
     </Typography>
   );
 
-  const testCart = cart.map((item, index) => (
-    <div>
-      {" "}
-      item @ index {index} is called {item.title} ({item.quantity} of them) and
-      it costs {item.cartUnitPrice}.
-      <br />
-      Special requests: {item.textFieldValue}
-      <br /> Item options is: {item.options.riceValue} ;{" "}
-      {item.options.sideValue}. <br />{" "}
-      <Button onClick={() => handleDelete(index)}> delete this item! </Button>
-    </div>
-  ));
+  const testCart = cart.map((item, index) => {
+    const itemOptions = Object.entries(item.options)
+      .map(([key, value]) => {
+        console.log(`${key} : ${value}`);
+        return value;
+      })
+      .join(", ");
+    return (
+      <div>
+        {" "}
+        item @ index {index} is called {item.title} ({item.quantity} of them)
+        and it costs {item.cartUnitPrice}.
+        <br />
+        Special requests: {item.textFieldValue}
+        <br /> Item options is: {itemOptions}. <br />{" "}
+        <Button onClick={() => handleDelete(index)}> delete this item! </Button>
+      </div>
+    );
+  });
 
   // every option object is not the same. They will have different options. some include option with sizes,or what not
   const testMap = cart.map((item, index) => {
@@ -199,6 +222,30 @@ function Cart() {
     return optionArray;
   });
 
+  const objMap = cart.map((item, index) => {
+    const op = item.options;
+    const display = [];
+    Object.entries(op).forEach(([key, value]) => {
+      console.log(`${key} : ${value}`);
+      display.push(value);
+      console.log(display);
+    });
+    return display.map((val, i) => {
+      return `${val} `;
+    });
+  });
+
+  const objMap2 = cart.map((item, index) => {
+    return Object.entries(item.options)
+      .map(([key, value]) => {
+        console.log(`${key} : ${value}`);
+        return value;
+      })
+      .join(", ");
+  });
+
+  console.log("join function", objMap2.join(" , "));
+
   return (
     <div className="Cart">
       <Typography component="div">
@@ -206,7 +253,7 @@ function Cart() {
           <Typography textAlign="center" variant="h4" gutterBottom>
             my cart ({userCartCount})
           </Typography>
-          <Typography> test map {testMap} </Typography>
+          <Typography> test map {testCart} </Typography>
           <Typography textAlign="center" variant="body" gutterBottom>
             <Button onClick={() => setCart([])}> Confirm & Place Order </Button>
             <Button onClick={() => setCart([1, 2, 3])}>
