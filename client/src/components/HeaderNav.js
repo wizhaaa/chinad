@@ -30,6 +30,8 @@ import { useTheme } from "@material-ui/core/styles";
 
 import { topList, menuList } from "./Data/NavList";
 
+import { useCartContext } from "./CartContext";
+
 //styling
 import useStyles from "./MaterialStyles";
 
@@ -38,6 +40,7 @@ function ResponsiveDrawer(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { userCartCount } = useCartContext();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -104,7 +107,7 @@ function ResponsiveDrawer(props) {
           <Typography variant="h6" className={classes.title}>
             <IconButton color="inherit" href="/">
               {" "}
-               china delight{" "}
+              china delight{" "}
             </IconButton>
           </Typography>
 
@@ -113,7 +116,7 @@ function ResponsiveDrawer(props) {
             {" "}
             <IconButton color="inherit" button>
               {" "}
-              <ShoppingCartIcon />{" "}
+              <ShoppingCartIcon /> ({userCartCount}){" "}
             </IconButton>
           </Link>
         </Toolbar>

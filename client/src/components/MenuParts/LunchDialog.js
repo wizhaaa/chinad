@@ -33,6 +33,8 @@ import {
   Divider,
 } from "@material-ui/core";
 
+import { useCartContext } from "../CartContext";
+
 const useStyles = makeStyles((theme) => ({
   root: { margin: 10 },
   gridPadding: {
@@ -117,6 +119,10 @@ const LunchDialog = (props) => {
   const [addedPrice, setAddedPrice] = useState(0);
   const [finalPrice, setFinalPrice] = useState(price);
   const [textFieldValue, setTextFieldValue] = useState("");
+
+  // context cart
+  const { cart, setCart, addNewItem } = useCartContext();
+
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
   const classes = useStyles();
@@ -127,8 +133,10 @@ const LunchDialog = (props) => {
 
   const handleAddItem = () => {
     onAdd();
+    addNewItem(4);
   };
 
+  //handling price changes
   const handleRiceChange = (e) => {
     var riceChosen = e.target.value;
     setRiceValue(riceChosen);
@@ -342,10 +350,7 @@ const LunchDialog = (props) => {
                   <Typography className={classes.heading}>about</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                  <Typography>
-                    {" "}
-                    {description} {priceSm} {priceLg}{" "}
-                  </Typography>
+                  <Typography> {description} </Typography>
                 </AccordionDetails>
               </Accordion>
               <Accordion>
@@ -357,7 +362,10 @@ const LunchDialog = (props) => {
                   <Typography className={classes.heading}>reviews</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                  <Typography> feature work in progress </Typography>
+                  <Typography>
+                    {" "}
+                    feature work in progress. coming soon tm{" "}
+                  </Typography>
                 </AccordionDetails>
               </Accordion>{" "}
             </Typography>

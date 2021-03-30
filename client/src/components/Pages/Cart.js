@@ -88,96 +88,101 @@ function Cart() {
   localStorage.setItem("orderItems", JSON.stringify(rows));
   var storedOrderItems = JSON.parse(localStorage.getItem("orderItems"));
 
-  const { cart, setCart } = useCartContext();
+  const { cart, setCart, userCartCount } = useCartContext();
+
+  const filledCart = (
+    <TableContainer component={Paper}>
+      <Table className={tableClasses.table} aria-label="spanning table">
+        <TableHead>
+          <TableRow>
+            <TableCell align="center" colSpan={3}>
+              Details
+            </TableCell>
+            <TableCell align="right">Price</TableCell>
+            <Table cell align="right">
+              {" "}
+            </Table>
+          </TableRow>
+          <TableRow>
+            <TableCell> Item </TableCell>
+            <TableCell align="right">Qty.</TableCell>
+            <TableCell align="right">Price</TableCell>
+            <TableCell align="right">Sum</TableCell>
+            <TableCell align="right"></TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {storedOrderItems.map((row) => (
+            <TableRow key={row.itemName}>
+              <TableCell>
+                <Typography>{row.itemName} </Typography>
+                <Typography style={{ color: "#d1d1d1" }} variant="body2">
+                  {" "}
+                  {row.desc}{" "}
+                </Typography>{" "}
+                <Typography style={{ color: "#d1d1d1" }} variant="body2">
+                  {" "}
+                  notes: {row.requests}{" "}
+                </Typography>
+              </TableCell>
+              <TableCell align="right">{row.qty}</TableCell>
+              <TableCell align="right">{row.unit}</TableCell>
+              <TableCell align="right">{ccyFormat(row.price)}</TableCell>
+              <TableCell align="right">
+                {" "}
+                <IconButton onClick={() => console.log("deleted item")}>
+                  <DeleteIcon> </DeleteIcon>
+                </IconButton>{" "}
+              </TableCell>
+            </TableRow>
+          ))}
+
+          <TableRow>
+            <TableCell rowSpan={3} />
+            <TableCell colSpan={2}>Subtotal</TableCell>
+            <TableCell align="right">{ccyFormat(invoiceSubtotal)}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>Tax</TableCell>
+            <TableCell align="right">{`${(TAX_RATE * 100).toFixed(
+              0
+            )} %`}</TableCell>
+            <TableCell align="right">{ccyFormat(invoiceTaxes)}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell colSpan={2}>Total</TableCell>
+            <TableCell align="right">{ccyFormat(invoiceTotal)}</TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
+
+  const emptyCart = (
+    <Typography>
+      {" "}
+      woops! looks like your cart is empty! head over to the menu and add items
+      to your cart ~{" "}
+    </Typography>
+  );
 
   return (
     <div className="Cart">
       <Typography component="div">
         <Box textAlign="center" m={1}>
           <Typography textAlign="center" variant="h4" gutterBottom>
-            my cart
+            my cart ({userCartCount})
           </Typography>
           <Typography textAlign="center" variant="body" gutterBottom>
             {cart}
-            <Button onClick={() => setCart([])}> Click me daddy ! </Button>
+            <Button onClick={() => setCart([])}> Confirm & Place Order </Button>
+            <Button onClick={() => setCart([1, 2, 3])}>
+              {" "}
+              Reset Cart to default{" "}
+            </Button>
           </Typography>
-
-          <TableContainer component={Paper}>
-            <Table className={tableClasses.table} aria-label="spanning table">
-              <TableHead>
-                <TableRow>
-                  <TableCell align="center" colSpan={3}>
-                    Details
-                  </TableCell>
-                  <TableCell align="right">Price</TableCell>
-                  <Table cell align="right">
-                    {" "}
-                  </Table>
-                </TableRow>
-                <TableRow>
-                  <TableCell> Item </TableCell>
-                  <TableCell align="right">Qty.</TableCell>
-                  <TableCell align="right">Price</TableCell>
-                  <TableCell align="right">Sum</TableCell>
-                  <TableCell align="right"></TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {storedOrderItems.map((row) => (
-                  <TableRow key={row.itemName}>
-                    <TableCell>
-                      <Typography>{row.itemName} </Typography>
-                      <Typography style={{ color: "#d1d1d1" }} variant="body2">
-                        {" "}
-                        {row.desc}{" "}
-                      </Typography>{" "}
-                      <Typography style={{ color: "#d1d1d1" }} variant="body2">
-                        {" "}
-                        notes: {row.requests}{" "}
-                      </Typography>
-                    </TableCell>
-                    <TableCell align="right">{row.qty}</TableCell>
-                    <TableCell align="right">{row.unit}</TableCell>
-                    <TableCell align="right">{ccyFormat(row.price)}</TableCell>
-                    <TableCell align="right">
-                      {" "}
-                      <IconButton onClick={() => console.log("deleted item")}>
-                        <DeleteIcon> </DeleteIcon>
-                      </IconButton>{" "}
-                    </TableCell>
-                  </TableRow>
-                ))}
-
-                <TableRow>
-                  <TableCell rowSpan={3} />
-                  <TableCell colSpan={2}>Subtotal</TableCell>
-                  <TableCell align="right">
-                    {ccyFormat(invoiceSubtotal)}
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Tax</TableCell>
-                  <TableCell align="right">{`${(TAX_RATE * 100).toFixed(
-                    0
-                  )} %`}</TableCell>
-                  <TableCell align="right">{ccyFormat(invoiceTaxes)}</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell colSpan={2}>Total</TableCell>
-                  <TableCell align="right">{ccyFormat(invoiceTotal)}</TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <Button onClick={() => console.log(rows)}> rows array </Button>
-          <Button onClick={() => console.log(JSON.stringify(rows))}>
-            {" "}
-            rows string{" "}
-          </Button>
-          <Button onClick={() => console.log(JSON.parse(jsonRows))}>
-            {" "}
-            rows parse{" "}
-          </Button>
+          {userCartCount > 0 ? filledCart : emptyCart}
+          {console.log(cart, userCartCount)}
         </Box>
       </Typography>
     </div>

@@ -35,17 +35,17 @@ function App() {
       <ThemeProvider theme={theme}>
         <Router>
           {/* <Test /> */}
-          <HeaderNav />
-          <CssBaseline />
+          <CartProvider>
+            <HeaderNav />
+            <CssBaseline />
 
-          <div className="App">
-            <main className={classes.content}>
-              <div className={classes.toolbar} />
-              <CartProvider>
+            <div className="App">
+              <main className={classes.content}>
+                <div className={classes.toolbar} />
                 <Routes />{" "}
-              </CartProvider>
-            </main>
-          </div>
+              </main>
+            </div>
+          </CartProvider>
         </Router>
       </ThemeProvider>
     </div>

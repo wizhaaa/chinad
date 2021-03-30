@@ -35,6 +35,7 @@ export function CartProvider({ children }) {
       return [...prevItems, newItem];
     });
   };
+
   return (
     <CartContext.Provider value={{ cart, setCart, userCartCount, addNewItem }}>
       {children}
