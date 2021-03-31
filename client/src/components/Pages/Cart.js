@@ -93,82 +93,75 @@ function Cart() {
     });
   };
 
+  const [cartSubtotal, setCartSubtotal] = useState(0);
+  var subt1 = 0;
+
+  // const subtotal = cart.map((item) =>
+  //   setCartSubtotal(cartSubtotal + item.cartUnitPrice * item.quantity)
+  // );
+
+  // console.log(subtotal);
+  // function subtotal(cart) {
+  //   return cart
+  //     .map(({cart.item.cartUnitPirce * cart.item.cartQuantity}) => price)
+  //     .reduce((sum, i) => sum + i, 0);
+  // }
+
   const filledCart = (
     <TableContainer component={Paper}>
       <Table className={tableClasses.table} aria-label="spanning table">
         <TableHead>
           <TableRow>
             <TableCell align="center" colSpan={3}>
-              Details
+              order
             </TableCell>
-            <TableCell align="right">Price</TableCell>
-            <Table cell align="right">
-              {" "}
-            </Table>
           </TableRow>
           <TableRow>
-            <TableCell> Item </TableCell>
-            <TableCell align="right">Qty.</TableCell>
-            <TableCell align="right">Price</TableCell>
-            <TableCell align="right">Sum</TableCell>
-            <TableCell align="right"></TableCell>
+            <TableCell> subtotal: {subt1} </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {cart.map((item, index) => {
             const itemOptions = Object.entries(item.options)
               .map(([key, value]) => {
-                console.log(`${key} : ${value}`);
                 return value;
               })
               .join(", ");
             const itemTotalPrice = item.cartUnitPrice * item.quantity;
-
-            console.log(
-              "price: ",
-              item.cartUnitPrice,
-              "qty : ",
-              item.quantity,
-              "price * qty =",
-              itemTotalPrice
-            );
+            subt1 = subt1 + itemTotalPrice;
+            console.log(subt1);
             return (
               <TableRow key={item.title}>
                 <TableCell>
-                  <Typography>{item.title} </Typography>
+                  <Typography> 🍱 {item.title} </Typography>
                   <Typography style={{ color: "#d1d1d1" }} variant="body2">
                     {" "}
-                    {itemOptions}{" "}
+                    🥠 {itemOptions}{" "}
                   </Typography>{" "}
                   <Typography style={{ color: "#d1d1d1" }} variant="body2">
                     {" "}
-                    requests? {item.textFieldValue}{" "}
+                    👩‍🍳 requests? {item.textFieldValue}{" "}
                   </Typography>
                   <Box variant="div" className="cartBottomOptions">
                     {" "}
                     <Typography> {item.quantity}</Typography>
-                    <Typography> {item.cartUnitPrice}</Typography>
-                    <IconButton onClick={() => handleDelete(index)}>
+                    <Typography>
+                      {" "}
+                      {formatter.format(item.cartUnitPrice)}
+                    </Typography>
+                    <IconButton
+                      color="primary"
+                      onClick={() => handleDelete(index)}
+                    >
                       <DeleteIcon> </DeleteIcon>
                     </IconButton>{" "}
                   </Box>
-                </TableCell>
-                <TableCell align="right">{item.quantity}</TableCell>
-                <TableCell align="right"></TableCell>
-                <TableCell align="right">
-                  {formatter.format(itemTotalPrice)}
-                </TableCell>
-                <TableCell align="right">
-                  {" "}
-                  <IconButton onClick={() => handleDelete(index)}>
-                    <DeleteIcon> </DeleteIcon>
-                  </IconButton>{" "}
                 </TableCell>
               </TableRow>
             );
           })}
 
-          <TableRow>
+          {/* <TableRow>
             <TableCell rowSpan={3} />
             <TableCell colSpan={2}>Subtotal</TableCell>
             <TableCell align="right">{ccyFormat(invoiceSubtotal)}</TableCell>
@@ -183,7 +176,7 @@ function Cart() {
           <TableRow>
             <TableCell colSpan={2}>Total</TableCell>
             <TableCell align="right">{ccyFormat(invoiceTotal)}</TableCell>
-          </TableRow>
+          </TableRow> */}
         </TableBody>
       </Table>
     </TableContainer>
@@ -250,14 +243,12 @@ function Cart() {
       .join(", ");
   });
 
-  console.log("join function", objMap2.join(" , "));
-
   return (
     <div className="Cart">
       <Typography component="div">
         <Box textAlign="center" m={1}>
           <Typography textAlign="center" variant="h4" gutterBottom>
-            my cart ({userCartCount})
+            🥡 my cart ({userCartCount})
           </Typography>
           <Typography gutterBottom>
             {userCartCount > 0 ? filledCart : emptyCart}{" "}
