@@ -95,17 +95,9 @@ function Cart() {
 
   const [cartSubtotal, setCartSubtotal] = useState(0);
   var subt1 = 0;
+  cart.forEach((item) => (subt1 = subt1 + item.cartUnitPrice * item.quantity));
 
-  // const subtotal = cart.map((item) =>
-  //   setCartSubtotal(cartSubtotal + item.cartUnitPrice * item.quantity)
-  // );
-
-  // console.log(subtotal);
-  // function subtotal(cart) {
-  //   return cart
-  //     .map(({cart.item.cartUnitPirce * cart.item.cartQuantity}) => price)
-  //     .reduce((sum, i) => sum + i, 0);
-  // }
+  console.log(subt1);
 
   const filledCart = (
     <TableContainer component={Paper}>
@@ -117,7 +109,12 @@ function Cart() {
             </TableCell>
           </TableRow>
           <TableRow>
-            <TableCell> subtotal: {subt1} </TableCell>
+            <TableCell>
+              {" "}
+              subtotal: {formatter.format(subt1)} <br /> taxes (6%):{" "}
+              {formatter.format(subt1 * 0.06)}
+              <br /> total: {formatter.format(subt1 * 1.06)}{" "}
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -129,7 +126,9 @@ function Cart() {
               .join(", ");
             const itemTotalPrice = item.cartUnitPrice * item.quantity;
             subt1 = subt1 + itemTotalPrice;
-            console.log(subt1);
+            {
+              /* setCartSubtotal(subt1); */
+            }
             return (
               <TableRow key={item.title}>
                 <TableCell>
@@ -144,7 +143,7 @@ function Cart() {
                   </Typography>
                   <Box variant="div" className="cartBottomOptions">
                     {" "}
-                    <Typography> {item.quantity}</Typography>
+                    <Typography> qty: {item.quantity}</Typography>
                     <Typography>
                       {" "}
                       {formatter.format(item.cartUnitPrice)}
@@ -193,7 +192,6 @@ function Cart() {
   const testCart = cart.map((item, index) => {
     const itemOptions = Object.entries(item.options)
       .map(([key, value]) => {
-        console.log(`${key} : ${value}`);
         return value;
       })
       .join(", ");
@@ -215,7 +213,6 @@ function Cart() {
     const optionArray = [];
     const obj = item.options;
     for (var key in obj) {
-      console.log(obj[key]);
       optionArray.push(obj[key]);
     }
     return optionArray;
@@ -225,9 +222,7 @@ function Cart() {
     const op = item.options;
     const display = [];
     Object.entries(op).forEach(([key, value]) => {
-      console.log(`${key} : ${value}`);
       display.push(value);
-      console.log(display);
     });
     return display.map((val, i) => {
       return `${val} `;
@@ -237,7 +232,6 @@ function Cart() {
   const objMap2 = cart.map((item, index) => {
     return Object.entries(item.options)
       .map(([key, value]) => {
-        console.log(`${key} : ${value}`);
         return value;
       })
       .join(", ");
