@@ -154,7 +154,7 @@ const LunchDialog = (props) => {
   const handleSideChange = (e) => {
     const sideChosen = e.target.value;
     setSideValue(sideChosen);
-    if (!(sideChosen === "none")) {
+    if (!(sideChosen === "no side")) {
       setFinalPrice(price + 0.75);
     } else {
       setFinalPrice(price);
@@ -286,9 +286,9 @@ const LunchDialog = (props) => {
                           onChange={handleSideChange}
                         >
                           <FormControlLabel
-                            value="none"
+                            value="no side"
                             control={<Radio />}
-                            label="none"
+                            label="no side"
                           />
                           <FormControlLabel
                             value="egg roll"
@@ -375,34 +375,38 @@ const LunchDialog = (props) => {
             </Typography>
           </DialogContentText>
         </DialogContent>
-        <DialogActions>
-          <Box pr={9}>
+
+        <DialogActions className="dialogContainer">
+          {" "}
+          <Box textAlign="center" className="dialogPrice">
             <Typography variant="h4">
               {" "}
               {formatter.format(cartPrice)}{" "}
             </Typography>
           </Box>
-          <FormControl variant="outlined" className={classes.formControl}>
-            <InputLabel id="demo-simple-select-outlined-label">
-              {" "}
-              qty{" "}
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-outlined-label"
-              id="demo-simple-select-outlined"
-              value={quantity}
-              onChange={handleQuantityChange}
-              label="qty"
-            >
-              {[...Array(20)].map((_id, i) => (
-                <MenuItem value={i + 1}> {i + 1}</MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <Box pt={1.5} px={1.5}>
+          <Box textAlign="center">
+            <FormControl variant="outlined" className={classes.formControl}>
+              <InputLabel id="demo-simple-select-outlined-label">
+                {" "}
+                qty{" "}
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-outlined-label"
+                id="demo-simple-select-outlined"
+                value={quantity}
+                onChange={handleQuantityChange}
+                label="qty"
+              >
+                {[...Array(20)].map((_id, i) => (
+                  <MenuItem value={i + 1}> {i + 1}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Box>
+          <Box textAlign="center" className="dialogButton">
             <Fab
               variant="extended"
-              size="medium"
+              size="large"
               color="secondary"
               aria-label="add"
               onClick={handleAddItem}

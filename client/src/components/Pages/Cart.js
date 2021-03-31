@@ -23,9 +23,7 @@ import { useCartContext } from "../CartContext";
 import useStyles from "../MaterialStyles";
 
 const tableStyles = makeStyles((theme) => ({
-  table: {
-    minWidth: 470,
-  },
+  table: {},
 }));
 
 const formatter = new Intl.NumberFormat("en-US", {
@@ -146,9 +144,17 @@ function Cart() {
                     {" "}
                     requests? {item.textFieldValue}{" "}
                   </Typography>
+                  <Box variant="div" className="cartBottomOptions">
+                    {" "}
+                    <Typography> {item.quantity}</Typography>
+                    <Typography> {item.cartUnitPrice}</Typography>
+                    <IconButton onClick={() => handleDelete(index)}>
+                      <DeleteIcon> </DeleteIcon>
+                    </IconButton>{" "}
+                  </Box>
                 </TableCell>
                 <TableCell align="right">{item.quantity}</TableCell>
-                <TableCell align="right">{item.cartUnitPrice}</TableCell>
+                <TableCell align="right"></TableCell>
                 <TableCell align="right">
                   {formatter.format(itemTotalPrice)}
                 </TableCell>
@@ -253,7 +259,10 @@ function Cart() {
           <Typography textAlign="center" variant="h4" gutterBottom>
             my cart ({userCartCount})
           </Typography>
-          <Typography> test map {testCart} </Typography>
+          <Typography gutterBottom>
+            {userCartCount > 0 ? filledCart : emptyCart}{" "}
+          </Typography>
+
           <Typography textAlign="center" variant="body" gutterBottom>
             <Button onClick={() => setCart([])}> Confirm & Place Order </Button>
             <Button onClick={() => setCart([1, 2, 3])}>
@@ -261,7 +270,6 @@ function Cart() {
               Reset Cart to default{" "}
             </Button>
           </Typography>
-          {userCartCount > 0 ? filledCart : emptyCart}
         </Box>
       </Typography>
     </div>
