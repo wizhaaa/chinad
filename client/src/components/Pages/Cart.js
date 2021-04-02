@@ -193,15 +193,17 @@ function Cart() {
   return (
     <div className="Cart">
       <Typography component="div">
-        <Box textAlign="center" m={1} py={8} mx={"3%"}>
+        <Box textAlign="center" m={1} py={8} mx={"1%"}>
           <Typography textAlign="center" variant="h4" gutterBottom>
             🥡 my cart ({userCartCount})
           </Typography>
+          <Box mb={5}></Box>
           <Typography gutterBottom>
             {userCartCount > 0 ? filledCart : emptyCart}{" "}
           </Typography>
 
           <Typography textAlign="center" variant="body" gutterBottom>
+            <Box mb={5}></Box>
             <Button onClick={() => setCart([])}> Confirm & Place Order </Button>
             <Button onClick={() => setCart([1, 2, 3])}>
               {" "}

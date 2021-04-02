@@ -59,6 +59,11 @@ app.post("/", (req, res) => {
   //res.json("hello loser!");
 });
 
+app.get("/", (req, res) => {
+  res.send(" getting hello bitch!");
+  //res.json("hello loser!");
+});
+
 app.listen(PORT, () => {
   console.log(app.get("env").toUpperCase() + "Server started on port" + PORT);
 });
