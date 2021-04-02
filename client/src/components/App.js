@@ -2,7 +2,12 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 // material-ui library
-import { makeStyles, ThemeProvider, CssBaseline } from "@material-ui/core/";
+import {
+  makeStyles,
+  ThemeProvider,
+  CssBaseline,
+  Container,
+} from "@material-ui/core/";
 
 // self made components
 import HeaderNav from "./HeaderNav";
@@ -19,11 +24,13 @@ import Test from "./DemoTestModule";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
+    justifyContent: "center",
   },
   toolbar: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
     padding: theme.spacing(1),
+    maxWidth: "960px",
   },
 }));
 

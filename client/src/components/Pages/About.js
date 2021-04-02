@@ -6,7 +6,7 @@ function About() {
   return (
     <div className="About">
       <Typography component="div">
-        <Box textAlign="center" m={1}>
+        <Box textAlign="center" m={1} py={8}>
           <Typography textAlign="center" variant="h4" gutterBottom>
             about
           </Typography>

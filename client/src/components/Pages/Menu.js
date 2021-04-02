@@ -5,7 +5,6 @@ import LunchSpecials from "../MenuPages/LunchSpecials";
 import Soups from "../MenuPages/Soups";
 import DinnerCombo from "../MenuPages/DinnerCombo";
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -30,11 +29,10 @@ const useStyles = makeStyles((theme) => ({
 function Menu() {
   const classes = useStyles();
 
-
   return (
     <div className="Cart">
       <Typography component="div" className={classes.root}>
-        <Box textAlign="center" m={1}>
+        <Box textAlign="center" m={1} py={8}>
           <Typography textAlign="center" variant="h1" gutterBottom>
             ゜・ menu ・゜
           </Typography>

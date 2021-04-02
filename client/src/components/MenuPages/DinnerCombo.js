@@ -42,7 +42,7 @@ const DinnerCombo = (props) => {
           className={(classes.menuHeadings, classes.bold)}
         >
           {" "}
-          dinner combination platters{" "}
+          dinner{" "}
         </Typography>
         <Typography className={classes.subheadings}>
           * aka combo platters or dinner platters *

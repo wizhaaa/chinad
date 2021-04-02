@@ -134,10 +134,23 @@ const LunchDialog = (props) => {
   };
 
   const handleAddItem = () => {
-    onAdd();
-    const options = { riceValue, sideValue };
-    const newItem = { title, cartUnitPrice, options, textFieldValue, quantity };
-    addNewItem(newItem);
+    const currentTime = new Date().getHours();
+    console.log("time is", currentTime);
+    if (currentTime < 16 && currentTime > 10) {
+      onAdd();
+      const type = "lunch";
+      const options = { type, riceValue, sideValue };
+      const newItem = {
+        title,
+        cartUnitPrice,
+        options,
+        textFieldValue,
+        quantity,
+      };
+      addNewItem(newItem);
+    } else {
+      alert(" sorry it is past lunch time right now ");
+    }
   };
 
   //handling price changes

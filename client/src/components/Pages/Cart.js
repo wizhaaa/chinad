@@ -23,7 +23,9 @@ import { useCartContext } from "../CartContext";
 import useStyles from "../MaterialStyles";
 
 const tableStyles = makeStyles((theme) => ({
-  table: {},
+  table: {
+    maxWidth: 805,
+  },
 }));
 
 const formatter = new Intl.NumberFormat("en-US", {
@@ -113,7 +115,8 @@ function Cart() {
               {" "}
               subtotal: {formatter.format(subt1)} <br /> taxes (6%):{" "}
               {formatter.format(subt1 * 0.06)}
-              <br /> total: {formatter.format(subt1 * 1.06)}{" "}
+              <br /> total: {formatter.format(subt1 * 1.06)} <br />
+              <Button> Checkout </Button>
             </TableCell>
           </TableRow>
         </TableHead>
@@ -126,9 +129,7 @@ function Cart() {
               .join(", ");
             const itemTotalPrice = item.cartUnitPrice * item.quantity;
             subt1 = subt1 + itemTotalPrice;
-            {
-              /* setCartSubtotal(subt1); */
-            }
+
             return (
               <TableRow key={item.title}>
                 <TableCell>
@@ -189,58 +190,10 @@ function Cart() {
     </Typography>
   );
 
-  const testCart = cart.map((item, index) => {
-    const itemOptions = Object.entries(item.options)
-      .map(([key, value]) => {
-        return value;
-      })
-      .join(", ");
-    return (
-      <div>
-        {" "}
-        item @ index {index} is called {item.title} ({item.quantity} of them)
-        and it costs {item.cartUnitPrice}.
-        <br />
-        Special requests: {item.textFieldValue}
-        <br /> Item options is: {itemOptions}. <br />{" "}
-        <Button onClick={() => handleDelete(index)}> delete this item! </Button>
-      </div>
-    );
-  });
-
-  // every option object is not the same. They will have different options. some include option with sizes,or what not
-  const testMap = cart.map((item, index) => {
-    const optionArray = [];
-    const obj = item.options;
-    for (var key in obj) {
-      optionArray.push(obj[key]);
-    }
-    return optionArray;
-  });
-
-  const objMap = cart.map((item, index) => {
-    const op = item.options;
-    const display = [];
-    Object.entries(op).forEach(([key, value]) => {
-      display.push(value);
-    });
-    return display.map((val, i) => {
-      return `${val} `;
-    });
-  });
-
-  const objMap2 = cart.map((item, index) => {
-    return Object.entries(item.options)
-      .map(([key, value]) => {
-        return value;
-      })
-      .join(", ");
-  });
-
   return (
     <div className="Cart">
       <Typography component="div">
-        <Box textAlign="center" m={1}>
+        <Box textAlign="center" m={1} py={8} mx={"3%"}>
           <Typography textAlign="center" variant="h4" gutterBottom>
             🥡 my cart ({userCartCount})
           </Typography>

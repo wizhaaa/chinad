@@ -42,7 +42,7 @@ const LunchSpecials = (props) => {
           className={(classes.menuHeadings, classes.bold)}
         >
           {" "}
-          lunch specials{" "}
+          lunch{" "}
         </Typography>
         <Typography className={classes.subheadings}>
           served with the choice of{" "}
