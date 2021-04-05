@@ -17,6 +17,15 @@
   background-image: linear-gradient(#a2a2a2, #a2a2a2);
 }
 
+a {
+  color: orange;
+  text-decoration: none;
+}
+
+a:hover {
+  color: red;
+}
+
 .dialogContainer {
   width: 100%;
   display: flex;

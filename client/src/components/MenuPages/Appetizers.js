@@ -48,6 +48,7 @@ const Appetizers = (props) => {
 
   const classes = useStyles();
 
+  // loop thru out appetizer collection 
   const appetizerGrid = appetizers.map((appetizer) => (
     <Grid item xs={12} sm={6} md={4}>
       <AppetizerMenuCard

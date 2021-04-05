@@ -307,7 +307,7 @@ const SoupDialog = (props) => {
           <Box pt={1.5} px={1.5}>
             <Fab
               variant="extended"
-              size="medium"
+              size="large"
               color="secondary"
               aria-label="add"
               onClick={handleAddItem}
