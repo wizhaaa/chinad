@@ -63,6 +63,8 @@ function Cart() {
     });
   };
 
+  
+
   const handleCheckout = () => {
     handleClickOpen();
     console.log("Checking out...");

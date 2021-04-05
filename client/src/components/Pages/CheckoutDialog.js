@@ -35,6 +35,9 @@ import {
   Divider,
 } from "@material-ui/core";
 import { wrap } from "module";
+import { useCartContext } from "../CartContext";
+import { Redirect } from "react-router";
+import api from "../api";
 
 const useStyles = makeStyles((theme) => ({
   root: { margin: 10 },
@@ -102,23 +105,56 @@ const useStyles = makeStyles((theme) => ({
 const DinnerDialog = (props) => {
   const { onClose, open, total } = props;
 
+  const { cart, setCart, userCartCount } = useCartContext();
+
   const [orderReqs, setOrderReqs] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNum, setPhoneNum] = useState();
   const [pickUpOption, setPickUpOption] = useState("ASAP");
-  const [customTime, setCustomTime] = useState();
+  const [customTime, setCustomTime] = useState("16:00");
 
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
   const classes = useStyles();
 
+  let order = {};
+  if (pickUpOption === "ASAP") {
+    order = {
+      name: name,
+      email: email,
+      phone: phoneNum,
+      pickUpOption: pickUpOption,
+      cart: cart,
+      orderReqs: orderReqs,
+    };
+  } else {
+    order = {
+      name: name,
+      email: email,
+      phone: phoneNum,
+      pickUpOption: pickUpOption,
+      pickUpTime: customTime,
+      cart: cart,
+      orderReqs: orderReqs,
+    };
+  }
+
   const handleClose = () => {
     onClose();
   };
 
-  const handlePlaceOrder = () => {
+  const addOrder = (newOrder) => {
+    api.post("/api/order/add", newOrder).catch((err) => console.log(err));
+  };
+
+  const handlePlaceOrder = (e) => {
     console.log("placing order ...");
+    console.log("order is: ", order);
+    addOrder(order);
+    // redirect
+    // window.location.href = "/";
+    e.preventDefault();
   };
 
   const handlePickUpOptionChange = (e) => {
@@ -160,7 +196,7 @@ const DinnerDialog = (props) => {
       id="time"
       label="pick up @"
       type="time"
-      defaultValue="07:30"
+      defaultValue="16:00"
       value={customTime}
       onChange={handleCustomTimeChange}
       className={classes.textField}
@@ -168,7 +204,7 @@ const DinnerDialog = (props) => {
         shrink: true,
       }}
       inputProps={{
-        step: 300, // 5 min
+        step: 600, // 5 min
       }}
     />
   );
@@ -334,9 +370,10 @@ const DinnerDialog = (props) => {
                   <Typography>
                     {" "}
                     orders usually take 15-20 minutes. <br /> we will try our
-                    best to finish your order on time. <br /> friday and
-                    saturdays nights can get very busy and orders can take
-                    upwards of 1 hour on holidays. <br /> please see
+                    best to finish your order on time. <br /> we only have 2
+                    chefs, please bear with us 🙇‍♂️ <br /> friday and saturdays
+                    nights can get very busy and orders can take upwards of 1
+                    hour on holidays. <br /> please see
                     <a href="/about">
                       {" "}
                       order times
@@ -352,6 +389,7 @@ const DinnerDialog = (props) => {
                   {" "}
                   <Box m={3} className={classes.textFields}>
                     <TextField
+                      name="orderRequests"
                       style={{ width: "100%" }}
                       id="outlined-textarea"
                       label="anything else?"

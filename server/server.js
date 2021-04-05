@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import path from "path";
 const app = express();
+
 import MongoClient from "mongodb";
 
 const PORT = process.env.SERVER_PORT;
@@ -67,11 +68,19 @@ const appetizer = new Appetizer({
   rating: 5,
 });
 
-let orderSchema = new mongoose.Schema();
+let orderSchema = new mongoose.Schema({
+  name: String,
+  email: String,
+  phone: String,
+  pickUpOption: String,
+  pickUpTime: String,
+  cart: Array,
+  orderReqs: String,
+});
 const Order = mongoose.model("Order", orderSchema);
 
 const all = await Appetizer.find();
-console.log("... beep : ", all);
+// console.log("... beep : ", all);
 
 // // Create Model
 // let Item = mongoose.model("Item", ItemSchema);
@@ -99,38 +108,34 @@ app.get("/", (req, res) => {
   res.json({ body: "hello", id: "fuck" });
 });
 
-app.get("/orders", (req, res) => {
-  res.json(all);
+//read all our order documents
+app.get("/api/orders", (req, res) => {
+  Order.find({}, { __v: 0 }, (err, docs) => {
+    if (!err) {
+      res.json(docs);
+    } else {
+      res.status(400).json({ error: err });
+    }
+  });
+});
+
+// to add an order
+app.post("/api/order/add", async (req, res) => {
+  console.log(req.body);
+  let order = new Order({ ...req.body });
+  console.log("order is ", order);
+  await order.save((err, result) => {
+    if (!err) {
+      delete result._doc.__v;
+      res.json(result._doc);
+    } else {
+      res.status(400).json({ error: err });
+    }
+  });
 });
 
 app.get("/appetizers", (req, res) => {
   res.send(all);
-});
-
-app.get("/suck", (req, res) => {
-  res.json([
-    {
-      title: "sweet & sour chicken",
-      cartUnitPrice: 6.25,
-      options: { type: "lunch", riceValue: "white rice", sideValue: "no side" },
-      textFieldValue: "",
-      quantity: 1,
-    },
-    {
-      title: "sweet & sour chicken",
-      cartUnitPrice: 6.25,
-      options: { type: "lunch", riceValue: "white rice", sideValue: "no side" },
-      textFieldValue: "",
-      quantity: 6,
-    },
-    {
-      title: "sweet & sour chicken",
-      cartUnitPrice: 6.25,
-      options: { type: "lunch", riceValue: "white rice", sideValue: "no side" },
-      textFieldValue: "",
-      quantity: 2,
-    },
-  ]);
 });
 
 app.get("/:name", (req, res) => {
