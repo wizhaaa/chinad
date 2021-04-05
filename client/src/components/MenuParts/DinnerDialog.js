@@ -115,7 +115,7 @@ const DinnerDialog = (props) => {
   const [sideValue, setSideValue] = useState("none");
   const [addedPrice, setAddedPrice] = useState(0);
   const [finalPrice, setFinalPrice] = useState(price);
-  const [textFieldValue, setTextFieldValue] = useState("");
+  const [requestContent, setRequestContent] = useState("");
   const [quantity, setQuantity] = useState(1);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
@@ -155,7 +155,7 @@ const DinnerDialog = (props) => {
 
   const handleTextFieldChange = (e) => {
     var text = e.target.value;
-    setTextFieldValue(text);
+    setRequestContent(text);
   };
 
   const formatter = new Intl.NumberFormat("en-US", {
@@ -312,7 +312,7 @@ const DinnerDialog = (props) => {
                     multiline
                     variant="outlined"
                     inputProps={{ maxLength: 250 }}
-                    value={textFieldValue}
+                    value={requestContent}
                     onChange={handleTextFieldChange}
                   />{" "}
                 </Box>

@@ -40,6 +40,7 @@ const DinnerCombo = (props) => {
         <Typography
           variant="h3"
           className={(classes.menuHeadings, classes.bold)}
+          gutterBottom
         >
           {" "}
           dinner{" "}

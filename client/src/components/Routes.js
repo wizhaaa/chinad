@@ -8,6 +8,7 @@ import Menu from "./Pages/Menu";
 import LunchSpecials from "./MenuPages/LunchSpecials";
 import Soups from "./MenuPages/Soups";
 import DinnerCombo from "./MenuPages/DinnerCombo";
+import Appetizers from "./MenuPages/Appetizers";
 
 import Test from "./DemoTestModule";
 import AxiosTest from "./AxiosTest";
@@ -48,6 +49,10 @@ const Routes = () => {
         <Route exact path="/dinner-combo">
           {" "}
           <DinnerCombo />{" "}
+        </Route>
+        <Route exact path="/appetizers">
+          {" "}
+          <Appetizers />{" "}
         </Route>
         <Route exact path="/test">
           {" "}

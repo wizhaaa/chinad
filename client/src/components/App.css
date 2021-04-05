@@ -39,3 +39,17 @@
   justify-content: space-around;
   align-items: center;
 }
+
+.cartContainer {
+  min-width: auto;
+  max-width: 960px;
+}
+
+.cart {
+  width: 100%;
+}
+
+.Cart {
+  width: 100%;
+  max-width: 960px;
+}

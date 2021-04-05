@@ -1,6 +1,10 @@
 import React, { useState, useContext } from "react";
 
-import { Button as ButtonIcon, Delete as DeleteIcon } from "@material-ui/icons";
+import {
+  Button as ButtonIcon,
+  Delete as DeleteIcon,
+  ShoppingCart as ShoppingCartIcon,
+} from "@material-ui/icons";
 import {
   IconButton,
   Button,
@@ -19,11 +23,14 @@ import {
 // context provider
 import { useCartContext } from "../CartContext";
 
+import CheckoutDialog from "./CheckoutDialog";
+
 // styling
 import useStyles from "../MaterialStyles";
 
 const tableStyles = makeStyles((theme) => ({
   table: {
+    width: "100%",
     maxWidth: 805,
   },
 }));
@@ -34,57 +41,18 @@ const formatter = new Intl.NumberFormat("en-US", {
   minimumFractionDigits: 2,
 });
 
-const TAX_RATE = 0.06;
-
-function ccyFormat(num) {
-  return `${formatter.format(num)}`;
-}
-
-function priceRow(qty, unit) {
-  return qty * unit;
-}
-
-function createRow(itemName, desc, requests, qty, unit) {
-  const price = priceRow(qty, unit);
-  return { itemName, desc, requests, qty, unit, price };
-}
-
-function subtotal(cart) {
-  return cart.map(({ price }) => price).reduce((sum, i) => sum + i, 0);
-}
-
-const rows = [
-  createRow(
-    "Sweet & Sour Chicken",
-    "dinner, small, fried rice, egg roll, hot & sour soup",
-    "extra spicy please",
-    20,
-    1.15
-  ),
-  createRow(
-    "General Tso Chicken",
-    "this is the description",
-    "extra spicy please",
-    10,
-    45.99
-  ),
-  createRow(
-    "Combination of Shrimp & Chicken",
-    "this is the description",
-    "extra spicy please",
-    2,
-    17.99
-  ),
-];
-
-const invoiceSubtotal = subtotal(rows);
-const invoiceTaxes = TAX_RATE * invoiceSubtotal;
-const invoiceTotal = invoiceTaxes + invoiceSubtotal;
-
 function Cart() {
   const tableClasses = tableStyles();
 
   const { cart, setCart, userCartCount } = useCartContext();
+  const [open, setOpen] = React.useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const handleDelete = (i) => {
     console.log("deleting item @ index : ", i);
@@ -95,28 +63,44 @@ function Cart() {
     });
   };
 
+  const handleCheckout = () => {
+    handleClickOpen();
+    console.log("Checking out...");
+  };
+
   const [cartSubtotal, setCartSubtotal] = useState(0);
   var subt1 = 0;
   cart.forEach((item) => (subt1 = subt1 + item.cartUnitPrice * item.quantity));
-
-  console.log(subt1);
+  var taxes = subt1 * 0.06;
+  var total = subt1 * 1.06;
 
   const filledCart = (
     <TableContainer component={Paper}>
-      <Table className={tableClasses.table} aria-label="spanning table">
+      <Table className={(tableClasses.table, Cart)} aria-label="spanning table">
         <TableHead>
           <TableRow>
-            <TableCell align="center" colSpan={3}>
-              order
+            <TableCell align="center">
+              {" "}
+              <Box>
+                <Typography variant="h5"> order </Typography>{" "}
+              </Box>
             </TableCell>
           </TableRow>
           <TableRow>
             <TableCell>
-              {" "}
-              subtotal: {formatter.format(subt1)} <br /> taxes (6%):{" "}
-              {formatter.format(subt1 * 0.06)}
-              <br /> total: {formatter.format(subt1 * 1.06)} <br />
-              <Button> Checkout </Button>
+              <Typography gutterBottom>
+                {" "}
+                subtotal: {formatter.format(subt1)} <br /> taxes (6%):{" "}
+                {formatter.format(taxes)}
+                <br /> total: {formatter.format(total)} <br />{" "}
+              </Typography>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={handleCheckout}
+              >
+                <ShoppingCartIcon /> Checkout{" "}
+              </Button>
             </TableCell>
           </TableRow>
         </TableHead>
@@ -194,7 +178,7 @@ function Cart() {
     <div className="Cart">
       <Typography component="div">
         <Box textAlign="center" m={1} py={8} mx={"1%"}>
-          <Typography textAlign="center" variant="h4" gutterBottom>
+          <Typography variant="h4" gutterBottom>
             🥡 my cart ({userCartCount})
           </Typography>
           <Box mb={5}></Box>
@@ -202,16 +186,25 @@ function Cart() {
             {userCartCount > 0 ? filledCart : emptyCart}{" "}
           </Typography>
 
-          <Typography textAlign="center" variant="body" gutterBottom>
+          <Typography variant="body" gutterBottom>
             <Box mb={5}></Box>
-            <Button onClick={() => setCart([])}> Confirm & Place Order </Button>
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={handleCheckout}
+            >
+              <ShoppingCartIcon /> Checkout{" "}
+            </Button>
+            <Box p={22}> </Box>
+            {/* <Button onClick={() => setCart([])}> Confirm & Place Order </Button>
             <Button onClick={() => setCart([1, 2, 3])}>
               {" "}
               Reset Cart to default{" "}
-            </Button>
+            </Button> */}
           </Typography>
         </Box>
       </Typography>
+      <CheckoutDialog open={open} onClose={handleClose} total={total} />
     </div>
   );
 }

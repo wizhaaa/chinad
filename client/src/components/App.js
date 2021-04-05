@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(1),
     maxWidth: "960px",
+    paddingBottom: theme.spacing(20),
   },
 }));
 

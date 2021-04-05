@@ -7,10 +7,10 @@ function Home() {
     <div className="Home">
       <Typography component="div">
         <Box textAlign="center" m={1} py={8}>
-          <Typography textAlign="center" variant="h4" gutterBottom>
+          <Typography variant="h4" gutterBottom>
             welcome!
           </Typography>
-          <Typography textAlign="center" variant="body" gutterBottom>
+          <Typography variant="body1" gutterBottom>
             {" "}
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -21,7 +21,7 @@ function Home() {
             culpa qui officia deserunt mollit anim id est laborum.
           </Typography>
           <br />
-          <Typography textAlign="center" variant="body" gutterBottom>
+          <Typography variant="body1" gutterBottom>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
             ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut

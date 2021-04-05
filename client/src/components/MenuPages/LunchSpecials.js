@@ -40,6 +40,7 @@ const LunchSpecials = (props) => {
         <Typography
           variant="h3"
           className={(classes.menuHeadings, classes.bold)}
+          gutterBottom
         >
           {" "}
           lunch{" "}

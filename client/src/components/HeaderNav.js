@@ -9,6 +9,7 @@ import {
   Info as InfoIcon,
   RestaurantMenu as RestaurantMenuIcon,
   Close as CloseIcon,
+  ShoppingBasket as ShoppingBasketIcon,
 } from "@material-ui/icons";
 
 import {
@@ -57,7 +58,7 @@ function ResponsiveDrawer(props) {
           const { text, icon, routeTo } = item;
 
           return (
-            <Link className={classes.navLinks} to={routeTo}>
+            <Link key={text} className={classes.navLinks} to={routeTo}>
               {" "}
               <ListItem button key={text}>
                 {icon && <ListItemIcon> {icon} </ListItemIcon>}
@@ -116,7 +117,7 @@ function ResponsiveDrawer(props) {
             {" "}
             <IconButton color="inherit" button>
               {" "}
-              <ShoppingCartIcon /> ({userCartCount}){" "}
+              <ShoppingBasketIcon /> ({userCartCount}){" "}
             </IconButton>
           </Link>
         </Toolbar>

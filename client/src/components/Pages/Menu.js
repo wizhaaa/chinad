@@ -3,6 +3,7 @@ import { Typography, Box, Grid, makeStyles, Divider } from "@material-ui/core";
 
 import LunchSpecials from "../MenuPages/LunchSpecials";
 import Soups from "../MenuPages/Soups";
+import Appetizers from "../MenuPages/Appetizers";
 import DinnerCombo from "../MenuPages/DinnerCombo";
 
 const useStyles = makeStyles((theme) => ({
@@ -33,10 +34,10 @@ function Menu() {
     <div className="Cart">
       <Typography component="div" className={classes.root}>
         <Box textAlign="center" m={1} py={8}>
-          <Typography textAlign="center" variant="h1" gutterBottom>
+          <Typography variant="h1" gutterBottom>
             ゜・ menu ・゜
           </Typography>
-          <Typography textAlign="center" variant="body" gutterBottom>
+          <Typography variant="body1" gutterBottom>
             {" "}
             hi there! welcome to the page where <em> every </em> menu item is
             listed. <br /> you will be able to customize some items and then add
@@ -52,16 +53,14 @@ function Menu() {
             </em>
           </Typography>
           <br />
-          <Typography
-            textAlign="center"
-            variant="body"
-            gutterBottom
-          ></Typography>
+          <Typography variant="body1" gutterBottom></Typography>
 
           <Divider className={classes.divider} />
           <LunchSpecials />
           <Divider className={classes.divider} />
           <Soups />
+          <Divider className={classes.divider} />
+          <Appetizers />
           <Divider className={classes.divider} />
           <DinnerCombo />
         </Box>
