@@ -111,8 +111,6 @@ const AppetizerDialog = (props) => {
     priceLg,
   } = props;
 
-  console.log("props are: ", props);
-
   const [styleValue, setStyleValue] = useState("fried");
   const [fillingValue, setFillingValue] = useState("pork");
   const [quantity, setQuantity] = useState(1);
@@ -134,8 +132,6 @@ const AppetizerDialog = (props) => {
   };
 
   const handleAddItem = () => {
-    const currentTime = new Date().getHours();
-
     onAdd();
     const type = "appetizer";
     let options = {};
@@ -352,7 +348,7 @@ const AppetizerDialog = (props) => {
               {" "}
               <Grid Item xs={12} sm={6} className={classes.gridPadding}>
                 {" "}
-                <img className={classes.img} src={img} alt=" sweet sour" />
+                <img className={classes.img} src={img} alt={title} />
               </Grid>
               <Grid Item xs={12} sm={6}>
                 {" "}

@@ -8,20 +8,20 @@ import {
 //get the title of appbar to be equal to the ${List.text}
 
 const topList = [
-  { text: "home", icon: <HomeIcon />, routeTo: "/home" },
+  { text: "home", icon: <HomeIcon color="primary" />, routeTo: "/home" },
   {
     text: "about",
-    icon: <InfoIcon />,
+    icon: <InfoIcon color="primary" />,
     routeTo: "/about",
   },
   {
     text: "cart",
-    icon: <ShoppingCartIcon />,
+    icon: <ShoppingCartIcon color="primary" />,
     routeTo: "/cart",
   },
   {
     text: "menu",
-    icon: <RestaurantMenuIcon />,
+    icon: <RestaurantMenuIcon color="primary" />,
     routeTo: "/menu",
   },
 ];

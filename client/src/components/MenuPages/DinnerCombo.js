@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Typography, Box, Grid, makeStyles } from "@material-ui/core";
+
+// fetching data from db
+import api from "../api";
 
 import DinnerMenuCard from "../MenuParts/DinnerMenuCard";
 
@@ -32,6 +35,26 @@ const useStyles = makeStyles((theme) => ({
 
 const DinnerCombo = (props) => {
   const classes = useStyles();
+  const [dinners, setDinners] = useState([]);
+
+  useEffect(() => {
+    api.get("/api/dinners").then((res) => {
+      setDinners(res.data);
+    });
+  });
+
+  const dinnerGrid = dinners.map((dinner) => (
+    <Grid item xs={12} sm={6} md={4}>
+      <DinnerMenuCard
+        itemName={dinner.name}
+        itemDescription={dinner.description}
+        img={dinner.img}
+        price={dinner.price}
+        priceSm={dinner.priceSm}
+        priceLg={dinner.priceLg}
+      />
+    </Grid>
+  ));
 
   return (
     <Box textAlign="center" m={1} py={8}>
@@ -57,90 +80,7 @@ const DinnerCombo = (props) => {
 
       <Box marginTop={10}>
         <Grid container spacing={3}>
-          <Grid item xs={12} sm={6} md={4}>
-            <DinnerMenuCard
-              itemName={"sweet and sour chicken"}
-              itemDescription={
-                "crispy, breaded chicken with sweet and sour sauce on the side"
-              }
-              img={
-                "https://copykat.com/wp-content/uploads/2016/12/Sweet-and-Sour-Chicken-Pin.jpg"
-              }
-              price={9.95}
-              priceSm={2.5}
-              priceLg={3.75}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <DinnerMenuCard
-              itemName={"sweet and sour chicken"}
-              itemDescription={
-                "crispy, breaded chicken with sweet and sour sauce on the side"
-              }
-              img={
-                "https://copykat.com/wp-content/uploads/2016/12/Sweet-and-Sour-Chicken-Pin.jpg"
-              }
-              price={9.95}
-              priceSm={2.5}
-              priceLg={3.75}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <DinnerMenuCard
-              itemName={"sweet and sour chicken"}
-              itemDescription={
-                "crispy, breaded chicken with sweet and sour sauce on the side"
-              }
-              img={
-                "https://copykat.com/wp-content/uploads/2016/12/Sweet-and-Sour-Chicken-Pin.jpg"
-              }
-              price={9.95}
-              priceSm={2.5}
-              priceLg={3.75}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <DinnerMenuCard
-              itemName={"sweet and sour chicken"}
-              itemDescription={
-                "crispy, breaded chicken with sweet and sour sauce on the side"
-              }
-              img={
-                "https://copykat.com/wp-content/uploads/2016/12/Sweet-and-Sour-Chicken-Pin.jpg"
-              }
-              price={9.95}
-              priceSm={2.5}
-              priceLg={3.75}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <DinnerMenuCard
-              itemName={"sweet and sour chicken"}
-              itemDescription={
-                "crispy, breaded chicken with sweet and sour sauce on the side"
-              }
-              img={
-                "https://copykat.com/wp-content/uploads/2016/12/Sweet-and-Sour-Chicken-Pin.jpg"
-              }
-              price={9.95}
-              priceSm={2.5}
-              priceLg={3.75}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <DinnerMenuCard
-              itemName={"sweet and sour chicken"}
-              itemDescription={
-                "crispy, breaded chicken with sweet and sour sauce on the side"
-              }
-              img={
-                "https://copykat.com/wp-content/uploads/2016/12/Sweet-and-Sour-Chicken-Pin.jpg"
-              }
-              price={9.95}
-              priceSm={2.5}
-              priceLg={3.75}
-            />
-          </Grid>
+          {dinnerGrid}
         </Grid>
       </Box>
     </Box>

@@ -33,6 +33,8 @@ import {
   Divider,
 } from "@material-ui/core";
 
+import { useCartContext } from "../CartContext";
+
 const useStyles = makeStyles((theme) => ({
   root: { margin: 10 },
   gridPadding: {
@@ -109,14 +111,14 @@ const DinnerDialog = (props) => {
     priceLg,
   } = props;
 
-  console.log(props);
-
   const [riceValue, setRiceValue] = useState("white rice");
   const [sideValue, setSideValue] = useState("none");
   const [addedPrice, setAddedPrice] = useState(0);
   const [finalPrice, setFinalPrice] = useState(price);
   const [requestContent, setRequestContent] = useState("");
   const [quantity, setQuantity] = useState(1);
+
+  const { cart, setCart, addNewItem } = useCartContext();
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
   const classes = useStyles();
@@ -127,6 +129,23 @@ const DinnerDialog = (props) => {
 
   const handleAddItem = () => {
     onAdd();
+    const type = "dinner";
+    let options = {};
+    if (title === "yat gai mei") {
+      options = { type };
+    } else {
+      options = { type, riceValue, sideValue };
+    }
+    let cartUnitPrice = cartPrice;
+
+    const newItem = {
+      title,
+      cartUnitPrice,
+      options,
+      requestContent,
+      quantity,
+    };
+    addNewItem(newItem);
   };
 
   const handleRiceChange = (e) => {
@@ -353,31 +372,34 @@ const DinnerDialog = (props) => {
             </Typography>
           </DialogContentText>
         </DialogContent>
-        <DialogActions>
-          <Box pr={9}>
+        <DialogActions className="dialogContainer">
+          {" "}
+          <Box textAlign="center" className="dialogPrice">
             <Typography variant="h4">
               {" "}
               {formatter.format(cartPrice)}{" "}
             </Typography>
           </Box>
-          <FormControl variant="outlined" className={classes.formControl}>
-            <InputLabel id="demo-simple-select-outlined-label">
-              {" "}
-              qty{" "}
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-outlined-label"
-              id="demo-simple-select-outlined"
-              value={quantity}
-              onChange={handleQuantityChange}
-              label="qty"
-            >
-              {[...Array(20)].map((_id, i) => (
-                <MenuItem value={i + 1}> {i + 1}</MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <Box pt={1.5} px={1.5}>
+          <Box textAlign="center">
+            <FormControl variant="outlined" className={classes.formControl}>
+              <InputLabel id="demo-simple-select-outlined-label">
+                {" "}
+                qty{" "}
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-outlined-label"
+                id="demo-simple-select-outlined"
+                value={quantity}
+                onChange={handleQuantityChange}
+                label="qty"
+              >
+                {[...Array(20)].map((_id, i) => (
+                  <MenuItem value={i + 1}> {i + 1}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Box>
+          <Box textAlign="center" className="dialogButton">
             <Fab
               variant="extended"
               size="large"

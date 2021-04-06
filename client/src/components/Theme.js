@@ -7,19 +7,19 @@ const theme = createMuiTheme({
     fontFamily:
       "-apple-system, BlinkMacSystemFont, acumin-pro, Merriweather, Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif",
     h1: {
-      color: "#E07A5F",
+      color: "orange",
       fontWeight: "bold",
     },
     h2: {
-      color: "#E07A5F",
+      color: "orange",
       fontWeight: "bold",
     },
     h3: {
-      color: "#E07A5F",
+      color: "orange",
       fontWeight: "bold",
     },
     h4: {
-      color: "#E07A5F",
+      color: "orange",
       fontWeight: "bold",
     },
   },

@@ -39,7 +39,7 @@ const Appetizers = (props) => {
 
   useEffect(
     () =>
-      api.get("/appetizers").then((res) => {
+      api.get("/api/appetizers").then((res) => {
         console.log(res.data);
         setAppetizers(res.data);
       }),
@@ -48,7 +48,7 @@ const Appetizers = (props) => {
 
   const classes = useStyles();
 
-  // loop thru out appetizer collection 
+  // loop thru out appetizer collection
   const appetizerGrid = appetizers.map((appetizer) => (
     <Grid item xs={12} sm={6} md={4}>
       <AppetizerMenuCard

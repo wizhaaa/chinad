@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Typography, Box, Grid, makeStyles } from "@material-ui/core";
+
+// fetching data from db
+import api from "../api";
 
 import SoupMenuCard from "../MenuParts/SoupMenuCard";
 
@@ -32,6 +35,28 @@ const useStyles = makeStyles((theme) => ({
 
 const Soups = (props) => {
   const classes = useStyles();
+  const [soups, setSoups] = useState([]);
+
+  useEffect(
+    () =>
+      api.get("/api/soups").then((res) => {
+        setSoups(res.data);
+      }),
+    []
+  );
+
+  const soupGrid = soups.map((soup) => (
+    <Grid item xs={12} sm={6} md={4}>
+      <SoupMenuCard
+        itemName={soup.name}
+        itemDescription={soup.description}
+        img={soup.img}
+        price={soup.price}
+        priceSm={soup.priceSm}
+        priceLg={soup.priceLg}
+      />
+    </Grid>
+  ));
 
   return (
     <Box textAlign="center" m={1} py={8}>
@@ -54,66 +79,7 @@ const Soups = (props) => {
 
       <Box marginTop={10}>
         <Grid container spacing={3}>
-          <Grid item xs={12} sm={6} md={4}>
-            <SoupMenuCard
-              itemName={"wonton soup"}
-              itemDescription={"pork wrapped in wontons in a chicken broth"}
-              img={
-                "https://www.marionskitchen.com/wp-content/uploads/2019/05/Wonton-Soup1.jpg"
-              }
-              price={null}
-              priceSm={2.5}
-              priceLg={3.75}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <SoupMenuCard
-              itemName={"hot & sour soup"}
-              itemDescription={"pork wrapped in wontons in a chicken broth"}
-              img={
-                "https://www.recipetineats.com/wp-content/uploads/2019/02/Hot-and-Sour-Soup_1_6.jpg"
-              }
-              price={null}
-              priceSm={2.5}
-              priceLg={3.75}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <SoupMenuCard
-              itemName={"egg drop soup"}
-              itemDescription={"pork wrapped in wontons in a chicken broth"}
-              img={
-                "https://healthyrecipesblogs.com/wp-content/uploads/2014/04/egg-drop-soup-featured.jpg"
-              }
-              price={null}
-              priceSm={2.5}
-              priceLg={3.75}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <SoupMenuCard
-              itemName={"young chow wonton soup"}
-              itemDescription={"pork wrapped in wontons in a chicken broth"}
-              img={
-                "https://www.marionskitchen.com/wp-content/uploads/2019/05/Wonton-Soup1.jpg"
-              }
-              price={6.5}
-              priceSm={2.5}
-              priceLg={3.75}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <SoupMenuCard
-              itemName={"house special soup"}
-              itemDescription={"pork wrapped in wontons in a chicken broth"}
-              img={
-                "https://i.pinimg.com/originals/91/12/3c/91123c1d0f7afaf26ccc3587e1da5d69.jpg"
-              }
-              price={6.5}
-              priceSm={2.5}
-              priceLg={3.75}
-            />
-          </Grid>
+          {soupGrid}
         </Grid>
       </Box>
     </Box>

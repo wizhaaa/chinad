@@ -33,6 +33,8 @@ import {
   Divider,
 } from "@material-ui/core";
 
+import { useCartContext } from "../CartContext";
+
 const useStyles = makeStyles((theme) => ({
   root: { margin: 10 },
   gridPadding: {
@@ -104,16 +106,25 @@ const SoupDialog = (props) => {
     title,
     description,
     img,
+    price,
     priceSm,
     priceLg,
   } = props;
 
-  console.log(props);
-
+  var initialPrice = 1;
+  if (price == null) {
+    initialPrice = priceSm;
+  } else {
+    initialPrice = price;
+  }
   const [sizeValue, setSizeValue] = useState("pint");
+  const [meatValue, setMeatValue] = useState("chicken");
   const [quantity, setQuantity] = useState(1);
-  const [finalPrice, setFinalPrice] = useState(priceSm);
-  const [textFieldValue, setTextFieldValue] = useState("");
+  const [finalPrice, setFinalPrice] = useState(initialPrice);
+
+  const [requestContent, setRequestContent] = useState("");
+  const { cart, setCart, addNewItem } = useCartContext();
+
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
   const classes = useStyles();
@@ -124,6 +135,23 @@ const SoupDialog = (props) => {
 
   const handleAddItem = () => {
     onAdd();
+    const type = "soup";
+    let options = {};
+    if (title === "yat gai mei") {
+      options = { type, meatValue };
+    } else {
+      options = { type, sizeValue };
+    }
+    let cartUnitPrice = finalPrice;
+
+    const newItem = {
+      title,
+      cartUnitPrice,
+      options,
+      requestContent,
+      quantity,
+    };
+    addNewItem(newItem);
   };
 
   const handleSizeChange = (e) => {
@@ -136,13 +164,18 @@ const SoupDialog = (props) => {
     }
   };
 
+  const handleMeatChange = (e) => {
+    const meat = e.target.value;
+    setMeatValue(meat);
+  };
+
   const handleQuantityChange = (e) => {
     setQuantity(e.target.value);
   };
 
-  const handleTextFieldChange = (e) => {
+  const handleRequestContentChange = (e) => {
     var text = e.target.value;
-    setTextFieldValue(text);
+    setRequestContent(text);
   };
 
   const formatter = new Intl.NumberFormat("en-US", {
@@ -150,6 +183,98 @@ const SoupDialog = (props) => {
     currency: "USD",
     minimumFractionDigits: 2,
   });
+
+  const meatOptions = (
+    <div>
+      {" "}
+      please choose from the options below:
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography className={classes.heading}> meat: </Typography>
+          <Typography className={classes.selectedValue}>{meatValue}</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+            <FormControl component="fieldset">
+              <FormLabel component="legend"> select one: </FormLabel>
+              <RadioGroup
+                aria-label="rices"
+                name="rices1"
+                value={meatValue}
+                onChange={handleMeatChange}
+              >
+                <FormControlLabel
+                  value="chicken"
+                  control={<Radio />}
+                  label="chicken"
+                />
+                <FormControlLabel
+                  value="pork"
+                  control={<Radio />}
+                  label="pork"
+                />{" "}
+                <FormControlLabel
+                  value="shrimp"
+                  control={<Radio />}
+                  label="shrimp"
+                />{" "}
+                <FormControlLabel
+                  value="beef"
+                  control={<Radio />}
+                  label="beef"
+                />
+              </RadioGroup>
+            </FormControl>{" "}
+          </Typography>
+        </AccordionDetails>
+      </Accordion>{" "}
+    </div>
+  );
+
+  const sizeOptions = (
+    <div>
+      {" "}
+      please choose from the options below:
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography className={classes.heading}>size: </Typography>
+          <Typography className={classes.selectedValue}>{sizeValue}</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+            <FormControl component="fieldset">
+              <FormLabel component="legend"> select one: </FormLabel>
+              <RadioGroup
+                aria-label="rices"
+                name="rices1"
+                value={sizeValue}
+                onChange={handleSizeChange}
+              >
+                <FormControlLabel
+                  value="pint"
+                  control={<Radio />}
+                  label="pint"
+                />
+                <FormControlLabel
+                  value="quart"
+                  control={<Radio />}
+                  label="quart"
+                />
+              </RadioGroup>
+            </FormControl>{" "}
+          </Typography>
+        </AccordionDetails>
+      </Accordion>{" "}
+    </div>
+  );
 
   let cartPrice = quantity * finalPrice;
 
@@ -190,43 +315,12 @@ const SoupDialog = (props) => {
                 <img className={classes.img} src={img} alt=" sweet sour" />
               </Grid>
               <Grid Item xs={12} sm={6}>
-                please choose from the options below:
-                <Accordion>
-                  <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
-                  >
-                    <Typography className={classes.heading}>size: </Typography>
-                    <Typography className={classes.selectedValue}>
-                      {sizeValue}
-                    </Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <Typography>
-                      <FormControl component="fieldset">
-                        <FormLabel component="legend"> select one: </FormLabel>
-                        <RadioGroup
-                          aria-label="rices"
-                          name="rices1"
-                          value={sizeValue}
-                          onChange={handleSizeChange}
-                        >
-                          <FormControlLabel
-                            value="pint"
-                            control={<Radio />}
-                            label="pint"
-                          />
-                          <FormControlLabel
-                            value="quart"
-                            control={<Radio />}
-                            label="quart"
-                          />
-                        </RadioGroup>
-                      </FormControl>{" "}
-                    </Typography>
-                  </AccordionDetails>
-                </Accordion>
+                {price === null ? (
+                  sizeOptions
+                ) : (
+                  <Typography> no options to choose from 🧐 </Typography>
+                )}
+                {title === "yat gai mei" ? meatOptions : null}
               </Grid>
               <Grid item xs={12}>
                 {" "}
@@ -241,8 +335,8 @@ const SoupDialog = (props) => {
                     multiline
                     variant="outlined"
                     inputProps={{ maxLength: 250 }}
-                    value={textFieldValue}
-                    onChange={handleTextFieldChange}
+                    value={requestContent}
+                    onChange={handleRequestContentChange}
                   />{" "}
                 </Box>
               </Grid>
@@ -279,32 +373,34 @@ const SoupDialog = (props) => {
             </Typography>
           </DialogContentText>
         </DialogContent>
-        <DialogActions>
+        <DialogActions className="dialogContainer">
           {" "}
-          <Box pr={9}>
+          <Box textAlign="center" className="dialogPrice">
             <Typography variant="h4">
               {" "}
               {formatter.format(cartPrice)}{" "}
             </Typography>
           </Box>
-          <FormControl variant="outlined" className={classes.formControl}>
-            <InputLabel id="demo-simple-select-outlined-label">
-              {" "}
-              qty{" "}
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-outlined-label"
-              id="demo-simple-select-outlined"
-              value={quantity}
-              onChange={handleQuantityChange}
-              label="qty"
-            >
-              {[...Array(20)].map((_id, i) => (
-                <MenuItem value={i + 1}> {i + 1}</MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <Box pt={1.5} px={1.5}>
+          <Box textAlign="center">
+            <FormControl variant="outlined" className={classes.formControl}>
+              <InputLabel id="demo-simple-select-outlined-label">
+                {" "}
+                qty{" "}
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-outlined-label"
+                id="demo-simple-select-outlined"
+                value={quantity}
+                onChange={handleQuantityChange}
+                label="qty"
+              >
+                {[...Array(20)].map((_id, i) => (
+                  <MenuItem value={i + 1}> {i + 1}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Box>
+          <Box textAlign="center" className="dialogButton">
             <Fab
               variant="extended"
               size="large"

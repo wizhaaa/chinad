@@ -411,7 +411,8 @@ const DinnerDialog = (props) => {
               {" "}
             </DialogContentText>
           </DialogContent>
-          <DialogActions>
+
+          <DialogActions className="dialogContainer">
             <Box pr={5}>
               <Typography variant="h4"> {formatter.format(total)} </Typography>
             </Box>

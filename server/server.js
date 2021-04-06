@@ -43,6 +43,8 @@ liveDB.once("open", () =>
   )
 );
 
+// menu item schemas & models
+
 let appetizerSchema = new mongoose.Schema({
   name: String,
   description: String,
@@ -55,18 +57,31 @@ let appetizerSchema = new mongoose.Schema({
 });
 const Appetizer = mongoose.model("Appetizer", appetizerSchema);
 
-const appetizer = new Appetizer({
-  name: "Pork Egg Roll",
-  description:
-    "deep-fried savory roll with shredded cabbage, chopped meats, and other fillings inside a thickly-wrapped wheat flour skin.",
-  img:
-    "https://www.dinneratthezoo.com/wp-content/uploads/2018/01/homemade-egg-rolls-4.jpg",
-  price: 1.45,
-  priceSm: "",
-  priceLg: "",
-  reviews: [""],
-  rating: 5,
+let soupSchema = new mongoose.Schema({
+  name: String,
+  description: String,
+  img: String,
+  price: Number,
+  priceSm: String,
+  priceLg: String,
+  reviews: Object,
+  rating: Number,
 });
+const Soup = mongoose.model("Soup", soupSchema);
+
+let dinnerSchema = new mongoose.Schema({
+  name: String,
+  description: String,
+  img: String,
+  price: Number,
+  priceSm: String,
+  priceLg: String,
+  reviews: Object,
+  rating: Number,
+});
+const Dinner = mongoose.model("Dinner", dinnerSchema);
+
+// customer order schema and model
 
 let orderSchema = new mongoose.Schema({
   name: String,
@@ -79,13 +94,6 @@ let orderSchema = new mongoose.Schema({
 });
 const Order = mongoose.model("Order", orderSchema);
 
-const all = await Appetizer.find();
-// console.log("... beep : ", all);
-
-// // Create Model
-// let Item = mongoose.model("Item", ItemSchema);
-// const item = new Item({ name: "Lo Mein", price: 9.75 });
-
 // app.get("/api/people", (req, res) => {
 //   itemModel.find({}, { __v: 0 }, (err, docs) => {
 //     if (!err) {
@@ -96,21 +104,11 @@ const all = await Appetizer.find();
 //   });
 // });
 
-// Route to add Item
+// Routes
 
-app.post("/", (req, res) => {
-  // res.send("hello bitch!");
-  res.json("hello loser!");
-});
-
-app.get("/", (req, res) => {
-  // res.send(" getting hello bitch!");
-  res.json({ body: "hello", id: "fuck" });
-});
-
-//read all our order documents
-app.get("/api/orders", (req, res) => {
-  Order.find({}, { __v: 0 }, (err, docs) => {
+// read all our order documents
+app.get("/api/orders", async (req, res) => {
+  await Order.find({}, { __v: 0 }, (err, docs) => {
     if (!err) {
       res.json(docs);
     } else {
@@ -134,8 +132,48 @@ app.post("/api/order/add", async (req, res) => {
   });
 });
 
-app.get("/appetizers", (req, res) => {
-  res.send(all);
+// to read our appetizer collection to loop thru on front end
+app.get("/api/appetizers", async (req, res) => {
+  await Appetizer.find({}, { __v: 0 }, (err, docs) => {
+    if (!err) {
+      res.json(docs);
+    } else {
+      res.status(400).json({ error: err });
+    }
+  });
+});
+
+app.get("/api/soups", async (req, res) => {
+  await Soup.find({}, { __v: 0 }, (err, docs) => {
+    if (!err) {
+      res.json(docs);
+    } else {
+      res.status(400).json({ error: err });
+    }
+  });
+});
+
+app.get("/api/dinners", async (req, res) => {
+  await Dinner.find({}, { __v: 0 }, (err, docs) => {
+    if (!err) {
+      res.json(docs);
+    } else {
+      res.status(400).json({ error: err });
+    }
+  });
+});
+
+app.post("/api/sendemail", async (req, res, next) => {
+  const name = req.body.name;
+  const email = req.body.email;
+  const message = req.body.messageHtml;
+
+  var mail = {
+    from: name,
+    to: "chinadelightmd@gmail.com",
+    subject: "China Delight Online Order",
+    html: message,
+  };
 });
 
 app.get("/:name", (req, res) => {
