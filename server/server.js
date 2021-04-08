@@ -6,6 +6,56 @@ import cors from "cors";
 import path from "path";
 const app = express();
 
+// email
+import nodemailer from "nodemailer";
+
+var transport = {
+  host: "smtp.gmail.com",
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+};
+
+var transporter = nodemailer.createTransport(transport);
+
+transporter.verify((error, success) => {
+  if (error) {
+    console.log(error);
+  } else {
+    console.log(" ... # Nodemailer transporter working.");
+  }
+});
+
+// sending mail route
+app.use(express.json());
+app.post("/api/send", (req, res) => {
+  const name = req.body.name;
+  const email = req.body.email;
+  const message = JSON.stringify(req.body.cart);
+
+  console.log("posting ... ");
+
+  var mail = {
+    from: "China Delight",
+    to: `chinadelightnoreply@gmail.com, ${email}`,
+    subject: `China Delight Order for ${name}`,
+    html: `testing msg ${message} `,
+  };
+
+  transporter.sendMail(mail, (err, data) => {
+    if (err) {
+      res.json({
+        msg: "fail",
+      });
+    } else {
+      res.json({
+        msg: "success",
+      });
+    }
+  });
+});
+
 import MongoClient from "mongodb";
 
 const PORT = process.env.SERVER_PORT;

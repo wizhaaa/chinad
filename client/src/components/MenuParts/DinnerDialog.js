@@ -223,7 +223,7 @@ const DinnerDialog = (props) => {
               </Grid>
               <Grid Item xs={12} sm={6}>
                 please choose from the options below:
-                <Accordion>
+                <Accordion TransitionProps={{ unmountOnExit: true }}>
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1a-content"
@@ -269,7 +269,7 @@ const DinnerDialog = (props) => {
                     </Typography>
                   </AccordionDetails>
                 </Accordion>
-                <Accordion>
+                <Accordion TransitionProps={{ unmountOnExit: true }}>
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel2a-content"
@@ -342,7 +342,7 @@ const DinnerDialog = (props) => {
           <DialogContentText className={classes.container}>
             {" "}
             <Typography pl={50}>
-              <Accordion>
+              {/* <Accordion>
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
                   aria-controls="panel1a-content"
@@ -368,7 +368,7 @@ const DinnerDialog = (props) => {
                 <AccordionDetails>
                   <Typography> feature work in progress </Typography>
                 </AccordionDetails>
-              </Accordion>{" "}
+              </Accordion>{" "} */}
             </Typography>
           </DialogContentText>
         </DialogContent>

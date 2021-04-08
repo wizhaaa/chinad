@@ -148,10 +148,26 @@ const DinnerDialog = (props) => {
     api.post("/api/order/add", newOrder).catch((err) => console.log(err));
   };
 
+  const sendEmail = (newOrder) => {
+    api
+      .post("/api/send", newOrder)
+      .then((res) => {
+        alert("email sending...");
+        console.log("respsone is", res.data.msg);
+        if (res.data.msg === "success") {
+          alert("Email sent, awesome!");
+        } else if (res.data.msg === "fail") {
+          alert("Oops, something went wrong. Try again");
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
   const handlePlaceOrder = (e) => {
     console.log("placing order ...");
     console.log("order is: ", order);
     addOrder(order);
+    sendEmail(order);
     // redirect
     // window.location.href = "/";
     e.preventDefault();

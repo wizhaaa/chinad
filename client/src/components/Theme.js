@@ -24,6 +24,10 @@ const theme = createMuiTheme({
     },
   },
   palette: { type: "dark", primary: red, secondary: orange },
+  // transitions: {
+  //   // So we have `transition: none;` everywhere
+  //   create: () => "none",
+  // },
 });
 
 export default theme;
