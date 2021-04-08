@@ -6,56 +6,6 @@ import cors from "cors";
 import path from "path";
 const app = express();
 
-// email
-import nodemailer from "nodemailer";
-
-var transport = {
-  host: "smtp.gmail.com",
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-};
-
-var transporter = nodemailer.createTransport(transport);
-
-transporter.verify((error, success) => {
-  if (error) {
-    console.log(error);
-  } else {
-    console.log(" ... # Nodemailer transporter working.");
-  }
-});
-
-// sending mail route
-app.use(express.json());
-app.post("/api/send", (req, res) => {
-  const name = req.body.name;
-  const email = req.body.email;
-  const message = JSON.stringify(req.body.cart);
-
-  console.log("posting ... ");
-
-  var mail = {
-    from: "China Delight",
-    to: `chinadelightnoreply@gmail.com, ${email}`,
-    subject: `China Delight Order for ${name}`,
-    html: `testing msg ${message} `,
-  };
-
-  transporter.sendMail(mail, (err, data) => {
-    if (err) {
-      res.json({
-        msg: "fail",
-      });
-    } else {
-      res.json({
-        msg: "success",
-      });
-    }
-  });
-});
-
 import MongoClient from "mongodb";
 
 const PORT = process.env.SERVER_PORT;
@@ -92,6 +42,55 @@ liveDB.once("open", () =>
     ` ---- *** ..... loading ..... connected to database ! ..... 200 success .... *** ----`
   )
 );
+// email
+import nodemailer from "nodemailer";
+
+var transport = {
+  host: "smtp.gmail.com",
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+};
+
+var transporter = nodemailer.createTransport(transport);
+
+transporter.verify((error, success) => {
+  if (error) {
+    console.log(error);
+  } else {
+    console.log(" ... # Nodemailer transporter working.");
+  }
+});
+
+// sending mail route
+app.post("/api/send", (req, res, next) => {
+  const name = req.body.name;
+  const email = req.body.email;
+  const message = req.body.messageHtml;
+  console.log("message is : ", message);
+  console.log("posting ... ");
+
+  var mail = {
+    from: "China Delight",
+    to: `chinadelightnoreply@gmail.com, ${email}`,
+    cc: `${process.env.CHINA_DELIGHT_EMAIL}`,
+    subject: `China Delight Order for ${name}`,
+    html: message,
+  };
+
+  transporter.sendMail(mail, (err, data) => {
+    if (err) {
+      res.json({
+        msg: "fail",
+      });
+    } else {
+      res.json({
+        msg: "success",
+      });
+    }
+  });
+});
 
 // menu item schemas & models
 
@@ -141,6 +140,7 @@ let orderSchema = new mongoose.Schema({
   pickUpTime: String,
   cart: Array,
   orderReqs: String,
+  total: Number,
 });
 const Order = mongoose.model("Order", orderSchema);
 
@@ -169,13 +169,12 @@ app.get("/api/orders", async (req, res) => {
 
 // to add an order
 app.post("/api/order/add", async (req, res) => {
-  console.log(req.body);
   let order = new Order({ ...req.body });
-  console.log("order is ", order);
   await order.save((err, result) => {
     if (!err) {
       delete result._doc.__v;
       res.json(result._doc);
+      console.log("order added to the database");
     } else {
       res.status(400).json({ error: err });
     }
@@ -211,19 +210,6 @@ app.get("/api/dinners", async (req, res) => {
       res.status(400).json({ error: err });
     }
   });
-});
-
-app.post("/api/sendemail", async (req, res, next) => {
-  const name = req.body.name;
-  const email = req.body.email;
-  const message = req.body.messageHtml;
-
-  var mail = {
-    from: name,
-    to: "chinadelightmd@gmail.com",
-    subject: "China Delight Online Order",
-    html: message,
-  };
 });
 
 app.get("/:name", (req, res) => {

@@ -12,6 +12,7 @@ import Appetizers from "./MenuPages/Appetizers";
 
 import Test from "./DemoTestModule";
 import AxiosTest from "./AxiosTest";
+import MyEmail from "./Pages/MyEmail";
 
 const Routes = () => {
   return (
@@ -61,6 +62,10 @@ const Routes = () => {
         <Route exact path="/axiostest">
           {" "}
           <AxiosTest />{" "}
+        </Route>
+        <Route exact path="/email">
+          {" "}
+          <MyEmail />{" "}
         </Route>
       </Switch>
     </div>

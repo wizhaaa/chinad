@@ -34,10 +34,15 @@ import {
   makeStyles,
   Divider,
 } from "@material-ui/core";
+
 import { wrap } from "module";
 import { useCartContext } from "../CartContext";
+//email
+import MyEmail from "./MyEmail";
+import { renderEmail } from "react-html-email";
 import { Redirect } from "react-router";
 import api from "../api";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   root: { margin: 10 },
@@ -102,7 +107,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const DinnerDialog = (props) => {
+const CheckoutDialog = (props) => {
   const { onClose, open, total } = props;
 
   const { cart, setCart, userCartCount } = useCartContext();
@@ -127,6 +132,7 @@ const DinnerDialog = (props) => {
       pickUpOption: pickUpOption,
       cart: cart,
       orderReqs: orderReqs,
+      total: total,
     };
   } else {
     order = {
@@ -137,6 +143,7 @@ const DinnerDialog = (props) => {
       pickUpTime: customTime,
       cart: cart,
       orderReqs: orderReqs,
+      total: total,
     };
   }
 
@@ -163,13 +170,39 @@ const DinnerDialog = (props) => {
       .catch((err) => console.log(err));
   };
 
+  const sendEmailMethod2 = () => {
+    const messageHtml = renderEmail(
+      <MyEmail name={name} order={order}></MyEmail>
+    );
+    axios({
+      method: "POST",
+      url: "http://localhost:4747/api/send",
+      data: {
+        name: name,
+        email: email,
+        messageHtml: messageHtml,
+      },
+    }).then((response) => {
+      if (response.data.msg === "success") {
+        alert("Email sent, awesome!");
+      } else if (response.data.msg === "fail") {
+        alert("Oops, something went wrong. Try again");
+      }
+    });
+  };
+
   const handlePlaceOrder = (e) => {
+    // const messageHtml = renderEmail(
+    //   <MyEmail name={name} order={order}></MyEmail>
+    // );
     console.log("placing order ...");
     console.log("order is: ", order);
-    addOrder(order);
-    sendEmail(order);
+    //commenting out adding order for now
+    // addOrder(order);
+    // sendEmail(order);
+    sendEmailMethod2();
     // redirect
-    // window.location.href = "/";
+    // window.location.href = "/"
     e.preventDefault();
   };
 
@@ -453,4 +486,4 @@ const DinnerDialog = (props) => {
   );
 };
 
-export default DinnerDialog;
+export default CheckoutDialog;

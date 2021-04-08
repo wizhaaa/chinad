@@ -68,7 +68,6 @@ function Cart() {
     console.log("Checking out...");
   };
 
-  const [cartSubtotal, setCartSubtotal] = useState(0);
   var subt1 = 0;
   cart.forEach((item) => (subt1 = subt1 + item.cartUnitPrice * item.quantity));
   var taxes = subt1 * 0.06;
@@ -124,7 +123,7 @@ function Cart() {
                   </Typography>{" "}
                   <Typography style={{ color: "#d1d1d1" }} variant="body2">
                     {" "}
-                    👩‍🍳 requests? {item.textFieldValue}{" "}
+                    👩‍🍳 requests? {item.requestContent}{" "}
                   </Typography>
                   <Box variant="div" className="cartBottomOptions">
                     {" "}
