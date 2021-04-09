@@ -47,7 +47,7 @@ const formatter = new Intl.NumberFormat("en-US", {
   minimumFractionDigits: 2,
 });
 
-function Cart() {
+function Confirmation() {
   const tableClasses = tableStyles();
 
   const { prevOrder } = useCartContext();
@@ -61,6 +61,9 @@ function Cart() {
   const pickUpTime = prevOrder.pickUpTime;
   const timePlaced = prevOrder.timePlaced;
   const orderReqs = prevOrder.orderReqs;
+  const minutes = new Date().getMinutes() + 20;
+  const hours = new Date().getHours();
+  const estimatedTime = `${hours}:${minutes}`;
 
   const pickUpDetails = (
     <div>
@@ -73,9 +76,6 @@ function Cart() {
   );
 
   const [open, setOpen] = React.useState(false);
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
 
   const handleClose = () => {
     setOpen(false);
@@ -89,7 +89,10 @@ function Cart() {
 
   const filledCart = (
     <TableContainer component={Paper}>
-      <Table className={(tableClasses.table, Cart)} aria-label="spanning table">
+      <Table
+        className={(tableClasses.table, Confirmation)}
+        aria-label="spanning table"
+      >
         <TableHead>
           <TableRow>
             <TableCell align="center">
@@ -241,6 +244,12 @@ function Cart() {
                   <br /> Picking Up At: {pickUpTime}{" "}
                 </>
               ) : null}
+              {pickUpOption === "ASAP" ? (
+                <>
+                  {" "}
+                  <br /> Estimated Pick Up Time (for): {estimatedTime}{" "}
+                </>
+              ) : null}
               <br /> Payment: In-person
             </Typography>
             <Box mb={5}> </Box>{" "}
@@ -295,4 +304,4 @@ function useLocalStorage(key, initialValue) {
   return [storedValue, setValue];
 }
 
-export default Cart;
+export default Confirmation;

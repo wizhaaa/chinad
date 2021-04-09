@@ -41,6 +41,7 @@ function ResponsiveDrawer(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
   const { userCartCount } = useCartContext();
 
   const handleDrawerToggle = () => {
@@ -49,7 +50,7 @@ function ResponsiveDrawer(props) {
 
   // defining our drawer. loops through imported lists
   const drawer = (
-    <div>
+    <div onClick={handleDrawerToggle}>
       <div className={classes.toolbar} />
       <Divider />
 
