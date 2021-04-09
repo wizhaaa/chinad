@@ -110,7 +110,7 @@ const useStyles = makeStyles((theme) => ({
 const CheckoutDialog = (props) => {
   const { onClose, open, total } = props;
 
-  const { cart, setCart, userCartCount } = useCartContext();
+  const { cart, setCart, orderID, setOrderID, setPrevOrder } = useCartContext();
 
   const [orderReqs, setOrderReqs] = useState("");
   const [name, setName] = useState("");
@@ -124,6 +124,7 @@ const CheckoutDialog = (props) => {
   const classes = useStyles();
 
   let order = {};
+  let date = new Date().toString();
   if (pickUpOption === "ASAP") {
     order = {
       name: name,
@@ -133,6 +134,7 @@ const CheckoutDialog = (props) => {
       cart: cart,
       orderReqs: orderReqs,
       total: total,
+      timePlaced: date,
     };
   } else {
     order = {
@@ -144,6 +146,7 @@ const CheckoutDialog = (props) => {
       cart: cart,
       orderReqs: orderReqs,
       total: total,
+      timePlaced: date,
     };
   }
 
@@ -152,25 +155,28 @@ const CheckoutDialog = (props) => {
   };
 
   const addOrder = (newOrder) => {
-    api.post("/api/order/add", newOrder).catch((err) => console.log(err));
-  };
-
-  const sendEmail = (newOrder) => {
     api
-      .post("/api/send", newOrder)
-      .then((res) => {
-        alert("email sending...");
-        console.log("respsone is", res.data.msg);
-        if (res.data.msg === "success") {
-          alert("Email sent, awesome!");
-        } else if (res.data.msg === "fail") {
-          alert("Oops, something went wrong. Try again");
-        }
-      })
+      .post("/api/order/add", newOrder)
+      // .then((res) => setOrderID(res.data.id))
       .catch((err) => console.log(err));
   };
 
-  const sendEmailMethod2 = () => {
+  // const sendEmail = (newOrder) => {
+  //   api
+  //     .post("/api/send", newOrder)
+  //     .then((res) => {
+  //       alert("email sending...");
+  //       console.log("respsone is", res.data.msg);
+  //       if (res.data.msg === "success") {
+  //         alert("Email sent, awesome!");
+  //       } else if (res.data.msg === "fail") {
+  //         alert("Oops, something went wrong. Try again");
+  //       }
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
+
+  const sendEmail = () => {
     const messageHtml = renderEmail(
       <MyEmail name={name} order={order}></MyEmail>
     );
@@ -184,7 +190,7 @@ const CheckoutDialog = (props) => {
       },
     }).then((response) => {
       if (response.data.msg === "success") {
-        alert("Email sent, awesome!");
+        window.location.href = "/confirmation";
       } else if (response.data.msg === "fail") {
         alert("Oops, something went wrong. Try again");
       }
@@ -192,18 +198,23 @@ const CheckoutDialog = (props) => {
   };
 
   const handlePlaceOrder = (e) => {
-    // const messageHtml = renderEmail(
-    //   <MyEmail name={name} order={order}></MyEmail>
-    // );
-    console.log("placing order ...");
-    console.log("order is: ", order);
-    //commenting out adding order for now
-    // addOrder(order);
-    // sendEmail(order);
-    sendEmailMethod2();
-    // redirect
-    // window.location.href = "/"
-    e.preventDefault();
+    if (Object.keys(cart).length <= 0) {
+      alert("ERROR :please add items into your cart ");
+    } else {
+      console.log("placing order ...");
+
+      //commenting out adding order for now
+      addOrder(order);
+      sendEmail();
+      // redirect
+      // window.location.href = "/"
+      e.preventDefault();
+
+      //empty our cart
+      setPrevOrder(order);
+      setCart([]);
+      console.log(orderID);
+    }
   };
 
   const handlePickUpOptionChange = (e) => {

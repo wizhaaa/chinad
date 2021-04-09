@@ -141,6 +141,7 @@ let orderSchema = new mongoose.Schema({
   cart: Array,
   orderReqs: String,
   total: Number,
+  timePlaced: String,
 });
 const Order = mongoose.model("Order", orderSchema);
 
@@ -226,6 +227,18 @@ app.get("/:name", (req, res) => {
         db.close();
       }
     );
+  });
+});
+
+// fetch our matching order
+
+app.get("/api/:orderID", async (req, res) => {
+  await Order.find({ _id: req.params.orderID }, { __v: 0 }, (err, docs) => {
+    if (!err) {
+      res.json(docs);
+    } else {
+      res.status(400).json({ error: err });
+    }
   });
 });
 

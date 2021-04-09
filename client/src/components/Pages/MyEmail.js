@@ -51,21 +51,25 @@ const MyEmail = ({ order }) => {
   const email = order.email;
   const phone = order.phone;
   const cart = order.cart;
+  const orderRequests = order.orderReqs;
+  var orderPickUpTime = order.pickUpTime;
 
   const date = new Date().toString();
   const emailTotal = order.cart.total;
 
-  var subt1 = 0;
-  //   cart.forEach((item) => (subt1 = subt1 + item.cartUnitPrice * item.quantity));
-  var taxes = subt1 * 0.06;
-  var total = subt1 * 1.06;
+  var subtotal = 0;
+  cart.forEach(
+    (item) => (subtotal = subtotal + item.cartUnitPrice * item.quantity)
+  );
+  var taxes = subtotal * 0.06;
+  var total = subtotal * 1.06;
 
   const pickUpDetails = (
     <div>
       {" "}
       Pick up Option: {order.pickUpOption}
-      {order.pickUpOption === "custom" ? (
-        <div> Pick up Option: {order.pickUpTime} </div>
+      {order.pickUpOption === "custom time" ? (
+        <div> Pick up time: {order.pickUpTime} </div>
       ) : null}{" "}
     </div>
   );
@@ -79,7 +83,7 @@ const MyEmail = ({ order }) => {
           })
           .join(", ");
         const itemTotalPrice = item.cartUnitPrice * item.quantity;
-        subt1 = subt1 + itemTotalPrice;
+
         return (
           <tr key={item.title}>
             <td>
@@ -91,7 +95,7 @@ const MyEmail = ({ order }) => {
                 <div> qty: {item.quantity}</div>
                 <div>
                   {" "}
-                  {formatter.format(item.cartUnitPrice)} * {item.quantity} ={" "}
+                  {formatter.format(item.cartUnitPrice)} ( x {item.quantity} ) ={" "}
                   {formatter.format(itemTotalPrice)}
                 </div>{" "}
               </div>
@@ -114,8 +118,8 @@ const MyEmail = ({ order }) => {
         <br /> Phone: {phone}
         <br /> Order Cost: {emailTotal}
         <div>
-          subtotal: {formatter.format(subt1)} <br /> taxes (6%):{" "}
-          {formatter.format(taxes)}
+          subtotal: {formatter.format(subtotal)}
+          <br /> taxes (6%): {formatter.format(taxes)}
           <br /> total: {formatter.format(total)} <br />{" "}
         </div>
         <div> {pickUpDetails} </div>
@@ -130,6 +134,9 @@ const MyEmail = ({ order }) => {
           </tr>
           {filledCart}
         </table>
+        customer's requests for the order:
+        <br />
+        {orderRequests}
         <br /> any questions? don't hesitate to email us at
         chinadelightmd@gmail.com or call us at 410-877-9490! <br />
       </Item>

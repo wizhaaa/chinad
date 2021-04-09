@@ -27,8 +27,13 @@ export const useCartContext = () => {
 };
 
 export function CartProvider({ children }) {
+  // values and functions we are allowing every component to access below:
+
   const [cart, setCart] = useLocalStorage("userLocalCart", []);
   const userCartCount = cart.length;
+
+  const [prevCart, setPrevCart] = useLocalStorage("prevCart", cart);
+  const [prevOrder, setPrevOrder] = useLocalStorage("prevOrder");
 
   const addNewItem = (newItem) => {
     setCart((prevItems) => {
@@ -36,8 +41,23 @@ export function CartProvider({ children }) {
     });
   };
 
+  const [orderID, setOrderID] = useState();
+
   return (
-    <CartContext.Provider value={{ cart, setCart, userCartCount, addNewItem }}>
+    <CartContext.Provider
+      value={{
+        cart,
+        setCart,
+        userCartCount,
+        addNewItem,
+        orderID,
+        setOrderID,
+        prevCart,
+        setPrevCart,
+        prevOrder,
+        setPrevOrder,
+      }}
+    >
       {children}
     </CartContext.Provider>
   );

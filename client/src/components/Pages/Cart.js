@@ -111,7 +111,6 @@ function Cart() {
               })
               .join(", ");
             const itemTotalPrice = item.cartUnitPrice * item.quantity;
-            subt1 = subt1 + itemTotalPrice;
 
             return (
               <TableRow key={item.title}>
