@@ -142,6 +142,7 @@ let orderSchema = new mongoose.Schema({
   orderReqs: String,
   total: Number,
   timePlaced: String,
+  estimatedTime: String,
 });
 const Order = mongoose.model("Order", orderSchema);
 

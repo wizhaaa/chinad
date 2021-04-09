@@ -52,7 +52,7 @@ const MyEmail = ({ order }) => {
   const phone = order.phone;
   const cart = order.cart;
   const orderRequests = order.orderReqs;
-  var orderPickUpTime = order.pickUpTime;
+  const estimatedTime = order.estimatedTime;
 
   const date = new Date().toString();
   const emailTotal = order.cart.total;
@@ -70,7 +70,9 @@ const MyEmail = ({ order }) => {
       Pick up Option: {order.pickUpOption}
       {order.pickUpOption === "custom time" ? (
         <div> Pick up time: {order.pickUpTime} </div>
-      ) : null}{" "}
+      ) : (
+        <div> Estimated pick up @ {estimatedTime} </div>
+      )}{" "}
     </div>
   );
 
@@ -107,7 +109,7 @@ const MyEmail = ({ order }) => {
   );
 
   return (
-    <Email title="title !">
+    <Email title="china delit order">
       <Item>
         {" "}
         <h1> China Delight Order </h1>
@@ -116,11 +118,10 @@ const MyEmail = ({ order }) => {
         Order for: {name}
         <br /> Email: {email}
         <br /> Phone: {phone}
-        <br /> Order Cost: {emailTotal}
         <div>
-          subtotal: {formatter.format(subtotal)}
-          <br /> taxes (6%): {formatter.format(taxes)}
-          <br /> total: {formatter.format(total)} <br />{" "}
+          Subtotal: {formatter.format(subtotal)}
+          <br /> Taxes (6%): {formatter.format(taxes)}
+          <br /> Total: {formatter.format(total)} <br />{" "}
         </div>
         <div> {pickUpDetails} </div>
         <table aria-label="spanning table">
@@ -134,9 +135,11 @@ const MyEmail = ({ order }) => {
           </tr>
           {filledCart}
         </table>
+        <div className="divider"> </div>
         customer's requests for the order:
         <br />
         {orderRequests}
+        <div className="divider"> </div>
         <br /> any questions? don't hesitate to email us at
         chinadelightmd@gmail.com or call us at 410-877-9490! <br />
       </Item>

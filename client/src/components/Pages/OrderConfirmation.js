@@ -36,8 +36,7 @@ import useStyles from "../MaterialStyles";
 
 const tableStyles = makeStyles((theme) => ({
   table: {
-    width: "100%",
-    maxWidth: 805,
+    maxWidth: 650,
   },
 }));
 
@@ -56,14 +55,13 @@ function Confirmation() {
   const name = prevOrder.name;
   const email = prevOrder.email;
   const phone = prevOrder.phone;
-  const orderRequests = prevOrder.orderReqs;
+
   const pickUpOption = prevOrder.pickUpOption;
   const pickUpTime = prevOrder.pickUpTime;
   const timePlaced = prevOrder.timePlaced;
   const orderReqs = prevOrder.orderReqs;
-  const minutes = new Date().getMinutes() + 20;
-  const hours = new Date().getHours();
-  const estimatedTime = `${hours}:${minutes}`;
+
+  const estimatedTime = prevOrder.estimatedTime;
 
   const pickUpDetails = (
     <div>
@@ -81,7 +79,6 @@ function Confirmation() {
     setOpen(false);
   };
 
-  const [cartSubtotal, setCartSubtotal] = useState(0);
   var subt1 = 0;
   cart.forEach((item) => (subt1 = subt1 + item.cartUnitPrice * item.quantity));
   var taxes = subt1 * 0.06;
@@ -151,7 +148,10 @@ function Confirmation() {
           <TableRow key="orderReqs">
             {" "}
             <TableCell>
-              <Typography> Order Requests: {orderReqs} </Typography>
+              <Typography>
+                {" "}
+                Order Requests: {orderReqs === "" ? "N/A" : orderReqs}{" "}
+              </Typography>
             </TableCell>
           </TableRow>
         </TableBody>
@@ -222,7 +222,11 @@ function Confirmation() {
                 src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/apple/271/man-technologist_1f468-200d-1f4bb.png"
                 alt="typing-man"
               />{" "}
-              How was the ordering experience? Email chinadelightmd@gmail.com
+              How was the ordering experience? Email{" "}
+              <a href="mailto:chinadelightmd@gmail.com">
+                {" "}
+                chinadelightmd@gmail.com{" "}
+              </a>
               with any suggestions or feedback. Anything helps us improve and
               learn! <br />
               🤤 Enjoyed the food? click{" "}
@@ -266,42 +270,6 @@ function Confirmation() {
       <CheckoutDialog open={open} onClose={handleClose} total={total} />
     </div>
   );
-}
-
-function useLocalStorage(key, initialValue) {
-  // State to store our value
-  // Pass initial state function to useState so logic is only executed once
-  const [storedValue, setStoredValue] = useState(() => {
-    try {
-      // Get from local storage by key
-      const item = window.localStorage.getItem(key);
-      // Parse stored json or if none return initialValue
-      return item ? JSON.parse(item) : initialValue;
-    } catch (error) {
-      // If error also return initialValue
-      console.log(error);
-      return initialValue;
-    }
-  });
-
-  // Return a wrapped version of useState's setter function that ...
-  // ... persists the new value to localStorage.
-  const setValue = (value) => {
-    try {
-      // Allow value to be a function so we have same API as useState
-      const valueToStore =
-        value instanceof Function ? value(storedValue) : value;
-      // Save state
-      setStoredValue(valueToStore);
-      // Save to local storage
-      window.localStorage.setItem(key, JSON.stringify(valueToStore));
-    } catch (error) {
-      // A more advanced implementation would handle the error case
-      console.log(error);
-    }
-  };
-
-  return [storedValue, setValue];
 }
 
 export default Confirmation;

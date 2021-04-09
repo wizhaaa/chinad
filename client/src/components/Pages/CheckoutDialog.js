@@ -125,6 +125,9 @@ const CheckoutDialog = (props) => {
 
   let order = {};
   let date = new Date().toString();
+  const minutes = new Date().getMinutes() + 20;
+  const hours = new Date().getHours();
+  const estimatedTime = `${hours}:${minutes}`;
   if (pickUpOption === "ASAP") {
     order = {
       name: name,
@@ -135,6 +138,7 @@ const CheckoutDialog = (props) => {
       orderReqs: orderReqs,
       total: total,
       timePlaced: date,
+      estimatedTime: estimatedTime,
     };
   } else {
     order = {
@@ -147,6 +151,7 @@ const CheckoutDialog = (props) => {
       orderReqs: orderReqs,
       total: total,
       timePlaced: date,
+      estimatedTime: estimatedTime,
     };
   }
 

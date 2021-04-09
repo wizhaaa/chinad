@@ -62,3 +62,11 @@ a:hover {
   width: 100%;
   max-width: 960px;
 }
+
+.divider {
+  padding: 50px;
+}
+
+.Home {
+  max-width: 650px;
+}

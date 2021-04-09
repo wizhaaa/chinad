@@ -16,6 +16,7 @@ import {
   AppBar,
   Toolbar,
   Drawer,
+  SwipeableDrawer,
   Typography,
   IconButton,
   List,
@@ -41,7 +42,7 @@ function ResponsiveDrawer(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [drawerOpen, setDrawerOpen] = useState(false);
+
   const { userCartCount } = useCartContext();
 
   const handleDrawerToggle = () => {
@@ -74,7 +75,7 @@ function ResponsiveDrawer(props) {
         {menuList.map((item, index) => {
           const { text, icon, routeTo } = item;
           return (
-            <Link className={classes.navLinks} to={routeTo}>
+            <Link key={text} className={classes.navLinks} to={routeTo}>
               {" "}
               <ListItem button key={text}>
                 {icon && <ListItemIcon> {icon} </ListItemIcon>}
@@ -106,11 +107,11 @@ function ResponsiveDrawer(props) {
           </IconButton>
 
           {/* Our Heading  */}
-          <Typography variant="h6" className={classes.title}>
-            <IconButton color="inherit" href="/">
+          <Typography variant="h5" className={classes.title}>
+            <Link className={classes.navLinks} to="/">
               {" "}
               china delight{" "}
-            </IconButton>
+            </Link>
           </Typography>
 
           {/* Shopping Cart Icon */}

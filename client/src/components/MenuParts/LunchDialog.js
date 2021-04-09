@@ -136,7 +136,7 @@ const LunchDialog = (props) => {
   const handleAddItem = () => {
     const currentTime = new Date().getHours();
     console.log("time is", currentTime);
-    if (currentTime < 16 && currentTime > 9) {
+    if (currentTime < 16 && currentTime > 7) {
       onAdd();
       const type = "lunch";
       const options = { type, riceValue, sideValue };

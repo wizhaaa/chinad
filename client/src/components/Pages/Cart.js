@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 
 import {
   Button as ButtonIcon,
@@ -131,6 +132,7 @@ function Cart() {
                       {" "}
                       {formatter.format(item.cartUnitPrice)}
                     </Typography>
+                    <Typography> {formatter.format(itemTotalPrice)}</Typography>
                     <IconButton
                       color="primary"
                       onClick={() => handleDelete(index)}
@@ -167,8 +169,8 @@ function Cart() {
   const emptyCart = (
     <Typography>
       {" "}
-      woops! looks like your cart is empty! head over to the menu and add items
-      to your cart ~{" "}
+      woops! looks like your cart is empty! head over to the{" "}
+      <a href="/menu"> menu</a> and add items to your cart ~{" "}
     </Typography>
   );
 
