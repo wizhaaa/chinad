@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import React, { useState } from "react";
 import { useTheme } from "@material-ui/core/styles";
 import {
   Add as AddIcon,
@@ -34,6 +34,7 @@ import {
 } from "@material-ui/core";
 
 import { useCartContext } from "../CartContext";
+import Reviews from "./Reviews";
 
 const useStyles = makeStyles((theme) => ({
   root: { margin: 10 },
@@ -98,7 +99,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LunchDialog = (props) => {
+const LunchDialog = React.memo((props) => {
   const {
     onClose,
     open,
@@ -109,18 +110,20 @@ const LunchDialog = (props) => {
     price,
     priceSm,
     priceLg,
+    reviews,
   } = props;
 
-  console.log(props);
-
-  const [riceValue, setRiceValue] = useState("white rice");
-  const [sideValue, setSideValue] = useState("no side");
+  const [riceValue, setRiceValue] = useState("White Rice");
+  const [sideValue, setSideValue] = useState("No Side");
   const [quantity, setQuantity] = useState(1);
   const [addedPrice, setAddedPrice] = useState(0);
   const [finalPrice, setFinalPrice] = useState(price);
   let cartUnitPrice = finalPrice + addedPrice;
+  const [meatValue, setMeatValue] = useState("Chicken");
   // customer request
   const [requestContent, setRequestContent] = useState("");
+
+  const [expanded, setExpanded] = useState(false);
 
   // context cart
   const { cart, setCart, addNewItem } = useCartContext();
@@ -135,11 +138,21 @@ const LunchDialog = (props) => {
 
   const handleAddItem = () => {
     const currentTime = new Date().getHours();
-    console.log("time is", currentTime);
     if (currentTime < 16 && currentTime > 7) {
       onAdd();
-      const type = "lunch";
-      const options = { type, riceValue, sideValue };
+      const type = "Lunch";
+      let options = {};
+      if (
+        title === "Egg Foo Young" ||
+        title === "Lo Mein" ||
+        title === "Fried Rice" ||
+        title === "Chow Mein"
+      ) {
+        options = { type, meatValue, riceValue, sideValue };
+      } else {
+        options = { type, riceValue, sideValue };
+      }
+
       const newItem = {
         title,
         cartUnitPrice,
@@ -149,7 +162,7 @@ const LunchDialog = (props) => {
       };
       addNewItem(newItem);
     } else {
-      alert(" sorry it is past lunch time right now ");
+      alert(" Sorry it is past lunch time right now ");
     }
   };
 
@@ -157,7 +170,7 @@ const LunchDialog = (props) => {
   const handleRiceChange = (e) => {
     var riceChosen = e.target.value;
     setRiceValue(riceChosen);
-    if (riceChosen === "lo mein" || riceChosen === "pork fried rice") {
+    if (riceChosen === "Lo Mein" || riceChosen === "Pork Fried Rice") {
       setAddedPrice(1.75);
     } else {
       setAddedPrice(0);
@@ -167,11 +180,16 @@ const LunchDialog = (props) => {
   const handleSideChange = (e) => {
     const sideChosen = e.target.value;
     setSideValue(sideChosen);
-    if (!(sideChosen === "no side")) {
+    if (!(sideChosen === "No Side")) {
       setFinalPrice(price + 0.75);
     } else {
       setFinalPrice(price);
     }
+  };
+
+  const handleMeatChange = (e) => {
+    const meat = e.target.value;
+    setMeatValue(meat);
   };
 
   const handleQuantityChange = (e) => {
@@ -190,6 +208,88 @@ const LunchDialog = (props) => {
   });
 
   let cartPrice = quantity * (finalPrice + addedPrice);
+
+  const EFYMeatOptions = (
+    <Accordion>
+      <AccordionSummary
+        expandIcon={<ExpandMoreIcon />}
+        aria-controls="panel1a-content"
+        id="panel1a-header"
+      >
+        <Typography className={classes.heading}> Meat: </Typography>
+        <Typography className={classes.selectedValue}>{meatValue}</Typography>
+      </AccordionSummary>
+      <AccordionDetails>
+        <Typography>
+          <FormControl component="fieldset">
+            <FormLabel component="legend"> Select one: </FormLabel>
+            <RadioGroup
+              aria-label="meats"
+              name="meats"
+              value={meatValue}
+              onChange={handleMeatChange}
+            >
+              <FormControlLabel
+                value="Chicken"
+                control={<Radio />}
+                label="Chicken"
+              />
+              <FormControlLabel value="Pork" control={<Radio />} label="Pork" />{" "}
+              <FormControlLabel
+                value="Shrimp"
+                control={<Radio />}
+                label="Shrimp"
+              />{" "}
+              <FormControlLabel value="Beef" control={<Radio />} label="Beef" />
+            </RadioGroup>
+          </FormControl>{" "}
+        </Typography>
+      </AccordionDetails>
+    </Accordion>
+  );
+  const meatOptions = (
+    <Accordion>
+      <AccordionSummary
+        expandIcon={<ExpandMoreIcon />}
+        aria-controls="panel1a-content"
+        id="panel1a-header"
+      >
+        <Typography className={classes.heading}> Meat: </Typography>
+        <Typography className={classes.selectedValue}>{meatValue}</Typography>
+      </AccordionSummary>
+      <AccordionDetails>
+        <Typography>
+          <FormControl component="fieldset">
+            <FormLabel component="legend"> Select one: </FormLabel>
+            <RadioGroup
+              aria-label="meats"
+              name="meats"
+              value={meatValue}
+              onChange={handleMeatChange}
+            >
+              <FormControlLabel
+                value="Chicken"
+                control={<Radio />}
+                label="Chicken"
+              />
+              <FormControlLabel value="Pork" control={<Radio />} label="Pork" />{" "}
+              <FormControlLabel
+                value="Shrimp"
+                control={<Radio />}
+                label="Shrimp"
+              />{" "}
+              <FormControlLabel value="Beef" control={<Radio />} label="Beef" />
+              <FormControlLabel
+                value="Combo"
+                control={<Radio />}
+                label="Combo"
+              />
+            </RadioGroup>
+          </FormControl>{" "}
+        </Typography>
+      </AccordionDetails>
+    </Accordion>
+  );
 
   return (
     <>
@@ -228,47 +328,48 @@ const LunchDialog = (props) => {
                 <img className={classes.img} src={img} alt=" sweet sour" />
               </Grid>
               <Grid Item xs={12} sm={6}>
-                please choose from the options below:
+                Please choose from the options below:
                 <Accordion>
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1a-content"
                     id="panel1a-header"
                   >
-                    <Typography className={classes.heading}>rice: </Typography>
+                    <Typography className={classes.heading}> Rice: </Typography>
                     <Typography className={classes.selectedValue}>
                       {riceValue}
                     </Typography>
                   </AccordionSummary>
+
                   <AccordionDetails>
                     <Typography>
                       <FormControl component="fieldset">
-                        <FormLabel component="legend"> select one: </FormLabel>
+                        <FormLabel component="legend"> Select one: </FormLabel>
                         <RadioGroup
                           aria-label="rices"
-                          name="rices1"
+                          name="rices"
                           value={riceValue}
                           onChange={handleRiceChange}
                         >
                           <FormControlLabel
-                            value="white rice"
+                            value="White Rice"
                             control={<Radio />}
-                            label="white rice"
+                            label="White Rice"
                           />
                           <FormControlLabel
-                            value="fried rice"
+                            value="Fried Rice"
                             control={<Radio />}
-                            label="fried rice"
+                            label="Fried Rice"
                           />
                           <FormControlLabel
-                            value="lo mein"
+                            value="Lo Mein"
                             control={<Radio />}
-                            label="lo mein (+1.75)"
+                            label="Lo Mein (+1.75)"
                           />
                           <FormControlLabel
-                            value="pork fried rice"
+                            value="Pork Fried Rice"
                             control={<Radio />}
-                            label="pork fried rice (+1.75)"
+                            label="Pork Fried Rice (+1.75)"
                           />
                         </RadioGroup>
                       </FormControl>{" "}
@@ -282,57 +383,64 @@ const LunchDialog = (props) => {
                     id="panel2a-header"
                   >
                     <Typography className={classes.heading}>
-                      sides (+.75):
+                      Sides (+.75):
                     </Typography>
                     <Typography className={classes.selectedValue}>
                       {sideValue}
                     </Typography>
                   </AccordionSummary>
+
                   <AccordionDetails>
                     <Typography>
                       <FormControl component="fieldset">
-                        <FormLabel component="legend"> select one: </FormLabel>
+                        <FormLabel component="legend"> Select one: </FormLabel>
                         <RadioGroup
-                          aria-label="rices"
-                          name="rices1"
+                          aria-label="sides"
+                          name="sides"
                           value={sideValue}
                           onChange={handleSideChange}
                         >
                           <FormControlLabel
-                            value="no side"
+                            value="No Side"
                             control={<Radio />}
-                            label="no side"
+                            label="No Side"
                           />
                           <FormControlLabel
-                            value="egg roll"
+                            value="Egg Roll"
                             control={<Radio />}
-                            label="egg roll"
+                            label="Egg Roll"
                           />
                           <FormControlLabel
-                            value="soda"
+                            value="Soda"
                             control={<Radio />}
-                            label="soda"
+                            label="Soda"
                           />
                           <FormControlLabel
-                            value="wonton soup"
+                            value="Wonton Soup"
                             control={<Radio />}
-                            label="wonton soup"
+                            label="Wonton Soup"
                           />
                           <FormControlLabel
-                            value="egg drop soup"
+                            value="Egg Drop Soup"
                             control={<Radio />}
-                            label="egg drop soup"
+                            label="Egg Drop Soup"
                           />
                           <FormControlLabel
-                            value="hot & sour soup"
+                            value="Hot & Sour Soup"
                             control={<Radio />}
-                            label="hot & sour soup"
+                            label="Hot & Sour Soup"
                           />
                         </RadioGroup>
                       </FormControl>
                     </Typography>
                   </AccordionDetails>
                 </Accordion>
+                {title === "Egg Foo Young" ? EFYMeatOptions : null}
+                {title === "Fried Rice" ||
+                title === "Lo Mein" ||
+                title === "Chow Mein"
+                  ? meatOptions
+                  : null}
               </Grid>
               <Grid item xs={12}>
                 {" "}
@@ -358,33 +466,19 @@ const LunchDialog = (props) => {
           <DialogContentText className={classes.container}>
             {" "}
             <Typography pl={50}>
-              <Accordion>
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel1a-content"
-                  id="panel1a-header"
-                >
-                  <Typography className={classes.heading}>about</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography> {description} </Typography>
-                </AccordionDetails>
-              </Accordion>
-              <Accordion>
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel2a-content"
-                  id="panel2a-header"
-                >
-                  <Typography className={classes.heading}>reviews</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography>
-                    {" "}
-                    feature work in progress. coming soon tm{" "}
-                  </Typography>
-                </AccordionDetails>
-              </Accordion>{" "}
+              <Typography variant="h5" gutterBottom>
+                About
+              </Typography>
+
+              <Typography gutterBottom> {description} </Typography>
+              <Divider className={classes.divider} />
+
+              <Typography variant="h5" gutterBottom>
+                Reviews
+              </Typography>
+
+              <Typography></Typography>
+              <Reviews title={title} reviews={reviews} category="dinner" />
             </Typography>
           </DialogContentText>
         </DialogContent>
@@ -433,6 +527,6 @@ const LunchDialog = (props) => {
       </Dialog>
     </>
   );
-};
+});
 
 export default LunchDialog;

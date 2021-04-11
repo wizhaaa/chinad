@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Typography, Box, Grid, makeStyles } from "@material-ui/core";
+
+// fetching data from db
+import api from "../api";
 
 import LunchMenuCard from "../MenuParts/LunchMenuCard";
 
@@ -32,6 +35,27 @@ const useStyles = makeStyles((theme) => ({
 
 const LunchSpecials = (props) => {
   const classes = useStyles();
+  const [lunches, setLunches] = useState([]);
+
+  useEffect(() => {
+    api.get("/api/lunches").then((res) => {
+      setLunches(res.data);
+    });
+  });
+
+  const lunchGrid = lunches.map((lunch) => (
+    <Grid item xs={12} sm={6} md={4}>
+      <LunchMenuCard
+        itemName={lunch.name}
+        itemDescription={lunch.description}
+        img={lunch.img}
+        price={lunch.price}
+        priceSm={lunch.priceSm}
+        priceLg={lunch.priceLg}
+        reviews={lunch.reviews}
+      />
+    </Grid>
+  ));
 
   return (
     <Box textAlign="center" m={1} py={8}>
@@ -63,76 +87,7 @@ const LunchSpecials = (props) => {
 
       <Box marginTop={10}>
         <Grid container spacing={3}>
-          <Grid item xs={12} sm={6} md={4}>
-            <LunchMenuCard
-              itemName={"sweet & sour chicken"}
-              itemDescription={
-                "crispy, breaded chicken with sweet and sour sauce on the side"
-              }
-              img={
-                "https://copykat.com/wp-content/uploads/2016/12/Sweet-and-Sour-Chicken-Pin.jpg"
-              }
-              price={6.25}
-              priceSm={null}
-              priceLg={null}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <LunchMenuCard
-              itemName={"sweet & sour chicken"}
-              itemDescription={
-                "crispy, breaded chicken with sweet and sour sauce on the side"
-              }
-              img={
-                "https://therecipecritic.com/wp-content/uploads/2019/07/easy_fried_rice-1-500x500.jpg"
-              }
-              price={6.25}
-              priceSm={null}
-              priceLg={null}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <LunchMenuCard
-              itemName={"sweet & sour chicken"}
-              itemDescription={
-                "crispy, breaded chicken with sweet and sour sauce on the side"
-              }
-              img={
-                "https://therecipecritic.com/wp-content/uploads/2019/07/easy_fried_rice-1-500x500.jpg"
-              }
-              price={6.25}
-              priceSm={null}
-              priceLg={null}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <LunchMenuCard
-              itemName={"sweet & sour chicken"}
-              itemDescription={
-                "crispy, breaded chicken with sweet and sour sauce on the side"
-              }
-              img={
-                "https://therecipecritic.com/wp-content/uploads/2019/07/easy_fried_rice-1-500x500.jpg"
-              }
-              price={6.25}
-              priceSm={null}
-              priceLg={null}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <LunchMenuCard
-              itemName={"sweet & sour chicken"}
-              itemDescription={
-                "crispy, breaded chicken with sweet and sour sauce on the side"
-              }
-              img={
-                "https://therecipecritic.com/wp-content/uploads/2019/07/easy_fried_rice-1-500x500.jpg"
-              }
-              price={6.25}
-              priceSm={null}
-              priceLg={null}
-            />
-          </Grid>
+          {lunchGrid}
         </Grid>
       </Box>
     </Box>

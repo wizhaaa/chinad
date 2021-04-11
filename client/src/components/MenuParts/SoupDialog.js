@@ -189,7 +189,7 @@ const SoupDialog = (props) => {
   const meatOptions = (
     <div>
       {" "}
-      (JK) Please choose from the options below:
+      Please choose from the options below:
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -317,12 +317,16 @@ const SoupDialog = (props) => {
                 <img className={classes.img} src={img} alt=" sweet sour" />
               </Grid>
               <Grid Item xs={12} sm={6}>
-                {price === null ? (
-                  sizeOptions
+                {price !== null ? (
+                  title === "Yat Gai Mei" ? (
+                    meatOptions
+                  ) : (
+                    <Typography> no options to choose from 🧐 </Typography>
+                  )
                 ) : (
-                  <Typography> no options to choose from 🧐 </Typography>
+                  sizeOptions
                 )}
-                {title === "Yat Gai Mei" ? meatOptions : null}
+                {/* {title === "Yat Gai Mei" ? meatOptions : null} */}
               </Grid>
               <Grid item xs={12}>
                 {" "}

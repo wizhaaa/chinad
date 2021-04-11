@@ -510,7 +510,11 @@ const CheckoutDialog = (props) => {
         </form>
       </Dialog>
       <Backdrop className={classes.backdrop} open={backdrop}>
-        <CircularProgress color="inherit" />
+        <CircularProgress color="inherit" /> <br />
+        <Typography variant="h4">
+          {" "}
+          Sending... don't close the window{" "}
+        </Typography>
       </Backdrop>
     </>
   );

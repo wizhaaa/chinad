@@ -358,7 +358,7 @@ const AppetizerDialog = (props) => {
                 {title === "Dumplings" ? (
                   dumplingOptions
                 ) : (
-                  <Typography> no options to choose from 🔎 </Typography>
+                  <Typography> no options to choose from 🧐 </Typography>
                 )}{" "}
               </Grid>
               <Grid item xs={12}>

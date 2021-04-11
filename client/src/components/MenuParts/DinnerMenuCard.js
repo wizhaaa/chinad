@@ -126,16 +126,18 @@ const DinnerMenuCard = React.memo((props) => {
             reviews={reviews}
           />
         )}
-        <Snackbar
-          open={alertOpen}
-          autoHideDuration={4000}
-          onClose={handleAlertClose}
-        >
-          <Alert onClose={handleAlertClose} severity="success">
-            {" "}
-            added to cart ! ~{" "}
-          </Alert>
-        </Snackbar>
+        {alertOpen && (
+          <Snackbar
+            open={alertOpen}
+            autoHideDuration={4000}
+            onClose={handleAlertClose}
+          >
+            <Alert onClose={handleAlertClose} severity="success">
+              {" "}
+              added to cart ! ~{" "}
+            </Alert>
+          </Snackbar>
+        )}
       </CardActions>
     </Card>
   );

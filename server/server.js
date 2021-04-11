@@ -130,6 +130,18 @@ let dinnerSchema = new mongoose.Schema({
 });
 const Dinner = mongoose.model("Dinner", dinnerSchema);
 
+let lunchSchema = new mongoose.Schema({
+  name: String,
+  description: String,
+  img: String,
+  price: Number,
+  priceSm: String,
+  priceLg: String,
+  reviews: Object,
+  rating: Number,
+});
+const Lunch = mongoose.model("Lunch", lunchSchema);
+
 // customer order schema and model
 
 let orderSchema = new mongoose.Schema({
@@ -145,16 +157,6 @@ let orderSchema = new mongoose.Schema({
   estimatedTime: String,
 });
 const Order = mongoose.model("Order", orderSchema);
-
-// app.get("/api/people", (req, res) => {
-//   itemModel.find({}, { __v: 0 }, (err, docs) => {
-//     if (!err) {
-//       res.json(docs);
-//     } else {
-//       res.status(400).json({ error: err });
-//     }
-//   });
-// });
 
 // Routes
 
@@ -206,6 +208,16 @@ app.get("/api/soups", async (req, res) => {
 
 app.get("/api/dinners", async (req, res) => {
   await Dinner.find({}, { __v: 0 }, (err, docs) => {
+    if (!err) {
+      res.json(docs);
+    } else {
+      res.status(400).json({ error: err });
+    }
+  });
+});
+
+app.get("/api/lunches", async (req, res) => {
+  await Lunch.find({}, { __v: 0 }, (err, docs) => {
     if (!err) {
       res.json(docs);
     } else {

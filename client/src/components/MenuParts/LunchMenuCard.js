@@ -56,7 +56,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const LunchMenuCard = (props) => {
-  const { itemName, itemDescription, img, price, priceSm, priceLg } = props;
+  const {
+    itemName,
+    itemDescription,
+    img,
+    price,
+    priceSm,
+    priceLg,
+    reviews,
+  } = props;
   const [open, setOpen] = React.useState(false);
   const [alertOpen, setAlertOpen] = React.useState(false);
   const theme = useTheme();
@@ -115,6 +123,7 @@ const LunchMenuCard = (props) => {
             priceSm={priceSm}
             priceLg={priceLg}
             img={img}
+            reviews={reviews}
           />
         )}
         <Snackbar
