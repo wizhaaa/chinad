@@ -33,6 +33,8 @@ import {
   Divider,
 } from "@material-ui/core";
 
+import Review from "./Reviews";
+
 import { useCartContext } from "../CartContext";
 
 const useStyles = makeStyles((theme) => ({
@@ -80,7 +82,7 @@ const useStyles = makeStyles((theme) => ({
   selectedValue: {
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular,
-    color: "#b5b5b5",
+    color: theme.palette.text.secondary,
     marginLeft: 10,
   },
   formControl: {
@@ -109,10 +111,11 @@ const AppetizerDialog = (props) => {
     price,
     priceSm,
     priceLg,
+    reviews,
   } = props;
 
-  const [styleValue, setStyleValue] = useState("fried");
-  const [fillingValue, setFillingValue] = useState("pork");
+  const [styleValue, setStyleValue] = useState("Fried");
+  const [fillingValue, setFillingValue] = useState("Pork");
   const [quantity, setQuantity] = useState(1);
   const [addedPrice, setAddedPrice] = useState(0);
   const [finalPrice, setFinalPrice] = useState(price);
@@ -133,9 +136,9 @@ const AppetizerDialog = (props) => {
 
   const handleAddItem = () => {
     onAdd();
-    const type = "appetizer";
+    const type = "Appetizer";
     let options = {};
-    if (title === "dumplings") {
+    if (title === "Dumplings") {
       options = { type, styleValue, fillingValue };
     } else {
       options = { type };
@@ -160,7 +163,7 @@ const AppetizerDialog = (props) => {
   const handleFillingChange = (e) => {
     const fillingChosen = e.target.value;
     setFillingValue(fillingChosen);
-    if (fillingChosen === "chicken") {
+    if (fillingChosen === "Chicken") {
       setFinalPrice(price + 1.25);
     } else {
       setFinalPrice(price);
@@ -186,14 +189,14 @@ const AppetizerDialog = (props) => {
 
   const dumplingOptions = (
     <div>
-      please choose from the options below:
+      Please choose from the options below:
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography className={classes.heading}>style: </Typography>
+          <Typography className={classes.heading}>Style: </Typography>
           <Typography className={classes.selectedValue}>
             {styleValue}
           </Typography>
@@ -201,7 +204,7 @@ const AppetizerDialog = (props) => {
         <AccordionDetails>
           <Typography>
             <FormControl component="fieldset">
-              <FormLabel component="legend"> select one: </FormLabel>
+              <FormLabel component="legend"> Select one: </FormLabel>
               <RadioGroup
                 aria-label="style"
                 name="style"
@@ -209,14 +212,14 @@ const AppetizerDialog = (props) => {
                 onChange={handleStyleChange}
               >
                 <FormControlLabel
-                  value="fried"
+                  value="Fried"
                   control={<Radio />}
-                  label="fried"
+                  label="Fried"
                 />
                 <FormControlLabel
-                  value="steamed"
+                  value="Steamed"
                   control={<Radio />}
-                  label="steamed"
+                  label="Steamed"
                 />
               </RadioGroup>
             </FormControl>{" "}
@@ -229,7 +232,7 @@ const AppetizerDialog = (props) => {
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography className={classes.heading}>filling:</Typography>
+          <Typography className={classes.heading}>Filling:</Typography>
           <Typography className={classes.selectedValue}>
             {fillingValue}
           </Typography>
@@ -237,7 +240,7 @@ const AppetizerDialog = (props) => {
         <AccordionDetails>
           <Typography>
             <FormControl component="fieldset">
-              <FormLabel component="legend"> select one: </FormLabel>
+              <FormLabel component="legend"> Select one: </FormLabel>
               <RadioGroup
                 aria-label="filling"
                 name="filling"
@@ -245,19 +248,19 @@ const AppetizerDialog = (props) => {
                 onChange={handleFillingChange}
               >
                 <FormControlLabel
-                  value="pork"
+                  value="Pork"
                   control={<Radio />}
-                  label="pork"
+                  label="Pork"
                 />
                 <FormControlLabel
-                  value="vegetable"
+                  value="Vegetable"
                   control={<Radio />}
-                  label="vegetable"
+                  label="Vegetable"
                 />
                 <FormControlLabel
-                  value="chicken"
+                  value="Chicken"
                   control={<Radio />}
-                  label="chicken (+1.25)"
+                  label="Chicken (+1.25)"
                 />
               </RadioGroup>
             </FormControl>
@@ -352,10 +355,10 @@ const AppetizerDialog = (props) => {
               </Grid>
               <Grid Item xs={12} sm={6}>
                 {" "}
-                {title === "dumplings" ? (
+                {title === "Dumplings" ? (
                   dumplingOptions
                 ) : (
-                  <Typography> no options to choose from 😊 </Typography>
+                  <Typography> no options to choose from 🔎 </Typography>
                 )}{" "}
               </Grid>
               <Grid item xs={12}>
@@ -382,33 +385,19 @@ const AppetizerDialog = (props) => {
           <DialogContentText className={classes.container}>
             {" "}
             <Typography pl={50}>
-              <Accordion>
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel1a-content"
-                  id="panel1a-header"
-                >
-                  <Typography className={classes.heading}>about</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography> {description} </Typography>
-                </AccordionDetails>
-              </Accordion>
-              <Accordion>
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel2a-content"
-                  id="panel2a-header"
-                >
-                  <Typography className={classes.heading}>reviews</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography>
-                    {" "}
-                    feature work in progress. coming soon tm{" "}
-                  </Typography>
-                </AccordionDetails>
-              </Accordion>{" "}
+              <Typography variant="h5" gutterBottom>
+                About
+              </Typography>
+
+              <Typography gutterBottom> {description} </Typography>
+              <Divider className={classes.divider} />
+
+              <Typography variant="h5" gutterBottom>
+                Reviews
+              </Typography>
+
+              <Typography></Typography>
+              <Review title={title} reviews={reviews} category="appetizer" />
             </Typography>
           </DialogContentText>
         </DialogContent>
@@ -416,7 +405,7 @@ const AppetizerDialog = (props) => {
         <DialogActions className="dialogContainer">
           {" "}
           <Box textAlign="center" className="dialogPrice">
-            <Typography variant="h4">
+            <Typography variant="h5">
               {" "}
               {formatter.format(cartPrice)}{" "}
             </Typography>
@@ -458,5 +447,41 @@ const AppetizerDialog = (props) => {
     </>
   );
 };
+
+function useLocalStorage(key, initialValue) {
+  // State to store our value
+  // Pass initial state function to useState so logic is only executed once
+  const [storedValue, setStoredValue] = useState(() => {
+    try {
+      // Get from local storage by key
+      const item = window.localStorage.getItem(key);
+      // Parse stored json or if none return initialValue
+      return item ? JSON.parse(item) : initialValue;
+    } catch (error) {
+      // If error also return initialValue
+      console.log(error);
+      return initialValue;
+    }
+  });
+
+  // Return a wrapped version of useState's setter function that ...
+  // ... persists the new value to localStorage.
+  const setValue = (value) => {
+    try {
+      // Allow value to be a function so we have same API as useState
+      const valueToStore =
+        value instanceof Function ? value(storedValue) : value;
+      // Save state
+      setStoredValue(valueToStore);
+      // Save to local storage
+      window.localStorage.setItem(key, JSON.stringify(valueToStore));
+    } catch (error) {
+      // A more advanced implementation would handle the error case
+      console.log(error);
+    }
+  };
+
+  return [storedValue, setValue];
+}
 
 export default AppetizerDialog;

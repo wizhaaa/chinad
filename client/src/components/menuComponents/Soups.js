@@ -42,7 +42,7 @@ const Soups = (props) => {
           className={(classes.menuHeadings, classes.bold)}
         >
           {" "}
-          soups{" "}
+          Soups{" "}
         </Typography>
         <Typography className={classes.subheadings}>
           served with the choice of{" "}

@@ -43,20 +43,20 @@ const LunchSpecials = (props) => {
           gutterBottom
         >
           {" "}
-          lunch{" "}
+          Lunch{" "}
         </Typography>
         <Typography className={classes.subheadings}>
-          served with the choice of{" "}
+          Served with the choice of{" "}
           <strong>
             {" "}
             fried rice, white rice, lo mein (+1.75), or pork fried rice (+1.75).{" "}
           </strong>
           <br />
-          optional: choose egg drop soup, wonton soup, or hot & sour soup, egg
+          Optional: choose egg drop soup, wonton soup, or hot & sour soup, egg
           roll, or soda for $0.75 <br />
           <em style={{ color: "orange" }}>
             {" "}
-            note: available daily until 3:30 PM{" "}
+            Note: available daily until 3:30 PM{" "}
           </em>
         </Typography>{" "}
       </div>

@@ -66,15 +66,15 @@ const DinnerCombo = (props) => {
           gutterBottom
         >
           {" "}
-          dinner{" "}
+          Dinner{" "}
         </Typography>
         <Typography className={classes.subheadings}>
-          * aka combo platters or dinner platters *
-          <br /> can choose between <strong> fried or white rice </strong>
+          * AKA Combo platters or Dinner platters *
+          <br /> Can choose between <strong> fried or white rice </strong>
           <em> (for free!) </em>
-          <br /> each comes with an <strong> egg roll </strong>{" "}
+          <br /> Each comes with an <strong> egg roll </strong>{" "}
           <em> (for free!) </em>
-          <br /> can choose to add a <strong>soup </strong> for +$1
+          <br /> Can choose to add a <strong> soup </strong> for +$1
         </Typography>{" "}
       </div>
 

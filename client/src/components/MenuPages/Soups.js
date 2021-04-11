@@ -68,12 +68,12 @@ const Soups = (props) => {
           gutterBottom
         >
           {" "}
-          soups{" "}
+          Soups{" "}
         </Typography>
         <Typography className={classes.subheadings}>
-          yummy & warm soups !
-          <br /> every soup comes with a bag of fried noodles !
-          <br /> pints come with 1 bag , quarts come with 2 bags
+          Yummy & warm soups !
+          <br /> Every soup comes with a bag of fried noodles !
+          <br /> Pints come with 1 bag , quarts come with 2 bags
         </Typography>{" "}
       </div>
 

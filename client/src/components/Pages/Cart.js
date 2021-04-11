@@ -82,7 +82,7 @@ function Cart() {
             <TableCell align="center">
               {" "}
               <Box>
-                <Typography variant="h5"> order </Typography>{" "}
+                <Typography variant="h5"> Order </Typography>{" "}
               </Box>
             </TableCell>
           </TableRow>
@@ -90,9 +90,9 @@ function Cart() {
             <TableCell>
               <Typography gutterBottom>
                 {" "}
-                subtotal: {formatter.format(subt1)} <br /> taxes (6%):{" "}
-                {formatter.format(taxes)}
-                <br /> total: {formatter.format(total)} <br />{" "}
+                Subtotal: {formatter.format(subt1)}
+                <br /> Taxes (6%): {formatter.format(taxes)}
+                <br /> Total: {formatter.format(total)} <br />{" "}
               </Typography>
               <Button
                 variant="contained"
@@ -117,17 +117,17 @@ function Cart() {
               <TableRow key={item.title}>
                 <TableCell>
                   <Typography> 🍱 {item.title} </Typography>
-                  <Typography style={{ color: "#d1d1d1" }} variant="body2">
+                  <Typography style={{ color: "#5e5e5d" }} variant="body2">
                     {" "}
                     🥠 {itemOptions}{" "}
                   </Typography>{" "}
-                  <Typography style={{ color: "#d1d1d1" }} variant="body2">
+                  <Typography style={{ color: "#5e5e5d" }} variant="body2">
                     {" "}
-                    👩‍🍳 requests? {item.requestContent}{" "}
+                    👩‍🍳 Requests? {item.requestContent}{" "}
                   </Typography>
                   <Box variant="div" className="cartBottomOptions">
                     {" "}
-                    <Typography> qty: {item.quantity}</Typography>
+                    <Typography> Qty: {item.quantity}</Typography>
                     <Typography>
                       {" "}
                       {formatter.format(item.cartUnitPrice)}
@@ -169,8 +169,8 @@ function Cart() {
   const emptyCart = (
     <Typography>
       {" "}
-      woops! looks like your cart is empty! head over to the{" "}
-      <a href="/menu"> menu</a> and add items to your cart ~{" "}
+      Woops! Looks like your cart is empty! head over to the{" "}
+      <a href="/menu"> Menu</a> and add items to your cart ~{" "}
     </Typography>
   );
 
@@ -179,7 +179,7 @@ function Cart() {
       <Typography component="div">
         <Box textAlign="center" m={1} py={8} mx={"1%"}>
           <Typography variant="h4" gutterBottom>
-            🥡 my cart ({userCartCount})
+            🥡 My Cart ({userCartCount})
           </Typography>
           <Box mb={5}></Box>
           <Typography gutterBottom>

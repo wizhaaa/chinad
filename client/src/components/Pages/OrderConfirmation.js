@@ -95,7 +95,7 @@ function Confirmation() {
             <TableCell align="center">
               {" "}
               <Box>
-                <Typography variant="h5"> ~ order ~ </Typography>{" "}
+                <Typography variant="h5"> ~ Order ~ </Typography>{" "}
               </Box>
             </TableCell>
           </TableRow>
@@ -103,9 +103,10 @@ function Confirmation() {
             <TableCell>
               <Typography gutterBottom>
                 {" "}
-                subtotal: {formatter.format(subt1)} <br /> taxes (6%):{" "}
+                Subtotal: {formatter.format(subt1)} <br /> Taxes (6%):{" "}
                 {formatter.format(taxes)}
-                <br /> total: {formatter.format(total)} <br />{" "}
+                <br /> <strong> Total </strong>
+                {formatter.format(total)} <br />{" "}
               </Typography>
             </TableCell>
           </TableRow>
@@ -124,11 +125,11 @@ function Confirmation() {
               <TableRow key={item.title}>
                 <TableCell>
                   <Typography> 🍱 {item.title} </Typography>
-                  <Typography style={{ color: "#d1d1d1" }} variant="body2">
+                  <Typography style={{ color: "#5e5e5e" }} variant="body2">
                     {" "}
                     🥠 {itemOptions}{" "}
                   </Typography>{" "}
-                  <Typography style={{ color: "#d1d1d1" }} variant="body2">
+                  <Typography style={{ color: "#5e5e5e" }} variant="body2">
                     {" "}
                     👩‍🍳 requests? {item.requestContent}{" "}
                   </Typography>
@@ -173,12 +174,12 @@ function Confirmation() {
         <Box textAlign="center" m={1} py={8} mx={"1%"}>
           <Box style={{ maxWidth: 650 }}>
             <Typography variant="h4" gutterBottom>
-              🎉 confirmation 🙌
+              🎉 Confirmation 🙌
             </Typography>
             <Typography gutterBottom>
               {" "}
               🙏 Thank you {name} for your order! You should have received a
-              confirmation email ({email}). Check your junk or spam folder if
+              confirmation email (at {email}). Check your junk or spam folder if
               you cannot find it. For future orders, adding
               chinadelightnoreply@gmail to your contacts will keep it out of the
               junk folder. If you still can't find your confirmation email, call
@@ -229,7 +230,7 @@ function Confirmation() {
               </a>
               with any suggestions or feedback. Anything helps us improve and
               learn! <br />
-              🤤 Enjoyed the food? click{" "}
+              🤤 Enjoyed the food? Click{" "}
               <a href="https://www.google.com/search?q=china+delight&authuser=3&sxsrf=ALeKk0216R8L-eEzUxoNXNmYIss9qtYxsA%3A1617941364003&source=hp&ei=c9NvYOyvOsms5NoPqa2a6Aw&iflsig=AINFCbYAAAAAYG_hhGz9b7oNbJuNgiTNZyyGrLikw5Lt&oq=china+delight&gs_lcp=Cgdnd3Mtd2l6EAMyCAgAELEDEMkDMgUIABCSAzIFCAAQkgMyCAguEMcBEK8BMggILhDHARCvATICCAAyAggAMgIIADICCAAyAggAOgUIABCxAzoICAAQsQMQgwE6DgguELEDEIMBEMcBEKMCOgsILhCxAxDHARCjAjoOCC4QsQMQxwEQowIQkwI6CAguELEDEIMBOgUIABDJAzoFCC4QsQNQlhNYuSNg4yRoAnAAeACAAXOIAb8JkgEDOS40mAEAoAEBqgEHZ3dzLXdperABAA&sclient=gws-wiz&ved=0ahUKEwistZCipfDvAhVJFlkFHamWBs0Q4dUDCAk&uact=5#lrd=0x89c7deb7b8b012ab:0xd3e57330e03df815,3,,,">
                 {" "}
                 here
@@ -240,21 +241,22 @@ function Confirmation() {
             <Box mb={3}> </Box>
             <Typography>
               {" "}
-              Order Time: {timePlaced}
-              <br /> Pick Up Option: {pickUpOption}{" "}
+              <strong> Order Time </strong> {timePlaced}
+              <br /> <strong> Pick Up Option </strong> {pickUpOption}{" "}
               {pickUpOption === "custom time" ? (
                 <>
                   {" "}
-                  <br /> Picking Up At: {pickUpTime}{" "}
+                  <br /> <strong> Picking Up At </strong> {pickUpTime}{" "}
                 </>
               ) : null}
               {pickUpOption === "ASAP" ? (
                 <>
                   {" "}
-                  <br /> Estimated Pick Up Time (for): {estimatedTime}{" "}
+                  <br /> <strong> Estimated Pick Up Time</strong>{" "}
+                  {estimatedTime}{" "}
                 </>
               ) : null}
-              <br /> Payment: In-person
+              <br /> <strong> Payment </strong> In-person
             </Typography>
             <Box mb={5}> </Box>{" "}
           </Box>

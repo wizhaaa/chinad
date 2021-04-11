@@ -35,20 +35,20 @@ function Menu() {
       <Typography component="div" className={classes.root}>
         <Box textAlign="center" m={1} py={8}>
           <Typography variant="h1" gutterBottom>
-            ゜・ menu ・゜
+            ゜・ Menu ・゜
           </Typography>
           <Typography variant="body1" gutterBottom>
             {" "}
-            hi there! welcome to the page where <em> every </em> menu item is
-            listed. <br /> you will be able to customize some items and then add
+            Hi there! Welcome to the page where <em> every </em> menu item is
+            listed. <br /> You will be able to customize some items and then add
             them to your cart{" "}
-            <em> (see your top left, or under the menubar) </em> <br /> it's
+            <em> (see your top left, or under the menubar) </em> <br /> It's
             quite a long menu, so we recommend you navigate using the sidebar
             menu to find what you are looking for!
             <br />
             <em>
               {" "}
-              note: the drawings and photos are not accurate replications of our
+              Note: the drawings and photos are not accurate replications of our
               dishes, only a reference to see what they look like{" "}
             </em>
           </Typography>

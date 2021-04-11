@@ -58,6 +58,7 @@ const Appetizers = (props) => {
         price={appetizer.price}
         priceSm={appetizer.priceSm}
         priceLg={appetizer.priceLg}
+        reviews={appetizer.reviews}
       />
     </Grid>
   ));
@@ -72,10 +73,10 @@ const Appetizers = (props) => {
           gutterBottom
         >
           {" "}
-          appetizers{" "}
+          Appetizers{" "}
         </Typography>
         <Typography className={classes.subheadings}>
-          classic chinese appetizers to tease the appetite
+          Classic chinese appetizers to tease the appetite
         </Typography>{" "}
       </div>
 

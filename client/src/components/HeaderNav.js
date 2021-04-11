@@ -26,6 +26,7 @@ import {
   ListItemText,
   CssBaseline,
   Hidden,
+  Badge,
 } from "@material-ui/core";
 
 import { useTheme } from "@material-ui/core/styles";
@@ -110,7 +111,7 @@ function ResponsiveDrawer(props) {
           <Typography variant="h5" className={classes.title}>
             <Link className={classes.navLinks} to="/">
               {" "}
-              china delight{" "}
+              China Delight{" "}
             </Link>
           </Typography>
 
@@ -119,7 +120,9 @@ function ResponsiveDrawer(props) {
             {" "}
             <IconButton color="inherit" button>
               {" "}
-              <ShoppingBasketIcon /> ({userCartCount}){" "}
+              <Badge color="secondary" badgeContent={userCartCount}>
+                <ShoppingBasketIcon />{" "}
+              </Badge>{" "}
             </IconButton>
           </Link>
         </Toolbar>

@@ -127,11 +127,11 @@ function About() {
     <div className="About">
       <Box textAlign="center" m={1} py={8}>
         <Typography variant="h4" gutterBottom>
-          about
+          About
         </Typography>
         <Typography variant="body1" gutterBottom>
           {" "}
-          have more questions? call us at 410-877-9490 or email us at{" "}
+          Have more questions? call us at 410-877-9490 or email us at{" "}
           <a href="mailto:chinadelightmd@gmail.com">
             {" "}
             chinadelightmd@gmail.com{" "}
@@ -245,16 +245,16 @@ function About() {
         <Box py={5}> </Box>
         <Typography variant="h4" gutterBottom>
           {" "}
-          about the site{" "}
+          About the site{" "}
         </Typography>
         <Typography variant="body1" gutterBottom>
           {" "}
-          this website was made by will zhang for his senior project derp. ©{" "}
+          This website was made by will zhang for his senior project derp. ©{" "}
           {new Date().getFullYear()}{" "}
         </Typography>
         <Typography variant="body1" gutterBottom>
           {" "}
-          source code can be found at his{" "}
+          Source code can be found at his{" "}
           <a href="https://github.com/notwz/chinad">
             {" "}
             github{" "}
@@ -263,11 +263,11 @@ function About() {
         </Typography>
         <Typography variant="body1" gutterBottom>
           {" "}
-          pretty much just a MERN stack application{" "}
+          Pretty much just a MERN stack application{" "}
         </Typography>
         <Typography variant="body1" gutterBottom>
           {" "}
-          and yea i just added a bunch of emojis to make it more interesting{" "}
+          And yea i just added a bunch of emojis to make it more interesting{" "}
         </Typography>
       </Box>
     </div>

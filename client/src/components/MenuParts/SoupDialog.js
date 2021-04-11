@@ -80,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
   selectedValue: {
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular,
-    color: "#b5b5b5",
+    color: theme.palette.text.secondary,
     marginLeft: 10,
   },
   formControl: {

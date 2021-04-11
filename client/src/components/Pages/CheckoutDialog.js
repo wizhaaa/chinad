@@ -33,6 +33,8 @@ import {
   useMediaQuery,
   makeStyles,
   Divider,
+  Backdrop,
+  CircularProgress,
 } from "@material-ui/core";
 
 import { wrap } from "module";
@@ -89,7 +91,8 @@ const useStyles = makeStyles((theme) => ({
   selectedValue: {
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular,
-    color: "#b5b5b5",
+    color: theme.palette.text.secondary,
+
     marginLeft: 10,
   },
   formControl: {
@@ -105,6 +108,10 @@ const useStyles = makeStyles((theme) => ({
       width: "25ch",
     },
   },
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: "#fff",
+  },
 }));
 
 const CheckoutDialog = (props) => {
@@ -118,6 +125,8 @@ const CheckoutDialog = (props) => {
   const [phoneNum, setPhoneNum] = useState();
   const [pickUpOption, setPickUpOption] = useState("ASAP");
   const [customTime, setCustomTime] = useState("16:00");
+
+  const [backdrop, setBackdrop] = useState(false);
 
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
@@ -209,7 +218,7 @@ const CheckoutDialog = (props) => {
       console.log("placing order ...");
 
       //commenting out adding order for now
-      addOrder(order);
+      // addOrder(order);
       sendEmail();
       // redirect
       // window.location.href = "/"
@@ -218,6 +227,8 @@ const CheckoutDialog = (props) => {
       //empty our cart
       setPrevOrder(order);
       setCart([]);
+      setBackdrop(true);
+      handleClose();
       console.log(orderID);
     }
   };
@@ -293,7 +304,7 @@ const CheckoutDialog = (props) => {
             <div style={{ display: "flex" }}>
               {" "}
               <Typography variant="h4" style={{ flexGrow: 1 }}>
-                ► checking out ...{" "}
+                ► Checking out ...{" "}
               </Typography>{" "}
               <IconButton color="primary" onClick={handleClose}>
                 {" "}
@@ -309,7 +320,7 @@ const CheckoutDialog = (props) => {
                 <Grid item xs={12}>
                   <Typography variant="h6" gutterBottom>
                     {" "}
-                    👇 please fill out the info to place your order 👇
+                    👇 Please fill out the info to place your order 👇
                   </Typography>
                   <Typography variant="body1" gutterBottom>
                     {" "}
@@ -320,7 +331,7 @@ const CheckoutDialog = (props) => {
                 <Grid item xs={12}>
                   <Typography variant="body1" gutterBottom>
                     {" "}
-                    👋 name:
+                    👋 Name:
                   </Typography>{" "}
                   <TextField
                     style={{ width: "75%", paddingBottom: "20px" }}
@@ -340,7 +351,7 @@ const CheckoutDialog = (props) => {
                 <Grid item xs={12}>
                   <Typography variant="body1" gutterBottom>
                     {" "}
-                    📧 email:
+                    📧 Email:
                   </Typography>{" "}
                   <TextField
                     style={{ width: "75%", paddingBottom: "20px" }}
@@ -362,7 +373,7 @@ const CheckoutDialog = (props) => {
                 <Grid item xs={12}>
                   <Typography variant="body1" gutterBottom>
                     {" "}
-                    📞 phone number:
+                    📞 Phone Number:
                   </Typography>{" "}
                   <TextField
                     style={{ width: "75%", paddingBottom: "20px" }}
@@ -434,11 +445,11 @@ const CheckoutDialog = (props) => {
                   {" "}
                   <Typography>
                     {" "}
-                    orders usually take 15-20 minutes. <br /> we will try our
-                    best to finish your order on time. <br /> we only have 2
-                    chefs, please bear with us 🙇‍♂️ <br /> friday and saturdays
+                    Orders usually take 15-20 minutes. <br /> We will try our
+                    best to finish your order on time. <br /> We only have 2
+                    chefs, please bear with us 🙇‍♂️ <br /> Friday and saturdays
                     nights can get very busy and orders can take upwards of 1
-                    hour on holidays. <br /> please see
+                    hour on holidays. <br /> Please see
                     <a href="/about">
                       {" "}
                       order times
@@ -498,6 +509,9 @@ const CheckoutDialog = (props) => {
           </DialogActions>
         </form>
       </Dialog>
+      <Backdrop className={classes.backdrop} open={backdrop}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </>
   );
 };

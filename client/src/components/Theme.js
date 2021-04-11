@@ -23,7 +23,14 @@ const theme = createMuiTheme({
       fontWeight: "bold",
     },
   },
-  palette: { type: "dark", primary: red, secondary: orange },
+  palette: {
+    primary: red,
+    secondary: orange,
+    text: {
+      secondary: "#5e5e5e",
+    },
+  },
+  // add attribute to palette for dark mode: type: "dark",
   transitions: {
     // So we have `transition: none;` everywhere
     create: () => "none",

@@ -7,6 +7,8 @@ import {
   ThemeProvider,
   CssBaseline,
   Container,
+  useMediaQuery,
+  createMuiTheme,
 } from "@material-ui/core/";
 
 // self made components
@@ -36,6 +38,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function App() {
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+  // const theme = React.useMemo(
+  //   () =>
+  //     createMuiTheme({
+  //       palette: {
+  //         type: prefersDarkMode ? "dark" : "light",
+  //       },
+  //     }),
+  //   [prefersDarkMode]
+  // );
   const classes = useStyles();
 
   return (

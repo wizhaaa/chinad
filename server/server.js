@@ -243,6 +243,44 @@ app.get("/api/:orderID", async (req, res) => {
   });
 });
 
+// receiving a new review and adding it
+
+// app.get("/api/review/add/:model/:name", async (req, res) => {
+//   const model = req.params.model;
+//   await model.find({ name: req.params.name }, { __v: 0 }, (err, docs) => {
+//     if (!err) {
+//       res.json(docs);
+//     } else {
+//       res.status(400).json({ error: err });
+//     }
+//   });
+// });
+
+app.post("/api/review/add/appetizer/:name", (req, res) => {
+  console.log(" adding review to app ");
+  const name = req.body.name;
+  const rating = req.body.rating;
+  const reviewContent = req.body.reviewContent;
+  let review = {
+    name: name,
+    rating: rating,
+    reviewContent: reviewContent,
+  };
+  console.log(review);
+
+  Appetizer.updateOne(
+    { name: req.params.name },
+    { $push: { reviews: review } },
+    (err, docs) => {
+      if (!err) {
+        res.json(docs);
+      } else {
+        res.status(400).json({ error: err });
+      }
+    }
+  );
+});
+
 app.listen(PORT, () => {
   console.log(
     app.get("env").toUpperCase() + " Server started on port: ... " + PORT

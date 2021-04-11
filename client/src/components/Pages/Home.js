@@ -10,25 +10,25 @@ function Home() {
       <Typography component="div">
         <Box textAlign="center" m={1} py={8}>
           <Typography variant="h4" gutterBottom>
-            welcome!
+            Welcome!
           </Typography>
           <Typography variant="body1" gutterBottom>
             {" "}
-            welcome the new china delight website! we are a chinese take-out ( &
+            Welcome the new china delight website! We are a chinese take-out ( &
             dine-in whenever COVID decides it's safe enough ) restauraunt
             located in Forest Hill, MD.
           </Typography>
           <br />
           <Typography variant="body1" gutterBottom>
-            here, you may browse our menu and place online orders for pick-up! I
-            reccommend to use the side bar navigation to browse the menu, and
+            Here, you may browse our menu and place online orders for pick-up!
+            we recommend to use the side bar navigation to browse the menu, and
             not to scroll through the 200+ items! It's faster and less swiping.
           </Typography>
           <Box py={2}> </Box>
           <Typography variant="body1" gutterBottom>
             <Typography variant="h4" gutterBottom>
               {" "}
-              hours{" "}
+              Hours{" "}
             </Typography>
             <Grid container spacing={3}>
               <Grid container item xs={6} justify="flex-end">
@@ -61,7 +61,7 @@ function Home() {
           <Typography variant="body1" gutterBottom>
             <Typography variant="h4" gutterBottom>
               {" "}
-              contact{" "}
+              Contact{" "}
             </Typography>
             📞 PHONE: 410-877-9490 <br />
             📩 EMAIL:{" "}
@@ -74,7 +74,7 @@ function Home() {
           <Typography variant="body1" gutterBottom>
             <Typography variant="h4" gutterBottom>
               {" "}
-              directions{" "}
+              Directions{" "}
             </Typography>
             📍 1 Newport Dr, Forest Hill, MD 21050
             <Box py={1.5}> </Box>
