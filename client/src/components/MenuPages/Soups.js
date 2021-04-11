@@ -54,6 +54,7 @@ const Soups = (props) => {
         price={soup.price}
         priceSm={soup.priceSm}
         priceLg={soup.priceLg}
+        reviews={soup.reviews}
       />
     </Grid>
   ));

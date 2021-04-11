@@ -34,6 +34,7 @@ import {
 } from "@material-ui/core";
 
 import { useCartContext } from "../CartContext";
+import Review from "./Reviews";
 
 const useStyles = makeStyles((theme) => ({
   root: { margin: 10 },
@@ -109,6 +110,7 @@ const SoupDialog = (props) => {
     price,
     priceSm,
     priceLg,
+    reviews,
   } = props;
 
   var initialPrice = 1;
@@ -117,8 +119,8 @@ const SoupDialog = (props) => {
   } else {
     initialPrice = price;
   }
-  const [sizeValue, setSizeValue] = useState("pint");
-  const [meatValue, setMeatValue] = useState("chicken");
+  const [sizeValue, setSizeValue] = useState("Pint");
+  const [meatValue, setMeatValue] = useState("Chicken");
   const [quantity, setQuantity] = useState(1);
   const [finalPrice, setFinalPrice] = useState(initialPrice);
 
@@ -135,9 +137,9 @@ const SoupDialog = (props) => {
 
   const handleAddItem = () => {
     onAdd();
-    const type = "soup";
+    const type = "Soup";
     let options = {};
-    if (title === "yat gai mei") {
+    if (title === "Yat Gai Mei") {
       options = { type, meatValue };
     } else {
       options = { type, sizeValue };
@@ -157,9 +159,9 @@ const SoupDialog = (props) => {
   const handleSizeChange = (e) => {
     const size = e.target.value;
     setSizeValue(size);
-    if (size === "quart") {
+    if (size === "Quart") {
       setFinalPrice(priceLg);
-    } else if (size === "pint") {
+    } else if (size === "Pint") {
       setFinalPrice(priceSm);
     }
   };
@@ -187,20 +189,20 @@ const SoupDialog = (props) => {
   const meatOptions = (
     <div>
       {" "}
-      please choose from the options below:
+      (JK) Please choose from the options below:
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography className={classes.heading}> meat: </Typography>
+          <Typography className={classes.heading}> Meat: </Typography>
           <Typography className={classes.selectedValue}>{meatValue}</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
             <FormControl component="fieldset">
-              <FormLabel component="legend"> select one: </FormLabel>
+              <FormLabel component="legend"> Select one: </FormLabel>
               <RadioGroup
                 aria-label="rices"
                 name="rices1"
@@ -208,24 +210,24 @@ const SoupDialog = (props) => {
                 onChange={handleMeatChange}
               >
                 <FormControlLabel
-                  value="chicken"
+                  value="Chicken"
                   control={<Radio />}
-                  label="chicken"
+                  label="Chicken"
                 />
                 <FormControlLabel
-                  value="pork"
+                  value="Pork"
                   control={<Radio />}
-                  label="pork"
+                  label="Pork"
                 />{" "}
                 <FormControlLabel
-                  value="shrimp"
+                  value="Shrimp"
                   control={<Radio />}
-                  label="shrimp"
+                  label="Shrimp"
                 />{" "}
                 <FormControlLabel
-                  value="beef"
+                  value="Beef"
                   control={<Radio />}
-                  label="beef"
+                  label="Beef"
                 />
               </RadioGroup>
             </FormControl>{" "}
@@ -238,20 +240,20 @@ const SoupDialog = (props) => {
   const sizeOptions = (
     <div>
       {" "}
-      please choose from the options below:
+      Slease choose from the options below:
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography className={classes.heading}>size: </Typography>
+          <Typography className={classes.heading}>Size: </Typography>
           <Typography className={classes.selectedValue}>{sizeValue}</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
             <FormControl component="fieldset">
-              <FormLabel component="legend"> select one: </FormLabel>
+              <FormLabel component="legend"> Select one: </FormLabel>
               <RadioGroup
                 aria-label="rices"
                 name="rices1"
@@ -259,14 +261,14 @@ const SoupDialog = (props) => {
                 onChange={handleSizeChange}
               >
                 <FormControlLabel
-                  value="pint"
+                  value="Pint"
                   control={<Radio />}
-                  label="pint"
+                  label="Pint"
                 />
                 <FormControlLabel
-                  value="quart"
+                  value="Quart"
                   control={<Radio />}
-                  label="quart"
+                  label="Quart"
                 />
               </RadioGroup>
             </FormControl>{" "}
@@ -320,7 +322,7 @@ const SoupDialog = (props) => {
                 ) : (
                   <Typography> no options to choose from 🧐 </Typography>
                 )}
-                {title === "yat gai mei" ? meatOptions : null}
+                {title === "Yat Gai Mei" ? meatOptions : null}
               </Grid>
               <Grid item xs={12}>
                 {" "}
@@ -346,30 +348,19 @@ const SoupDialog = (props) => {
           <DialogContentText className={classes.container}>
             {" "}
             <Typography pl={50}>
-              <Accordion>
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel1a-content"
-                  id="panel1a-header"
-                >
-                  <Typography className={classes.heading}>about</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography> {description} </Typography>
-                </AccordionDetails>
-              </Accordion>
-              <Accordion>
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel2a-content"
-                  id="panel2a-header"
-                >
-                  <Typography className={classes.heading}>reviews</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography> feature work in progress </Typography>
-                </AccordionDetails>
-              </Accordion>{" "}
+              <Typography variant="h5" gutterBottom>
+                About
+              </Typography>
+
+              <Typography gutterBottom> {description} </Typography>
+              <Divider className={classes.divider} />
+
+              <Typography variant="h5" gutterBottom>
+                Reviews
+              </Typography>
+
+              <Typography></Typography>
+              <Review title={title} reviews={reviews} category="soup" />
             </Typography>
           </DialogContentText>
         </DialogContent>

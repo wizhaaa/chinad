@@ -52,6 +52,7 @@ const DinnerCombo = (props) => {
         price={dinner.price}
         priceSm={dinner.priceSm}
         priceLg={dinner.priceLg}
+        reviews={dinner.reviews}
       />
     </Grid>
   ));

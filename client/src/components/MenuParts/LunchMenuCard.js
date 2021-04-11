@@ -83,7 +83,7 @@ const LunchMenuCard = (props) => {
     <Card className={classes.cards}>
       <CardHeader title={itemName}> </CardHeader>{" "}
       <CardMedia className={classes.media} image={img} title="fried rice" />
-      <CardContent> {itemDescription}</CardContent>
+      <CardContent> {/* {itemDescription} */}</CardContent>
       <CardActions className={classes.container} disableSpacing>
         <Box className={classes.bottomText}>
           {" "}
@@ -103,18 +103,20 @@ const LunchMenuCard = (props) => {
           <AddIcon> </AddIcon>
           Customize{" "}
         </Fab>
-        <LunchDialog
-          open={open}
-          onClose={handleClose}
-          onAdd={handleAdd}
-          onAlertClose={handleAlertClose}
-          title={itemName}
-          description={itemDescription}
-          price={price}
-          priceSm={priceSm}
-          priceLg={priceLg}
-          img={img}
-        />
+        {open && (
+          <LunchDialog
+            open={open}
+            onClose={handleClose}
+            onAdd={handleAdd}
+            onAlertClose={handleAlertClose}
+            title={itemName}
+            description={itemDescription}
+            price={price}
+            priceSm={priceSm}
+            priceLg={priceLg}
+            img={img}
+          />
+        )}
         <Snackbar
           open={alertOpen}
           autoHideDuration={4000}

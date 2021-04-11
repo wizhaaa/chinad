@@ -42,7 +42,7 @@ function Menu() {
             Hi there! Welcome to the page where <em> every </em> menu item is
             listed. <br /> You will be able to customize some items and then add
             them to your cart{" "}
-            <em> (see your top left, or under the menubar) </em> <br /> It's
+            <em> (see your top right, or under the menubar) </em> <br /> It's
             quite a long menu, so we recommend you navigate using the sidebar
             menu to find what you are looking for!
             <br />

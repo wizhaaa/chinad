@@ -257,7 +257,7 @@ app.get("/api/:orderID", async (req, res) => {
 // });
 
 app.post("/api/review/add/appetizer/:name", (req, res) => {
-  console.log(" adding review to app ");
+  console.log(" adding review to apps ");
   const name = req.body.name;
   const rating = req.body.rating;
   const reviewContent = req.body.reviewContent;
@@ -269,6 +269,56 @@ app.post("/api/review/add/appetizer/:name", (req, res) => {
   console.log(review);
 
   Appetizer.updateOne(
+    { name: req.params.name },
+    { $push: { reviews: review } },
+    (err, docs) => {
+      if (!err) {
+        res.json(docs);
+      } else {
+        res.status(400).json({ error: err });
+      }
+    }
+  );
+});
+
+app.post("/api/review/add/soup/:name", (req, res) => {
+  console.log(` adding review to soup: ${req.params.name}`);
+  const name = req.body.name;
+  const rating = req.body.rating;
+  const reviewContent = req.body.reviewContent;
+  let review = {
+    name: name,
+    rating: rating,
+    reviewContent: reviewContent,
+  };
+  console.log(review);
+
+  Soup.updateOne(
+    { name: req.params.name },
+    { $push: { reviews: review } },
+    (err, docs) => {
+      if (!err) {
+        res.json(docs);
+      } else {
+        res.status(400).json({ error: err });
+      }
+    }
+  );
+});
+
+app.post("/api/review/add/dinner/:name", (req, res) => {
+  console.log(` adding review to dinner: ${req.params.name}`);
+  const name = req.body.name;
+  const rating = req.body.rating;
+  const reviewContent = req.body.reviewContent;
+  let review = {
+    name: name,
+    rating: rating,
+    reviewContent: reviewContent,
+  };
+  console.log(review);
+
+  Dinner.updateOne(
     { name: req.params.name },
     { $push: { reviews: review } },
     (err, docs) => {

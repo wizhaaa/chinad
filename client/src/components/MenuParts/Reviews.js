@@ -149,7 +149,7 @@ IconContainer.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-const Review = (props) => {
+const Review = React.memo((props) => {
   const classes = useStyles();
   const { title, reviews, category } = props;
   // for the item review
@@ -162,10 +162,6 @@ const Review = (props) => {
   var itemRating = 0;
 
   reviews.forEach((review) => {
-    console.log("this item's rating is: ", review.rating);
-    console.log("itemRating is now: ", itemRating);
-    console.log(" length is ", reviews.length);
-    console.log("dividing: ", itemRating / reviews.length);
     itemRating = itemRating + review.rating;
   });
 
@@ -310,6 +306,6 @@ const Review = (props) => {
       </form>
     </Typography>
   );
-};
+});
 
 export default Review;

@@ -54,7 +54,7 @@ const LunchSpecials = (props) => {
           <br />
           Optional: choose egg drop soup, wonton soup, or hot & sour soup, egg
           roll, or soda for $0.75 <br />
-          <em style={{ color: "orange" }}>
+          <em style={{ color: "#B18944" }}>
             {" "}
             Note: available daily until 3:30 PM{" "}
           </em>

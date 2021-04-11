@@ -164,7 +164,7 @@ const AppetizerDialog = (props) => {
     const fillingChosen = e.target.value;
     setFillingValue(fillingChosen);
     if (fillingChosen === "Chicken") {
-      setFinalPrice(price + 1.25);
+      setFinalPrice(price + 2.25);
     } else {
       setFinalPrice(price);
     }
@@ -405,7 +405,7 @@ const AppetizerDialog = (props) => {
         <DialogActions className="dialogContainer">
           {" "}
           <Box textAlign="center" className="dialogPrice">
-            <Typography variant="h5">
+            <Typography variant="h4">
               {" "}
               {formatter.format(cartPrice)}{" "}
             </Typography>

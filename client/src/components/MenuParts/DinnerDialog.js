@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import React, { useState } from "react";
 import { useTheme } from "@material-ui/core/styles";
 import {
   Add as AddIcon,
@@ -34,6 +34,7 @@ import {
 } from "@material-ui/core";
 
 import { useCartContext } from "../CartContext";
+import Review from "./Reviews";
 
 const useStyles = makeStyles((theme) => ({
   root: { margin: 10 },
@@ -109,6 +110,7 @@ const DinnerDialog = (props) => {
     price,
     priceSm,
     priceLg,
+    reviews,
   } = props;
 
   const [riceValue, setRiceValue] = useState("white rice");
@@ -117,6 +119,8 @@ const DinnerDialog = (props) => {
   const [finalPrice, setFinalPrice] = useState(price);
   const [requestContent, setRequestContent] = useState("");
   const [quantity, setQuantity] = useState(1);
+
+  const [expanded, setExpanded] = useState(false);
 
   const { cart, setCart, addNewItem } = useCartContext();
   const theme = useTheme();
@@ -185,6 +189,8 @@ const DinnerDialog = (props) => {
 
   let cartPrice = quantity * (finalPrice + addedPrice);
 
+  // console.log("Rendering this dinner dialog: ", title);
+
   return (
     <>
       <Dialog
@@ -221,13 +227,19 @@ const DinnerDialog = (props) => {
                 {" "}
                 <img className={classes.img} src={img} alt=" sweet sour" />
               </Grid>
-              <Grid Item container xs={12} sm={6}>
-                <Box>
-                  <Typography className={classes.heading}>
-                    rice: {riceValue}
-                  </Typography>
-                  <Typography className={classes.selectedValue}></Typography>
-                  <Box>
+              <Grid Item xs={12} sm={6}>
+                <Accordion>
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                  >
+                    <Typography className={classes.heading}>
+                      rice: {riceValue}
+                    </Typography>
+                    <Typography className={classes.selectedValue}></Typography>{" "}
+                  </AccordionSummary>
+                  <AccordionDetails>
                     <FormControl component="fieldset">
                       {/* <FormLabel component="legend"> select one: </FormLabel> */}
                       <RadioGroup
@@ -258,17 +270,20 @@ const DinnerDialog = (props) => {
                         />
                       </RadioGroup>
                     </FormControl>{" "}
-                  </Box>
-                </Box>
-                <br />
-                <Divider />
-                <Box>
-                  <Typography className={classes.heading}>
-                    Soup? ( + $1 ) : {sideValue}
-                  </Typography>
-                  <Typography className={classes.selectedValue}></Typography>
-
-                  <Box>
+                  </AccordionDetails>
+                </Accordion>{" "}
+                <Accordion>
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                  >
+                    <Typography className={classes.heading}>
+                      Soup? ( + $1 ) : {sideValue}
+                    </Typography>
+                    <Typography className={classes.selectedValue}></Typography>{" "}
+                  </AccordionSummary>
+                  <AccordionDetails>
                     <FormControl component="fieldset">
                       {/* <FormLabel component="legend"> Select one: </FormLabel> */}
                       <RadioGroup
@@ -299,8 +314,8 @@ const DinnerDialog = (props) => {
                         />
                       </RadioGroup>
                     </FormControl>
-                  </Box>
-                </Box>
+                  </AccordionDetails>
+                </Accordion>{" "}
               </Grid>
               <Grid item xs={12}>
                 {" "}
@@ -326,33 +341,19 @@ const DinnerDialog = (props) => {
           <DialogContentText className={classes.container}>
             {" "}
             <Typography pl={50}>
-              {/* <Accordion>
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel1a-content"
-                  id="panel1a-header"
-                >
-                  <Typography className={classes.heading}>about</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography>
-                    {" "}
-                    {description} {" "}
-                  </Typography>
-                </AccordionDetails>
-              </Accordion>
-              <Accordion>
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel2a-content"
-                  id="panel2a-header"
-                >
-                  <Typography className={classes.heading}>reviews</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography> feature work in progress </Typography>
-                </AccordionDetails>
-              </Accordion>{" "} */}
+              <Typography variant="h5" gutterBottom>
+                About
+              </Typography>
+
+              <Typography gutterBottom> {description} </Typography>
+              <Divider className={classes.divider} />
+
+              <Typography variant="h5" gutterBottom>
+                Reviews
+              </Typography>
+
+              <Typography></Typography>
+              <Review title={title} reviews={reviews} category="dinner" />
             </Typography>
           </DialogContentText>
         </DialogContent>

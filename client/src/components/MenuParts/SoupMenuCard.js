@@ -56,7 +56,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const LunchMenuCard = (props) => {
-  const { itemName, itemDescription, img, price, priceSm, priceLg } = props;
+  const {
+    itemName,
+    itemDescription,
+    img,
+    price,
+    priceSm,
+    priceLg,
+    reviews,
+  } = props;
   const [open, setOpen] = React.useState(false);
   const [alertOpen, setAlertOpen] = React.useState(false);
   const theme = useTheme();
@@ -83,7 +91,7 @@ const LunchMenuCard = (props) => {
     <Card className={classes.cards}>
       <CardHeader title={itemName}> </CardHeader>{" "}
       <CardMedia className={classes.media} image={img} title="fried rice" />
-      <CardContent> {itemDescription}</CardContent>
+      <CardContent> {/* {itemDescription} */}</CardContent>
       <CardActions className={classes.container} disableSpacing>
         <Box className={classes.bottomText}>
           {" "}
@@ -103,18 +111,21 @@ const LunchMenuCard = (props) => {
           <AddIcon> </AddIcon>
           Customize{" "}
         </Fab>
-        <SoupDialog
-          open={open}
-          onClose={handleClose}
-          onAdd={handleAdd}
-          onAlertClose={handleAlertClose}
-          title={itemName}
-          description={itemDescription}
-          price={price}
-          priceSm={priceSm}
-          priceLg={priceLg}
-          img={img}
-        />
+        {open && (
+          <SoupDialog
+            open={open}
+            onClose={handleClose}
+            onAdd={handleAdd}
+            onAlertClose={handleAlertClose}
+            title={itemName}
+            description={itemDescription}
+            price={price}
+            priceSm={priceSm}
+            priceLg={priceLg}
+            img={img}
+            reviews={reviews}
+          />
+        )}
         <Snackbar
           open={alertOpen}
           autoHideDuration={4000}

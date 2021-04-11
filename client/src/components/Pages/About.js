@@ -249,8 +249,8 @@ function About() {
         </Typography>
         <Typography variant="body1" gutterBottom>
           {" "}
-          This website was made by will zhang for his senior project derp. ©{" "}
-          {new Date().getFullYear()}{" "}
+          This website was made with ☕ by will zhang for his senior project
+          derp. © {new Date().getFullYear()}{" "}
         </Typography>
         <Typography variant="body1" gutterBottom>
           {" "}

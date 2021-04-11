@@ -91,7 +91,7 @@ const AppetizerMenuCard = (props) => {
     <Card className={classes.cards}>
       <CardHeader title={itemName}> </CardHeader>{" "}
       <CardMedia className={classes.media} image={img} title={itemName} />
-      <CardContent> {itemDescription}</CardContent>
+      <CardContent>{/* {itemDescription} */}</CardContent>
       <CardActions className={classes.container} disableSpacing>
         <Box className={classes.bottomText}>
           {" "}
@@ -111,19 +111,21 @@ const AppetizerMenuCard = (props) => {
           <AddIcon> </AddIcon>
           Customize{" "}
         </Fab>
-        <AppetizerDialog
-          open={open}
-          onClose={handleClose}
-          onAdd={handleAdd}
-          onAlertClose={handleAlertClose}
-          title={itemName}
-          description={itemDescription}
-          price={price}
-          priceSm={priceSm}
-          priceLg={priceLg}
-          img={img}
-          reviews={reviews}
-        />
+        {open && (
+          <AppetizerDialog
+            open={open}
+            onClose={handleClose}
+            onAdd={handleAdd}
+            onAlertClose={handleAlertClose}
+            title={itemName}
+            description={itemDescription}
+            price={price}
+            priceSm={priceSm}
+            priceLg={priceLg}
+            img={img}
+            reviews={reviews}
+          />
+        )}
         <Snackbar
           open={alertOpen}
           autoHideDuration={4000}
