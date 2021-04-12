@@ -78,7 +78,7 @@ const FriedRice = (props) => {
       </div>
 
       <Box marginTop={10}>
-        <Grid container spacing={3}>1
+        <Grid container spacing={3}>
           {itemGrid}
         </Grid>
       </Box>

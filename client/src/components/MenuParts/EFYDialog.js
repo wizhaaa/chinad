@@ -123,6 +123,8 @@ const EFYDialog = (props) => {
   const [meatValue, setMeatValue] = useState("Chicken");
   const [quantity, setQuantity] = useState(1);
   const [finalPrice, setFinalPrice] = useState(initialPrice);
+  const [ricePrice, setRicePrice] = useState(0);
+  const [riceValue, setRiceValue] = useState("White Rice");
 
   const [requestContent, setRequestContent] = useState("");
   const { cart, setCart, addNewItem } = useCartContext();
@@ -139,12 +141,8 @@ const EFYDialog = (props) => {
     onAdd();
     const type = "EFY";
     let options = {};
-    if (title === "Yat Gai Mei") {
-      options = { type, meatValue };
-    } else {
-      options = { type };
-    }
-    let cartUnitPrice = finalPrice;
+    options = { type, riceValue };
+    let cartUnitPrice = finalPrice + ricePrice;
 
     const newItem = {
       title,
@@ -166,9 +164,14 @@ const EFYDialog = (props) => {
     }
   };
 
-  const handleMeatChange = (e) => {
-    const meat = e.target.value;
-    setMeatValue(meat);
+  const handleRiceChange = (e) => {
+    const rice = e.target.value;
+    setRiceValue(rice);
+    if (rice === "Fried Rice") {
+      setRicePrice(1.5);
+    } else {
+      setRicePrice(0);
+    }
   };
 
   const handleQuantityChange = (e) => {
@@ -186,55 +189,41 @@ const EFYDialog = (props) => {
     minimumFractionDigits: 2,
   });
 
-  const meatOptions = (
-    <div>
-      {" "}
-      Please choose from the options below:
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography className={classes.heading}> Meat: </Typography>
-          <Typography className={classes.selectedValue}>{meatValue}</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            <FormControl component="fieldset">
-              <FormLabel component="legend"> Select one: </FormLabel>
-              <RadioGroup
-                aria-label="rices"
-                name="rices1"
-                value={meatValue}
-                onChange={handleMeatChange}
-              >
-                <FormControlLabel
-                  value="Chicken"
-                  control={<Radio />}
-                  label="Chicken"
-                />
-                <FormControlLabel
-                  value="Pork"
-                  control={<Radio />}
-                  label="Pork"
-                />{" "}
-                <FormControlLabel
-                  value="Shrimp"
-                  control={<Radio />}
-                  label="Shrimp"
-                />{" "}
-                <FormControlLabel
-                  value="Beef"
-                  control={<Radio />}
-                  label="Beef"
-                />
-              </RadioGroup>
-            </FormControl>{" "}
-          </Typography>
-        </AccordionDetails>
-      </Accordion>{" "}
-    </div>
+  const riceOptions = (
+    <Accordion>
+      <AccordionSummary
+        expandIcon={<ExpandMoreIcon />}
+        aria-controls="panel1a-content"
+        id="panel1a-header"
+      >
+        <Typography className={classes.heading}> Rice: </Typography>
+        <Typography className={classes.selectedValue}>{riceValue}</Typography>
+      </AccordionSummary>
+      <AccordionDetails>
+        <Typography>
+          <FormControl component="fieldset">
+            <FormLabel component="legend"> Select one: </FormLabel>
+            <RadioGroup
+              aria-label="rices"
+              name="rices1"
+              value={riceValue}
+              onChange={handleRiceChange}
+            >
+              <FormControlLabel
+                value="White Rice"
+                control={<Radio />}
+                label="White Rice"
+              />
+              <FormControlLabel
+                value="Fried Rice"
+                control={<Radio />}
+                label="Fried Rice"
+              />{" "}
+            </RadioGroup>
+          </FormControl>{" "}
+        </Typography>
+      </AccordionDetails>
+    </Accordion>
   );
 
   const sizeOptions = (
@@ -278,7 +267,7 @@ const EFYDialog = (props) => {
     </div>
   );
 
-  let cartPrice = quantity * finalPrice;
+  let cartPrice = quantity * (finalPrice + ricePrice);
 
   return (
     <>
@@ -317,15 +306,7 @@ const EFYDialog = (props) => {
                 <img className={classes.img} src={img} alt={title} />
               </Grid>
               <Grid Item xs={12} sm={6}>
-                {price !== null ? (
-                  title === "Yat Gai Mei" ? (
-                    meatOptions
-                  ) : (
-                    <Typography> no options to choose from 🧐 </Typography>
-                  )
-                ) : (
-                  sizeOptions
-                )}
+                {riceOptions}
                 {/* {title === "Yat Gai Mei" ? meatOptions : null} */}
               </Grid>
               <Grid item xs={12}>

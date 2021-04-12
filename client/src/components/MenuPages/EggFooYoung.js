@@ -72,7 +72,8 @@ const EFY = (props) => {
           Egg Foo Young{" "}
         </Typography>
         <Typography className={classes.subheadings}>
-          An omelette-type dish served with gravy. Choose your meat!
+          An omelette-type dish served with gravy. Choose your meat! Served with
+          white rice.
         </Typography>{" "}
       </div>
 

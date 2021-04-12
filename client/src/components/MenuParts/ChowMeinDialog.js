@@ -123,6 +123,8 @@ const ChowMeinDialog = (props) => {
   const [style, setStyle] = useState("Chow Mein");
   const [quantity, setQuantity] = useState(1);
   const [finalPrice, setFinalPrice] = useState(initialPrice);
+  const [ricePrice, setRicePrice] = useState(0);
+  const [riceValue, setRiceValue] = useState("White Rice");
 
   const [requestContent, setRequestContent] = useState("");
   const { cart, setCart, addNewItem } = useCartContext();
@@ -137,12 +139,12 @@ const ChowMeinDialog = (props) => {
 
   const handleAddItem = () => {
     onAdd();
-    const type = "Chow Mein";
+
     let options = {};
 
-    options = { style, sizeValue };
+    options = { style, sizeValue, riceValue };
 
-    let cartUnitPrice = finalPrice;
+    let cartUnitPrice = finalPrice + ricePrice;
 
     const newItem = {
       title,
@@ -161,6 +163,26 @@ const ChowMeinDialog = (props) => {
       setFinalPrice(priceLg);
     } else if (size === "Pint") {
       setFinalPrice(priceSm);
+    }
+    if (riceValue === "Fried Rice" && size === "Quart") {
+      setRicePrice(1.5);
+    } else if (riceValue === "Fried Rice" && size === "Pint") {
+      setRicePrice(1);
+    } else {
+      setRicePrice(0);
+    }
+  };
+
+  const handleRiceChange = (e) => {
+    const rice = e.target.value;
+    setRiceValue(rice);
+    console.log(typeof finalPrice);
+    if (rice === "Fried Rice" && sizeValue === "Quart") {
+      setRicePrice(1.5);
+    } else if (rice === "Fried Rice" && sizeValue === "Pint") {
+      setRicePrice(1);
+    } else {
+      setRicePrice(0);
     }
   };
 
@@ -221,6 +243,43 @@ const ChowMeinDialog = (props) => {
     </Accordion>
   );
 
+  const riceOptions = (
+    <Accordion>
+      <AccordionSummary
+        expandIcon={<ExpandMoreIcon />}
+        aria-controls="panel1a-content"
+        id="panel1a-header"
+      >
+        <Typography className={classes.heading}> Rice: </Typography>
+        <Typography className={classes.selectedValue}>{riceValue}</Typography>
+      </AccordionSummary>
+      <AccordionDetails>
+        <Typography>
+          <FormControl component="fieldset">
+            <FormLabel component="legend"> Select one: </FormLabel>
+            <RadioGroup
+              aria-label="rices"
+              name="rices1"
+              value={riceValue}
+              onChange={handleRiceChange}
+            >
+              <FormControlLabel
+                value="White Rice"
+                control={<Radio />}
+                label="White Rice"
+              />
+              <FormControlLabel
+                value="Fried Rice"
+                control={<Radio />}
+                label="Fried Rice"
+              />{" "}
+            </RadioGroup>
+          </FormControl>{" "}
+        </Typography>
+      </AccordionDetails>
+    </Accordion>
+  );
+
   const sizeOptions = (
     <div>
       {" "}
@@ -262,7 +321,7 @@ const ChowMeinDialog = (props) => {
     </div>
   );
 
-  let cartPrice = quantity * finalPrice;
+  let cartPrice = quantity * (finalPrice + ricePrice);
 
   return (
     <>
@@ -302,6 +361,7 @@ const ChowMeinDialog = (props) => {
               </Grid>
               <Grid Item xs={12} sm={6}>
                 {sizeOptions}
+                {riceOptions}
                 {styleOptions}
               </Grid>
               <Grid item xs={12}>

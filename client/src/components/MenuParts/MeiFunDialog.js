@@ -139,11 +139,7 @@ const MeiFunDialog = (props) => {
     onAdd();
     const type = "Mei Fun";
     let options = {};
-    if (title === "Yat Gai Mei") {
-      options = { type, meatValue };
-    } else {
-      options = { type };
-    }
+    options = { type };
     let cartUnitPrice = finalPrice;
 
     const newItem = {

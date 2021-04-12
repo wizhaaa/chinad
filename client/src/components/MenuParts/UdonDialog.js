@@ -139,11 +139,7 @@ const UdonDialog = (props) => {
     onAdd();
     const type = "Udon";
     let options = {};
-    if (title === "Yat Gai Mei") {
-      options = { type, meatValue };
-    } else {
-      options = { type };
-    }
+    options = { type };
     let cartUnitPrice = finalPrice;
 
     const newItem = {

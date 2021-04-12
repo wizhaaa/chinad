@@ -139,10 +139,10 @@ const SideDialog = (props) => {
     onAdd();
     const type = "Side";
     let options = {};
-    if (title === "Yat Gai Mei") {
-      options = { type, meatValue };
-    } else {
+    if (title === "White Rice") {
       options = { type, sizeValue };
+    } else {
+      options = { type };
     }
     let cartUnitPrice = finalPrice;
 

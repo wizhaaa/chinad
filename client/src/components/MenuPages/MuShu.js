@@ -73,7 +73,8 @@ const MuShu = (props) => {
         </Typography>
         <Typography className={classes.subheadings}>
           Mixed vegetables with a meat of your choice. Put some in the included
-          wraps and dab on some of the included Hoison sauce.
+          wraps and dab on some of the included Hoison sauce. Served with white
+          rice.
         </Typography>{" "}
       </div>
 

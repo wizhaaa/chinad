@@ -6,8 +6,8 @@ let lunchSchema = new mongoose.Schema({
   description: String,
   img: String,
   price: Number,
-  priceSm: String,
-  priceLg: String,
+  priceSm: Number,
+  priceLg: Number,
   reviews: Object,
   rating: Number,
 });
@@ -18,8 +18,8 @@ let dinnerSchema = new mongoose.Schema({
   description: String,
   img: String,
   price: Number,
-  priceSm: String,
-  priceLg: String,
+  priceSm: Number,
+  priceLg: Number,
   reviews: Object,
   rating: Number,
 });
@@ -30,8 +30,8 @@ let soupSchema = new mongoose.Schema({
   description: String,
   img: String,
   price: Number,
-  priceSm: String,
-  priceLg: String,
+  priceSm: Number,
+  priceLg: Number,
   reviews: Object,
   rating: Number,
 });
@@ -42,8 +42,8 @@ let appetizerSchema = new mongoose.Schema({
   description: String,
   img: String,
   price: Number,
-  priceSm: String,
-  priceLg: String,
+  priceSm: Number,
+  priceLg: Number,
   reviews: Object,
   rating: Number,
 });
@@ -54,8 +54,8 @@ let sweetandsourSchema = new mongoose.Schema({
   description: String,
   img: String,
   price: Number,
-  priceSm: String,
-  priceLg: String,
+  priceSm: Number,
+  priceLg: Number,
   reviews: Object,
 });
 const Sweetandsour = mongoose.model("Sweetandsour", sweetandsourSchema);
@@ -65,8 +65,8 @@ let eggfooyoungSchema = new mongoose.Schema({
   description: String,
   img: String,
   price: Number,
-  priceSm: String,
-  priceLg: String,
+  priceSm: Number,
+  priceLg: Number,
   reviews: Object,
 });
 const Eggfooyoung = mongoose.model("Eggfooyoung", eggfooyoungSchema);
@@ -76,8 +76,8 @@ let friedriceSchema = new mongoose.Schema({
   description: String,
   img: String,
   price: Number,
-  priceSm: String,
-  priceLg: String,
+  priceSm: Number,
+  priceLg: Number,
   reviews: Object,
 });
 const Friedrice = mongoose.model("Friedrice", friedriceSchema);
@@ -87,8 +87,8 @@ let lomeinSchema = new mongoose.Schema({
   description: String,
   img: String,
   price: Number,
-  priceSm: String,
-  priceLg: String,
+  priceSm: Number,
+  priceLg: Number,
   reviews: Object,
 });
 const Lomein = mongoose.model("Lomein", lomeinSchema);
@@ -98,8 +98,8 @@ let meifunSchema = new mongoose.Schema({
   description: String,
   img: String,
   price: Number,
-  priceSm: String,
-  priceLg: String,
+  priceSm: Number,
+  priceLg: Number,
   reviews: Object,
 });
 const Meifun = mongoose.model("Meifun", meifunSchema);
@@ -109,8 +109,8 @@ let chowmeinSchema = new mongoose.Schema({
   description: String,
   img: String,
   price: Number,
-  priceSm: String,
-  priceLg: String,
+  priceSm: Number,
+  priceLg: Number,
   reviews: Object,
 });
 const Chowmein = mongoose.model("Chowmein", chowmeinSchema);
@@ -120,8 +120,8 @@ let poultrySchema = new mongoose.Schema({
   description: String,
   img: String,
   price: Number,
-  priceSm: String,
-  priceLg: String,
+  priceSm: Number,
+  priceLg: Number,
   reviews: Object,
 });
 const Poultry = mongoose.model("Poultry", poultrySchema);
@@ -131,8 +131,8 @@ let porkSchema = new mongoose.Schema({
   description: String,
   img: String,
   price: Number,
-  priceSm: String,
-  priceLg: String,
+  priceSm: Number,
+  priceLg: Number,
   reviews: Object,
 });
 const Pork = mongoose.model("Pork", porkSchema);
@@ -142,8 +142,8 @@ let seafoodSchema = new mongoose.Schema({
   description: String,
   img: String,
   price: Number,
-  priceSm: String,
-  priceLg: String,
+  priceSm: Number,
+  priceLg: Number,
   reviews: Object,
 });
 const Seafood = mongoose.model("Seafood", seafoodSchema);
@@ -153,8 +153,8 @@ let beefSchema = new mongoose.Schema({
   description: String,
   img: String,
   price: Number,
-  priceSm: String,
-  priceLg: String,
+  priceSm: Number,
+  priceLg: Number,
   reviews: Object,
 });
 const Beef = mongoose.model("Beef", beefSchema);
@@ -164,8 +164,8 @@ let mushuSchema = new mongoose.Schema({
   description: String,
   img: String,
   price: Number,
-  priceSm: String,
-  priceLg: String,
+  priceSm: Number,
+  priceLg: Number,
   reviews: Object,
 });
 const Mushu = mongoose.model("Mushu", mushuSchema);
@@ -175,8 +175,8 @@ let udonSchema = new mongoose.Schema({
   description: String,
   img: String,
   price: Number,
-  priceSm: String,
-  priceLg: String,
+  priceSm: Number,
+  priceLg: Number,
   reviews: Object,
 });
 const Udon = mongoose.model("Udon", udonSchema);
@@ -186,8 +186,8 @@ let vegetableSchema = new mongoose.Schema({
   description: String,
   img: String,
   price: Number,
-  priceSm: String,
-  priceLg: String,
+  priceSm: Number,
+  priceLg: Number,
   reviews: Object,
 });
 const Vegetable = mongoose.model("Vegetable", vegetableSchema);
@@ -197,8 +197,8 @@ let chefspecialSchema = new mongoose.Schema({
   description: String,
   img: String,
   price: Number,
-  priceSm: String,
-  priceLg: String,
+  priceSm: Number,
+  priceLg: Number,
   reviews: Object,
 });
 const Chefspecial = mongoose.model("Chefspecial", chefspecialSchema);
@@ -208,8 +208,8 @@ let dietSchema = new mongoose.Schema({
   description: String,
   img: String,
   price: Number,
-  priceSm: String,
-  priceLg: String,
+  priceSm: Number,
+  priceLg: Number,
   reviews: Object,
 });
 const Diet = mongoose.model("Diet", dietSchema);
@@ -219,8 +219,8 @@ let sideSchema = new mongoose.Schema({
   description: String,
   img: String,
   price: Number,
-  priceSm: String,
-  priceLg: String,
+  priceSm: Number,
+  priceLg: Number,
 });
 const Side = mongoose.model("Side", sideSchema);
 
