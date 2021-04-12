@@ -42,6 +42,17 @@ liveDB.once("open", () =>
     ` ---- *** ..... loading ..... connected to database ! ..... 200 success .... *** ----`
   )
 );
+
+// import Models
+// use the router from our to get our DB collections
+
+import router from "./Routes/MenuItemRoutes.js";
+app.use(router);
+
+// for reviews
+import reviews from "./Routes/ReviewRoutes.js";
+app.use(reviews);
+
 // email
 import nodemailer from "nodemailer";
 
@@ -92,56 +103,6 @@ app.post("/api/send", (req, res, next) => {
   });
 });
 
-// menu item schemas & models
-
-let appetizerSchema = new mongoose.Schema({
-  name: String,
-  description: String,
-  img: String,
-  price: Number,
-  priceSm: String,
-  priceLg: String,
-  reviews: Object,
-  rating: Number,
-});
-const Appetizer = mongoose.model("Appetizer", appetizerSchema);
-
-let soupSchema = new mongoose.Schema({
-  name: String,
-  description: String,
-  img: String,
-  price: Number,
-  priceSm: String,
-  priceLg: String,
-  reviews: Object,
-  rating: Number,
-});
-const Soup = mongoose.model("Soup", soupSchema);
-
-let dinnerSchema = new mongoose.Schema({
-  name: String,
-  description: String,
-  img: String,
-  price: Number,
-  priceSm: String,
-  priceLg: String,
-  reviews: Object,
-  rating: Number,
-});
-const Dinner = mongoose.model("Dinner", dinnerSchema);
-
-let lunchSchema = new mongoose.Schema({
-  name: String,
-  description: String,
-  img: String,
-  price: Number,
-  priceSm: String,
-  priceLg: String,
-  reviews: Object,
-  rating: Number,
-});
-const Lunch = mongoose.model("Lunch", lunchSchema);
-
 // customer order schema and model
 
 let orderSchema = new mongoose.Schema({
@@ -185,64 +146,6 @@ app.post("/api/order/add", async (req, res) => {
   });
 });
 
-// to read our appetizer collection to loop thru on front end
-app.get("/api/appetizers", async (req, res) => {
-  await Appetizer.find({}, { __v: 0 }, (err, docs) => {
-    if (!err) {
-      res.json(docs);
-    } else {
-      res.status(400).json({ error: err });
-    }
-  });
-});
-
-app.get("/api/soups", async (req, res) => {
-  await Soup.find({}, { __v: 0 }, (err, docs) => {
-    if (!err) {
-      res.json(docs);
-    } else {
-      res.status(400).json({ error: err });
-    }
-  });
-});
-
-app.get("/api/dinners", async (req, res) => {
-  await Dinner.find({}, { __v: 0 }, (err, docs) => {
-    if (!err) {
-      res.json(docs);
-    } else {
-      res.status(400).json({ error: err });
-    }
-  });
-});
-
-app.get("/api/lunches", async (req, res) => {
-  await Lunch.find({}, { __v: 0 }, (err, docs) => {
-    if (!err) {
-      res.json(docs);
-    } else {
-      res.status(400).json({ error: err });
-    }
-  });
-});
-
-app.get("/:name", (req, res) => {
-  MongoClient.connect(DB_URI, function (err, db) {
-    if (err) throw err;
-    var dbo = db.db("testChina");
-    dbo.collection("testApps").findOne(
-      {
-        name: req.params.name,
-      },
-      function (err, result) {
-        if (err) throw err;
-        res.json(result);
-        db.close();
-      }
-    );
-  });
-});
-
 // fetch our matching order
 
 app.get("/api/:orderID", async (req, res) => {
@@ -253,94 +156,6 @@ app.get("/api/:orderID", async (req, res) => {
       res.status(400).json({ error: err });
     }
   });
-});
-
-// receiving a new review and adding it
-
-// app.get("/api/review/add/:model/:name", async (req, res) => {
-//   const model = req.params.model;
-//   await model.find({ name: req.params.name }, { __v: 0 }, (err, docs) => {
-//     if (!err) {
-//       res.json(docs);
-//     } else {
-//       res.status(400).json({ error: err });
-//     }
-//   });
-// });
-
-app.post("/api/review/add/appetizer/:name", (req, res) => {
-  console.log(" adding review to apps ");
-  const name = req.body.name;
-  const rating = req.body.rating;
-  const reviewContent = req.body.reviewContent;
-  let review = {
-    name: name,
-    rating: rating,
-    reviewContent: reviewContent,
-  };
-  console.log(review);
-
-  Appetizer.updateOne(
-    { name: req.params.name },
-    { $push: { reviews: review } },
-    (err, docs) => {
-      if (!err) {
-        res.json(docs);
-      } else {
-        res.status(400).json({ error: err });
-      }
-    }
-  );
-});
-
-app.post("/api/review/add/soup/:name", (req, res) => {
-  console.log(` adding review to soup: ${req.params.name}`);
-  const name = req.body.name;
-  const rating = req.body.rating;
-  const reviewContent = req.body.reviewContent;
-  let review = {
-    name: name,
-    rating: rating,
-    reviewContent: reviewContent,
-  };
-  console.log(review);
-
-  Soup.updateOne(
-    { name: req.params.name },
-    { $push: { reviews: review } },
-    (err, docs) => {
-      if (!err) {
-        res.json(docs);
-      } else {
-        res.status(400).json({ error: err });
-      }
-    }
-  );
-});
-
-app.post("/api/review/add/dinner/:name", (req, res) => {
-  console.log(` adding review to dinner: ${req.params.name}`);
-  const name = req.body.name;
-  const rating = req.body.rating;
-  const reviewContent = req.body.reviewContent;
-  let review = {
-    name: name,
-    rating: rating,
-    reviewContent: reviewContent,
-  };
-  console.log(review);
-
-  Dinner.updateOne(
-    { name: req.params.name },
-    { $push: { reviews: review } },
-    (err, docs) => {
-      if (!err) {
-        res.json(docs);
-      } else {
-        res.status(400).json({ error: err });
-      }
-    }
-  );
 });
 
 app.listen(PORT, () => {

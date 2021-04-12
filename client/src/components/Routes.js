@@ -14,7 +14,7 @@ import Appetizers from "./MenuPages/Appetizers";
 import Test from "./DemoTestModule";
 import AxiosTest from "./AxiosTest";
 import MyEmail from "./Pages/MyEmail";
-import { isObject } from "util";
+import SweetAndSour from "./MenuPages/SweetAndSour";
 
 const Routes = () => {
   return (
@@ -56,6 +56,10 @@ const Routes = () => {
         <Route exact path="/appetizers">
           {" "}
           <Appetizers />{" "}
+        </Route>
+        <Route exact path="/sweet-and-sour">
+          {" "}
+          <SweetAndSour />{" "}
         </Route>
         <Route exact path="/test">
           {" "}
