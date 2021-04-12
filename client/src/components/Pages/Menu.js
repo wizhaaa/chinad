@@ -5,6 +5,22 @@ import LunchSpecials from "../MenuPages/LunchSpecials";
 import Soups from "../MenuPages/Soups";
 import Appetizers from "../MenuPages/Appetizers";
 import DinnerCombo from "../MenuPages/DinnerCombo";
+import SweetAndSour from "../MenuPages/SweetAndSour";
+import EFY from "../MenuPages/EggFooYoung";
+import FR from "../MenuPages/FriedRice";
+import LoMein from "../MenuPages/LoMein";
+import MeiFun from "../MenuPages/MeiFun";
+import ChowMein from "../MenuPages/ChowMein";
+import Poultry from "../MenuPages/Poultry";
+import Pork from "../MenuPages/Pork";
+import Seafood from "../MenuPages/Seafood";
+import Beef from "../MenuPages/Beef";
+import MuShu from "../MenuPages/MuShu";
+import Vegetable from "../MenuPages/Vegetable";
+import Udon from "../MenuPages/Udon";
+import Chef from "../MenuPages/Chef";
+import Diet from "../MenuPages/Diet";
+import Side from "../MenuPages/Side";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,6 +48,7 @@ function Menu() {
 
   return (
     <div className="Cart">
+      {console.log("menu page is being rendered")}
       <Typography component="div" className={classes.root}>
         <Box textAlign="center" m={1} py={8}>
           <Typography variant="h1" gutterBottom>
@@ -54,15 +71,46 @@ function Menu() {
           </Typography>
           <br />
           <Typography variant="body1" gutterBottom></Typography>
-
           <Divider className={classes.divider} />
           <LunchSpecials />
+          <Divider className={classes.divider} />
+          <DinnerCombo />
           <Divider className={classes.divider} />
           <Soups />
           <Divider className={classes.divider} />
           <Appetizers />
           <Divider className={classes.divider} />
-          <DinnerCombo />
+          <SweetAndSour />
+          <Divider className={classes.divider} />
+          <EFY />
+          <Divider className={classes.divider} />
+          <FR />
+          <Divider className={classes.divider} />
+          <LoMein />
+          <Divider className={classes.divider} />
+          <MeiFun />
+          <Divider className={classes.divider} />
+          <ChowMein />
+          <Divider className={classes.divider} />
+          <Poultry />
+          <Divider className={classes.divider} />
+          <Pork />
+          <Divider className={classes.divider} />
+          <Seafood />
+          <Divider className={classes.divider} />
+          <Beef />
+          <Divider className={classes.divider} />
+          <MuShu />
+          <Divider className={classes.divider} />
+          <Vegetable />
+          <Divider className={classes.divider} />
+          <Udon />
+          <Divider className={classes.divider} />
+          <Chef />
+          <Divider className={classes.divider} />
+          <Diet />
+          <Divider className={classes.divider} />
+          <Side />
         </Box>
       </Typography>
     </div>
