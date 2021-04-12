@@ -10,11 +10,26 @@ import LunchSpecials from "./MenuPages/LunchSpecials";
 import Soups from "./MenuPages/Soups";
 import DinnerCombo from "./MenuPages/DinnerCombo";
 import Appetizers from "./MenuPages/Appetizers";
+import SweetAndSour from "./MenuPages/SweetAndSour";
+import EFY from "./MenuPages/EggFooYoung";
+import FR from "./MenuPages/FriedRice";
+import LoMein from "./MenuPages/LoMein";
+import MeiFun from "./MenuPages/MeiFun";
+import ChowMein from "./MenuPages/ChowMein";
+import Poultry from "./MenuPages/Poultry";
+import Pork from "./MenuPages/Pork";
+import Seafood from "./MenuPages/Seafood";
+import Beef from "./MenuPages/Beef";
+import MuShu from "./MenuPages/MuShu";
+import Vegetable from "./MenuPages/Vegetable";
+import Udon from "./MenuPages/Udon";
+import Chef from "./MenuPages/Chef";
+import Diet from "./MenuPages/Diet";
+import Side from "./MenuPages/Side";
 
 import Test from "./DemoTestModule";
 import AxiosTest from "./AxiosTest";
 import MyEmail from "./Pages/MyEmail";
-import SweetAndSour from "./MenuPages/SweetAndSour";
 
 const Routes = () => {
   return (
@@ -40,7 +55,6 @@ const Routes = () => {
           {" "}
           <Menu />
         </Route>
-
         {/* menu list */}
         <Route exact path="/lunch">
           {" "}
@@ -60,6 +74,66 @@ const Routes = () => {
         <Route exact path="/sweet-and-sour">
           {" "}
           <SweetAndSour />{" "}
+        </Route>
+        <Route exact path="/egg-foo-young">
+          {" "}
+          <EFY />{" "}
+        </Route>
+        <Route exact path="/fried-rice">
+          {" "}
+          <FR />{" "}
+        </Route>
+        <Route exact path="/lo-mein">
+          {" "}
+          <LoMein />{" "}
+        </Route>
+        <Route exact path="/mei-fun">
+          {" "}
+          <MeiFun />{" "}
+        </Route>
+        <Route exact path="/chow-mein">
+          {" "}
+          <ChowMein />{" "}
+        </Route>
+        <Route exact path="/poultry">
+          {" "}
+          <Poultry />{" "}
+        </Route>
+        <Route exact path="/pork">
+          {" "}
+          <Pork />{" "}
+        </Route>{" "}
+        <Route exact path="/seafood">
+          {" "}
+          <Seafood />{" "}
+        </Route>{" "}
+        <Route exact path="/beef">
+          {" "}
+          <Beef />{" "}
+        </Route>
+        <Route exact path="/mu-shu">
+          {" "}
+          <MuShu />{" "}
+        </Route>
+        <Route exact path="/vegetable">
+          {" "}
+          <Vegetable />{" "}
+        </Route>
+        <Route exact path="/udon">
+          {" "}
+          <Udon />{" "}
+        </Route>
+        <Route exact path="/chef">
+          {" "}
+          <Chef />{" "}
+        </Route>
+        <Route exact path="/diet">
+          {" "}
+          <Diet />{" "}
+        </Route>
+        <Route exact path="/sides">
+          {" "}
+          <Side />{" "}
         </Route>
         <Route exact path="/test">
           {" "}

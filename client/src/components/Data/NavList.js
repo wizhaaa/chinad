@@ -43,7 +43,7 @@ const menuList = [
   { text: "Beef", routeTo: "/beef" },
   { text: "Mu Shu", routeTo: "/mu-shu" },
   { text: "Vegetable", routeTo: "/vegetable" },
-  { text: "Udon Moodles", routeTo: "/udon" },
+  { text: "Udon Noodles", routeTo: "/udon" },
   { text: "Chef's Specials", routeTo: "/chef" },
   { text: "Diet", routeTo: "/diet" },
   { text: "Sides", routeTo: "/sides" },
