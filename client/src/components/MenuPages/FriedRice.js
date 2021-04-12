@@ -4,7 +4,7 @@ import { Typography, Box, Grid, makeStyles } from "@material-ui/core";
 // fetching data from db
 import api from "../api";
 
-import SoupMenuCard from "../MenuParts/SoupMenuCard";
+import FriedRiceMenuCard from "../MenuParts/FriedRiceMenuCard";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,28 +33,28 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Soups = (props) => {
+const FriedRice = (props) => {
   const classes = useStyles();
-  const [soups, setSoups] = useState([]);
+  const [items, setItems] = useState([]);
 
   useEffect(
     () =>
-      api.get("/api/soups").then((res) => {
-        setSoups(res.data);
+      api.get("/api/friedrice").then((res) => {
+        setItems(res.data);
       }),
     []
   );
 
-  const soupGrid = soups.map((soup) => (
+  const itemGrid = items.map((item) => (
     <Grid item xs={12} sm={6} md={4}>
-      <SoupMenuCard
-        itemName={soup.name}
-        itemDescription={soup.description}
-        img={soup.img}
-        price={soup.price}
-        priceSm={soup.priceSm}
-        priceLg={soup.priceLg}
-        reviews={soup.reviews}
+      <FriedRiceMenuCard
+        itemName={item.name}
+        itemDescription={item.description}
+        img={item.img}
+        price={item.price}
+        priceSm={item.priceSm}
+        priceLg={item.priceLg}
+        reviews={item.reviews}
       />
     </Grid>
   ));
@@ -69,22 +69,21 @@ const Soups = (props) => {
           gutterBottom
         >
           {" "}
-          Soups{" "}
+          Fried Rice{" "}
         </Typography>
         <Typography className={classes.subheadings}>
-          Yummy & warm soups !
-          <br /> Every soup comes with a bag of fried noodles !
-          <br /> Pints come with 1 bag , quarts come with 2 bags
+          Just simple fried rice with peas, onions, and carrots with meats of
+          your choice.
         </Typography>{" "}
       </div>
 
       <Box marginTop={10}>
-        <Grid container spacing={3}>
-          {soupGrid}
+        <Grid container spacing={3}>1
+          {itemGrid}
         </Grid>
       </Box>
     </Box>
   );
 };
 
-export default Soups;
+export default FriedRice;

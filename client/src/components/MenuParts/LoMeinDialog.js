@@ -99,7 +99,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SoupDialog = (props) => {
+const LoMeinDialog = (props) => {
   const {
     onClose,
     open,
@@ -137,7 +137,7 @@ const SoupDialog = (props) => {
 
   const handleAddItem = () => {
     onAdd();
-    const type = "Soup";
+    const type = "Lo Mein";
     let options = {};
     if (title === "Yat Gai Mei") {
       options = { type, meatValue };
@@ -364,7 +364,7 @@ const SoupDialog = (props) => {
               </Typography>
 
               <Typography></Typography>
-              <Review title={title} reviews={reviews} category="soup" />
+              <Review title={title} reviews={reviews} category="lomein" />
             </Typography>
           </DialogContentText>
         </DialogContent>
@@ -414,4 +414,4 @@ const SoupDialog = (props) => {
   );
 };
 
-export default SoupDialog;
+export default LoMeinDialog;

@@ -5,20 +5,12 @@ import {
   CardActions,
   CardContent,
   CardMedia,
-  Button,
   Typography,
   CardHeader,
   makeStyles,
   useTheme,
-  IconButton,
   Fab,
   Box,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  useMediaQuery,
   Snackbar,
 } from "@material-ui/core";
 
@@ -26,7 +18,7 @@ import MuiAlert from "@material-ui/lab/Alert";
 
 import { Add as AddIcon } from "@material-ui/icons";
 
-import SoupDialog from "./SoupDialog";
+import SideDialog from "./SideDialog";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -55,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LunchMenuCard = (props) => {
+const SideMenuCard = (props) => {
   const {
     itemName,
     itemDescription,
@@ -90,7 +82,7 @@ const LunchMenuCard = (props) => {
   return (
     <Card className={classes.cards}>
       <CardHeader title={itemName}> </CardHeader>{" "}
-      <CardMedia className={classes.media} image={img} title="fried rice" />
+      <CardMedia className={classes.media} image={img} title={itemName} />
       <CardContent> {/* {itemDescription} */}</CardContent>
       <CardActions className={classes.container} disableSpacing>
         <Box className={classes.bottomText}>
@@ -112,7 +104,7 @@ const LunchMenuCard = (props) => {
           Customize{" "}
         </Fab>
         {open && (
-          <SoupDialog
+          <SideDialog
             open={open}
             onClose={handleClose}
             onAdd={handleAdd}
@@ -141,4 +133,4 @@ const LunchMenuCard = (props) => {
   );
 };
 
-export default LunchMenuCard;
+export default SideMenuCard;

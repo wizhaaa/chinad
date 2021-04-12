@@ -72,9 +72,7 @@ const SweetAndSour = (props) => {
           Sweet and Sour{" "}
         </Typography>
         <Typography className={classes.subheadings}>
-          Yummy & warm soups !
-          <br /> Every soup comes with a bag of fried noodles !
-          <br /> Pints come with 1 bag , quarts come with 2 bags
+          Breaded meats deep-fried served with sweet and sour sauce on the side.
         </Typography>{" "}
       </div>
 

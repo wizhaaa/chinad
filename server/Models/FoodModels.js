@@ -224,7 +224,7 @@ let sideSchema = new mongoose.Schema({
 });
 const Side = mongoose.model("Side", sideSchema);
 
-let item = new Udon({
+let item = new Side({
   name: "Sweet & Sour Chicken",
   description: "Breaded meats!",
   img: "img",

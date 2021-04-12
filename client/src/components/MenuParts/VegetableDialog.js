@@ -99,7 +99,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SoupDialog = (props) => {
+const VegetableDialog = (props) => {
   const {
     onClose,
     open,
@@ -137,10 +137,12 @@ const SoupDialog = (props) => {
 
   const handleAddItem = () => {
     onAdd();
-    const type = "Soup";
+    const type = "Entree";
     let options = {};
     if (title === "Yat Gai Mei") {
       options = { type, meatValue };
+    } else if (price !== null) {
+      options = { type };
     } else {
       options = { type, sizeValue };
     }
@@ -314,7 +316,7 @@ const SoupDialog = (props) => {
               {" "}
               <Grid Item xs={12} sm={6} className={classes.gridPadding}>
                 {" "}
-                <img className={classes.img} src={img} alt=" sweet sour" />
+                <img className={classes.img} src={img} alt={title} />
               </Grid>
               <Grid Item xs={12} sm={6}>
                 {price !== null ? (
@@ -364,7 +366,7 @@ const SoupDialog = (props) => {
               </Typography>
 
               <Typography></Typography>
-              <Review title={title} reviews={reviews} category="soup" />
+              <Review title={title} reviews={reviews} category="vegetable" />
             </Typography>
           </DialogContentText>
         </DialogContent>
@@ -414,4 +416,4 @@ const SoupDialog = (props) => {
   );
 };
 
-export default SoupDialog;
+export default VegetableDialog;

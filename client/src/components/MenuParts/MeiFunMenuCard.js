@@ -18,7 +18,7 @@ import MuiAlert from "@material-ui/lab/Alert";
 
 import { Add as AddIcon } from "@material-ui/icons";
 
-import UdonDialog from "./UdonDialog";
+import MeiFunDialog from "./MeiFunDialog";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const UdonMenuCard = (props) => {
+const MeiFunMenuCard = (props) => {
   const {
     itemName,
     itemDescription,
@@ -104,7 +104,7 @@ const UdonMenuCard = (props) => {
           Customize{" "}
         </Fab>
         {open && (
-          <UdonDialog
+          <MeiFunDialog
             open={open}
             onClose={handleClose}
             onAdd={handleAdd}
@@ -133,4 +133,4 @@ const UdonMenuCard = (props) => {
   );
 };
 
-export default UdonMenuCard;
+export default MeiFunMenuCard;

@@ -99,7 +99,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SoupDialog = (props) => {
+const ChowMeinDialog = (props) => {
   const {
     onClose,
     open,
@@ -120,7 +120,7 @@ const SoupDialog = (props) => {
     initialPrice = price;
   }
   const [sizeValue, setSizeValue] = useState("Pint");
-  const [meatValue, setMeatValue] = useState("Chicken");
+  const [style, setStyle] = useState("Chow Mein");
   const [quantity, setQuantity] = useState(1);
   const [finalPrice, setFinalPrice] = useState(initialPrice);
 
@@ -137,13 +137,11 @@ const SoupDialog = (props) => {
 
   const handleAddItem = () => {
     onAdd();
-    const type = "Soup";
+    const type = "Chow Mein";
     let options = {};
-    if (title === "Yat Gai Mei") {
-      options = { type, meatValue };
-    } else {
-      options = { type, sizeValue };
-    }
+
+    options = { style, sizeValue };
+
     let cartUnitPrice = finalPrice;
 
     const newItem = {
@@ -166,9 +164,9 @@ const SoupDialog = (props) => {
     }
   };
 
-  const handleMeatChange = (e) => {
+  const handleStyleChange = (e) => {
     const meat = e.target.value;
-    setMeatValue(meat);
+    setStyle(meat);
   };
 
   const handleQuantityChange = (e) => {
@@ -186,55 +184,41 @@ const SoupDialog = (props) => {
     minimumFractionDigits: 2,
   });
 
-  const meatOptions = (
-    <div>
-      {" "}
-      Please choose from the options below:
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography className={classes.heading}> Meat: </Typography>
-          <Typography className={classes.selectedValue}>{meatValue}</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            <FormControl component="fieldset">
-              <FormLabel component="legend"> Select one: </FormLabel>
-              <RadioGroup
-                aria-label="rices"
-                name="rices1"
-                value={meatValue}
-                onChange={handleMeatChange}
-              >
-                <FormControlLabel
-                  value="Chicken"
-                  control={<Radio />}
-                  label="Chicken"
-                />
-                <FormControlLabel
-                  value="Pork"
-                  control={<Radio />}
-                  label="Pork"
-                />{" "}
-                <FormControlLabel
-                  value="Shrimp"
-                  control={<Radio />}
-                  label="Shrimp"
-                />{" "}
-                <FormControlLabel
-                  value="Beef"
-                  control={<Radio />}
-                  label="Beef"
-                />
-              </RadioGroup>
-            </FormControl>{" "}
-          </Typography>
-        </AccordionDetails>
-      </Accordion>{" "}
-    </div>
+  const styleOptions = (
+    <Accordion>
+      <AccordionSummary
+        expandIcon={<ExpandMoreIcon />}
+        aria-controls="panel1a-content"
+        id="panel1a-header"
+      >
+        <Typography className={classes.heading}> Style: </Typography>
+        <Typography className={classes.selectedValue}>{style}</Typography>
+      </AccordionSummary>
+      <AccordionDetails>
+        <Typography>
+          <FormControl component="fieldset">
+            <FormLabel component="legend"> Select one: </FormLabel>
+            <RadioGroup
+              aria-label="style"
+              name="style"
+              value={style}
+              onChange={handleStyleChange}
+            >
+              <FormControlLabel
+                value="Chow Mein"
+                control={<Radio />}
+                label="Chow Mein"
+              />
+              <FormControlLabel
+                value="Chop Suey"
+                control={<Radio />}
+                label="Chop Suey"
+              />{" "}
+            </RadioGroup>
+          </FormControl>{" "}
+        </Typography>
+      </AccordionDetails>
+    </Accordion>
   );
 
   const sizeOptions = (
@@ -314,19 +298,11 @@ const SoupDialog = (props) => {
               {" "}
               <Grid Item xs={12} sm={6} className={classes.gridPadding}>
                 {" "}
-                <img className={classes.img} src={img} alt=" sweet sour" />
+                <img className={classes.img} src={img} alt={title} />
               </Grid>
               <Grid Item xs={12} sm={6}>
-                {price !== null ? (
-                  title === "Yat Gai Mei" ? (
-                    meatOptions
-                  ) : (
-                    <Typography> no options to choose from 🧐 </Typography>
-                  )
-                ) : (
-                  sizeOptions
-                )}
-                {/* {title === "Yat Gai Mei" ? meatOptions : null} */}
+                {sizeOptions}
+                {styleOptions}
               </Grid>
               <Grid item xs={12}>
                 {" "}
@@ -364,7 +340,7 @@ const SoupDialog = (props) => {
               </Typography>
 
               <Typography></Typography>
-              <Review title={title} reviews={reviews} category="soup" />
+              <Review title={title} reviews={reviews} category="chowmein" />
             </Typography>
           </DialogContentText>
         </DialogContent>
@@ -414,4 +390,4 @@ const SoupDialog = (props) => {
   );
 };
 
-export default SoupDialog;
+export default ChowMeinDialog;

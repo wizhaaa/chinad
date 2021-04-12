@@ -26,7 +26,7 @@ import MuiAlert from "@material-ui/lab/Alert";
 
 import { Add as AddIcon } from "@material-ui/icons";
 
-import SoupDialog from "./SoupDialog";
+import LoMeinDialog from "./LoMeinDialog";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LunchMenuCard = (props) => {
+const LoMeinMenuCard = (props) => {
   const {
     itemName,
     itemDescription,
@@ -90,7 +90,7 @@ const LunchMenuCard = (props) => {
   return (
     <Card className={classes.cards}>
       <CardHeader title={itemName}> </CardHeader>{" "}
-      <CardMedia className={classes.media} image={img} title="fried rice" />
+      <CardMedia className={classes.media} image={img} title={itemName} />
       <CardContent> {/* {itemDescription} */}</CardContent>
       <CardActions className={classes.container} disableSpacing>
         <Box className={classes.bottomText}>
@@ -112,7 +112,7 @@ const LunchMenuCard = (props) => {
           Customize{" "}
         </Fab>
         {open && (
-          <SoupDialog
+          <LoMeinDialog
             open={open}
             onClose={handleClose}
             onAdd={handleAdd}
@@ -141,4 +141,4 @@ const LunchMenuCard = (props) => {
   );
 };
 
-export default LunchMenuCard;
+export default LoMeinMenuCard;

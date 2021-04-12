@@ -141,6 +141,8 @@ const SoupDialog = (props) => {
     let options = {};
     if (title === "Yat Gai Mei") {
       options = { type, meatValue };
+    } else if (price !== null) {
+      options = { type };
     } else {
       options = { type, sizeValue };
     }

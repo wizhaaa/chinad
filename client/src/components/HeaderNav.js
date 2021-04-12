@@ -51,8 +51,9 @@ function ResponsiveDrawer(props) {
   };
 
   // defining our drawer. loops through imported lists
+  // add this to wrapper div to make it close on click onClick={handleDrawerToggle}
   const drawer = (
-    <div onClick={handleDrawerToggle}>
+    <div>
       <div className={classes.toolbar} />
       <Divider />
 

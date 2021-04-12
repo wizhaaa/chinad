@@ -5,20 +5,12 @@ import {
   CardActions,
   CardContent,
   CardMedia,
-  Button,
   Typography,
   CardHeader,
   makeStyles,
   useTheme,
-  IconButton,
   Fab,
   Box,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  useMediaQuery,
   Snackbar,
 } from "@material-ui/core";
 
@@ -26,7 +18,7 @@ import MuiAlert from "@material-ui/lab/Alert";
 
 import { Add as AddIcon } from "@material-ui/icons";
 
-import SoupDialog from "./SoupDialog";
+import BeefDialog from "./BeefDialog";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -55,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LunchMenuCard = (props) => {
+const BeefMenuCard = (props) => {
   const {
     itemName,
     itemDescription,
@@ -112,7 +104,7 @@ const LunchMenuCard = (props) => {
           Customize{" "}
         </Fab>
         {open && (
-          <SoupDialog
+          <BeefDialog
             open={open}
             onClose={handleClose}
             onAdd={handleAdd}
@@ -141,4 +133,4 @@ const LunchMenuCard = (props) => {
   );
 };
 
-export default LunchMenuCard;
+export default BeefMenuCard;

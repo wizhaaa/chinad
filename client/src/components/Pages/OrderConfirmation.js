@@ -176,6 +176,11 @@ function Confirmation() {
             <Typography variant="h4" gutterBottom>
               🎉 Confirmation 🙌
             </Typography>
+            <img
+              src="https://i.pinimg.com/originals/5e/65/93/5e659326c2027e01b2c56a8c6d7908e7.gif"
+              alt="celebration-gif"
+              style={{ maxWidth: "80%" }}
+            />
             <Typography gutterBottom>
               {" "}
               🙏 Thank you {name} for your order! You should have received a

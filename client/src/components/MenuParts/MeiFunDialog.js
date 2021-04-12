@@ -99,7 +99,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const DietDialog = (props) => {
+const MeiFunDialog = (props) => {
   const {
     onClose,
     open,
@@ -137,12 +137,12 @@ const DietDialog = (props) => {
 
   const handleAddItem = () => {
     onAdd();
-    const type = "Diet";
+    const type = "Mei Fun";
     let options = {};
     if (title === "Yat Gai Mei") {
       options = { type, meatValue };
     } else {
-      options = { type, sizeValue };
+      options = { type };
     }
     let cartUnitPrice = finalPrice;
 
@@ -314,7 +314,7 @@ const DietDialog = (props) => {
               {" "}
               <Grid Item xs={12} sm={6} className={classes.gridPadding}>
                 {" "}
-                <img className={classes.img} src={img} alt=" sweet sour" />
+                <img className={classes.img} src={img} alt={title} />
               </Grid>
               <Grid Item xs={12} sm={6}>
                 {price !== null ? (
@@ -364,7 +364,7 @@ const DietDialog = (props) => {
               </Typography>
 
               <Typography></Typography>
-              <Review title={title} reviews={reviews} category="diet" />
+              <Review title={title} reviews={reviews} category="mushu" />
             </Typography>
           </DialogContentText>
         </DialogContent>
@@ -414,4 +414,4 @@ const DietDialog = (props) => {
   );
 };
 
-export default DietDialog;
+export default MeiFunDialog;
