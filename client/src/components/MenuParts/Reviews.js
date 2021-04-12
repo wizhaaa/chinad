@@ -1,41 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
-  Add as AddIcon,
-  Close as CloseIcon,
-  ExpandMore as ExpandMoreIcon,
   SentimentVeryDissatisfied as SentimentVeryDissatisfiedIcon,
   SentimentDissatisfied as SentimentDissatisfiedIcon,
   SentimentSatisfied as SentimentSatisfiedIcon,
   SentimentSatisfiedAlt as SentimentSatisfiedAltIcon,
   SentimentVerySatisfied as SentimentVerySatisfiedIcon,
-  StarBorder as StarBorderIcon,
   Favorite as FavoriteIcon,
 } from "@material-ui/icons";
 import {
-  Grid,
   Box,
-  Fab,
   Button,
   Typography,
-  IconButton,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  Radio,
-  RadioGroup,
-  FormControlLabel,
-  FormControl,
-  FormLabel,
-  InputLabel,
-  MenuItem,
-  Select,
   TextField,
-  useMediaQuery,
   makeStyles,
   Divider,
   withStyles,
@@ -44,7 +20,6 @@ import Rating from "@material-ui/lab/Rating";
 import PropTypes from "prop-types";
 import Pagination from "@material-ui/lab/Pagination";
 
-import { useCartContext } from "../CartContext";
 import api from "../api";
 
 const useStyles = makeStyles((theme) => ({
@@ -117,37 +92,6 @@ const StyledRating = withStyles({
     color: "#ff3d47",
   },
 })(Rating);
-
-const customIcons = {
-  1: {
-    icon: <SentimentVeryDissatisfiedIcon />,
-    label: "Very Dissatisfied",
-  },
-  2: {
-    icon: <SentimentDissatisfiedIcon />,
-    label: "Dissatisfied",
-  },
-  3: {
-    icon: <SentimentSatisfiedIcon />,
-    label: "Neutral",
-  },
-  4: {
-    icon: <SentimentSatisfiedAltIcon />,
-    label: "Satisfied",
-  },
-  5: {
-    icon: <SentimentVerySatisfiedIcon />,
-    label: "Very Satisfied",
-  },
-};
-
-function IconContainer(props) {
-  const { value, ...other } = props;
-  return <span {...other}>{customIcons[value].icon}</span>;
-}
-IconContainer.propTypes = {
-  value: PropTypes.number.isRequired,
-};
 
 const Review = React.memo((props) => {
   const classes = useStyles();
