@@ -1,17 +1,4 @@
-const ingredients = [
-  { name: "lunch specials", des: "/lunch" },
-  { name: "soup", des: "/soups" },
-  { name: "appetizers", des: "/appetizers" },
-  { name: "lunch specials", des: "/lunch" },
-  { name: "soup", des: "/soups" },
-  { name: "appetizers", des: "/appetizers" },
-  { name: "lunch specials", des: "/lunch" },
-  { name: "soup", des: "/soups" },
-  { name: "appetizers", des: "/appetizers" },
-  { name: "lunch specials", des: "/lunch" },
-  { name: "soup", des: "/soups" },
-  { name: "appetizers", des: "/appetizers" },
-];
+const ingredients = [{ name: "section wip", des: "description here" }];
 
 const pricing = [
   {
