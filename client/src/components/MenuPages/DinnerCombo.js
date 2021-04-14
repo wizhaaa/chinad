@@ -41,7 +41,7 @@ const DinnerCombo = (props) => {
     api.get("/api/dinners").then((res) => {
       setDinners(res.data);
     });
-  });
+  }, []);
 
   const dinnerGrid = dinners.map((dinner) => (
     <Grid item xs={12} sm={6} md={4}>

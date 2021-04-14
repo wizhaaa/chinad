@@ -9,20 +9,30 @@ function Home() {
     <div className="Home">
       <Typography component="div">
         <Box textAlign="center" m={1} py={8}>
-          <Typography variant="h4" gutterBottom>
+          <Typography variant="h1" gutterBottom>
             Welcome!
           </Typography>
           <Typography variant="body1" gutterBottom>
             {" "}
-            Welcome the new china delight website! We are a chinese take-out ( &
-            dine-in whenever COVID decides it's safe enough ) restauraunt
+            👋 Welcome the new China Delight website! We are a chinese take-out
+            ( & dine-in whenever COVID decides it's safe enough ) restauraunt
             located in Forest Hill, MD.
           </Typography>
           <br />
           <Typography variant="body1" gutterBottom>
-            Here, you may browse our menu and place online orders for pick-up!
-            we recommend to use the side bar navigation to browse the menu, and
-            not to scroll through the 200+ items! It's faster and less swiping.
+            🛒 Here, you may browse our menu and place online orders for
+            pick-up! We recommend to use the side bar navigation to browse the
+            menu, and not to scroll through the 200+ items! It's faster and less
+            swiping.
+          </Typography>{" "}
+          <br />
+          <Typography variant="body1" gutterBottom>
+            <em> Disclaimer: the </em> 📸{" "}
+            <em>
+              {" "}
+              photos are not accurate replications of our dishes, only a
+              reference to see what they look like{" "}
+            </em>
           </Typography>
           <Box py={2}> </Box>
           <Typography variant="body1" gutterBottom>

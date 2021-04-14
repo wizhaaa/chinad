@@ -41,7 +41,7 @@ const LunchSpecials = (props) => {
     api.get("/api/lunches").then((res) => {
       setLunches(res.data);
     });
-  });
+  }, []);
 
   const lunchGrid = lunches.map((lunch) => (
     <Grid item xs={12} sm={6} md={4}>
@@ -77,7 +77,10 @@ const LunchSpecials = (props) => {
           </strong>
           <br />
           Optional: choose egg drop soup, wonton soup, or hot & sour soup, egg
-          roll, or soda for $0.75 <br />
+          roll, or soda for $0.75
+          <br /> If you choose a soda, indicating which soda you would like in
+          the special request field would help us a lot!
+          <br />
           <em style={{ color: "#B18944" }}>
             {" "}
             Note: available daily until 3:30 PM{" "}

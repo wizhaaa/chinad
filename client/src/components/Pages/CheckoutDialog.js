@@ -196,7 +196,7 @@ const CheckoutDialog = (props) => {
     );
     axios({
       method: "POST",
-      url: "http://localhost:4747/api/send",
+      url: "https://chinadelightmd.com/api/send",
       data: {
         name: name,
         email: email,
@@ -447,7 +447,7 @@ const CheckoutDialog = (props) => {
                     {" "}
                     Orders usually take 15-20 minutes. <br /> We will try our
                     best to finish your order on time. <br /> We only have 2
-                    chefs, please bear with us 🙇‍♂️ <br /> Friday and saturdays
+                    chefs, please bear with us 🙇‍♂️ <br /> Friday and Saturdays
                     nights can get very busy and orders can take upwards of 1
                     hour on holidays. <br /> Please see
                     <a href="/about">
@@ -511,7 +511,7 @@ const CheckoutDialog = (props) => {
       </Dialog>
       <Backdrop className={classes.backdrop} open={backdrop}>
         <CircularProgress color="inherit" /> <br />
-        <Typography variant="h4">
+        <Typography variant="h5">
           {" "}
           Sending... don't close the window{" "}
         </Typography>

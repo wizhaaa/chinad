@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Typography, Box, Grid, makeStyles, Divider } from "@material-ui/core";
+import { Launch as LaunchIcon } from "@material-ui/icons";
 
 import LunchSpecials from "../MenuPages/LunchSpecials";
 import Soups from "../MenuPages/Soups";
@@ -59,18 +60,35 @@ function Menu() {
             Hi there! Welcome to the page where <em> every </em> menu item is
             listed. <br /> You will be able to customize some items and then add
             them to your cart{" "}
-            <em> (see your top right, or under the menubar) </em> <br /> It's
-            quite a long menu, so we recommend you navigate using the sidebar
-            menu to find what you are looking for!
+            <em> (see your top right 👆 , or under the menubar) </em> <br />{" "}
+            It's quite a long menu, so we recommend you navigate using the 👈
+            sidebar menu 👈 to find what you are looking for!
             <br />
-            <em>
-              {" "}
-              Note: the drawings and photos are not accurate replications of our
-              dishes, only a reference to see what they look like{" "}
-            </em>
           </Typography>
           <br />
-          <Typography variant="body1" gutterBottom></Typography>
+          <Typography variant="body1" gutterBottom>
+            Note: If your requests contain extra sauce, extra meat, or anything
+            extra, they are liable to extra fees not calculated in the final
+            price below. Please see{" "}
+            <a href="/about">
+              {" "}
+              💸 pricing
+              <LaunchIcon
+                style={{ alignItems: "center", height: "1rem" }}
+              />{" "}
+            </a>{" "}
+            for more details on what costs you can expect.{" "}
+          </Typography>
+          <br />
+
+          <Typography variant="body1" gutterBottom>
+            <em> Disclaimer: the </em> 📸{" "}
+            <em>
+              {" "}
+              photos are not accurate replications of our dishes, only a
+              reference to see what they look like{" "}
+            </em>
+          </Typography>
           <Divider className={classes.divider} />
           <LunchSpecials />
           <Divider className={classes.divider} />

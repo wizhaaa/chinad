@@ -72,7 +72,8 @@ const ChowMein = (props) => {
           Chow Mein{" "}
         </Typography>
         <Typography className={classes.subheadings}>
-          Mixed vegetables in a white sauce with a meat of your choice.
+          Mixed vegetables in a white sauce with a meat of your choice. Served
+          with steamed rice and fried noodles.
         </Typography>{" "}
       </div>
 

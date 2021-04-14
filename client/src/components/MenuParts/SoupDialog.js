@@ -316,14 +316,14 @@ const SoupDialog = (props) => {
               {" "}
               <Grid Item xs={12} sm={6} className={classes.gridPadding}>
                 {" "}
-                <img className={classes.img} src={img} alt=" sweet sour" />
+                <img className={classes.img} src={img} alt={title} />
               </Grid>
               <Grid Item xs={12} sm={6}>
                 {price !== null ? (
                   title === "Yat Gai Mei" ? (
                     meatOptions
                   ) : (
-                    <Typography> no options to choose from 🧐 </Typography>
+                    <Typography> No options to choose from 🧐 </Typography>
                   )
                 ) : (
                   sizeOptions

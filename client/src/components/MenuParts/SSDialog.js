@@ -137,7 +137,7 @@ const SSDialog = (props) => {
 
   const handleAddItem = () => {
     onAdd();
-    const type = "Soup";
+    const type = "S/S";
     let options = {};
     if (title === "Yat Gai Mei") {
       options = { type, meatValue };

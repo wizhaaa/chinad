@@ -359,10 +359,6 @@ const SideDialog = (props) => {
               <Typography gutterBottom> {description} </Typography>
               <Divider className={classes.divider} />
 
-              <Typography variant="h5" gutterBottom>
-                Reviews
-              </Typography>
-
               <Typography></Typography>
               {/* <Review title={title} reviews={reviews} category="side" /> */}
             </Typography>

@@ -131,7 +131,7 @@ function About() {
         </Typography>
         <Typography variant="body1" gutterBottom>
           {" "}
-          Have more questions? call us at 410-877-9490 or email us at{" "}
+          Have more questions? Call us at 410-877-9490 or email us at{" "}
           <a href="mailto:chinadelightmd@gmail.com">
             {" "}
             chinadelightmd@gmail.com{" "}
@@ -160,26 +160,13 @@ function About() {
                 {" "}
                 Vegetable oil{" "}
               </Typography>{" "}
-              <Typography variant="body1"> When will reviews work? </Typography>
-              <Typography variant="body2" gutterBottom>
-                {" "}
-                soon ™{" "}
-              </Typography>
               <Typography variant="body1">
                 {" "}
                 Accounts? Favorites? Order History?{" "}
               </Typography>
               <Typography variant="body2" gutterBottom>
                 {" "}
-                Yeahhhhhh{" "}
-              </Typography>
-              <Typography variant="body1">
-                {" "}
-                The menu page is kind of laggy?{" "}
-              </Typography>
-              <Typography variant="body2" gutterBottom>
-                {" "}
-                yeahhhh{" "}
+                Perhaps™ ... 🤔{" "}
               </Typography>
               <Typography variant="body1">
                 {" "}
@@ -249,15 +236,15 @@ function About() {
         </Typography>
         <Typography variant="body1" gutterBottom>
           {" "}
-          This website was made with ☕ by will zhang for his senior project
-          derp. © {new Date().getFullYear()}{" "}
+          This website was made with ❌😴🛌💤😫 by will zhang for his senior
+          project derp. © {new Date().getFullYear()}{" "}
         </Typography>
         <Typography variant="body1" gutterBottom>
           {" "}
-          Source code can be found at his{" "}
+          Source code can be found at my{" "}
           <a href="https://github.com/notwz/chinad">
             {" "}
-            github{" "}
+            GitHub{" "}
             <LaunchIcon style={{ alignItems: "center", height: "1rem" }} />
           </a>{" "}
         </Typography>
@@ -267,7 +254,7 @@ function About() {
         </Typography>
         <Typography variant="body1" gutterBottom>
           {" "}
-          And yea i just added a bunch of emojis to make it more interesting{" "}
+          And yea I just added a bunch of emojis to make it more interesting{" "}
         </Typography>
       </Box>
     </div>

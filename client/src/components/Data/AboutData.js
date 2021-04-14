@@ -1,4 +1,19 @@
-const ingredients = [{ name: "section wip", des: "description here" }];
+const ingredients = [
+  { name: "Combination/Combo", des: "Includes Shrimp, Chicken, & Beef" },
+  {
+    name: "Sweet and Sour",
+    des:
+      "Ours are breaded + fried meats. We serve it with a dark red sweet & sour suace. It is NOT covered in sauce nor put with pineapples.",
+  },
+  { name: "Egg Foo Young", des: "des" },
+  { name: "Hunan Sauce", des: "des" },
+  { name: "Szechuan Sauce", des: "des" },
+  { name: "Mixed Vegetables", des: "des" },
+  { name: "title", des: "des" },
+  { name: "title", des: "des" },
+  { name: "title", des: "des" },
+  { name: "title", des: "des" },
+];
 
 const pricing = [
   {

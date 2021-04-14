@@ -76,8 +76,7 @@ const Diet = (props) => {
           <br />
           Seasoning Sauce be Served on the Side (White or Brown Sauce).
           <br /> Fried Rice Instead of White Rice $1.5 Extra
-          <br /> Lo Mein or Chicken Fried Rice or Shrimp Fried Rice Instead of
-          White Rice $3.75 Extra
+          <br />
         </Typography>{" "}
       </div>
 
