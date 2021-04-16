@@ -2,25 +2,36 @@
 <br>
 GitHub Link: https://github.com/notwz/chinad
 <br> 
-essentially, this repository holds the files for the China Delight (forest hill) website. (ecommerce & food ordering)
+Files for China Delight of Forest Hill, MD. 
+<br> 
+Purpose: to allow online ordering. 
 <br>
-DOB: 20200803 Aug 3
+DOB: AUG 03 2020
 <br>
-03 . 09 . 2020 goal:
+Production is: 
 Digital Ocean Deployment with MERN Stack
 
 <h2> front end stuffs </h2>
 
 <h3> quick start guide </h3>
 
-cd client: `npx create-react-app client`
+cd client: `npm install`
 
- <br>
+<br /> 
 
-and then: `npm i @material-ui/core @material-ui/icons @material-ui/lab react react-dom react-scripts axios `
+run development: `npm start` 
+
+<br /> 
+
+run build: `npm run build` 
+
 
 <br>
 
 <h2> back end stuffs </h2>
 
-cd server `npm i express mongoose cors dotenv`
+cd server `npm install`
+
+<br /> 
+
+run server `nodemon server.js` or `node server.js` 
