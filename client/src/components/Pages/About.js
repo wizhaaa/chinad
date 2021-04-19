@@ -230,32 +230,34 @@ function About() {
         </Accordion>
 
         <Box py={5}> </Box>
-        <Typography variant="h4" gutterBottom>
+        <Box className="bottomAbout">
           {" "}
-          About the site{" "}
-        </Typography>
-        <Typography variant="body1" gutterBottom>
-          {" "}
-          This website was made with ❌😴🛌💤😫 by will zhang for his senior
-          project derp. © {new Date().getFullYear()}{" "}
-        </Typography>
-        <Typography variant="body1" gutterBottom>
-          {" "}
-          Source code can be found at my{" "}
-          <a href="https://github.com/notwz/chinad">
+          <Typography variant="h4" gutterBottom>
             {" "}
-            GitHub{" "}
-            <LaunchIcon style={{ alignItems: "center", height: "1rem" }} />
-          </a>{" "}
-        </Typography>
-        <Typography variant="body1" gutterBottom>
-          {" "}
-          Pretty much just a MERN stack application{" "}
-        </Typography>
-        <Typography variant="body1" gutterBottom>
-          {" "}
-          And yea I just added a bunch of emojis to make it more interesting{" "}
-        </Typography>
+            About the site{" "}
+          </Typography>
+          <Typography variant="body1" gutterBottom>
+            {" "}
+            This website was made with ❌🛌😴💤 by Will Zhang for his senior
+            project. © {new Date().getFullYear()}{" "}
+          </Typography>
+          <Typography variant="body1" gutterBottom>
+            {" "}
+            Source code can be found at my{" "}
+            <a href="https://github.com/notwz/chinad">
+              {" "}
+              GitHub{" "}
+              <LaunchIcon style={{ alignItems: "center", height: "1rem" }} />
+            </a>{" "}
+          </Typography>
+          <Typography variant="body1" gutterBottom>
+            {" "}
+            A MERN stack application{" "}
+          </Typography>
+          <Typography variant="body1" gutterBottom>
+            {" "}
+          </Typography>
+        </Box>
       </Box>
     </div>
   );

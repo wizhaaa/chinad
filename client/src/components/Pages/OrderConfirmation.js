@@ -1,13 +1,6 @@
-import React, { useState, useContext } from "react";
+import React from "react";
 
 import {
-  Button as ButtonIcon,
-  Delete as DeleteIcon,
-  ShoppingCart as ShoppingCartIcon,
-} from "@material-ui/icons";
-import {
-  IconButton,
-  Button,
   Typography,
   Box,
   Table,
@@ -19,20 +12,12 @@ import {
   Paper,
   makeStyles,
 } from "@material-ui/core";
-import {
-  Add as AddIcon,
-  Close as CloseIcon,
-  ExpandMore as ExpandMoreIcon,
-  Launch as LaunchIcon,
-} from "@material-ui/icons";
+import { Launch as LaunchIcon } from "@material-ui/icons";
 
 // context provider
 import { useCartContext } from "../CartContext";
 
 import CheckoutDialog from "./CheckoutDialog";
-
-// styling
-import useStyles from "../MaterialStyles";
 
 const tableStyles = makeStyles((theme) => ({
   table: {
@@ -95,7 +80,7 @@ function Confirmation() {
             <TableCell align="center">
               {" "}
               <Box>
-                <Typography variant="h5"> ~ Order ~ </Typography>{" "}
+                <Typography variant="h5"> ‿୨ order ୧‿　</Typography>{" "}
               </Box>
             </TableCell>
           </TableRow>
@@ -160,14 +145,6 @@ function Confirmation() {
     </TableContainer>
   );
 
-  const emptyCart = (
-    <Typography>
-      {" "}
-      woops! looks like your cart is empty! head over to the menu and add items
-      to your cart ~{" "}
-    </Typography>
-  );
-
   return (
     <div className="Cart">
       <Typography component="div">
@@ -181,16 +158,30 @@ function Confirmation() {
               alt="celebration-gif"
               style={{ maxWidth: "80%" }}
             />
-            <Typography gutterBottom>
+            <Box mb={5}> </Box>
+            <Typography variant="body1" gutterBottom>
               {" "}
               🙏 Thank you {name} for your order! You should have received a
-              confirmation email (at {email}). Check your junk or spam folder if
-              you cannot find it. For future orders, adding
-              chinadelightnoreply@gmail to your contacts will keep it out of the
-              junk folder. If you still can't find your confirmation email, call
-              us to ask if we received your online order.{" "}
+              confirmation email (at {email} or your junk/spam folder).{" "}
             </Typography>
-            <Box mb={3}> </Box>
+            <Typography variant="h5" gutterBottom>
+              {" "}
+              ❓ Still can't find it?{" "}
+            </Typography>
+            <Typography variant="body1" gutterBottom>
+              {" "}
+              Call us at 410-877-9490 and ask if we received your order.{" "}
+            </Typography>
+            <Box mb={5}> </Box>
+            <Typography variant="h5" gutterBottom>
+              {" "}
+              🏃‍♀️ What's next?{" "}
+            </Typography>
+            <Typography variant="body1" gutterBottom>
+              {" "}
+              Come in to pick it up and tell us you placed an online order!{" "}
+            </Typography>
+            <Box mb={5}> </Box>
             <Typography variant="h5" gutterBottom>
               {" "}
               🔗 quick links{" "}
@@ -218,8 +209,8 @@ function Confirmation() {
             <Box mb={3}> </Box>
             <Typography gutterBottom>
               {" "}
-              📞 If we have any concerns, updates, or concerns about your order,
-              we will contact you at {phone}.{" "}
+              📞 If we have any questions, updates, or concerns about your
+              order, we will contact you at {phone}.{" "}
             </Typography>
             <Box mb={3}> </Box>
             <Typography gutterBottom>

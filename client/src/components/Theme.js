@@ -5,7 +5,7 @@ import orange from "@material-ui/core/colors/orange";
 const theme = createMuiTheme({
   typography: {
     fontFamily:
-      "-apple-system, BlinkMacSystemFont, acumin-pro, Merriweather, Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif",
+      "-apple-system, BlinkMacSystemFont, 'Helvetica Neue',  acumin-pro, Merriweather, Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',sans-serif",
     h1: {
       color: "#B18944",
       fontWeight: "bold",
@@ -24,6 +24,9 @@ const theme = createMuiTheme({
     },
   },
   palette: {
+    background: {
+      default: "",
+    },
     primary: {
       main: "#B41E22",
     },

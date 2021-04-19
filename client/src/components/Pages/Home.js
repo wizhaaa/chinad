@@ -9,7 +9,7 @@ function Home() {
     <div className="Home">
       <Typography component="div">
         <Box textAlign="center" m={1} py={8}>
-          <Typography variant="h1" gutterBottom>
+          <Typography variant="h4" gutterBottom>
             Welcome!
           </Typography>
           <Typography variant="body1" gutterBottom>
@@ -87,6 +87,8 @@ function Home() {
               Directions{" "}
             </Typography>
             📍 1 Newport Dr, Forest Hill, MD 21050
+            <Box py={1.5}> </Box>
+            On 24 (Rocks Spring Road), right across Enotria
             <Box py={1.5}> </Box>
             <iframe
               title="china delight map"
