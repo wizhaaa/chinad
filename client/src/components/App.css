@@ -18,12 +18,12 @@
 }
 
 a {
-  color: red;
+  color: #b41e22;
   text-decoration: none;
 }
 
 a:hover {
-  color: orange;
+  color: #b18944;
 }
 
 .dialogContainer {

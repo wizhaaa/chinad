@@ -96,6 +96,8 @@ const StyledRating = withStyles({
 const Review = React.memo((props) => {
   const classes = useStyles();
   const { title, reviews, category } = props;
+  const [reviewed, setReviewed] = useLocalStorage("reviewed", false);
+
   // for the item review
   // post request to the api/review/add/appetizer/ name of dish
   const addReview = (newReview) => {
@@ -172,6 +174,7 @@ const Review = React.memo((props) => {
 
   const handleAddNewReview = (e) => {
     console.log("new review is: ", newReview);
+    setReviewed(true);
     addReview(newReview);
     e.preventDefault();
     setNewReview({
@@ -199,57 +202,102 @@ const Review = React.memo((props) => {
         <br />
       </div>{" "}
       <Divider className={classes.divider} />
-      <form onSubmit={handleAddNewReview}>
-        <Box pb={5} className={classes.textFields}>
-          <Typography component="legend" gutterBottom>
-            Leave a review!
-          </Typography>
-          <StyledRating
-            name="customized-color"
-            value={newReview.rating}
-            onChange={handleRatingChange}
-            precision={0.5}
-            icon={<FavoriteIcon fontSize="inherit" />}
-          />
-          <Box py={1}> </Box>
-          <TextField
-            style={{ width: "100%" }}
-            id="outlined-textarea"
-            label="your name"
-            placeholder="Sun Tzu"
-            rows={1}
-            rowsMax={1}
-            multiline
-            variant="outlined"
-            InputLabelProps={{ shrink: true }}
-            inputProps={{ maxLength: 250 }}
-            required
-            value={newReview.name}
-            onChange={handleNameChange}
-          />{" "}
-          <TextField
-            style={{ width: "100%" }}
-            id="outlined-textarea"
-            label="review this item!"
-            placeholder="Love this dish! Very spicy so beware!"
-            rows={2}
-            rowsMax={4}
-            multiline
-            variant="outlined"
-            inputProps={{ maxLength: 250 }}
-            InputLabelProps={{ shrink: true }}
-            required
-            value={newReview.reviewContent}
-            onChange={handleReviewChange}
-          />{" "}
-          <Button variant="contained" color="secondary" type="submit">
-            {" "}
-            Submit{" "}
-          </Button>
-        </Box>{" "}
-      </form>
+      {reviewed ? (
+        <Typography variant="body1" gutterBottom>
+          {" "}
+          Thank you for your review! 😊
+          <br /> If you just submitted a review, it should show up when you
+          reload!{" "}
+        </Typography>
+      ) : (
+        <form onSubmit={handleAddNewReview}>
+          <Box pb={5} className={classes.textFields}>
+            <Typography component="legend" gutterBottom>
+              Leave a review!
+            </Typography>
+            <StyledRating
+              name="customized-color"
+              value={newReview.rating}
+              onChange={handleRatingChange}
+              precision={0.5}
+              icon={<FavoriteIcon fontSize="inherit" />}
+            />
+            <Box py={1}> </Box>
+            <TextField
+              style={{ width: "100%" }}
+              id="outlined-textarea"
+              label="your name"
+              placeholder="Sun Tzu"
+              rows={1}
+              rowsMax={1}
+              multiline
+              variant="outlined"
+              InputLabelProps={{ shrink: true }}
+              inputProps={{ maxLength: 250 }}
+              required
+              value={newReview.name}
+              onChange={handleNameChange}
+            />{" "}
+            <TextField
+              style={{ width: "100%" }}
+              id="outlined-textarea"
+              label="review this item!"
+              placeholder="Love this dish! Very spicy so beware!"
+              rows={2}
+              rowsMax={4}
+              multiline
+              variant="outlined"
+              inputProps={{ maxLength: 250 }}
+              InputLabelProps={{ shrink: true }}
+              required
+              value={newReview.reviewContent}
+              onChange={handleReviewChange}
+            />{" "}
+            <Button variant="contained" color="secondary" type="submit">
+              {" "}
+              Submit{" "}
+            </Button>
+          </Box>{" "}
+        </form>
+      )}
     </Typography>
   );
 });
+
+function useLocalStorage(key, initialValue) {
+  // State to store our value
+  // Pass initial state function to useState so logic is only executed once
+  const [storedValue, setStoredValue] = useState(() => {
+    try {
+      // Get from local storage by key
+      const item = window.localStorage.getItem(key);
+      // Parse stored json or if none return initialValue
+      return item ? JSON.parse(item) : initialValue;
+    } catch (error) {
+      // If error also return initialValue
+      console.log(error);
+      return initialValue;
+    }
+  });
+
+  // Return a wrapped version of useState's setter function that ...
+  // ... persists the new value to localStorage.
+  const setValue = (value) => {
+    try {
+      // Allow value to be a function so we have same API as useState
+      const valueToStore =
+        value instanceof Function ? value(storedValue) : value;
+      // Save state
+      setStoredValue(valueToStore);
+      // Save to local storage
+      window.localStorage.setItem(key, JSON.stringify(valueToStore));
+    } catch (error) {
+      // A more advanced implementation would handle the error case
+      console.log(error);
+    }
+  };
+
+  return [storedValue, setValue];
+}
 
 export default Review;
