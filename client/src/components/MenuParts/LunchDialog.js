@@ -171,7 +171,7 @@ const LunchDialog = React.memo((props) => {
     var riceChosen = e.target.value;
     setRiceValue(riceChosen);
     if (riceChosen === "Lo Mein" || riceChosen === "Pork Fried Rice") {
-      setAddedPrice(1.75);
+      setAddedPrice(1.5);
     } else {
       setAddedPrice(0);
     }
@@ -364,12 +364,12 @@ const LunchDialog = React.memo((props) => {
                           <FormControlLabel
                             value="Lo Mein"
                             control={<Radio />}
-                            label="Lo Mein (+1.75)"
+                            label="Lo Mein (+1.5)"
                           />
                           <FormControlLabel
                             value="Pork Fried Rice"
                             control={<Radio />}
-                            label="Pork Fried Rice (+1.75)"
+                            label="Pork Fried Rice (+1.5)"
                           />
                         </RadioGroup>
                       </FormControl>{" "}

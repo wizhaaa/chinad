@@ -42,6 +42,10 @@ const formatter = new Intl.NumberFormat("en-US", {
   minimumFractionDigits: 2,
 });
 
+const PPformatter = new Intl.NumberFormat("en-US", {
+  minimumFractionDigits: 2,
+});
+
 function Cart() {
   const tableClasses = tableStyles();
 
@@ -65,8 +69,12 @@ function Cart() {
   };
 
   const handleCheckout = () => {
-    handleClickOpen();
-    console.log("Checking out...");
+    if (userCartCount === 0) {
+      alert("Please add items to your cart");
+    } else {
+      handleClickOpen();
+      console.log("Checking out...");
+    }
   };
 
   var subt1 = 0;
@@ -92,7 +100,8 @@ function Cart() {
                 {" "}
                 Subtotal: {formatter.format(subt1)}
                 <br /> Taxes (6%): {formatter.format(taxes)}
-                <br /> Total: {formatter.format(total)} <br />{" "}
+                <br /> Total: {formatter.format(total)}
+                <br />{" "}
               </Typography>
               <Button
                 variant="contained"

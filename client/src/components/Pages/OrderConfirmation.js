@@ -34,7 +34,7 @@ const formatter = new Intl.NumberFormat("en-US", {
 function Confirmation() {
   const tableClasses = tableStyles();
 
-  const { prevOrder } = useCartContext();
+  const { prevOrder, orderPaid } = useCartContext();
 
   const cart = prevOrder.cart;
   const name = prevOrder.name;
@@ -47,6 +47,9 @@ function Confirmation() {
   const orderReqs = prevOrder.orderReqs;
 
   const estimatedTime = prevOrder.estimatedTime;
+
+  const paymentMethod = prevOrder.paymentMethod;
+  const amountPaid = prevOrder.amountPaid;
 
   const pickUpDetails = (
     <div>
@@ -116,7 +119,7 @@ function Confirmation() {
                   </Typography>{" "}
                   <Typography style={{ color: "#5e5e5e" }} variant="body2">
                     {" "}
-                    👩‍🍳 requests? {item.requestContent}{" "}
+                    👩‍🍳 Requests? {item.requestContent}{" "}
                   </Typography>
                   <Box variant="div" className="cartBottomOptions">
                     {" "}
@@ -151,7 +154,7 @@ function Confirmation() {
         <Box textAlign="center" m={1} py={8} mx={"1%"}>
           <Box style={{ maxWidth: 650 }}>
             <Typography variant="h4" gutterBottom>
-              🎉 Confirmation 🙌
+              🎉 Success! 🙌
             </Typography>
             <img
               src="https://i.pinimg.com/originals/5e/65/93/5e659326c2027e01b2c56a8c6d7908e7.gif"
@@ -252,7 +255,16 @@ function Confirmation() {
                   {estimatedTime}{" "}
                 </>
               ) : null}
-              <br /> <strong> Payment </strong> In-person
+              <br /> <strong> Payment </strong> {paymentMethod} <br />{" "}
+              <strong> Paid </strong> {formatter.format(amountPaid)} (includes
+              .50 fee) <br />{" "}
+              {total - amountPaid === 0 || total - amountPaid < 0 ? null : (
+                <div>
+                  {" "}
+                  <strong> Have to pay: </strong>{" "}
+                  {formatter.format(total - amountPaid)}{" "}
+                </div>
+              )}
             </Typography>
             <Box mb={5}> </Box>{" "}
           </Box>

@@ -35,6 +35,8 @@ export function CartProvider({ children }) {
   const [prevCart, setPrevCart] = useLocalStorage("prevCart", cart);
   const [prevOrder, setPrevOrder] = useLocalStorage("prevOrder");
 
+  const [orderPaid, setOrderPaid] = useState(false);
+
   const addNewItem = (newItem) => {
     setCart((prevItems) => {
       return [...prevItems, newItem];
@@ -56,6 +58,8 @@ export function CartProvider({ children }) {
         setPrevCart,
         prevOrder,
         setPrevOrder,
+        orderPaid,
+        setOrderPaid,
       }}
     >
       {children}

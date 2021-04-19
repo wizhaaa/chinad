@@ -37,7 +37,7 @@ const formatter = new Intl.NumberFormat("en-US", {
 });
 
 const MyEmail = ({ order }) => {
-  //   const { cart, setCart, userCartCount } = useCartContext();
+  // const { orderPaid } = useCartContext();
 
   //   const tableClasses = tableStyles();
 
@@ -53,6 +53,8 @@ const MyEmail = ({ order }) => {
   const cart = order.cart;
   const orderRequests = order.orderReqs;
   const estimatedTime = order.estimatedTime;
+  const paymentMethod = order.paymentMethod;
+  const amountPaid = order.amountPaid;
 
   const date = new Date().toString();
   const emailTotal = order.cart.total;
@@ -91,7 +93,7 @@ const MyEmail = ({ order }) => {
             <td>
               <div> 🍱 {item.title} </div>
               <div> 🥠 {itemOptions} </div>{" "}
-              <div> 👩‍🍳 requests? {item.requestContent} </div>
+              <div> 👩‍🍳 Requests? {item.requestContent} </div>
               <div>
                 {" "}
                 <div> qty: {item.quantity}</div>
@@ -121,7 +123,16 @@ const MyEmail = ({ order }) => {
         <div>
           Subtotal: {formatter.format(subtotal)}
           <br /> Taxes (6%): {formatter.format(taxes)}
-          <br /> Total: {formatter.format(total)} <br />{" "}
+          <br /> Total: {formatter.format(total)} <br />
+          Payment Method: {paymentMethod} <br /> <strong> Paid </strong>{" "}
+          {formatter.format(amountPaid)} (includes .50 fee) <br />
+          {total - amountPaid === 0 || total - amountPaid < 0 ? null : (
+            <div>
+              {" "}
+              <strong>Have to pay: </strong>{" "}
+              {formatter.format(total - amountPaid)}{" "}
+            </div>
+          )}
         </div>
         <div> {pickUpDetails} </div>
         <table aria-label="spanning table">
@@ -129,18 +140,18 @@ const MyEmail = ({ order }) => {
             <th align="center">
               {" "}
               <div>
-                <h3> ~ order ~</h3>{" "}
+                <h3> ~ order ~ </h3>{" "}
               </div>
             </th>
           </tr>
           {filledCart}
         </table>
         <div className="divider"> </div>
-        customer's requests for the order:
+        Customer's requests for the order:
         <br />
         {orderRequests}
         <div className="divider"> </div>
-        <br /> any questions? don't hesitate to email us at
+        <br /> Any questions? Don't hesitate to email us at
         chinadelightmd@gmail.com or call us at 410-877-9490! <br />
       </Item>
     </Email>
