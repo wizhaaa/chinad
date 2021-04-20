@@ -240,29 +240,39 @@ function Confirmation() {
             <Box mb={3}> </Box>
             <Typography>
               {" "}
-              <strong> Order Time </strong> {timePlaced}
-              <br /> <strong> Pick Up Option </strong> {pickUpOption}{" "}
+              <strong> 📆 Order Time </strong> {timePlaced}
+              <br /> <strong> 🏃‍♀️💨 Pick Up Option </strong> {pickUpOption}{" "}
               {pickUpOption === "custom time" ? (
                 <>
                   {" "}
-                  <br /> <strong> Picking Up At </strong> {pickUpTime}{" "}
+                  <br /> <strong> 🏃‍♀💨 Picking Up At </strong> {pickUpTime}{" "}
                 </>
               ) : null}
               {pickUpOption === "ASAP" ? (
                 <>
                   {" "}
-                  <br /> <strong> Estimated Pick Up Time</strong>{" "}
+                  <br /> <strong> ⏰ Estimated Pick Up Time</strong>{" "}
                   {estimatedTime}{" "}
                 </>
               ) : null}
-              <br /> <strong> Payment </strong> {paymentMethod} <br />{" "}
-              <strong> Paid </strong> {formatter.format(amountPaid)} (includes
-              .50 fee) <br />{" "}
-              {total - amountPaid === 0 || total - amountPaid < 0 ? null : (
+              <br />{" "}
+              {paymentMethod === "In Person" ? (
                 <div>
                   {" "}
-                  <strong> Have to pay: </strong>{" "}
-                  {formatter.format(total - amountPaid)}{" "}
+                  <strong> ⛔ Payment </strong> {paymentMethod} <br />{" "}
+                </div>
+              ) : (
+                <div>
+                  <strong> ✅ Payment </strong> {paymentMethod} <br />{" "}
+                  <strong> ✅ Paid </strong> {formatter.format(amountPaid)}{" "}
+                  (includes .50 fee) <br />{" "}
+                  {total - amountPaid === 0 || total - amountPaid < 0 ? null : (
+                    <div>
+                      {" "}
+                      <strong> ⛔ Have to pay: </strong>{" "}
+                      {formatter.format(total - amountPaid)}{" "}
+                    </div>
+                  )}
                 </div>
               )}
             </Typography>

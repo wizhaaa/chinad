@@ -73,7 +73,7 @@ const LunchSpecials = (props) => {
           Served with the choice of{" "}
           <strong>
             {" "}
-            fried rice, white rice, lo mein (+1.75), or pork fried rice (+1.75).{" "}
+            fried rice, white rice, lo mein (+1.5), or pork fried rice (+1.5).{" "}
           </strong>
           <br />
           Optional: choose egg drop soup, wonton soup, or hot & sour soup, egg

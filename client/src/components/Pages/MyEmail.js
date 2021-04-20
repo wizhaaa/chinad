@@ -69,11 +69,11 @@ const MyEmail = ({ order }) => {
   const pickUpDetails = (
     <div>
       {" "}
-      Pick up Option: {order.pickUpOption}
+      🏃‍♀️💨 Pick up Option: {order.pickUpOption}
       {order.pickUpOption === "custom time" ? (
-        <div> Pick up time: {order.pickUpTime} </div>
+        <div> ⏰ Pick up time: {order.pickUpTime} </div>
       ) : (
-        <div> Estimated pick up @ {estimatedTime} </div>
+        <div> ⏰ Estimated pick up @ {estimatedTime} </div>
       )}{" "}
     </div>
   );
@@ -115,26 +115,36 @@ const MyEmail = ({ order }) => {
       <Item>
         {" "}
         <h1> China Delight Order </h1>
-        <div> Thank you {name} for your order! </div>
-        <div> Order Time: {date} </div>
-        Order for: {name}
-        <br /> Email: {email}
-        <br /> Phone: {phone}
+        <div> 🙇‍♀️ Thank you {name} for your order! </div>
+        <div> 📆 Order Time: {date} </div>
+        😀 Order for: {name}
+        <br /> 📧 Email: {email}
+        <br /> 📞 Phone: {phone}
         <div>
           Subtotal: {formatter.format(subtotal)}
           <br /> Taxes (6%): {formatter.format(taxes)}
           <br /> Total: {formatter.format(total)} <br />
-          Payment Method: {paymentMethod} <br /> <strong> Paid </strong>{" "}
-          {formatter.format(amountPaid)} (includes .50 fee) <br />
-          {total - amountPaid === 0 || total - amountPaid < 0 ? null : (
+          <div> {pickUpDetails} </div>
+          {paymentMethod === "In Person" ? (
             <div>
               {" "}
-              <strong>Have to pay: </strong>{" "}
-              {formatter.format(total - amountPaid)}{" "}
+              <strong> ⛔ Payment </strong> {paymentMethod} <br />{" "}
+            </div>
+          ) : (
+            <div>
+              <strong> ✅ Payment </strong> {paymentMethod} <br />{" "}
+              <strong> ✅ Paid </strong> {formatter.format(amountPaid)}{" "}
+              (includes .50 fee) <br />{" "}
+              {total - amountPaid === 0 || total - amountPaid < 0 ? null : (
+                <div>
+                  {" "}
+                  <strong> ⛔ Have to pay: </strong>{" "}
+                  {formatter.format(total - amountPaid)}{" "}
+                </div>
+              )}
             </div>
           )}
         </div>
-        <div> {pickUpDetails} </div>
         <table aria-label="spanning table">
           <tr>
             <th align="center">

@@ -1,10 +1,11 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import { useTheme } from "@material-ui/core/styles";
 import {
   Add as AddIcon,
   Close as CloseIcon,
   ExpandMore as ExpandMoreIcon,
   Launch as LaunchIcon,
+  TrainRounded,
 } from "@material-ui/icons";
 import {
   Grid,
@@ -135,7 +136,11 @@ const CheckoutDialog = (props) => {
   const [pickUpOption, setPickUpOption] = useState("ASAP");
   const [customTime, setCustomTime] = useState("16:00");
   const [paymentPage, setPaymentPage] = useState(false);
-  const [amountPaid, setAmountPaid] = useLocalStorage("amountPaid", 0);
+  const [finalPage, setFinalPage] = useState(false);
+  const [firstPage, setFirstPage] = useState(true);
+  const [showPayPal, setShowPayPal] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState("In Person");
+  const [amountPaid, setAmountPaid] = useState(0);
 
   const [backdrop, setBackdrop] = useState(false);
 
@@ -148,10 +153,12 @@ const CheckoutDialog = (props) => {
   const minutes = new Date().getMinutes() + 20;
   const hours = new Date().getHours();
   const estimatedTime = `${hours}:${minutes}`;
-  let paymentMethod = "In Person";
-  if (orderPaid) {
-    paymentMethod = "Paid Online";
-  }
+
+  useEffect(() => {
+    if (orderPaid) {
+      setPaymentMethod("Paid Online");
+    }
+  }, []);
 
   if (pickUpOption === "ASAP") {
     order = {
@@ -309,174 +316,218 @@ const CheckoutDialog = (props) => {
 
   const page1 = (
     <Grid container>
-      <Grid item xs={12}>
-        <Typography variant="h6" gutterBottom>
+      <form
+        onSubmit={(e) => {
+          setPaymentPage(!paymentPage);
+          setFirstPage(!firstPage);
+          e.preventDefault();
+        }}
+      >
+        <Grid item xs={12}>
+          <Typography variant="h6" gutterBottom>
+            {" "}
+            👇 Please fill out the info to place your order 👇
+          </Typography>
+          <Typography variant="body1" gutterBottom>
+            {" "}
+            <em>items marked with an * are required </em>
+          </Typography>
+        </Grid>
+        <Divider className={classes.divider} />
+        <Grid item xs={12}>
+          <Typography variant="body1" gutterBottom>
+            {" "}
+            👋 Name:
+          </Typography>{" "}
+          <TextField
+            style={{ width: "75%", paddingBottom: "20px" }}
+            id="outlined-textarea"
+            label="👋 name"
+            placeholder="Sun Tzu"
+            autoComplete="name"
+            rowsMax={1}
+            variant="outlined"
+            InputLabelProps={{ shrink: true }}
+            inputProps={{ maxLength: 250 }}
+            required
+            value={name}
+            onChange={handleNameChange}
+          />
+        </Grid>{" "}
+        <Grid item xs={12}>
+          <Typography variant="body1" gutterBottom>
+            {" "}
+            📧 Email:
+          </Typography>{" "}
+          <TextField
+            style={{ width: "75%", paddingBottom: "20px" }}
+            id="outlined-textarea"
+            label="📧 email"
+            placeholder="ilovechinadelight@gmail.com"
+            type="email"
+            pattern=".+@globlex.com"
+            autoComplete="email"
+            rowsMax={1}
+            variant="outlined"
+            InputLabelProps={{ shrink: true }}
+            inputProps={{ maxLength: 250 }}
+            required
+            value={email}
+            onChange={handleEmailChange}
+          />
+        </Grid>{" "}
+        <Grid item xs={12}>
+          <Typography variant="body1" gutterBottom>
+            {" "}
+            📞 Phone Number:
+          </Typography>{" "}
+          <TextField
+            style={{ width: "75%", paddingBottom: "20px" }}
+            id="outlined-textarea"
+            label="📞 phone #"
+            placeholder="410-877-9490"
+            type="tel"
+            autoComplete="tel"
+            rowsMax={1}
+            variant="outlined"
+            InputLabelProps={{ shrink: true }}
+            inputProps={{ maxLength: 250 }}
+            required
+            value={phoneNum}
+            onChange={handlePhoneNumChange}
+          />
+        </Grid>{" "}
+        <Grid item xs={12}>
+          <Box>
+            <Typography gutterBottom>
+              Please note: If your requests contain extra sauce, extra meat, or
+              anything extra, they are liable to extra fees not calculated in
+              the final price below. Please see{" "}
+              <a href="/about">
+                {" "}
+                pricing
+                <LaunchIcon
+                  style={{ alignItems: "center", height: "1rem" }}
+                />{" "}
+              </a>{" "}
+              for more details on what costs you can expect.{" "}
+            </Typography>
+          </Box>
+        </Grid>
+        <Divider className={classes.divider} />
+        <Grid item xs={12}>
+          <Box pb={5}>
+            <Typography variant="h5" gutterBottom>
+              ⏰ Pick Up time:{" "}
+            </Typography>{" "}
+            <Typography gutterBottom>
+              <FormControl component="fieldset">
+                <FormLabel component="legend"> select one: </FormLabel>
+                <RadioGroup
+                  aria-label="pickup"
+                  name="pickup"
+                  value={pickUpOption}
+                  onChange={handlePickUpOptionChange}
+                >
+                  <FormControlLabel
+                    value="ASAP"
+                    control={<Radio />}
+                    label="ASAP"
+                  />
+                  <FormControlLabel
+                    value="custom time"
+                    control={<Radio />}
+                    label="custom time"
+                  />
+                </RadioGroup>{" "}
+                {pickUpOption === "custom time" ? customTimeChooser : null}
+              </FormControl>
+            </Typography>
+          </Box>
+        </Grid>{" "}
+        <Grid item xs={12}>
           {" "}
-          👇 Please fill out the info to place your order 👇
-        </Typography>
-        <Typography variant="body1" gutterBottom>
-          {" "}
-          <em>items marked with an * are required </em>
-        </Typography>
-      </Grid>
-      <Divider className={classes.divider} />
-      <Grid item xs={12}>
-        <Typography variant="body1" gutterBottom>
-          {" "}
-          👋 Name:
-        </Typography>{" "}
-        <TextField
-          style={{ width: "75%", paddingBottom: "20px" }}
-          id="outlined-textarea"
-          label="👋 name"
-          placeholder="Sun Tzu"
-          autoComplete="name"
-          rowsMax={1}
-          variant="outlined"
-          InputLabelProps={{ shrink: true }}
-          inputProps={{ maxLength: 250 }}
-          required
-          value={name}
-          onChange={handleNameChange}
-        />
-      </Grid>{" "}
-      <Grid item xs={12}>
-        <Typography variant="body1" gutterBottom>
-          {" "}
-          📧 Email:
-        </Typography>{" "}
-        <TextField
-          style={{ width: "75%", paddingBottom: "20px" }}
-          id="outlined-textarea"
-          label="📧 email"
-          placeholder="ilovechinadelight@gmail.com"
-          type="email"
-          pattern=".+@globlex.com"
-          autoComplete="email"
-          rowsMax={1}
-          variant="outlined"
-          InputLabelProps={{ shrink: true }}
-          inputProps={{ maxLength: 250 }}
-          required
-          value={email}
-          onChange={handleEmailChange}
-        />
-      </Grid>{" "}
-      <Grid item xs={12}>
-        <Typography variant="body1" gutterBottom>
-          {" "}
-          📞 Phone Number:
-        </Typography>{" "}
-        <TextField
-          style={{ width: "75%", paddingBottom: "20px" }}
-          id="outlined-textarea"
-          label="📞 phone #"
-          placeholder="410-877-9490"
-          type="tel"
-          autoComplete="tel"
-          rowsMax={1}
-          variant="outlined"
-          InputLabelProps={{ shrink: true }}
-          inputProps={{ maxLength: 250 }}
-          required
-          value={phoneNum}
-          onChange={handlePhoneNumChange}
-        />
-      </Grid>{" "}
-      <Grid item xs={12}>
-        <Box>
-          <Typography gutterBottom>
-            Please note: If your requests contain extra sauce, extra meat, or
-            anything extra, they are liable to extra fees not calculated in the
-            final price below. Please see{" "}
+          <Typography>
+            {" "}
+            Orders usually take 15-20 minutes. <br /> We will try our best to
+            finish your order on time. <br /> We only have 2 chefs, please bear
+            with us 🙇‍♂️ <br /> Friday and Saturdays nights can get very busy and
+            orders can take upwards of 1 hour on holidays. <br /> Please see
             <a href="/about">
               {" "}
-              pricing
+              order times
               <LaunchIcon
                 style={{ alignItems: "center", height: "1rem" }}
               />{" "}
             </a>{" "}
-            for more details on what costs you can expect.{" "}
+            for more details on estimated order times.
           </Typography>
-        </Box>
-      </Grid>
-      <Divider className={classes.divider} />
-      <Grid item xs={12}>
-        <Box pb={5}>
-          <Typography variant="h5" gutterBottom>
-            ⏰ Pick Up time:{" "}
-          </Typography>{" "}
-          <Typography gutterBottom>
-            <FormControl component="fieldset">
-              <FormLabel component="legend"> select one: </FormLabel>
-              <RadioGroup
-                aria-label="pickup"
-                name="pickup"
-                value={pickUpOption}
-                onChange={handlePickUpOptionChange}
-              >
-                <FormControlLabel
-                  value="ASAP"
-                  control={<Radio />}
-                  label="ASAP"
-                />
-                <FormControlLabel
-                  value="custom time"
-                  control={<Radio />}
-                  label="custom time"
-                />
-              </RadioGroup>{" "}
-              {pickUpOption === "custom time" ? customTimeChooser : null}
-            </FormControl>
-          </Typography>
-        </Box>
-      </Grid>{" "}
-      <Grid item xs={12}>
-        {" "}
-        <Typography>
+        </Grid>
+        <Divider className={classes.divider} />
+        <Grid item xs={12}>
           {" "}
-          Orders usually take 15-20 minutes. <br /> We will try our best to
-          finish your order on time. <br /> We only have 2 chefs, please bear
-          with us 🙇‍♂️ <br /> Friday and Saturdays nights can get very busy and
-          orders can take upwards of 1 hour on holidays. <br /> Please see
-          <a href="/about">
+          <Box m={3} className={classes.textFields}>
+            <TextField
+              name="orderRequests"
+              style={{ width: "100%" }}
+              id="outlined-textarea"
+              label="anything else?"
+              placeholder="let us know!"
+              rows={4}
+              rowsMax={8}
+              multiline
+              variant="outlined"
+              inputProps={{ maxLength: 250 }}
+              value={orderReqs}
+              onChange={handleOrderReqsChange}
+            />{" "}
+          </Box>
+        </Grid>{" "}
+        <Grid item xs={12}>
+          {" "}
+          <Button
+            variant="contained"
+            size="large"
+            color="secondary"
+            aria-label="pay"
+            type="submit"
+          >
             {" "}
-            order times
-            <LaunchIcon style={{ alignItems: "center", height: "1rem" }} />{" "}
-          </a>{" "}
-          for more details on estimated order times.
-        </Typography>
-      </Grid>
+            Payment 👉{" "}
+          </Button>
+        </Grid>
+      </form>
+
       <Divider className={classes.divider} />
+    </Grid>
+  );
+
+  const page2 = (
+    <Grid container>
       <Grid item xs={12}>
-        {" "}
-        <Box m={3} className={classes.textFields}>
-          <TextField
-            name="orderRequests"
-            style={{ width: "100%" }}
-            id="outlined-textarea"
-            label="anything else?"
-            placeholder="let us know!"
-            rows={4}
-            rowsMax={8}
-            multiline
-            variant="outlined"
-            inputProps={{ maxLength: 250 }}
-            value={orderReqs}
-            onChange={handleOrderReqsChange}
-          />{" "}
-        </Box>
-      </Grid>{" "}
-      <Divider className={classes.divider} />
-      <Grid item xs={12}>
+        <Button
+          variant="contained"
+          size="large"
+          color="secondary"
+          aria-label="pay"
+          onClick={() => {
+            setPaymentPage(!paymentPage);
+            setFirstPage(!firstPage);
+          }}
+        >
+          {" "}
+          👈 Back
+        </Button>{" "}
+        <Box py={3}> </Box>
         <Box>
           {" "}
           <Typography variant="h5" gutterBottom>
             {" "}
-            Want to Pay Online?
+            💻 Pay Online?
           </Typography>
+          <Box py={2}> </Box>
+          <Box></Box>
         </Box>{" "}
-        <Box py={2}> </Box>
         <Box>
           {orderPaid ? (
             <Box textAlign="center" width="100%">
@@ -502,13 +553,90 @@ const CheckoutDialog = (props) => {
               size="large"
               color="secondary"
               aria-label="pay"
-              onClick={() => setPaymentPage(!paymentPage)}
+              onClick={() => setShowPayPal(!showPayPal)}
             >
               {" "}
-              {paymentPage ? "❌ Cancel" : "💳 Pay Now"}
+              {showPayPal ? "❌ NEVERMIND" : "💳 Pay Now"}
             </Button>
           )}
+          {showPayPal && (
+            <Box>
+              <Box py={2}> </Box>
+              <Typography variant="h5" gutterBottom>
+                {" "}
+                ⛔ PLEASE READ ⛔{" "}
+              </Typography>
+              <Typography variant="body1" gutterBottom>
+                {" "}
+                There is a <strong> $0.50 fee </strong> and any special requests
+                not calculated online may require you to pay extra in-person.
+                Please see{" "}
+                <a href="/about">
+                  {" "}
+                  pricing
+                  <LaunchIcon
+                    style={{ alignItems: "center", height: "1rem" }}
+                  />{" "}
+                </a>{" "}
+                for more details on what costs you can expect.
+                <Box py={2}> </Box>{" "}
+                <Typography variant="body1" gutterBottom>
+                  If this looks too complicated, you can always pay in-store!
+                </Typography>{" "}
+                <Box py={2}> </Box>
+                <Typography variant="body1" gutterBottom>
+                  Once the PayPal payment goes through, an email will be sent
+                  and you will be redirected to the confirmation page. Make sure
+                  to add all your items in your cart and do NOT reload or leave
+                  the page.
+                </Typography>
+              </Typography>
+              <Box py={2}> </Box>
+
+              <Paypal
+                orderTotal={total}
+                cart={cart}
+                order={order}
+                setAmountPaid={setAmountPaid}
+                handlePlaceOrder={handlePlaceOrder}
+                sendEmail={sendEmail}
+                setPrevOrder={setPrevOrder}
+                setCart={setCart}
+                setBackdrop={setBackdrop}
+                handleClose={handleClose}
+                setPaymentMethod={setPaymentMethod}
+                setFinalPage={setFinalPage}
+                setPaymentPage={setPaymentPage}
+              />
+            </Box>
+          )}
         </Box>
+      </Grid>{" "}
+      <Grid item xs={12}>
+        <Box py={5}> </Box>
+        {showPayPal ? null : (
+          <div>
+            {" "}
+            <Typography variant="h5" gutterBottom>
+              {" "}
+              🧍‍♀️ Pay In-Person{" "}
+            </Typography>{" "}
+            <Box py={2}> </Box>
+            <Button
+              variant="contained"
+              size="large"
+              color="secondary"
+              aria-label="checkout"
+              type="submit"
+              onClick={handlePlaceOrder}
+            >
+              {" "}
+              🎉 Place Order!{" "}
+            </Button>
+          </div>
+        )}
+
+        <Box py={5}> </Box>
       </Grid>
     </Grid>
   );
@@ -524,88 +652,120 @@ const CheckoutDialog = (props) => {
         maxWidth="md"
         classes={{ paper: classes.dialogWrapper }}
       >
-        <form onSubmit={handlePlaceOrder} autoComplete="off">
-          <DialogTitle
-            id="responsive-dialog-title"
-            className={classes.dialogTitle}
-          >
-            <div style={{ display: "flex" }}>
-              {" "}
-              <Typography variant="h4" style={{ flexGrow: 1 }}>
-                ► Checking out ...{" "}
-              </Typography>{" "}
-              <IconButton color="primary" onClick={handleClose}>
-                {" "}
-                <CloseIcon />
-              </IconButton>
-            </div>
-          </DialogTitle>
-          <DialogContent dividers>
+        <DialogTitle
+          id="responsive-dialog-title"
+          className={classes.dialogTitle}
+        >
+          <div style={{ display: "flex" }}>
             {" "}
-            <Box textAlign="center">
-              {page1}
-              {paymentPage ? (
+            <Typography variant="h4" style={{ flexGrow: 1 }}>
+              ► Checking out ...{" "}
+            </Typography>{" "}
+            <IconButton color="primary" onClick={handleClose}>
+              {" "}
+              <CloseIcon />
+            </IconButton>
+          </div>
+        </DialogTitle>
+        <DialogContent dividers>
+          {" "}
+          <Box textAlign="center">
+            <Typography variant="h5" gutterBottom>
+              {" "}
+              Choose payment method{" "}
+            </Typography>
+            <Box py={3}></Box>
+            {firstPage && page1}
+            {paymentPage ? page2 : null}
+            {finalPage && <div> Redirecting ..</div>}
+            {/* {paymentPage ? (
+              <Grid item xs={12}>
                 <Box>
-                  <Box py={2}> </Box>
+                  {" "}
                   <Typography variant="h5" gutterBottom>
                     {" "}
-                    ⛔ PLEASE READ ⛔{" "}
+                    Want to Pay Online?
                   </Typography>
-                  <Typography variant="body1" gutterBottom>
-                    {" "}
-                    There is a .50 fee and any special requests not calculated
-                    online may require you to pay extra in-person. Please see{" "}
-                    <a href="/about">
+                </Box>{" "}
+                <Box py={2}> </Box>
+                <Box>
+                  {orderPaid ? (
+                    <Box textAlign="center" width="100%">
                       {" "}
-                      pricing
-                      <LaunchIcon
-                        style={{ alignItems: "center", height: "1rem" }}
-                      />{" "}
-                    </a>{" "}
-                    for more details on what costs you can expect. Adding items
-                    to your cart after payment will require you to pay the
-                    difference in person as well. Make sure to add all your
-                    items in your cart and do NOT reload or leave the page.
-                  </Typography>
-
-                  <Typography variant="body1" gutterBottom>
-                    If this looks too complicated, you can always pay in-store!
-                  </Typography>
-                  <Box py={2}> </Box>
-
-                  <Paypal
-                    orderTotal={total}
-                    order={order}
-                    setAmountPaid={setAmountPaid}
-                  />
+                      <Typography variant="body1">
+                        {" "}
+                        Thanks for paying! Your online order status will be
+                        updated as paid ✅ Amount Paid:{" "}
+                        {formatter.format(amountPaid)} (Inludes .50 fee)
+                        <br />
+                        {total - amountPaid === 0 ||
+                        total - amountPaid < 0 ? null : (
+                          <div>
+                            {" "}
+                            <strong> Have to Pay: </strong>{" "}
+                            {formatter.format(total - amountPaid)}{" "}
+                          </div>
+                        )}
+                      </Typography>
+                    </Box>
+                  ) : (
+                    <Button
+                      variant="contained"
+                      size="large"
+                      color="secondary"
+                      aria-label="pay"
+                      onClick={() => setPaymentPage(!paymentPage)}
+                    >
+                      {" "}
+                      {paymentPage ? "❌ Cancel" : "💳 Pay Now"}
+                    </Button>
+                  )}
                 </Box>
-              ) : null}
-            </Box>
-            <DialogContentText className={classes.container}>
-              {" "}
-            </DialogContentText>
-          </DialogContent>
+              </Grid>
+            ) : null} */}
+          </Box>
+          <DialogContentText className={classes.container}> </DialogContentText>
+        </DialogContent>
 
-          <DialogActions className="dialogContainer">
-            <Box pr={5}>
-              <Typography variant="h4"> {formatter.format(total)} </Typography>
-            </Box>
+        <DialogActions className="dialogContainer">
+          <Box pr={5}>
+            <Typography variant="h4"> {formatter.format(total)} </Typography>
+          </Box>
 
-            <Box pt={1.5} px={1.5}>
+          <Box pt={1.5} px={1.5}>
+            {firstPage ? (
               <Button
                 variant="contained"
                 size="large"
                 color="secondary"
-                aria-label="checkout"
-                type="submit"
-                onClick={() => console.log(" trying to place order ... ")}
+                aria-label="pay"
+                onClick={() => {
+                  if (name === "" || email === "" || phoneNum === "") {
+                    alert("Please fill out the form.");
+                  } else {
+                    setPaymentPage(!paymentPage);
+                    setFirstPage(!firstPage);
+                  }
+                }}
               >
-                {" "}
-                🎉 Place Order!{" "}
+                Payment 💸{" "}
               </Button>
-            </Box>
-          </DialogActions>
-        </form>
+            ) : (
+              <Button
+                variant="contained"
+                size="large"
+                color="secondary"
+                aria-label="pay"
+                onClick={() => {
+                  setPaymentPage(!paymentPage);
+                  setFirstPage(!firstPage);
+                }}
+              >
+                👈 Back{" "}
+              </Button>
+            )}
+          </Box>
+        </DialogActions>
       </Dialog>
       <Backdrop className={classes.backdrop} open={backdrop}>
         <CircularProgress color="inherit" /> <br />

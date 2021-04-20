@@ -3,7 +3,19 @@ import React, { useState, useEffect, useRef } from "react";
 import { useCartContext } from "../CartContext";
 
 const Paypal = (props) => {
-  const { orderTotal, setAmountPaid } = props;
+  let {
+    orderTotal,
+    setAmountPaid,
+    sendEmail,
+    setPrevOrder,
+    setCart,
+    setBackdrop,
+    handleClose,
+    order,
+    setPaymentMethod,
+    setFinalPage,
+    setPaymentPage,
+  } = props;
 
   const { orderPaid, setOrderPaid } = useCartContext();
 
@@ -19,6 +31,22 @@ const Paypal = (props) => {
   console.log("new total is : ", paypalTotal);
 
   console.log(paypalTotal);
+
+  const handlePlaceOrder = () => {
+    order["amountPaid"] = paypalTotal;
+    order["paymentMethod"] = "Paid Online";
+    //commenting out adding order for now
+    // addOrder(order);
+    sendEmail();
+    // redirect
+    // window.location.href = "/"
+
+    //empty our cart
+    setPrevOrder(order);
+    setCart([]);
+    setBackdrop(true);
+    handleClose();
+  };
 
   useEffect(() => {
     window.paypal
@@ -41,7 +69,13 @@ const Paypal = (props) => {
           const order = await actions.order.capture();
           console.log("successful order: " + order);
           setOrderPaid(true);
+          setPaymentMethod("Paid Online");
           setAmountPaid(paypalTotal);
+          order["amountPaid"] = paypalTotal;
+          order["paymentMethod"] = "Paid Online";
+          handlePlaceOrder();
+          setPaymentPage(false);
+          setFinalPage(true);
         },
         onError: (err) => {
           console.log(err);
