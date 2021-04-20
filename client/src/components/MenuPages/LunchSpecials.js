@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Typography, Box, Grid, makeStyles } from "@material-ui/core";
+import {
+  Typography,
+  Box,
+  Grid,
+  makeStyles,
+  TextField,
+} from "@material-ui/core";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import SearchIcon from "@material-ui/icons/Search";
 
 // fetching data from db
 import api from "../api";
@@ -36,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
 const LunchSpecials = (props) => {
   const classes = useStyles();
   const [lunches, setLunches] = useState([]);
+  const [filter, setFilter] = useState("");
 
   useEffect(() => {
     api.get("/api/lunches").then((res) => {
@@ -56,6 +65,24 @@ const LunchSpecials = (props) => {
       />
     </Grid>
   ));
+
+  const filteredLunchGrid = lunches.map((lunch) => {
+    if (lunch.name.toLowerCase().includes(filter.toLowerCase())) {
+      return (
+        <Grid item xs={12} sm={6} md={6}>
+          <LunchMenuCard
+            itemName={lunch.name}
+            itemDescription={lunch.description}
+            img={lunch.img}
+            price={lunch.price}
+            priceSm={lunch.priceSm}
+            priceLg={lunch.priceLg}
+            reviews={lunch.reviews}
+          />
+        </Grid>
+      );
+    }
+  });
 
   return (
     <Box textAlign="center" m={1} py={8}>
@@ -89,8 +116,30 @@ const LunchSpecials = (props) => {
       </div>
 
       <Box marginTop={10}>
+        <TextField
+          name="orderRequests"
+          style={{ width: "80%" }}
+          id="outlined-textarea"
+          label="Search for your dish"
+          placeholder="Try... Egg Foo Young"
+          rows={1}
+          rowsMax={1}
+          multiline
+          variant="outlined"
+          inputProps={{ maxLength: 50 }}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment>
+                <SearchIcon />
+              </InputAdornment>
+            ),
+          }}
+          value={filter}
+          onChange={(e) => setFilter(e.target.value)}
+        />{" "}
+        <Box marginTop={5}></Box>
         <Grid container spacing={3}>
-          {lunchGrid}
+          {filter === "" ? lunchGrid : filteredLunchGrid}
         </Grid>
       </Box>
     </Box>

@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Typography, Box, Grid, makeStyles } from "@material-ui/core";
+import {
+  Typography,
+  Box,
+  Grid,
+  makeStyles,
+  TextField,
+} from "@material-ui/core";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import SearchIcon from "@material-ui/icons/Search";
 
 // fetching data from db
 import api from "../api";
@@ -36,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
 const Poultry = (props) => {
   const classes = useStyles();
   const [items, setItems] = useState([]);
+  const [filter, setFilter] = useState("");
 
   useEffect(
     () =>
@@ -59,6 +68,25 @@ const Poultry = (props) => {
     </Grid>
   ));
 
+  const filteredItemGrid = items.map((item) => {
+    if (item.name.toLowerCase().includes(filter.toLowerCase())) {
+      return (
+        <Grid item xs={12} sm={6}>
+          <PoultryMenuCard
+            itemName={item.name}
+            item
+            itemDescription={item.description}
+            img={item.img}
+            price={item.price}
+            priceSm={item.priceSm}
+            priceLg={item.priceLg}
+            reviews={item.reviews}
+          />
+        </Grid>
+      );
+    }
+  });
+
   return (
     <Box textAlign="center" m={1} py={8}>
       <div>
@@ -77,8 +105,30 @@ const Poultry = (props) => {
       </div>
 
       <Box marginTop={10}>
+        <TextField
+          name="orderRequests"
+          style={{ width: "80%" }}
+          id="outlined-textarea"
+          label="Search for your dish"
+          placeholder="Try... Pepper Chicken"
+          rows={1}
+          rowsMax={1}
+          multiline
+          variant="outlined"
+          inputProps={{ maxLength: 50 }}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment>
+                <SearchIcon />
+              </InputAdornment>
+            ),
+          }}
+          value={filter}
+          onChange={(e) => setFilter(e.target.value)}
+        />{" "}
+        <Box marginTop={5}></Box>
         <Grid container spacing={3}>
-          {itemGrid}
+          {filter === "" ? itemGrid : filteredItemGrid}
         </Grid>
       </Box>
     </Box>

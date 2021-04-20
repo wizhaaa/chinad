@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Typography, Box, Grid, makeStyles } from "@material-ui/core";
+import {
+  Typography,
+  Box,
+  Grid,
+  makeStyles,
+  TextField,
+} from "@material-ui/core";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import SearchIcon from "@material-ui/icons/Search";
 
 // fetching data from db
 import axios from "axios";
@@ -35,13 +43,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Appetizers = (props) => {
-  const [appetizers, setAppetizers] = useState([]);
+  const [items, setItems] = useState([]);
+  const [filter, setFilter] = useState("");
 
   useEffect(
     () =>
       api.get("/api/appetizers").then((res) => {
         console.log(res.data);
-        setAppetizers(res.data);
+        setItems(res.data);
       }),
     []
   );
@@ -49,7 +58,7 @@ const Appetizers = (props) => {
   const classes = useStyles();
 
   // loop thru out appetizer collection
-  const appetizerGrid = appetizers.map((appetizer) => (
+  const itemGrid = items.map((appetizer) => (
     <Grid item xs={12} sm={6} md={4}>
       <AppetizerMenuCard
         itemName={appetizer.name}
@@ -62,6 +71,24 @@ const Appetizers = (props) => {
       />
     </Grid>
   ));
+  const filteredItemGrid = items.map((item) => {
+    if (item.name.toLowerCase().includes(filter.toLowerCase())) {
+      return (
+        <Grid item xs={12} sm={6}>
+          <AppetizerMenuCard
+            itemName={item.name}
+            item
+            itemDescription={item.description}
+            img={item.img}
+            price={item.price}
+            priceSm={item.priceSm}
+            priceLg={item.priceLg}
+            reviews={item.reviews}
+          />
+        </Grid>
+      );
+    }
+  });
 
   return (
     <Box textAlign="center" m={1} py={8}>
@@ -81,8 +108,30 @@ const Appetizers = (props) => {
       </div>
 
       <Box marginTop={10}>
+        <TextField
+          name="orderRequests"
+          style={{ width: "80%" }}
+          id="outlined-textarea"
+          label="Search for your dish"
+          placeholder="Try... Dumplings"
+          rows={1}
+          rowsMax={1}
+          multiline
+          variant="outlined"
+          inputProps={{ maxLength: 50 }}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment>
+                <SearchIcon />
+              </InputAdornment>
+            ),
+          }}
+          value={filter}
+          onChange={(e) => setFilter(e.target.value)}
+        />{" "}
+        <Box marginTop={5}></Box>
         <Grid container spacing={3}>
-          {appetizerGrid}
+          {filter === "" ? itemGrid : filteredItemGrid}
         </Grid>
       </Box>
     </Box>

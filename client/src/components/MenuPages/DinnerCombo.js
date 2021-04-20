@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Typography, Box, Grid, makeStyles } from "@material-ui/core";
+import {
+  Typography,
+  Box,
+  Grid,
+  makeStyles,
+  TextField,
+} from "@material-ui/core";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import SearchIcon from "@material-ui/icons/Search";
 
 // fetching data from db
 import api from "../api";
@@ -36,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
 const DinnerCombo = (props) => {
   const classes = useStyles();
   const [dinners, setDinners] = useState([]);
+  const [filter, setFilter] = useState("");
 
   useEffect(() => {
     api.get("/api/dinners").then((res) => {
@@ -57,6 +66,24 @@ const DinnerCombo = (props) => {
     </Grid>
   ));
 
+  const filteredDinnerGrid = dinners.map((dinner) => {
+    if (dinner.name.toLowerCase().includes(filter.toLowerCase())) {
+      return (
+        <Grid item xs={12} sm={6} md={6}>
+          <DinnerMenuCard
+            itemName={dinner.name}
+            itemDescription={dinner.description}
+            img={dinner.img}
+            price={dinner.price}
+            priceSm={dinner.priceSm}
+            priceLg={dinner.priceLg}
+            reviews={dinner.reviews}
+          />
+        </Grid>
+      );
+    }
+  });
+
   return (
     <Box textAlign="center" m={1} py={8}>
       <div>
@@ -77,11 +104,32 @@ const DinnerCombo = (props) => {
           <em> (for free!) </em>
           <br /> Can choose to add a <strong> soup </strong> for +$1
         </Typography>{" "}
-      </div>
-
+      </div>{" "}
+      <TextField
+        name="orderRequests"
+        style={{ width: "80%" }}
+        id="outlined-textarea"
+        label="Search for your dish"
+        placeholder="Try... Crispy Beef"
+        rows={1}
+        rowsMax={1}
+        multiline
+        variant="outlined"
+        inputProps={{ maxLength: 50 }}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment>
+              <SearchIcon />
+            </InputAdornment>
+          ),
+        }}
+        value={filter}
+        onChange={(e) => setFilter(e.target.value)}
+      />{" "}
+      <Box marginTop={5}></Box>
       <Box marginTop={10}>
         <Grid container spacing={3}>
-          {dinnerGrid}
+          {filter === "" ? dinnerGrid : filteredDinnerGrid}
         </Grid>
       </Box>
     </Box>
