@@ -85,7 +85,7 @@ app.post("/api/send", (req, res, next) => {
   var mail = {
     from: "China Delight",
     to: `chinadelightnoreply@gmail.com, ${email}`,
-    cc: `${process.env.CHINA_DELIGHT_EMAIL}`,
+    cc: `chinadelightmd@icloud.com, ${process.env.CHINA_DELIGHT_EMAIL}`,
     subject: `China Delight Order for ${name}`,
     html: message,
   };
