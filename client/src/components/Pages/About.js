@@ -150,10 +150,25 @@ function About() {
           </AccordionSummary>
           <AccordionDetails>
             <Box textAlign="left">
+              <Typography variant="body1">
+                {" "}
+                What are your Holiday Hours?{" "}
+              </Typography>
+              <Typography variant="body2" gutterBottom>
+                {" "}
+                We are open every day of the year{" "}
+                <strong> EXCEPT: Tuesdays & Thanksgiving. </strong> Our Holidays
+                hours are the same as our regular hours.{" "}
+              </Typography>
               <Typography variant="body1"> Do you deliver? </Typography>
               <Typography variant="body2" gutterBottom>
                 {" "}
-                Usually not. However, you can order delivery on grubhub !{" "}
+                Usually not. However, you can order delivery on{" "}
+                <a href="https://www.doordash.com/store/china-delight-forest-hill-438714/?utm_campaign=gpa">
+                  {" "}
+                  DoorDash
+                </a>
+                .{" "}
               </Typography>
               <Typography variant="body1"> What oil do you use? </Typography>
               <Typography variant="body2" gutterBottom>
@@ -166,15 +181,7 @@ function About() {
               </Typography>
               <Typography variant="body2" gutterBottom>
                 {" "}
-                Perhaps™ ... 🤔{" "}
-              </Typography>
-              <Typography variant="body1">
-                {" "}
-                Can you stop with the emojis?{" "}
-              </Typography>
-              <Typography variant="body2" gutterBottom>
-                {" "}
-                😀😁😂🤣😃😄😅😆😗🥰😘😍😎😋😊😉😙😚🤗🤔🤔😴😪😑😯😪{" "}
+                We will try to work on this in future if time allows.{" "}
               </Typography>
             </Box>
           </AccordionDetails>
@@ -203,15 +210,15 @@ function About() {
           </AccordionSummary>
           <AccordionDetails>
             {" "}
-            <Box>
+            <Box textAlign="left">
               <Typography>
                 {" "}
                 When it is not very busy, orders can be finished with 10-15
                 minutes. On busy nights like Thursdays, Fridays, Saturdays, and
                 Holidays, orders can take much longer. ~30 min - 1 hour.{" "}
               </Typography>
-              <Typography> These times are only for reference. </Typography>
-              <Box> {orderTimesTable} </Box>{" "}
+              {/* <Typography> These times are only for reference. </Typography>
+              <Box> {orderTimesTable} </Box>{" "} */}
             </Box>
           </AccordionDetails>
         </Accordion>
@@ -222,10 +229,16 @@ function About() {
             id="panel2a-header"
           >
             <Typography> Ingredients: </Typography>
-            <Typography></Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <Box textAlign="center">{ingredientTable}</Box>
+            <Box textAlign="left">
+              <Typography gutterBottom>
+                {" "}
+                Items with a 🔥 means they are spicy.{" "}
+              </Typography>
+              <Box p={2}> </Box>
+              <Box textAlign="center">{ingredientTable}</Box>{" "}
+            </Box>
           </AccordionDetails>
         </Accordion>
 
@@ -238,17 +251,12 @@ function About() {
           </Typography>
           <Typography variant="body1" gutterBottom>
             {" "}
-            This website was made with ❌🛌😴💤 by Will Zhang for his senior
-            project. © {new Date().getFullYear()}{" "}
+            This website was made with 💗 by WZ © {new Date().getFullYear()}{" "}
           </Typography>
           <Typography variant="body1" gutterBottom>
             {" "}
-            Source code can be found at my{" "}
-            <a href="https://github.com/notwz/chinad">
-              {" "}
-              GitHub{" "}
-              <LaunchIcon style={{ alignItems: "center", height: "1rem" }} />
-            </a>{" "}
+            Source code can be found at{" "}
+            <a href="https://github.com/notwz/chinad"> GitHub</a>{" "}
           </Typography>
           <Typography variant="body1" gutterBottom>
             {" "}

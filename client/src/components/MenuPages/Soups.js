@@ -72,9 +72,9 @@ const Soups = (props) => {
           Soups{" "}
         </Typography>
         <Typography className={classes.subheadings}>
-          Yummy & warm soups !
-          <br /> Every soup comes with a bag of fried noodles !
-          <br /> Pints come with 1 bag , quarts come with 2 bags
+          Something to warm you up on cold nights.
+          <br /> Each soup comes with a bag of fried noodles.
+          <br /> (Pints come with 1 bag; quarts come with 2 bags)
         </Typography>{" "}
       </div>
 

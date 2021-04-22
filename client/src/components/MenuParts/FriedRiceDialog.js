@@ -139,11 +139,8 @@ const FriedRiceDialog = (props) => {
     onAdd();
     const type = "Fried Rice";
     let options = {};
-    if (title === "Yat Gai Mei") {
-      options = { type, meatValue };
-    } else {
-      options = { type, sizeValue };
-    }
+
+    options = { sizeValue };
     let cartUnitPrice = finalPrice;
 
     const newItem = {

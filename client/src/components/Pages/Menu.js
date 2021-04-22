@@ -61,7 +61,7 @@ function Menu() {
             listed. <br /> You will be able to customize some items and then add
             them to your cart{" "}
             <em> (see your top right 👆 , or under the menubar) </em> <br />{" "}
-            It's quite a long menu, so we recommend you navigate using the 👈
+            It's quite a long menu, so we recommend you navigate using the
             sidebar menu 👈 to find what you are looking for!
             <br />
           </Typography>
@@ -69,20 +69,13 @@ function Menu() {
           <Typography variant="body1" gutterBottom>
             Note: If your requests contain extra sauce, extra meat, or anything
             extra, they are liable to extra fees not calculated in the final
-            price below. Please see{" "}
-            <a href="/about">
-              {" "}
-              💸 pricing
-              <LaunchIcon
-                style={{ alignItems: "center", height: "1rem" }}
-              />{" "}
-            </a>{" "}
-            for more details on what costs you can expect.{" "}
+            price below. Please see <a href="/about"> pricing</a> for more
+            details on what costs you can expect.{" "}
           </Typography>
           <br />
 
           <Typography variant="body1" gutterBottom>
-            <em> Disclaimer: the </em> 📸{" "}
+            <em> Disclaimer: the </em>{" "}
             <em>
               {" "}
               photos are not accurate replications of our dishes, only a

@@ -1,12 +1,37 @@
 import React, { useState } from "react";
-import Typography from "@material-ui/core/Typography";
+import { Helmet } from "react-helmet";
+import { Typography, Button } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 
 import { Grid } from "@material-ui/core";
 
 function Home() {
   return (
     <div className="Home">
+      <Helmet>
+        <meta charset="utf-8" />
+        <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          name="keywords"
+          content="China Delight Chinese Restaurant, Forest Hill, MD，Chinese Food, Fast delivery, Online coupon, Restaurant Review, Take Out, Eat in, Dine in, Online, Order, Online Order, Menu, Maryland, Harford County"
+        />
+        <meta
+          name="description"
+          content="China Delight Chinese Restaurant based in Forest Hill, Maryland. Serve the Bel Air, Fallston, and Jarrestville area. We do dine-in, carryout, and online orders!"
+        />
+        {/* <meta name="author" content="Will Zhang" />
+        <a href="https://www.chinadelightmd.com/menu"> Menu </a>
+        <a href="https://www.chinadelightmd.com/dinner-combo"> Dinner </a>
+        <a href="https://www.chinadelightmd.com/chef"> Specials </a>
+        <a href="https://www.chinadelightmd.com/sides"> Sides </a>
+        <a href="https://www.chinadelightmd.com/appetizers">
+          {" "}
+          Appetizers{" "}
+        </a>{" "} */}
+        <title> China Delight - Forest Hill, MD </title>
+      </Helmet>
       <Typography component="div">
         <Box textAlign="center" m={1} py={8}>
           <Typography variant="h4" gutterBottom>
@@ -14,9 +39,9 @@ function Home() {
           </Typography>
           <Typography variant="body1" gutterBottom>
             {" "}
-            👋 Welcome the new China Delight website! We are a chinese take-out
-            ( & dine-in whenever COVID decides it's safe enough ) restauraunt
-            located in Forest Hill, MD.
+            👋 Welcome the new China Delight website! We are a Chinese take-out
+            (& limited Dine-In during COVID) restauraunt located in Forest Hill,
+            MD.
           </Typography>
           <br />
           <Typography variant="body1" gutterBottom>
@@ -27,13 +52,17 @@ function Home() {
           </Typography>{" "}
           <br />
           <Typography variant="body1" gutterBottom>
-            <em> Disclaimer: the </em> 📸{" "}
+            <em> Disclaimer: the </em>{" "}
             <em>
               {" "}
               photos are not accurate replications of our dishes, only a
               reference to see what they look like{" "}
             </em>
           </Typography>
+          <Box py={2}> </Box>
+          {/* <a className="homeButton" size="large" href="/menu">
+            Order Now
+          </a>{" "} */}
           <Box py={2}> </Box>
           <Typography variant="body1" gutterBottom>
             <Typography variant="h4" gutterBottom>

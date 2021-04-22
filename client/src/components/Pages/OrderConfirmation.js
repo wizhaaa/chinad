@@ -230,7 +230,7 @@ function Confirmation() {
               with any suggestions or feedback. Anything helps us improve and
               learn! <br />
               🤤 Enjoyed the food? Click{" "}
-              <a href="https://www.google.com/search?q=china+delight&authuser=3&sxsrf=ALeKk0216R8L-eEzUxoNXNmYIss9qtYxsA%3A1617941364003&source=hp&ei=c9NvYOyvOsms5NoPqa2a6Aw&iflsig=AINFCbYAAAAAYG_hhGz9b7oNbJuNgiTNZyyGrLikw5Lt&oq=china+delight&gs_lcp=Cgdnd3Mtd2l6EAMyCAgAELEDEMkDMgUIABCSAzIFCAAQkgMyCAguEMcBEK8BMggILhDHARCvATICCAAyAggAMgIIADICCAAyAggAOgUIABCxAzoICAAQsQMQgwE6DgguELEDEIMBEMcBEKMCOgsILhCxAxDHARCjAjoOCC4QsQMQxwEQowIQkwI6CAguELEDEIMBOgUIABDJAzoFCC4QsQNQlhNYuSNg4yRoAnAAeACAAXOIAb8JkgEDOS40mAEAoAEBqgEHZ3dzLXdperABAA&sclient=gws-wiz&ved=0ahUKEwistZCipfDvAhVJFlkFHamWBs0Q4dUDCAk&uact=5#lrd=0x89c7deb7b8b012ab:0xd3e57330e03df815,3,,,">
+              <a href="https://g.page/chinadelightforesthill/review?rc">
                 {" "}
                 here
               </a>{" "}

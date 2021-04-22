@@ -20,10 +20,11 @@
 a {
   color: #b41e22;
   text-decoration: none;
+  box-shadow: 0 -1px #b41e22 inset;
 }
 
 a:hover {
-  color: #b18944;
+  color: #b41e22;
 }
 
 .dialogContainer {
@@ -71,6 +72,19 @@ a:hover {
   max-width: 650px;
 }
 
-.MuiBadge-colorSecondary {
-  color: #ffffff;
+.homeButton {
+  background: #fff;
+  color: #000;
+  font-size: 2rem;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  border: 1px solid #b41e22;
+  box-shadow: 0 -1px #b41e22 inset;
+}
+
+.homeButton:hover {
+  background: #b41e22;
+  color: #fff;
+  text-decoration: none;
+  border: 0px 0px 10px 0px solid #fff;
 }

@@ -36,7 +36,10 @@ import {
   Divider,
   Backdrop,
   CircularProgress,
+  Snackbar,
 } from "@material-ui/core";
+import MuiAlert from "@material-ui/lab/Alert";
+import { AlertTitle } from "@material-ui/lab";
 
 import { wrap } from "module";
 import { useCartContext } from "../CartContext";
@@ -47,6 +50,10 @@ import { Redirect } from "react-router";
 import api from "../api";
 import axios from "axios";
 import Paypal from "./Paypal";
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const useStyles = makeStyles((theme) => ({
   root: { margin: 10 },
@@ -144,6 +151,17 @@ const CheckoutDialog = (props) => {
 
   const [backdrop, setBackdrop] = useState(false);
 
+  // handling alerts
+  const [formAlert, setFormAlert] = useState(false);
+  const formAlertClose = () => {
+    setFormAlert(false);
+  };
+
+  const [emptyAlert, setEmptyAlert] = useState(false);
+  const emptyAlertClose = () => {
+    setEmptyAlert(false);
+  };
+
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
   const classes = useStyles();
@@ -154,11 +172,11 @@ const CheckoutDialog = (props) => {
   const hours = new Date().getHours();
   const estimatedTime = `${hours}:${minutes}`;
 
-  useEffect(() => {
-    if (orderPaid) {
-      setPaymentMethod("Paid Online");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (orderPaid) {
+  //     setPaymentMethod("Paid Online");
+  //   }
+  // }, []);
 
   if (pickUpOption === "ASAP") {
     order = {
@@ -218,12 +236,7 @@ const CheckoutDialog = (props) => {
   // };
 
   const sendEmail = () => {
-    if (orderPaid) {
-      paymentMethod = "Paid Online";
-    }
-    const messageHtml = renderEmail(
-      <MyEmail name={name} order={order}></MyEmail>
-    );
+    const messageHtml = renderEmail(<MyEmail order={order}></MyEmail>);
     axios({
       method: "POST",
       url: "https://chinadelightmd.com/api/send",
@@ -243,12 +256,12 @@ const CheckoutDialog = (props) => {
 
   const handlePlaceOrder = (e) => {
     if (Object.keys(cart).length <= 0) {
-      alert("ERROR :please add items into your cart ");
+      setEmptyAlert(true);
     } else {
       console.log("placing order ...");
 
       //commenting out adding order for now
-      // addOrder(order);
+      addOrder(order);
       sendEmail();
       // redirect
       // window.location.href = "/"
@@ -326,7 +339,7 @@ const CheckoutDialog = (props) => {
         <Grid item xs={12}>
           <Typography variant="h6" gutterBottom>
             {" "}
-            👇 Please fill out the info to place your order 👇
+            Please fill out the info to place your order
           </Typography>
           <Typography variant="body1" gutterBottom>
             {" "}
@@ -342,7 +355,7 @@ const CheckoutDialog = (props) => {
           <TextField
             style={{ width: "75%", paddingBottom: "20px" }}
             id="outlined-textarea"
-            label="👋 name"
+            label="name"
             placeholder="Sun Tzu"
             autoComplete="name"
             rowsMax={1}
@@ -362,7 +375,7 @@ const CheckoutDialog = (props) => {
           <TextField
             style={{ width: "75%", paddingBottom: "20px" }}
             id="outlined-textarea"
-            label="📧 email"
+            label="email"
             placeholder="ilovechinadelight@gmail.com"
             type="email"
             pattern=".+@globlex.com"
@@ -384,7 +397,7 @@ const CheckoutDialog = (props) => {
           <TextField
             style={{ width: "75%", paddingBottom: "20px" }}
             id="outlined-textarea"
-            label="📞 phone #"
+            label="phone #"
             placeholder="410-877-9490"
             type="tel"
             autoComplete="tel"
@@ -402,15 +415,8 @@ const CheckoutDialog = (props) => {
             <Typography gutterBottom>
               Please note: If your requests contain extra sauce, extra meat, or
               anything extra, they are liable to extra fees not calculated in
-              the final price below. Please see{" "}
-              <a href="/about">
-                {" "}
-                pricing
-                <LaunchIcon
-                  style={{ alignItems: "center", height: "1rem" }}
-                />{" "}
-              </a>{" "}
-              for more details on what costs you can expect.{" "}
+              the final price below. Please see <a href="/about">pricing</a> for
+              more details on what costs you can expect.{" "}
             </Typography>
           </Box>
         </Grid>
@@ -449,18 +455,11 @@ const CheckoutDialog = (props) => {
           {" "}
           <Typography>
             {" "}
-            Orders usually take 15-20 minutes. <br /> We will try our best to
-            finish your order on time. <br /> We only have 2 chefs, please bear
-            with us 🙇‍♂️ <br /> Friday and Saturdays nights can get very busy and
-            orders can take upwards of 1 hour on holidays. <br /> Please see
-            <a href="/about">
-              {" "}
-              order times
-              <LaunchIcon
-                style={{ alignItems: "center", height: "1rem" }}
-              />{" "}
-            </a>{" "}
-            for more details on estimated order times.
+            Orders usually take 15-20 minutes. <br />
+            Friday and Saturdays nights can get very busy and orders can take
+            upwards of ~30 - 1 hour on holidays.
+            <br /> Please see <a href="/about">order times</a> for more details
+            on estimated order times.
           </Typography>
         </Grid>
         <Divider className={classes.divider} />
@@ -518,7 +517,18 @@ const CheckoutDialog = (props) => {
           {" "}
           👈 Back
         </Button>{" "}
-        <Box py={3}> </Box>
+        <Box py={3}> </Box>{" "}
+        <Typography variant="h5" gutterBottom>
+          {" "}
+          Choose a payment method{" "}
+        </Typography>{" "}
+        <Typography variant="body1" gutterBottom>
+          {" "}
+          After hitting either "Place Order" or finishing the PayPal payment,
+          you should receive an email and be redirected to the Order
+          Confirmation page.{" "}
+        </Typography>{" "}
+        <Box py={3}> </Box>{" "}
         <Box>
           {" "}
           <Typography variant="h5" gutterBottom>
@@ -570,15 +580,8 @@ const CheckoutDialog = (props) => {
                 {" "}
                 There is a <strong> $0.50 fee </strong> and any special requests
                 not calculated online may require you to pay extra in-person.
-                Please see{" "}
-                <a href="/about">
-                  {" "}
-                  pricing
-                  <LaunchIcon
-                    style={{ alignItems: "center", height: "1rem" }}
-                  />{" "}
-                </a>{" "}
-                for more details on what costs you can expect.
+                Please see <a href="/about"> pricing </a> for more details on
+                what costs you can expect.
                 <Box py={2}> </Box>{" "}
                 <Typography variant="body1" gutterBottom>
                   If this looks too complicated, you can always pay in-store!
@@ -586,9 +589,10 @@ const CheckoutDialog = (props) => {
                 <Box py={2}> </Box>
                 <Typography variant="body1" gutterBottom>
                   Once the PayPal payment goes through, an email will be sent
-                  and you will be redirected to the confirmation page. Make sure
-                  to add all your items in your cart and do NOT reload or leave
-                  the page.
+                  and you will be redirected to the confirmation page. If
+                  nothing happens, call us to see if we got your order. Make
+                  sure to add all your items in your cart and do NOT reload or
+                  leave the page.
                 </Typography>
               </Typography>
               <Box py={2}> </Box>
@@ -608,6 +612,7 @@ const CheckoutDialog = (props) => {
                 setFinalPage={setFinalPage}
                 setPaymentPage={setPaymentPage}
               />
+              {/* <Typography> Working on this feature... </Typography> */}
             </Box>
           )}
         </Box>
@@ -659,7 +664,7 @@ const CheckoutDialog = (props) => {
           <div style={{ display: "flex" }}>
             {" "}
             <Typography variant="h4" style={{ flexGrow: 1 }}>
-              ► Checking out ...{" "}
+              CHECKOUT{" "}
             </Typography>{" "}
             <IconButton color="primary" onClick={handleClose}>
               {" "}
@@ -670,14 +675,10 @@ const CheckoutDialog = (props) => {
         <DialogContent dividers>
           {" "}
           <Box textAlign="center">
-            <Typography variant="h5" gutterBottom>
-              {" "}
-              Choose payment method{" "}
-            </Typography>
             <Box py={3}></Box>
             {firstPage && page1}
             {paymentPage ? page2 : null}
-            {finalPage && <div> Redirecting ..</div>}
+
             {/* {paymentPage ? (
               <Grid item xs={12}>
                 <Box>
@@ -741,14 +742,14 @@ const CheckoutDialog = (props) => {
                 aria-label="pay"
                 onClick={() => {
                   if (name === "" || email === "" || phoneNum === "") {
-                    alert("Please fill out the form.");
+                    setFormAlert(true);
                   } else {
                     setPaymentPage(!paymentPage);
                     setFirstPage(!firstPage);
                   }
                 }}
               >
-                Payment 💸{" "}
+                Next 👉{" "}
               </Button>
             ) : (
               <Button
@@ -767,6 +768,28 @@ const CheckoutDialog = (props) => {
           </Box>
         </DialogActions>
       </Dialog>
+      <Snackbar
+        open={formAlert}
+        autoHideDuration={4000}
+        onClose={formAlertClose}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert onClose={formAlertClose} severity="error">
+          {" "}
+          <AlertTitle>Error</AlertTitle> Please fill out the form!{" "}
+        </Alert>
+      </Snackbar>{" "}
+      <Snackbar
+        open={emptyAlert}
+        autoHideDuration={4000}
+        onClose={emptyAlertClose}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert onClose={emptyAlertClose} severity="error">
+          {" "}
+          <AlertTitle>Error</AlertTitle> Your cart is empty!{" "}
+        </Alert>
+      </Snackbar>
       <Backdrop className={classes.backdrop} open={backdrop}>
         <CircularProgress color="inherit" /> <br />
         <Typography variant="h5">

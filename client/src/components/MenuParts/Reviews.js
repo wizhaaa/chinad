@@ -15,12 +15,19 @@ import {
   makeStyles,
   Divider,
   withStyles,
+  Snackbar,
 } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
 import PropTypes from "prop-types";
 import Pagination from "@material-ui/lab/Pagination";
+import MuiAlert from "@material-ui/lab/Alert";
+import { AlertTitle } from "@material-ui/lab";
 
 import api from "../api";
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const useStyles = makeStyles((theme) => ({
   root: { margin: 10 },
@@ -98,6 +105,12 @@ const Review = React.memo((props) => {
   const { title, reviews, category } = props;
   const [reviewed, setReviewed] = useLocalStorage("reviewed", false);
 
+  // handling alerts
+  const [alertOpen, setAlertOpen] = useState(false);
+  const handleAlertClose = () => {
+    setAlertOpen(false);
+  };
+
   // for the item review
   // post request to the api/review/add/appetizer/ name of dish
   const addReview = (newReview) => {
@@ -174,7 +187,8 @@ const Review = React.memo((props) => {
 
   const handleAddNewReview = (e) => {
     console.log("new review is: ", newReview);
-    setReviewed(true);
+    setAlertOpen(true);
+    // setReviewed(true);
     addReview(newReview);
     e.preventDefault();
     setNewReview({
@@ -183,6 +197,64 @@ const Review = React.memo((props) => {
       rating: 5,
     });
   };
+
+  const oldAddReview = reviewed ? (
+    <Typography variant="body1" gutterBottom>
+      {" "}
+      Thank you for your review! 😊
+      <br /> If you just submitted a review, it should show up when you reload!{" "}
+    </Typography>
+  ) : (
+    <form onSubmit={handleAddNewReview}>
+      <Box pb={5} className={classes.textFields}>
+        <Typography component="legend" gutterBottom>
+          Leave a review!
+        </Typography>
+        <StyledRating
+          name="customized-color"
+          value={newReview.rating}
+          onChange={handleRatingChange}
+          precision={0.5}
+          icon={<FavoriteIcon fontSize="inherit" />}
+        />
+        <Box py={1}> </Box>
+        <TextField
+          style={{ width: "100%" }}
+          id="outlined-textarea"
+          label="your name"
+          placeholder="Sun Tzu"
+          rows={1}
+          rowsMax={1}
+          multiline
+          variant="outlined"
+          InputLabelProps={{ shrink: true }}
+          inputProps={{ maxLength: 250 }}
+          required
+          value={newReview.name}
+          onChange={handleNameChange}
+        />{" "}
+        <TextField
+          style={{ width: "100%" }}
+          id="outlined-textarea"
+          label="review this item!"
+          placeholder="Love this dish! Very spicy so beware!"
+          rows={2}
+          rowsMax={4}
+          multiline
+          variant="outlined"
+          inputProps={{ maxLength: 250 }}
+          InputLabelProps={{ shrink: true }}
+          required
+          value={newReview.reviewContent}
+          onChange={handleReviewChange}
+        />{" "}
+        <Button variant="contained" color="secondary" type="submit">
+          {" "}
+          Submit{" "}
+        </Button>
+      </Box>{" "}
+    </form>
+  );
 
   return (
     <Typography gutterBottom>
@@ -202,64 +274,66 @@ const Review = React.memo((props) => {
         <br />
       </div>{" "}
       <Divider className={classes.divider} />
-      {reviewed ? (
-        <Typography variant="body1" gutterBottom>
+      <form onSubmit={handleAddNewReview}>
+        <Box pb={5} className={classes.textFields}>
+          <Typography component="legend" gutterBottom>
+            Leave a review!
+          </Typography>
+          <StyledRating
+            name="customized-color"
+            value={newReview.rating}
+            onChange={handleRatingChange}
+            precision={0.5}
+            icon={<FavoriteIcon fontSize="inherit" />}
+          />
+          <Box py={1}> </Box>
+          <TextField
+            style={{ width: "100%" }}
+            id="outlined-textarea"
+            label="your name"
+            placeholder="Sun Tzu"
+            rows={1}
+            rowsMax={1}
+            multiline
+            variant="outlined"
+            InputLabelProps={{ shrink: true }}
+            inputProps={{ maxLength: 250 }}
+            required
+            value={newReview.name}
+            onChange={handleNameChange}
+          />{" "}
+          <TextField
+            style={{ width: "100%" }}
+            id="outlined-textarea"
+            label="review this item!"
+            placeholder="Love this dish! Very spicy so beware!"
+            rows={2}
+            rowsMax={4}
+            multiline
+            variant="outlined"
+            inputProps={{ maxLength: 250 }}
+            InputLabelProps={{ shrink: true }}
+            required
+            value={newReview.reviewContent}
+            onChange={handleReviewChange}
+          />{" "}
+          <Button variant="contained" color="secondary" type="submit">
+            {" "}
+            Submit{" "}
+          </Button>
+        </Box>{" "}
+      </form>{" "}
+      <Snackbar
+        open={alertOpen}
+        autoHideDuration={4000}
+        onClose={handleAlertClose}
+      >
+        <Alert onClose={handleAlertClose} severity="success">
           {" "}
-          Thank you for your review! 😊
-          <br /> If you just submitted a review, it should show up when you
-          reload!{" "}
-        </Typography>
-      ) : (
-        <form onSubmit={handleAddNewReview}>
-          <Box pb={5} className={classes.textFields}>
-            <Typography component="legend" gutterBottom>
-              Leave a review!
-            </Typography>
-            <StyledRating
-              name="customized-color"
-              value={newReview.rating}
-              onChange={handleRatingChange}
-              precision={0.5}
-              icon={<FavoriteIcon fontSize="inherit" />}
-            />
-            <Box py={1}> </Box>
-            <TextField
-              style={{ width: "100%" }}
-              id="outlined-textarea"
-              label="your name"
-              placeholder="Sun Tzu"
-              rows={1}
-              rowsMax={1}
-              multiline
-              variant="outlined"
-              InputLabelProps={{ shrink: true }}
-              inputProps={{ maxLength: 250 }}
-              required
-              value={newReview.name}
-              onChange={handleNameChange}
-            />{" "}
-            <TextField
-              style={{ width: "100%" }}
-              id="outlined-textarea"
-              label="review this item!"
-              placeholder="Love this dish! Very spicy so beware!"
-              rows={2}
-              rowsMax={4}
-              multiline
-              variant="outlined"
-              inputProps={{ maxLength: 250 }}
-              InputLabelProps={{ shrink: true }}
-              required
-              value={newReview.reviewContent}
-              onChange={handleReviewChange}
-            />{" "}
-            <Button variant="contained" color="secondary" type="submit">
-              {" "}
-              Submit{" "}
-            </Button>
-          </Box>{" "}
-        </form>
-      )}
+          <AlertTitle>Sucess</AlertTitle> Thanks for the review! It should show
+          up when you refresh{" "}
+        </Alert>
+      </Snackbar>
     </Typography>
   );
 });

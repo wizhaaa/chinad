@@ -98,11 +98,11 @@ const DinnerCombo = (props) => {
         </Typography>
         <Typography className={classes.subheadings}>
           * AKA Combo platters or Dinner platters *
-          <br /> Can choose between <strong> fried or white rice </strong>
-          <em> (for free!) </em>
-          <br /> Each comes with an <strong> egg roll </strong>{" "}
-          <em> (for free!) </em>
-          <br /> Can choose to add a <strong> soup </strong> for +$1
+          <br /> Can choose between <strong> Fried or White Rice </strong>
+          <em> (free of charge) </em>
+          <br /> Each comes with an <strong> Egg Roll </strong>{" "}
+          <em> (free of charge) </em>
+          <br /> Can choose to add a <strong> Soup </strong> for +$1
         </Typography>{" "}
       </div>{" "}
       <TextField

@@ -19,8 +19,10 @@ import {
   TableRow,
   Paper,
   makeStyles,
+  Snackbar,
 } from "@material-ui/core";
-
+import MuiAlert from "@material-ui/lab/Alert";
+import { AlertTitle } from "@material-ui/lab";
 // context provider
 import { useCartContext } from "../CartContext";
 
@@ -28,6 +30,10 @@ import CheckoutDialog from "./CheckoutDialog";
 
 // styling
 import useStyles from "../MaterialStyles";
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const tableStyles = makeStyles((theme) => ({
   table: {
@@ -48,6 +54,11 @@ const PPformatter = new Intl.NumberFormat("en-US", {
 
 function Cart() {
   const tableClasses = tableStyles();
+  //handle empty cart alert
+  const [emptyAlert, setEmptyAlert] = useState(false);
+  const emptyAlertClose = () => {
+    setEmptyAlert(false);
+  };
 
   const { cart, setCart, userCartCount } = useCartContext();
   const [open, setOpen] = React.useState(false);
@@ -70,7 +81,7 @@ function Cart() {
 
   const handleCheckout = () => {
     if (userCartCount === 0) {
-      alert("Please add items to your cart");
+      setEmptyAlert(true);
     } else {
       handleClickOpen();
       console.log("Checking out...");
@@ -213,7 +224,18 @@ function Cart() {
           </Typography>
         </Box>
       </Typography>
-      <CheckoutDialog open={open} onClose={handleClose} total={total} />
+      <CheckoutDialog open={open} onClose={handleClose} total={total} />{" "}
+      <Snackbar
+        open={emptyAlert}
+        autoHideDuration={4000}
+        onClose={emptyAlertClose}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert onClose={emptyAlertClose} severity="error">
+          {" "}
+          <AlertTitle>Error</AlertTitle> Your cart is empty!{" "}
+        </Alert>
+      </Snackbar>
     </div>
   );
 }

@@ -31,10 +31,17 @@ import {
   useMediaQuery,
   makeStyles,
   Divider,
+  Snackbar,
 } from "@material-ui/core";
+import MuiAlert from "@material-ui/lab/Alert";
+import { AlertTitle } from "@material-ui/lab";
 
 import { useCartContext } from "../CartContext";
 import Reviews from "./Reviews";
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const useStyles = makeStyles((theme) => ({
   root: { margin: 10 },
@@ -123,7 +130,12 @@ const LunchDialog = React.memo((props) => {
   // customer request
   const [requestContent, setRequestContent] = useState("");
 
-  const [expanded, setExpanded] = useState(false);
+
+  // handling alerts 
+  const [alertOpen, setAlertOpen] = useState(false);
+  const handleAlertClose = () => {
+    setAlertOpen(false);
+  };
 
   // context cart
   const { cart, setCart, addNewItem } = useCartContext();
@@ -162,7 +174,7 @@ const LunchDialog = React.memo((props) => {
       };
       addNewItem(newItem);
     } else {
-      alert(" Sorry it is past lunch time right now ");
+      setAlertOpen(true);
     }
   };
 
@@ -482,7 +494,6 @@ const LunchDialog = React.memo((props) => {
             </Typography>
           </DialogContentText>
         </DialogContent>
-
         <DialogActions className="dialogContainer">
           {" "}
           <Box textAlign="center" className="dialogPrice">
@@ -523,7 +534,17 @@ const LunchDialog = React.memo((props) => {
               Add to Cart{" "}
             </Fab>
           </Box>
-        </DialogActions>
+        </DialogActions>{" "}
+        <Snackbar
+          open={alertOpen}
+          autoHideDuration={4000}
+          onClose={handleAlertClose}
+        >
+          <Alert onClose={handleAlertClose} severity="error">
+            {" "}
+            <AlertTitle>Error</AlertTitle> It's not lunch time right now!{" "}
+          </Alert>
+        </Snackbar>
       </Dialog>
     </>
   );

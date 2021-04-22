@@ -56,7 +56,40 @@ const MyEmail = ({ order }) => {
   const paymentMethod = order.paymentMethod;
   const amountPaid = order.amountPaid;
 
-  const date = new Date().toString();
+  function getClockTime() {
+    var now = new Date();
+    var hour = now.getHours();
+    var minute = now.getMinutes();
+    var second = now.getSeconds();
+    var ap = "AM";
+    if (hour > 11) {
+      ap = "PM";
+    }
+    if (hour > 12) {
+      hour = hour - 12;
+    }
+    if (hour === 0) {
+      hour = 12;
+    }
+    if (hour < 10) {
+      hour = "0" + hour;
+    }
+    if (minute < 10) {
+      minute = "0" + minute;
+    }
+    if (second < 10) {
+      second = "0" + second;
+    }
+    var timeString = hour + ":" + minute + ":" + second + " " + ap;
+    return timeString;
+  }
+  const orderTime = getClockTime();
+
+  const month = new Date().getMonth() + 1;
+  const date = new Date().getDate();
+  const year = new Date().getFullYear();
+  const fullDate = `${month} - ${date} - ${year}`;
+
   const emailTotal = order.cart.total;
 
   var subtotal = 0;
@@ -69,12 +102,10 @@ const MyEmail = ({ order }) => {
   const pickUpDetails = (
     <div>
       {" "}
-      🏃‍♀️💨 Pick up Option: {order.pickUpOption}
+      Pick up Option: {order.pickUpOption}
       {order.pickUpOption === "custom time" ? (
         <div> ⏰ Pick up time: {order.pickUpTime} </div>
-      ) : (
-        <div> ⏰ Estimated pick up @ {estimatedTime} </div>
-      )}{" "}
+      ) : null}{" "}
     </div>
   );
 
@@ -83,48 +114,68 @@ const MyEmail = ({ order }) => {
       {cart.map((item, index) => {
         const itemOptions = Object.entries(item.options)
           .map(([key, value]) => {
-            return value;
+            switch (value) {
+              case "Lunch":
+                return "L";
+              case "Dinner":
+                return "#";
+              case "White Rice":
+                return "WR";
+              case "Fried Rice":
+                return "FR";
+              default:
+                return value;
+            }
           })
           .join(", ");
         const itemTotalPrice = item.cartUnitPrice * item.quantity;
 
         return (
-          <tr key={item.title}>
-            <td>
-              <div> 🍱 {item.title} </div>
-              <div> 🥠 {itemOptions} </div>{" "}
-              <div> 👩‍🍳 Requests? {item.requestContent} </div>
-              <div>
-                {" "}
-                <div> qty: {item.quantity}</div>
+          <div>
+            <br />
+            <tr key={item.title}>
+              <td>
+                <div> 🍱 {item.title} </div>
+                <div> &emsp; {itemOptions} </div>{" "}
                 <div>
                   {" "}
-                  {formatter.format(item.cartUnitPrice)} ( x {item.quantity} ) ={" "}
-                  {formatter.format(itemTotalPrice)}
-                </div>{" "}
-              </div>
-            </td>
-          </tr>
+                  &emsp; Request:{" "}
+                  {item.requestContent === ""
+                    ? null
+                    : `Requests: ${item.requestContent}`}{" "}
+                </div>
+                <div>
+                  {" "}
+                  <div> &emsp; QTY: {item.quantity}</div>
+                  <div>
+                    {formatter.format(item.cartUnitPrice)} ( x {item.quantity} )
+                    = {formatter.format(itemTotalPrice)}
+                  </div>{" "}
+                </div>
+              </td>
+            </tr>{" "}
+            <br />
+          </div>
         );
       })}
     </div>
   );
 
-  return (
+  const orderEmail = (
     <Email title="china delit order">
       <Item>
         {" "}
         <h1> China Delight Order </h1>
-        <div> 🙇‍♀️ Thank you {name} for your order! </div>
-        <div> 📆 Order Time: {date} </div>
-        😀 Order for: {name}
-        <br /> 📧 Email: {email}
-        <br /> 📞 Phone: {phone}
+        <div>🙇‍♀️ Thank you {name} for your order! </div>
+        <div></div>
+        Order for: {name}
+        <br /> Email: {email}
+        <br /> Phone: {phone}
+        <div> {pickUpDetails} </div>
         <div>
           Subtotal: {formatter.format(subtotal)}
           <br /> Taxes (6%): {formatter.format(taxes)}
           <br /> Total: {formatter.format(total)} <br />
-          <div> {pickUpDetails} </div>
           {paymentMethod === "In Person" ? (
             <div>
               {" "}
@@ -156,16 +207,29 @@ const MyEmail = ({ order }) => {
           </tr>
           {filledCart}
         </table>
+        <br />
+        <br />
         <div className="divider"> </div>
-        Customer's requests for the order:
+        <strong> Customer's requests for the order: </strong>
         <br />
         {orderRequests}
+        <br />
+        <br />
+        <div>
+          {" "}
+          <strong> Subtotal:</strong> {formatter.format(subtotal)}
+          <br /> <strong> Taxes (6%): </strong> {formatter.format(taxes)}
+          <br /> <strong> Total: </strong> {formatter.format(total)} <br />
+        </div>
         <div className="divider"> </div>
+        <br />
         <br /> Any questions? Don't hesitate to email us at
         chinadelightmd@gmail.com or call us at 410-877-9490! <br />
       </Item>
     </Email>
   );
+
+  return <div> {orderEmail} </div>;
 };
 
 export default MyEmail;

@@ -72,8 +72,7 @@ const LoMein = (props) => {
           Lo Mein{" "}
         </Typography>
         <Typography className={classes.subheadings}>
-          Classic lo mein noodles cooked in soy sauce. Choose your own meats and
-          style!
+          Classic lo mein noodles cooked in soy sauce with meats & styles of your choice.
         </Typography>{" "}
       </div>
 

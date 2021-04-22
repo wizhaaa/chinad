@@ -97,20 +97,19 @@ const LunchSpecials = (props) => {
           Lunch{" "}
         </Typography>
         <Typography className={classes.subheadings}>
-          Served with the choice of{" "}
+          Served with the choice of:{" "}
           <strong>
             {" "}
-            fried rice, white rice, lo mein (+1.5), or pork fried rice (+1.5).{" "}
+            Fried Rice, White Rice, Lo Mein (+1.5), or Pork Fried Rice (+1.5).{" "}
           </strong>
           <br />
-          Optional: choose egg drop soup, wonton soup, or hot & sour soup, egg
-          roll, or soda for $0.75
-          <br /> If you choose a soda, indicating which soda you would like in
-          the special request field would help us a lot!
+          Optional: choose Egg Drop Soup, Wonton Soup, or Hot & Sour Soup, Egg
+          Roll, or Soda for $0.75
+          <br />
           <br />
           <em style={{ color: "#B18944" }}>
             {" "}
-            Note: available daily until 3:30 PM{" "}
+            Note: Available daily until 3:30 PM{" "}
           </em>
         </Typography>{" "}
       </div>

@@ -11,6 +11,9 @@ import {
   createMuiTheme,
 } from "@material-ui/core/";
 
+//helmet & meta tags
+import { Helmet } from "react-helmet";
+
 // self made components
 import HeaderNav from "./HeaderNav";
 import Routes from "./Routes";
@@ -52,6 +55,29 @@ function App() {
 
   return (
     <div className={classes.root}>
+      <Helmet>
+        <meta charset="utf-8" />
+        <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          name="keywords"
+          content="China Delight Chinese Restaurant, Forest Hill, MD，Chinese Food, Fast delivery, Online coupon, Restaurant Review, Take Out, Eat in, Dine in, Online, Order, Online Order, Menu, Maryland, Harford County"
+        />
+        <meta
+          name="description"
+          content="China Delight Chinese Restaurant based in Forest Hill, MD. We do dine-in, carryout, and online orders!"
+        />
+        {/* <meta name="author" content="Will Zhang" />
+        <a href="https://www.chinadelightmd.com/menu"> Menu </a>
+        <a href="https://www.chinadelightmd.com/dinner-combo"> Dinner </a>
+        <a href="https://www.chinadelightmd.com/chef"> Specials </a>
+        <a href="https://www.chinadelightmd.com/sides"> Sides </a>
+        <a href="https://www.chinadelightmd.com/appetizers">
+          {" "}
+          Appetizers{" "}
+        </a>{" "} */}
+        <title> China Delight - Forest Hill MD </title>
+      </Helmet>
       <ThemeProvider theme={theme}>
         <Router>
           {/* <Test /> */}

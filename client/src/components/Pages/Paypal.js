@@ -69,7 +69,7 @@ const Paypal = (props) => {
           const order = await actions.order.capture();
           console.log("successful order: " + order);
           setOrderPaid(true);
-          setPaymentMethod("Paid Online");
+          // setPaymentMethod("Paid Online");
           setAmountPaid(paypalTotal);
           order["amountPaid"] = paypalTotal;
           order["paymentMethod"] = "Paid Online";
