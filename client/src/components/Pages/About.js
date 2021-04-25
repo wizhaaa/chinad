@@ -156,33 +156,37 @@ function About() {
               </Typography>
               <Typography variant="body2" gutterBottom>
                 {" "}
-                We are open every day of the year{" "}
+                &emsp; We are open every day of the year{" "}
                 <strong> EXCEPT: Tuesdays & Thanksgiving. </strong> Our Holidays
                 hours are the same as our regular hours.{" "}
-              </Typography>
+              </Typography>{" "}
+              <br />
               <Typography variant="body1"> Do you deliver? </Typography>
               <Typography variant="body2" gutterBottom>
                 {" "}
-                Usually not. However, you can order delivery on{" "}
+                &emsp; Usually not. However, you can order delivery on{" "}
                 <a href="https://www.doordash.com/store/china-delight-forest-hill-438714/?utm_campaign=gpa">
                   {" "}
                   DoorDash
                 </a>
                 .{" "}
-              </Typography>
+              </Typography>{" "}
+              <br />
               <Typography variant="body1"> What oil do you use? </Typography>
               <Typography variant="body2" gutterBottom>
                 {" "}
-                Vegetable oil{" "}
+                &emsp; Vegetable oil{" "}
               </Typography>{" "}
+              <br />
               <Typography variant="body1">
                 {" "}
                 Accounts? Favorites? Order History?{" "}
               </Typography>
               <Typography variant="body2" gutterBottom>
                 {" "}
-                We will try to work on this in future if time allows.{" "}
-              </Typography>
+                &emsp; We will try to work on this in future if time allows.{" "}
+              </Typography>{" "}
+              <br />
             </Box>
           </AccordionDetails>
         </Accordion>
@@ -232,11 +236,8 @@ function About() {
           </AccordionSummary>
           <AccordionDetails>
             <Box textAlign="left">
-              <Typography gutterBottom>
-                {" "}
-                Items with a 🔥 means they are spicy.{" "}
-              </Typography>
-              <Box p={2}> </Box>
+              <Typography gutterBottom> 🔥 = spicy </Typography>
+              <Box p={1}> </Box>
               <Box textAlign="center">{ingredientTable}</Box>{" "}
             </Box>
           </AccordionDetails>

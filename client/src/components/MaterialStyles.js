@@ -38,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
   navLinks: {
     textDecoration: "none",
     color: "inherit",
+    boxShadow: "none",
   },
   menuNavLink: {
     marginRight: theme.spacing(2),

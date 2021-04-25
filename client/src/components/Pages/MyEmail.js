@@ -139,10 +139,10 @@ const MyEmail = ({ order }) => {
                 <div> &emsp; {itemOptions} </div>{" "}
                 <div>
                   {" "}
-                  &emsp; Request:{" "}
+                  &emsp;{" "}
                   {item.requestContent === ""
                     ? null
-                    : `Requests: ${item.requestContent}`}{" "}
+                    : `> ${item.requestContent}`}{" "}
                 </div>
                 <div>
                   {" "}
@@ -167,7 +167,10 @@ const MyEmail = ({ order }) => {
         {" "}
         <h1> China Delight Order </h1>
         <div>🙇‍♀️ Thank you {name} for your order! </div>
-        <div></div>
+        <div>
+          {" "}
+          Order Time: {fullDate} {orderTime}{" "}
+        </div>
         Order for: {name}
         <br /> Email: {email}
         <br /> Phone: {phone}

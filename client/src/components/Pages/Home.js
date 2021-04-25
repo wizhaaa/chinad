@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import { Typography, Button } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 import { BrowserRouter as Router, Link } from "react-router-dom";
+import { NavigateNext as NavigateNextIcon } from "@material-ui/icons";
 
 import { Grid } from "@material-ui/core";
 
@@ -35,23 +36,45 @@ function Home() {
       <Typography component="div">
         <Box textAlign="center" m={1} py={8}>
           <Typography variant="h4" gutterBottom>
-            Welcome!
-          </Typography>
+            Welcome
+          </Typography>{" "}
+          <Box py={1}></Box>
+          <img
+            src="https://media3.giphy.com/media/48PbiL2u5ZUU6HZf55/giphy.gif"
+            alt="bg"
+            className="homeImage"
+            style={{ backgroundSize: "cover" }}
+          />{" "}
+          {/* <Box className="imageContainer" textAlign="center">
+            <div className="homeBg">
+              <Grid container spacing={3}>
+                <Grid item xs={12} sm={4}>
+                  <a className="homeButton" size="large" href="/menu">
+                    Order
+                  </a>
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                  <a className="homeButton" size="large" href="/lunch">
+                    Lunch
+                  </a>
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                  <a className="homeButton" size="large" href="/dinner">
+                    Dinner
+                  </a>
+                </Grid>
+              </Grid>
+            </div>{" "}
+          </Box> */}
+          <Box py={2}></Box>
           <Typography variant="body1" gutterBottom>
             {" "}
-            👋 Welcome the new China Delight website! We are a Chinese take-out
-            (& limited Dine-In during COVID) restauraunt located in Forest Hill,
-            MD.
+            你好!~ Welcome the new China Delight website! We are a Chinese
+            take-out (& limited Dine-In during COVID) restauraunt located in
+            Forest Hill, MD.
           </Typography>
-          <br />
-          <Typography variant="body1" gutterBottom>
-            🛒 Here, you may browse our menu and place online orders for
-            pick-up! We recommend to use the side bar navigation to browse the
-            menu, and not to scroll through the 200+ items! It's faster and less
-            swiping.
-          </Typography>{" "}
-          <br />
-          <Typography variant="body1" gutterBottom>
+          <Typography variant="body1" gutterBottom></Typography>
+          <Typography variant="subtitle" gutterBottom>
             <em> Disclaimer: the </em>{" "}
             <em>
               {" "}
@@ -59,11 +82,70 @@ function Home() {
               reference to see what they look like{" "}
             </em>
           </Typography>
-          <Box py={2}> </Box>
-          {/* <a className="homeButton" size="large" href="/menu">
-            Order Now
-          </a>{" "} */}
-          <Box py={2}> </Box>
+          <Box py={4}></Box>
+          <Grid container spacing={4}>
+            <Grid
+              item
+              xs={12}
+              sm={4}
+              className="homeMenuBtn"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <a
+                className="homeButton"
+                size="large"
+                href="/menu"
+                style={{ whiteSpace: "nowrap" }}
+              >
+                Menu <NavigateNextIcon color="secondary" />
+              </a>{" "}
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              sm={4}
+              className="homeLunchBtn"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <a
+                className="homeButton"
+                size="large"
+                href="/lunch"
+                style={{ whiteSpace: "nowrap" }}
+              >
+                Lunch <NavigateNextIcon color="secondary" />
+              </a>
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              sm={4}
+              className="homeDinnerBtn"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <a
+                className="homeButton"
+                size="large"
+                href="/dinner-combo"
+                style={{ whiteSpace: "nowrap" }}
+              >
+                Dinner <NavigateNextIcon color="secondary" />
+              </a>
+            </Grid>
+          </Grid>
+          <Box py={8}> </Box>
           <Typography variant="body1" gutterBottom>
             <Typography variant="h4" gutterBottom>
               {" "}

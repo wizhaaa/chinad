@@ -168,7 +168,7 @@ const CheckoutDialog = (props) => {
 
   let order = {};
   let date = new Date().toString();
-  const minutes = new Date().getMinutes() + 20;
+  const minutes = new Date().getMinutes() + 25;
   const hours = new Date().getHours();
   const estimatedTime = `${hours}:${minutes}`;
 
@@ -790,12 +790,28 @@ const CheckoutDialog = (props) => {
           <AlertTitle>Error</AlertTitle> Your cart is empty!{" "}
         </Alert>
       </Snackbar>
-      <Backdrop className={classes.backdrop} open={backdrop}>
-        <CircularProgress color="inherit" /> <br />
-        <Typography variant="h5">
-          {" "}
-          ...Sending... don't close the window{" "}
-        </Typography>
+      <Backdrop
+        className={classes.backdrop}
+        open={backdrop}
+        style={{
+          whiteSpace: "pre-line",
+          backgroundColor: "rgba(0, 0, 0, 1)",
+        }}
+      >
+        <Box textAlign="center">
+          <CircularProgress color="primary" />
+          <Box p={5}> </Box>
+          <Typography variant="h5" style={{ whiteSpace: "pre-line" }}>
+            {" "}
+            Sending... don't close the window{" "}
+          </Typography>
+          <Box p={2}> </Box>
+          <img
+            src="loading.gif"
+            alt="celebration-gif"
+            style={{ maxWidth: "80%" }}
+          />{" "}
+        </Box>
         {/* <Typography variant="h5">
           {" "}
           ...if it takes longer than a few minutes, check your email or try

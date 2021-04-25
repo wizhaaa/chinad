@@ -17,14 +17,20 @@
   background-image: linear-gradient(#a2a2a2, #a2a2a2);
 }
 
+body,
+html {
+  overflow-x: hidden;
+  height: 100% !important;
+}
+
 a {
   color: #b41e22;
   text-decoration: none;
-  box-shadow: 0 -1px #b41e22 inset;
+  box-shadow: 0 -1px #f39a00 inset;
 }
 
 a:hover {
-  color: #b41e22;
+  color: #f39a00;
 }
 
 .dialogContainer {
@@ -69,22 +75,117 @@ a:hover {
 }
 
 .Home {
-  max-width: 650px;
+  max-width: none;
+  animation: fadeInAnimation ease 1.75s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+    transform: translateY(125px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .homeButton {
-  background: #fff;
-  color: #000;
-  font-size: 2rem;
+  background: rgba(0, 0, 0, 0);
+  color: #fff !important;
+  font-size: 1.75rem;
   padding: 10px 20px 10px 20px;
   text-decoration: none;
   border: 1px solid #b41e22;
   box-shadow: 0 -1px #b41e22 inset;
+  border-radius: 2ch;
 }
 
 .homeButton:hover {
   background: #b41e22;
-  color: #fff;
+  color: rgb(0, 0, 0) !important;
   text-decoration: none;
   border: 0px 0px 10px 0px solid #fff;
+  text-shadow: none;
+}
+
+.homeImage {
+  max-width: 100%;
+}
+
+.toTop {
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+}
+
+.imageContainer {
+  height: 284px;
+  width: 100%;
+}
+
+/* https://media3.giphy.com/media/48PbiL2u5ZUU6HZf55/giphy.gif */
+.homeMenuBtn {
+  /* The image used */
+  /* background-image: url("https://www.englishclub.com/images/vocabulary/food/chinese/chinese-food.jpg"); */
+  background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+    url("https://www.englishclub.com/images/vocabulary/food/chinese/chinese-food.jpg");
+
+  /* Full height */
+  height: 275px;
+  width: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.homeLunchBtn {
+  /* The image used */
+  background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+    url("https://www.thespruceeats.com/thmb/X6mg_2VBCQQ2X8VrLcPTf8_4ce0=/2733x2050/smart/filters:no_upscale()/chinese-take-out-472927590-57d31fff3df78c5833464e7b.jpg");
+
+  /* Full height */
+  height: 275px;
+  width: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.homeDinnerBtn {
+  /* The image used */
+  background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+    url("https://hips.hearstapps.com/del.h-cdn.co/assets/15/29/1437173075-delish-takeout-healthier.jpg");
+
+  /* Full height */
+  height: 275px;
+  width: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@media only screen and (min-width: 850px) {
+  /* for larger screens */
+  .homeMenuBtn {
+    height: 400px;
+  }
+  .homeLunchBtn {
+    height: 400px;
+  }
+  .homeDinnerBtn {
+    height: 400px;
+  }
+}
+
+.navText {
+  box-shadow: none;
 }

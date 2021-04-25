@@ -147,25 +147,30 @@ function Confirmation() {
       </Table>
     </TableContainer>
   );
-
+  // minions gif:
+  // https://i.pinimg.com/originals/5e/65/93/5e659326c2027e01b2c56a8c6d7908e7.gif
+  // quby (little monk)
+  // https://1.bp.blogspot.com/-SQd93ExJA70/W9h0023ZyQI/AAAAAAA0VjY/pTA1Op9ysxQQqinq6V1v4aFJvGO7ujnvACLcBGAs/s1600/AW2158645_18.gif
+  // thank you girl
+  // https://i.pinimg.com/originals/fd/4a/58/fd4a58bfd60ee8d07ca3acc265c4b72a.gif
   return (
     <div className="Cart">
       <Typography component="div">
         <Box textAlign="center" m={1} py={8} mx={"1%"}>
           <Box style={{ maxWidth: 650 }}>
-            <Typography variant="h4" gutterBottom>
-              🎉 Success! 🙌
-            </Typography>
             <img
-              src="https://i.pinimg.com/originals/5e/65/93/5e659326c2027e01b2c56a8c6d7908e7.gif"
+              src="https://1.bp.blogspot.com/-SQd93ExJA70/W9h0023ZyQI/AAAAAAA0VjY/pTA1Op9ysxQQqinq6V1v4aFJvGO7ujnvACLcBGAs/s1600/AW2158645_18.gif"
               alt="celebration-gif"
               style={{ maxWidth: "80%" }}
             />
             <Box mb={5}> </Box>
+            <Typography variant="h4" gutterBottom>
+              🎉 Success! 🙌
+            </Typography>
             <Typography variant="body1" gutterBottom>
               {" "}
-              🙏 Thank you {name} for your order! You should have received a
-              confirmation email (at {email} or your junk/spam folder).{" "}
+              🙏 谢谢！Thank you {name} for your order! You should have received
+              a confirmation email (at {email} or your junk/spam folder).{" "}
             </Typography>
             <Typography variant="h5" gutterBottom>
               {" "}
@@ -193,27 +198,27 @@ function Confirmation() {
               {" "}
               <a href="/about">
                 {" "}
-                ⏰ order times
-                <LaunchIcon
+                order times
+                {/* <LaunchIcon
                   style={{ alignItems: "center", height: "1rem" }}
-                />{" "}
+                />{" "} */}
               </a>{" "}
               for more details on estimated order times.
               <br />
               <a href="/about">
                 {" "}
-                💸 pricing
-                <LaunchIcon
+                pricing
+                {/* <LaunchIcon
                   style={{ alignItems: "center", height: "1rem" }}
-                />{" "}
+                />{" "} */}
               </a>{" "}
               for more details on what costs you can expect.{" "}
             </Typography>
             <Box mb={3}> </Box>
             <Typography gutterBottom>
               {" "}
-              📞 If we have any questions, updates, or concerns about your
-              order, we will contact you at {phone}.{" "}
+              If we have any questions, updates, or concerns about your order,
+              we will contact you at {phone}.{" "}
             </Typography>
             <Box mb={3}> </Box>
             <Typography gutterBottom>

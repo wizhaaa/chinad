@@ -270,7 +270,11 @@ const Review = React.memo((props) => {
         </span>
         <Box py={0.75}> </Box>
 
-        {reviews.length === 0 ? <div> no reviews yet 😔 </div> : reviewsDiv}
+        {reviews.length === 0 ? (
+          <div> Be the first to review! </div>
+        ) : (
+          reviewsDiv
+        )}
         <br />
       </div>{" "}
       <Divider className={classes.divider} />
@@ -290,7 +294,7 @@ const Review = React.memo((props) => {
           <TextField
             style={{ width: "100%" }}
             id="outlined-textarea"
-            label="your name"
+            label="Your name:"
             placeholder="Sun Tzu"
             rows={1}
             rowsMax={1}
@@ -305,7 +309,7 @@ const Review = React.memo((props) => {
           <TextField
             style={{ width: "100%" }}
             id="outlined-textarea"
-            label="review this item!"
+            label="Your review:"
             placeholder="Love this dish! Very spicy so beware!"
             rows={2}
             rowsMax={4}
