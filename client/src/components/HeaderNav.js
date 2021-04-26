@@ -113,7 +113,7 @@ function ResponsiveDrawer(props) {
           <Typography variant="h5" className={classes.title}>
             <Link className={classes.navLinks} to="/">
               {" "}
-              China Delight{" "}
+              <strong> China Delight </strong>{" "}
             </Link>
           </Typography>
 

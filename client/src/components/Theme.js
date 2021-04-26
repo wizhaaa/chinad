@@ -9,18 +9,26 @@ const theme = createMuiTheme({
     h1: {
       color: "#B18944",
       fontWeight: "bold",
+      fontFamily: "Hogback",
+      fontSize: "8.5rem",
     },
     h2: {
       color: "#B18944",
       fontWeight: "bold",
+      fontFamily: "Hogback",
+      fontSize: "7rem",
     },
     h3: {
       color: "#B18944",
       fontWeight: "bold",
+      fontFamily: "Hogback",
+      fontSize: "5.5rem",
     },
     h4: {
       color: "#B18944",
       fontWeight: "bold",
+      fontFamily: "Hogback",
+      fontSize: "3rem",
     },
   },
   palette: {

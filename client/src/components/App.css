@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "Hogback";
+  src: url("Hogback.otf") format("otf"), url("Hogback.woff2") format("woff2");
+}
+
 ::-webkit-scrollbar {
   width: 11.5px;
 }
@@ -30,7 +35,11 @@ a {
 }
 
 a:hover {
-  color: #f39a00;
+  color: #b18944;
+}
+
+.card-title {
+  font: 5rem;
 }
 
 .dialogContainer {
@@ -79,6 +88,7 @@ a:hover {
   animation: fadeInAnimation ease 1.75s;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
+  font-family: "Hogback" !important;
 }
 
 @keyframes fadeInAnimation {
@@ -93,18 +103,20 @@ a:hover {
 }
 
 .homeButton {
+  font-family: "Hogback";
+  font-size: 3.5rem !important;
   background: rgba(0, 0, 0, 0);
-  color: #fff !important;
+  color: #ffe9c3 !important;
   font-size: 1.75rem;
   padding: 10px 20px 10px 20px;
   text-decoration: none;
-  border: 1px solid #b41e22;
-  box-shadow: 0 -1px #b41e22 inset;
-  border-radius: 2ch;
+  /* border: 1px solid #b41e22; */
+  box-shadow: 0 -6px #ffe9c3 inset;
+  /* border-radius: 2ch; */
 }
 
 .homeButton:hover {
-  background: #b41e22;
+  background: #ffe9c3;
   color: rgb(0, 0, 0) !important;
   text-decoration: none;
   border: 0px 0px 10px 0px solid #fff;
@@ -138,6 +150,29 @@ a:hover {
   width: 100%;
 
   /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.homeMenuBtn:hover {
+  background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)),
+    url("https://www.englishclub.com/images/vocabulary/food/chinese/chinese-food.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.homeLunchBtn:hover {
+  background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)),
+    url("https://www.thespruceeats.com/thmb/X6mg_2VBCQQ2X8VrLcPTf8_4ce0=/2733x2050/smart/filters:no_upscale()/chinese-take-out-472927590-57d31fff3df78c5833464e7b.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.homeDinnerBtn:hover {
+  background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)),
+    url("https://hips.hearstapps.com/del.h-cdn.co/assets/15/29/1437173075-delish-takeout-healthier.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

@@ -456,8 +456,8 @@ const CheckoutDialog = (props) => {
           <Typography>
             {" "}
             Orders usually take 15-20 minutes. <br />
-            Friday and Saturdays nights can get very busy and orders can take
-            upwards of ~30 - 1 hour on holidays.
+            Friday and Saturdays nights can get very busy and orders can take 30
+            minutes or more on holidays.
             <br /> Please see <a href="/about">order times</a> for more details
             on estimated order times.
           </Typography>

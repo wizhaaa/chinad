@@ -45,6 +45,8 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    fontFamily: "Hogback",
+    fontSize: "2.5rem",
   },
   alignToCenter: {
     alignSelf: "center",

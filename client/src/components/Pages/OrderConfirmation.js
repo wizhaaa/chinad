@@ -161,10 +161,14 @@ function Confirmation() {
             <img
               src="https://1.bp.blogspot.com/-SQd93ExJA70/W9h0023ZyQI/AAAAAAA0VjY/pTA1Op9ysxQQqinq6V1v4aFJvGO7ujnvACLcBGAs/s1600/AW2158645_18.gif"
               alt="celebration-gif"
-              style={{ maxWidth: "80%" }}
+              style={{ maxWidth: "80%", maxHeight: "200px" }}
             />
             <Box mb={5}> </Box>
-            <Typography variant="h4" gutterBottom>
+            <Typography
+              variant="h3"
+              style={{ fontSize: "3.5rem" }}
+              gutterBottom
+            >
               🎉 Success! 🙌
             </Typography>
             <Typography variant="body1" gutterBottom>

@@ -82,11 +82,11 @@ function Menu() {
           <Typography variant="body1" gutterBottom>
             {" "}
             <div id="top"></div>
-            <em> Disclaimer: the </em>{" "}
+            <em> Disclaimer: The </em>{" "}
             <em>
               {" "}
-              photos are not accurate replications of our dishes, only a
-              reference to see what they look like{" "}
+              photos not exact replications of our dishes and are to serve as
+              references.{" "}
             </em>
           </Typography>{" "}
           <br />

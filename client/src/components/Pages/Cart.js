@@ -198,8 +198,8 @@ function Cart() {
     <div className="Cart">
       <Typography component="div">
         <Box textAlign="center" m={1} py={8} mx={"1%"}>
-          <Typography variant="h4" gutterBottom>
-            🥡 My Cart ({userCartCount})
+          <Typography variant="h4" style={{ fontSize: "4rem" }} gutterBottom>
+            🥡 My Cart
           </Typography>
           <Box mb={5}></Box>
           <Typography gutterBottom>

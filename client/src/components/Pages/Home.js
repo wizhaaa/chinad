@@ -35,8 +35,14 @@ function Home() {
       </Helmet>
       <Typography component="div">
         <Box textAlign="center" m={1} py={8}>
-          <Typography variant="h4" gutterBottom>
-            Welcome
+          <Typography
+            variant="h3"
+            style={{
+              fontFamily: "Zhi Mang Xing, cursive",
+            }}
+            gutterBottom
+          >
+            晚餐时间
           </Typography>{" "}
           <Box py={1}></Box>
           <img
@@ -69,85 +75,89 @@ function Home() {
           <Box py={2}></Box>
           <Typography variant="body1" gutterBottom>
             {" "}
-            你好!~ Welcome the new China Delight website! We are a Chinese
-            take-out (& limited Dine-In during COVID) restauraunt located in
-            Forest Hill, MD.
+            你好!~ Welcome the new China Delight website!
+            <Typography variant="body1" gutterBottom></Typography>
+            China Delight is a local Chinese cuisine take-out restaurant in
+            Forest Hill, MD. Dine-in is limited for health and safety during the
+            COVID-19 pandemic.
           </Typography>
           <Typography variant="body1" gutterBottom></Typography>
           <Typography variant="subtitle" gutterBottom>
-            <em> Disclaimer: the </em>{" "}
+            <em> Disclaimer: The </em>{" "}
             <em>
               {" "}
-              photos are not accurate replications of our dishes, only a
-              reference to see what they look like{" "}
+              photos not exact replications of our dishes and are to serve as
+              references.{" "}
             </em>
           </Typography>
           <Box py={4}></Box>
-          <Grid container spacing={4}>
-            <Grid
-              item
-              xs={12}
-              sm={4}
-              className="homeMenuBtn"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <a
-                className="homeButton"
-                size="large"
-                href="/menu"
-                style={{ whiteSpace: "nowrap" }}
+          <Box className="homeGallery">
+            <Grid container spacing={4}>
+              <Grid
+                item
+                xs={12}
+                sm={4}
+                className="homeMenuBtn"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
               >
-                Menu <NavigateNextIcon color="secondary" />
-              </a>{" "}
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              sm={4}
-              className="homeLunchBtn"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <a
-                className="homeButton"
-                size="large"
-                href="/lunch"
-                style={{ whiteSpace: "nowrap" }}
+                <a
+                  className="homeButton"
+                  size="large"
+                  href="/menu"
+                  style={{ whiteSpace: "nowrap" }}
+                >
+                  Menu <NavigateNextIcon color="#ffe9c3" />
+                </a>{" "}
+              </Grid>
+              <Grid
+                item
+                xs={12}
+                sm={4}
+                className="homeLunchBtn"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
               >
-                Lunch <NavigateNextIcon color="secondary" />
-              </a>
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              sm={4}
-              className="homeDinnerBtn"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <a
-                className="homeButton"
-                size="large"
-                href="/dinner-combo"
-                style={{ whiteSpace: "nowrap" }}
+                <a
+                  className="homeButton"
+                  size="large"
+                  href="/lunch"
+                  style={{ whiteSpace: "nowrap" }}
+                >
+                  Lunch <NavigateNextIcon color="#ffe9c3" />
+                </a>
+              </Grid>
+              <Grid
+                item
+                xs={12}
+                sm={4}
+                className="homeDinnerBtn"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
               >
-                Dinner <NavigateNextIcon color="secondary" />
-              </a>
-            </Grid>
-          </Grid>
+                <a
+                  className="homeButton"
+                  size="large"
+                  href="/dinner-combo"
+                  style={{ whiteSpace: "nowrap" }}
+                >
+                  Dinner <NavigateNextIcon color="#ffe9c3" />
+                </a>
+              </Grid>
+            </Grid>{" "}
+          </Box>
           <Box py={8}> </Box>
           <Typography variant="body1" gutterBottom>
-            <Typography variant="h4" gutterBottom>
+            <Typography variant="h3" gutterBottom>
               {" "}
               Hours{" "}
             </Typography>
@@ -180,7 +190,7 @@ function Home() {
           </Typography>
           <Box py={2}> </Box>
           <Typography variant="body1" gutterBottom>
-            <Typography variant="h4" gutterBottom>
+            <Typography variant="h3" gutterBottom>
               {" "}
               Contact{" "}
             </Typography>
@@ -193,20 +203,20 @@ function Home() {
           </Typography>
           <Box py={2}> </Box>
           <Typography variant="body1" gutterBottom>
-            <Typography variant="h4" gutterBottom>
+            <Typography variant="h3" gutterBottom>
               {" "}
               Directions{" "}
             </Typography>
-            📍 1 Newport Dr, Forest Hill, MD 21050
-            <Box py={1.5}> </Box>
-            On 24 (Rocks Spring Road), right across Enotria
+            📍 1E Newport Dr, Forest Hill, MD 21050
+            <br />
+            <em> On Rt. 24 (Rock Spring Road), right across Enotria </em>
             <Box py={1.5}> </Box>
             <iframe
               title="china delight map"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3075.182788165903!2d-76.3879002845251!3d39.57803061414107!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c7deb7b8b012ab%3A0xd3e57330e03df815!2sChina%20Delight!5e0!3m2!1sen!2sus!4v1617983002384!5m2!1sen!2sus"
-              width="400"
-              height="300"
-              style={{ border: 0, maxWidth: 350 }}
+              width="960"
+              height="600"
+              style={{ border: 0, maxWidth: "100%" }}
               allowfullscreen=""
               loading="lazy"
             ></iframe>
