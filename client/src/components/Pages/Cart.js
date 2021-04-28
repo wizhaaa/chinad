@@ -60,6 +60,12 @@ function Cart() {
     setEmptyAlert(false);
   };
 
+  //handle ordering on tuesdays alert
+  const [tuesdayAlert, setTuesdayAlert] = useState(false);
+  const tuesdayAlertClose = () => {
+    setTuesdayAlert(false);
+  };
+
   const { cart, setCart, userCartCount } = useCartContext();
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => {
@@ -80,7 +86,10 @@ function Cart() {
   };
 
   const handleCheckout = () => {
-    if (userCartCount === 0) {
+    let today = new Date();
+    if (today.getDay() === 2) {
+      setTuesdayAlert(true);
+    } else if (userCartCount === 0) {
       setEmptyAlert(true);
     } else {
       handleClickOpen();
@@ -234,6 +243,20 @@ function Cart() {
         <Alert onClose={emptyAlertClose} severity="error">
           {" "}
           <AlertTitle>Error</AlertTitle> Your cart is empty!{" "}
+        </Alert>
+      </Snackbar>
+      <Snackbar
+        open={tuesdayAlert}
+        autoHideDuration={4000}
+        onClose={tuesdayAlertClose}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert onClose={tuesdayAlertClose} severity="warning">
+          {" "}
+          <AlertTitle>
+            <strong> CAN NOT CHECKOUT ON TUESDAYS </strong>
+          </AlertTitle>{" "}
+          We are not open on Tuesdays! Apologies for any inconveniences.{" "}
         </Alert>
       </Snackbar>
     </div>
