@@ -21,7 +21,12 @@
     <!-- handwriting font -->
     <link href="https://fonts.googleapis.com/css2?family=Zhi+Mang+Xing&display=swap" rel="stylesheet">
     
+    <!-- paypal api -->
     <script src="https://www.paypal.com/sdk/js?client-id=AX_WprmPtR01VnvzoFrQYkVTn-zifrzuOtg_mv7Yoj-DiHUeewoAmiUDk4037A4rG5vIbri3F409qIoJ&currency=USD"> </script>
+
+    <!-- pwa -->
+    <link rel="manifest" href="manifest.json" >
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
     
 
     
@@ -30,6 +35,13 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+
+    <script> 
+    if ('serviceWorker' in navigator) { 
+      navigator.serviceWorker.register("/service-worker.js");
+    }
+      </script>
+
   </body>
 
 </html>
