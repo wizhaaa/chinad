@@ -1,3 +1,7 @@
+![Lines of code](https://img.shields.io/tokei/lines/github/notwz/chinad?style=for-the-badge)  
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/notwz/chinad?style=for-the-badge)
+
+
 # China Delight Website
 
 
