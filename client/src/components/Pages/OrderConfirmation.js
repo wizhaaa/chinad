@@ -51,16 +51,6 @@ function Confirmation() {
   const paymentMethod = prevOrder.paymentMethod;
   const amountPaid = prevOrder.amountPaid;
 
-  const pickUpDetails = (
-    <div>
-      {" "}
-      Pick up Option: {pickUpOption}
-      {pickUpOption === "custom time" ? (
-        <div> Pick up time: {pickUpTime} </div>
-      ) : null}{" "}
-    </div>
-  );
-
   const [open, setOpen] = React.useState(false);
 
   const handleClose = () => {
@@ -147,6 +137,7 @@ function Confirmation() {
       </Table>
     </TableContainer>
   );
+
   // minions gif:
   // https://i.pinimg.com/originals/5e/65/93/5e659326c2027e01b2c56a8c6d7908e7.gif
   // quby (little monk)
@@ -192,6 +183,18 @@ function Confirmation() {
             <Typography variant="body1" gutterBottom>
               {" "}
               Come in to pick it up and tell us you placed an online order!{" "}
+            </Typography>
+            <Box mb={5}> </Box>{" "}
+            <Typography variant="h5" gutterBottom>
+              {" "}
+              ⏰ How long?{" "}
+            </Typography>
+            <Typography variant="body1" gutterBottom>
+              {" "}
+              Wait times are usually 15-20 minutes.
+              <br />
+              Orders placed during dinner time (5-8) on
+              Fridays/Saturdays/Holidays may take over 30 minutes.{" "}
             </Typography>
             <Box mb={5}> </Box>
             <Typography variant="h5" gutterBottom>

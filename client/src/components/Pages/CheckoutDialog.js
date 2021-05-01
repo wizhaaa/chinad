@@ -168,9 +168,26 @@ const CheckoutDialog = (props) => {
 
   let order = {};
   let date = new Date().toString();
-  const minutes = new Date().getMinutes() + 25;
-  const hours = new Date().getHours();
-  const estimatedTime = `${hours}:${minutes}`;
+  let minutes = new Date().getMinutes() + 25;
+  let hours = new Date().getHours();
+  let meridiem = "AM";
+
+  if (minutes === 60) {
+    minutes = 0;
+    hours = hours + 1;
+  } else if (minutes > 60) {
+    minutes = minutes - 60;
+    hours = hours + 1;
+  }
+
+  if (hours > 12) {
+    hours = hours - 12;
+    meridiem = "PM";
+  } else if (hours === 12) {
+    meridiem = "PM";
+  }
+
+  const estimatedTime = `${hours}:${minutes} ${meridiem}`;
 
   // useEffect(() => {
   //   if (orderPaid) {
