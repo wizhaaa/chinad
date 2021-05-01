@@ -1,37 +1,28 @@
-<h1> china delight website repo (WIP)  </h1> 
-<br>
-GitHub Link: https://github.com/notwz/chinad
-<br> 
-Files for China Delight of Forest Hill, MD. 
-<br> 
-Purpose: to allow online ordering. 
-<br>
-DOB: AUG 03 2020
-<br>
-Production is: 
-Digital Ocean Deployment with MERN Stack
-
-<h2> front end stuffs </h2>
-
-<h3> quick start guide </h3>
-
-cd client: `npm install`
-
-<br /> 
-
-run development: `npm start` 
-
-<br /> 
-
-run build: `npm run build` 
+![Lines of code](https://img.shields.io/tokei/lines/github/notwz/chinad?style=for-the-badge)  
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/notwz/chinad?style=for-the-badge)
 
 
-<br>
+# China Delight Website
 
-<h2> back end stuffs </h2>
 
-cd server `npm install`
 
-<br /> 
+The official website for China Delight, a local Chinese restaurant in Forest Hill, MD, USA. It is a direct upgrade from its legacy website (http://chinadelightforesthill.com/). Customers are able to enjoy a smoother, modern ordering experience with the option to pay online, saving time in store. Check out the website here: https://www.chinadelightmd.com 
 
-run server `nodemon server.js` or `node server.js` 
+## About the Project 
+
+
+
+This started out as @notwz's Senior Capstone. We use a MERN stack deploying on a DigitalOcean VPS. Started in 2020 (August 3rd). 
+
+## Get Started 
+
+
+
+1. Clone the repo 
+2. cd into `client` 
+3. `npm i` 
+4. `npm start` 
+
+For a quick way to set up the development environment. It is connected the the live and makes API calls on the Node JS server I have running on my DO VPS. You can remap the routes to run in the local server. Switch to local host port 3000. 
+
+Can run server with `nodemon server.js` or `node server.js`. Make sure to install Node dependencies inside the /server directory. 
