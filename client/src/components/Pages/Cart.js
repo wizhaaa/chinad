@@ -156,12 +156,15 @@ function Cart() {
                   </Typography>
                   <Box variant="div" className="cartBottomOptions">
                     {" "}
-                    <Typography> Qty: {item.quantity}</Typography>
+                    <Typography> Qty: {item.quantity} </Typography>
                     <Typography>
                       {" "}
                       {formatter.format(item.cartUnitPrice)}
                     </Typography>
-                    <Typography> {formatter.format(itemTotalPrice)}</Typography>
+                    <Typography>
+                      {" "}
+                      {formatter.format(itemTotalPrice)}{" "}
+                    </Typography>
                     <IconButton
                       color="primary"
                       onClick={() => handleDelete(index)}
