@@ -66,6 +66,11 @@ function Cart() {
     setTuesdayAlert(false);
   };
 
+  const [morningAlert, setMorningAlert] = useState(false);
+  const morningAlertClose = () => {
+    setMorningAlert(false);
+  };
+
   const { cart, setCart, userCartCount } = useCartContext();
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => {
@@ -89,6 +94,8 @@ function Cart() {
     let today = new Date();
     if (today.getDay() === 2) {
       setTuesdayAlert(true);
+    } else if (today.getHours() < 12) {
+      setMorningAlert(true);
     } else if (userCartCount === 0) {
       setEmptyAlert(true);
     } else {
@@ -260,6 +267,21 @@ function Cart() {
             <strong> CAN NOT CHECKOUT ON TUESDAYS </strong>
           </AlertTitle>{" "}
           We are not open on Tuesdays! Apologies for any inconveniences.{" "}
+        </Alert>
+      </Snackbar>
+      <Snackbar
+        open={morningAlert}
+        autoHideDuration={4000}
+        onClose={morningAlertClose}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert onClose={morningAlertClose} severity="warning">
+          {" "}
+          <AlertTitle>
+            <strong> NOT ACCEPTING ONLINE ORDERS IN THE MORNINGS </strong>
+          </AlertTitle>{" "}
+          We are not accepting online orders in the morning (before 12 noon) to
+          avoid any inconveniences.{" "}
         </Alert>
       </Snackbar>
     </div>
