@@ -164,7 +164,7 @@ const AppetizerDialog = (props) => {
     const fillingChosen = e.target.value;
     setFillingValue(fillingChosen);
     if (fillingChosen === "Chicken") {
-      setFinalPrice(price + 2.25);
+      setFinalPrice(price + 1.5);
     } else {
       setFinalPrice(price);
     }
