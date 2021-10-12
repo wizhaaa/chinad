@@ -388,7 +388,7 @@ const LunchDialog = React.memo((props) => {
                     </Typography>
                   </AccordionDetails>
                 </Accordion>
-                <Accordion>
+                {/* <Accordion>
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel2a-content"
@@ -446,7 +446,7 @@ const LunchDialog = React.memo((props) => {
                       </FormControl>
                     </Typography>
                   </AccordionDetails>
-                </Accordion>
+                </Accordion> */}
                 {title === "Egg Foo Young" ? EFYMeatOptions : null}
                 {title === "Fried Rice" ||
                 title === "Lo Mein" ||

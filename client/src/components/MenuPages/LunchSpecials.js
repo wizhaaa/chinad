@@ -102,10 +102,7 @@ const LunchSpecials = (props) => {
             {" "}
             Fried Rice, White Rice, Lo Mein (+1.5), or Pork Fried Rice (+1.5).{" "}
           </strong>
-          <br />
-          Optional: Choose Egg Drop Soup, Wonton Soup, or Hot & Sour Soup, Egg
-          Roll, or Soda for $0.75
-          <br />
+          
           <br />
           <em style={{ color: "#B18944" }}>
             {" "}
