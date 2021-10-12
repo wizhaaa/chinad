@@ -66,9 +66,15 @@ function Cart() {
     setTuesdayAlert(false);
   };
 
+  // handling orders in the morning
   const [morningAlert, setMorningAlert] = useState(false);
   const morningAlertClose = () => {
     setMorningAlert(false);
+  };
+
+  const [holidayAlert, setHolidayAlert] = useState(false);
+  const holidayAlertClose = () => {
+    setHolidayAlert(false);
   };
 
   const { cart, setCart, userCartCount } = useCartContext();
@@ -90,10 +96,18 @@ function Cart() {
     });
   };
 
+  // for holiday alert. remember: .getMonth is i = 0 ... 11 (month -1)
+
   const handleCheckout = () => {
     let today = new Date();
     if (today.getDay() === 2) {
       setTuesdayAlert(true);
+    } else if (
+      today.getDate() === 15 &&
+      today.getMonth() === 9 &&
+      today.getFullYear() === 2021
+    ) {
+      setHolidayAlert(true);
     } else if (today.getHours() < 12) {
       setMorningAlert(true);
     } else if (userCartCount === 0) {
@@ -282,6 +296,23 @@ function Cart() {
           </AlertTitle>{" "}
           We are not accepting online orders in the morning (before 12 noon) to
           avoid any inconveniences.{" "}
+        </Alert>
+      </Snackbar>
+      <Snackbar
+        open={holidayAlert}
+        autoHideDuration={10000}
+        onClose={holidayAlertClose}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert onClose={holidayAlertClose} severity="error">
+          {" "}
+          <AlertTitle>
+            <strong> Not accepting online orders today </strong>
+          </AlertTitle>{" "}
+          Due to lack of manpower tonight, we will not be accepting online
+          orders to help reduce the workload on our staff and keep order times
+          in check. Thank you for understanding! We will reopen online orders
+          tomorrow. Apologies for any inconveniences.{" "}
         </Alert>
       </Snackbar>
     </div>
