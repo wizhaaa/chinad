@@ -128,7 +128,7 @@ function ResponsiveDrawer(props) {
             </IconButton>
           </Link>
         </Toolbar>
-      </AppBar>
+      </AppBar> 
       <nav className={classes.drawer} aria-label="mailbox folders">
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
 

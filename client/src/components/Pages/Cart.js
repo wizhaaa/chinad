@@ -103,7 +103,7 @@ function Cart() {
     if (today.getDay() === 2) {
       setTuesdayAlert(true);
     } else if (
-      today.getDate() === 15 &&
+      today.getDate() === 30 &&
       today.getMonth() === 9 &&
       today.getFullYear() === 2021
     ) {
