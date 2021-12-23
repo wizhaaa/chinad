@@ -164,7 +164,7 @@ const AppetizerDialog = (props) => {
     const fillingChosen = e.target.value;
     setFillingValue(fillingChosen);
     if (fillingChosen === "Chicken") {
-      setFinalPrice(price + 1.5);
+      setFinalPrice(price + 2);
     } else {
       setFinalPrice(price);
     }
@@ -260,7 +260,7 @@ const AppetizerDialog = (props) => {
                 <FormControlLabel
                   value="Chicken"
                   control={<Radio />}
-                  label="Chicken (+1.25)"
+                  label="Chicken (+2)"
                 />
               </RadioGroup>
             </FormControl>

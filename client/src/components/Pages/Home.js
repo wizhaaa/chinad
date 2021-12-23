@@ -166,19 +166,19 @@ function Home() {
                 Mondays - Thursdays{" "}
               </Grid>
               <Grid container item xs={6}>
-                11 AM - 10 PM{" "}
+                11 AM - 9 PM{" "}
               </Grid>
               <Grid container item xs={6} justify="flex-end">
                 Fridays - Saturdays{" "}
               </Grid>
               <Grid container item xs={6}>
-                11 AM - 10:30 PM{" "}
+                11 AM - 9:30 PM{" "}
               </Grid>
               <Grid container item xs={6} justify="flex-end">
                 Sundays{" "}
               </Grid>
               <Grid container item xs={6}>
-                12 - 9:30 PM{" "}
+                12 - 9 PM{" "}
               </Grid>
               <Grid container item xs={6} justify="flex-end">
                 Tuesdays{" "}

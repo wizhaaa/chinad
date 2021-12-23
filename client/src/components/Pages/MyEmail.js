@@ -135,7 +135,12 @@ const MyEmail = ({ order }) => {
             <br />
             <tr key={item.title}>
               <td>
-                <div> 🍱 {item.title} </div>
+                <div>
+                  {" "}
+                  <h4>
+                    🍱 <b> {item.title} </b>{" "}
+                  </h4>{" "}
+                </div>
                 <div> &emsp; {itemOptions} </div>{" "}
                 <div>
                   {" "}
