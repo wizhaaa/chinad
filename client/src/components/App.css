@@ -138,6 +138,27 @@ a:hover {
   width: 100%;
 }
 
+.home-alert { 
+  background-color: #b41e22;
+  padding: 2%;
+  padding-bottom: 35px;
+  margin: 2%;
+  margin-bottom: 35px;
+  color:#fff;
+  border-style: solid;
+  border-width:thick;
+  border-color:#b18944;
+  border-top: #fff;
+  border-left:#fff;
+}
+
+.home-alert-img { 
+  height: 125px; 
+  width: auto;
+  margin-bottom: 5%;
+
+}
+
 /* https://media3.giphy.com/media/48PbiL2u5ZUU6HZf55/giphy.gif */
 .homeMenuBtn {
   /* The image used */
