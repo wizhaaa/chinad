@@ -279,7 +279,9 @@ const CheckoutDialog = (props) => {
 
       //commenting out adding order for now
       addOrder(order);
+      console.log("order added to DB ...");
       sendEmail();
+      console.log("sent email ...");
       // redirect
       // window.location.href = "/"
       e.preventDefault();
