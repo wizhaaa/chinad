@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
-import { Typography, Button } from "@material-ui/core";
-import Box from "@material-ui/core/Box";
+import { Typography, Button, Grid, Box } from "@material-ui/core";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import { NavigateNext as NavigateNextIcon } from "@material-ui/icons";
-
-import { Grid } from "@material-ui/core";
 
 function Home() {
   return (
@@ -35,6 +32,22 @@ function Home() {
       </Helmet>
       <Typography component="div">
         <Box textAlign="center" m={1} py={8}>
+          {
+            // TEMPORARILY CLOSED NOTIFICATION
+            /* <Typography>
+            <div className="home-alert">
+              <h3> Updated: Monday, January {new Date().getDate()} </h3>
+              Apologies for any inconveniences but we are closed as our main
+              staff is not feeling well. Thank you for your support! We hope to
+              open as soon as possible.
+            </div>
+            <img
+              alt="maintence image"
+              className="home-alert-img"
+              src="https://scontent-iad3-2.xx.fbcdn.net/v/t1.6435-9/43065959_1846861985395776_7996339621719965696_n.jpg?_nc_cat=106&ccb=1-5&_nc_sid=730e14&_nc_ohc=KBn1AYsMtHoAX_HdNl1&_nc_ht=scontent-iad3-2.xx&oh=00_AT8CAqKMYLnCB_JNtBrJd-lEtCUowTuz-hIvyGgOwsOpBw&oe=61F8752D"
+            />
+          </Typography> */
+          }
           <Typography
             variant="h3"
             style={{
@@ -166,19 +179,19 @@ function Home() {
                 Mondays - Thursdays{" "}
               </Grid>
               <Grid container item xs={6}>
-                11 AM - 9 PM{" "}
+                11 AM - 8:30 PM{" "}
               </Grid>
               <Grid container item xs={6} justify="flex-end">
                 Fridays - Saturdays{" "}
               </Grid>
               <Grid container item xs={6}>
-                11 AM - 9:30 PM{" "}
+                11 AM - 8:30 PM{" "}
               </Grid>
               <Grid container item xs={6} justify="flex-end">
                 Sundays{" "}
               </Grid>
               <Grid container item xs={6}>
-                12 - 9 PM{" "}
+                12 - 8:30{" "}
               </Grid>
               <Grid container item xs={6} justify="flex-end">
                 Tuesdays{" "}

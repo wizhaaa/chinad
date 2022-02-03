@@ -99,13 +99,15 @@ function Cart() {
   // for holiday alert. remember: .getMonth is i = 0 ... 11 (month -1)
 
   const handleCheckout = () => {
+    // testing to allow opening cart
+    // handleClickOpen();
     let today = new Date();
     if (today.getDay() === 2) {
       setTuesdayAlert(true);
     } else if (
-      today.getDate() === 30 &&
-      today.getMonth() === 9 &&
-      today.getFullYear() === 2021
+      today.getDate() === 9 &&
+      today.getMonth() === 0 &&
+      today.getFullYear() === 2022
     ) {
       setHolidayAlert(true);
     } else if (today.getHours() < 12) {
@@ -309,10 +311,14 @@ function Cart() {
           <AlertTitle>
             <strong> Not accepting online orders today </strong>
           </AlertTitle>{" "}
-          Due to lack of manpower tonight, we will not be accepting online
+          {/* Due to lack of manpower tonight, we will not be accepting online
           orders to help reduce the workload on our staff and keep order times
           in check. Thank you for understanding! We will reopen online orders
-          tomorrow. Apologies for any inconveniences.{" "}
+          tomorrow. Apologies for any inconveniences.{" "} */}
+          Apologies for any inconveniences but we are closed as one of our chefs
+          is not feeling well. Thank you for your support! We hope to open as
+          soon as our chef and staff are feeling better. Possibly by this
+          Wednesday. Thank you again!
         </Alert>
       </Snackbar>
     </div>

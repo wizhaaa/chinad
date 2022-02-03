@@ -169,7 +169,7 @@ function Confirmation() {
             </Typography>
             <Typography variant="h5" gutterBottom>
               {" "}
-              ❓ Still can't find it?{" "}
+              ❓ <br> Still can't find it? </br>{" "}
             </Typography>
             <Typography variant="body1" gutterBottom>
               {" "}
@@ -178,7 +178,7 @@ function Confirmation() {
             <Box mb={5}> </Box>
             <Typography variant="h5" gutterBottom>
               {" "}
-              🏃‍♀️ What's next?{" "}
+              🏃‍♀️ <br> What's next?</br>{" "}
             </Typography>
             <Typography variant="body1" gutterBottom>
               {" "}
@@ -187,14 +187,15 @@ function Confirmation() {
             <Box mb={5}> </Box>{" "}
             <Typography variant="h5" gutterBottom>
               {" "}
-              ⏰ How long?{" "}
+              ⏰ <b> How long?</b>{" "}
             </Typography>
             <Typography variant="body1" gutterBottom>
               {" "}
-              Wait times are usually 15-20 minutes.
+              Regular wait times are usually 15-20 minutes.
               <br />
-              Orders placed during dinner time (5-8) on
-              Fridays/Saturdays/Holidays may take over 30 minutes.{" "}
+              Orders placed during dinner time (5-8) on Fridays/Saturdays may
+              take over 30 minutes. Major Holidays may take over an hour. Thank
+              you for your patience!{" "}
             </Typography>
             <Box mb={5}> </Box>
             <Typography variant="h5" gutterBottom>

@@ -218,8 +218,14 @@ function About() {
               <Typography>
                 {" "}
                 When it is not very busy, orders can be finished with 10-15
-                minutes. On busy nights like Thursdays, Fridays, Saturdays, and
-                Holidays, orders can take much longer. ~30 min - 1 hour.{" "}
+                minutes. On busy nights like{" "}
+                <strong>
+                  Thursdays, Fridays, Saturdays, and Holidays,{" "}
+                </strong>{" "}
+                orders can take much longer. ~30 min - 1 hour.
+                <br></br> <strong>Major holidays</strong> such as Thanksgiving,
+                Christmas week, and New Years can result in orders taking up to
+                1-2 hours. Thank you for your patience!{" "}
               </Typography>
               {/* <Typography> These times are only for reference. </Typography>
               <Box> {orderTimesTable} </Box>{" "} */}
