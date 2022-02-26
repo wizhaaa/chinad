@@ -600,7 +600,7 @@ const CheckoutDialog = (props) => {
                 There is a <strong> $0.50 fee </strong> and any special requests
                 not calculated online may require you to pay extra in-person.
                 Please see <a href="/about"> pricing </a> for more details on
-                what costs you can expect.
+                what costs you can expect. We do not deliver. Paypal may ask for a shipping address as their service requires it but we will not deliver to that address. If you want delivery, try 3rd-party apps like Grubhub, DoorDash, etc. 
                 <Box py={2}> </Box>{" "}
                 <Typography variant="body1" gutterBottom>
                   If this looks too complicated, you can always pay in-store!
