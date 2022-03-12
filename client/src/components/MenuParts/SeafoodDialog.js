@@ -35,6 +35,7 @@ import {
 
 import { useCartContext } from "../CartContext";
 import Review from "./Reviews";
+import SauceOptions from "../Utils/SauceOptions";
 
 const useStyles = makeStyles((theme) => ({
   root: { margin: 10 },
@@ -125,6 +126,7 @@ const SeafoodDialog = (props) => {
   const [finalPrice, setFinalPrice] = useState(initialPrice);
   const [ricePrice, setRicePrice] = useState(0);
   const [riceValue, setRiceValue] = useState("White Rice");
+  const [sauceValue, setSauceValue] = useState("White Sauce");
 
   const [requestContent, setRequestContent] = useState("");
   const { cart, setCart, addNewItem } = useCartContext();
@@ -141,8 +143,15 @@ const SeafoodDialog = (props) => {
     onAdd();
     const type = "Entree";
     let options = {};
-    if (price === null) {
+    if (price === null && (title === "Shrimp w. Broccoli"
+      || title === "Shrimp w. Mixed Vegetables")) {
+      options = { type, sizeValue, riceValue, sauceValue }
+    }
+    else if (price === null) {
       options = { type, sizeValue, riceValue };
+    } else if (title === "Shrimp w. Broccoli"
+      || title === "Shrimp w. Mixed Vegetables") {
+      options = { type, riceValue, sauceValue }
     } else {
       options = { type, riceValue };
     }
@@ -192,6 +201,11 @@ const SeafoodDialog = (props) => {
       setRicePrice(0);
     }
   };
+
+  const handleSauceChange = (e) => { 
+    const sauceChosen = e.target.value
+    setSauceValue(sauceChosen)
+  }
 
   const handleQuantityChange = (e) => {
     setQuantity(e.target.value);
@@ -327,8 +341,10 @@ const SeafoodDialog = (props) => {
               <Grid Item xs={12} sm={6}>
                 {price === null ? sizeOptions : null}
                 {riceOptions}
-                {/* {title === "Yat Gai Mei" ? meatOptions : null} */}
-              </Grid>
+                {title === "Shrimp w. Broccoli" ||
+                  title === "Shrimp w. Mixed Vegetables" ?
+                  <SauceOptions sauceValue={sauceValue}
+                  handleSauceChange={handleSauceChange} /> : null}              </Grid>
               <Grid item xs={12}>
                 {" "}
                 <Box m={3} className={classes.textFields}>

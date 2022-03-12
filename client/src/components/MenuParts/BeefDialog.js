@@ -35,6 +35,7 @@ import {
 
 import { useCartContext } from "../CartContext";
 import Review from "./Reviews";
+import SauceOptions from "../Utils/SauceOptions";
 
 const useStyles = makeStyles((theme) => ({
   root: { margin: 10 },
@@ -120,7 +121,6 @@ const BeefDialog = (props) => {
     initialPrice = price;
   }
   const [sizeValue, setSizeValue] = useState("Pint");
-  const [meatValue, setMeatValue] = useState("Chicken");
   const [quantity, setQuantity] = useState(1);
   const [finalPrice, setFinalPrice] = useState(initialPrice);
   const [ricePrice, setRicePrice] = useState(0);
@@ -327,7 +327,8 @@ const BeefDialog = (props) => {
               <Grid Item xs={12} sm={6}>
                 {price === null ? sizeOptions : null}
                 {riceOptions}
-                {/* {title === "Yat Gai Mei" ? meatOptions : null} */}
+               
+                  
               </Grid>
               <Grid item xs={12}>
                 {" "}
