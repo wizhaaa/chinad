@@ -160,16 +160,16 @@ function Confirmation() {
               style={{ fontSize: "3.5rem" }}
               gutterBottom
             >
-              🎉 Success! 🙌
+              🎉   谢谢！🙌
             </Typography>
             <Typography variant="body1" gutterBottom>
               {" "}
-              🙏 谢谢！Thank you {name} for your order! You should have received
+              🙏  (Xièxie)！Thank you {name} for your order! You should have received
               a confirmation email (at {email} or your junk/spam folder).{" "}
             </Typography>
             <Typography variant="h5" gutterBottom>
               {" "}
-              ❓ <br> Still can't find it? </br>{" "}
+              ❓ <b> Still can't find it? </b>{" "}
             </Typography>
             <Typography variant="body1" gutterBottom>
               {" "}
@@ -178,7 +178,7 @@ function Confirmation() {
             <Box mb={5}> </Box>
             <Typography variant="h5" gutterBottom>
               {" "}
-              🏃‍♀️ <br> What's next?</br>{" "}
+              🏃‍♀️ <b> What's next?</b>{" "}
             </Typography>
             <Typography variant="body1" gutterBottom>
               {" "}

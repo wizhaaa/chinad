@@ -135,10 +135,7 @@ const Routes = () => {
           {" "}
           <Side />{" "}
         </Route>
-        <Route exact path="/test">
-          {" "}
-          <Test />{" "}
-        </Route>
+        
         <Route exact path="/axiostest">
           {" "}
           <AxiosTest />{" "}
