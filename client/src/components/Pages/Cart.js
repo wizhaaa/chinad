@@ -105,8 +105,8 @@ function Cart() {
     if (today.getDay() === 2) {
       setTuesdayAlert(true);
     } else if (
-      today.getDate() === 9 &&
-      today.getMonth() === 0 &&
+      today.getDate() === 18 &&
+      today.getMonth() === 4 &&
       today.getFullYear() === 2022
     ) {
       setHolidayAlert(true);
@@ -315,10 +315,12 @@ function Cart() {
           orders to help reduce the workload on our staff and keep order times
           in check. Thank you for understanding! We will reopen online orders
           tomorrow. Apologies for any inconveniences.{" "} */}
-          Apologies for any inconveniences but we are closed as one of our chefs
+          {/* Apologies for any inconveniences but we are closed as one of our chefs
           is not feeling well. Thank you for your support! We hope to open as
           soon as our chef and staff are feeling better. Possibly by this
-          Wednesday. Thank you again!
+          Wednesday. Thank you again! */}
+          Apologies, but we are closed today for graduation! We will reopen tomorrow!
+          Thank you so much. 
         </Alert>
       </Snackbar>
     </div>
