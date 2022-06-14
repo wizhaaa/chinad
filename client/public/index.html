@@ -1,49 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-9RK4LGZH98"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-9RK4LGZH98");
+    </script>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta name="keywords" content="China Delight Chinese Restaurant, Forest Hill, MD，Chinese Food, Fast delivery, Online coupon, Restaurant Review, Take Out, Eat in, Dine in, Online, Order, Online Order, Menu, Maryland, Harford County" />
+    <meta
+      name="keywords"
+      content="China Delight Chinese Restaurant, Forest Hill, MD，Chinese Food, Fast delivery, Online coupon, Restaurant Review, Take Out, Eat in, Dine in, Online, Order, Online Order, Menu, Maryland, Harford County"
+    />
 
-    <meta name="description" content="China Delight Chinese Restaurant based in Forest Hill, MD. We do dine-in, carryout, and online orders!" /> 
-   
+    <meta
+      name="description"
+      content="China Delight Chinese Restaurant based in Forest Hill, MD. We do dine-in, carryout, and online orders!"
+    />
 
-    
+    <meta name="author" content="Will Zhang" />
+    <a href="https://www.chinadelightmd.com/menu"> Menu </a>
+    <a href="https://www.chinadelightmd.com/dinner-combo"> Dinner </a>
+    <a href="https://www.chinadelightmd.com/chef"> Specials </a>
+    <a href="https://www.chinadelightmd.com/sides"> Sides </a>
+    <a href="https://www.chinadelightmd.com/appetizers">
+      {" "} Appetizers{" "}
+    </a>
+    {" "}
+
     <!-- <link rel="stylesheet" href="./styles.css" /> -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
-    
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    />
+
     <!-- acumin-pro font stylesheet -->
-    <link rel="stylesheet" href="https://use.typekit.net/zbm6jqo.css">
+    <link rel="stylesheet" href="https://use.typekit.net/zbm6jqo.css" />
 
     <!-- handwriting font -->
-    <link href="https://fonts.googleapis.com/css2?family=Zhi+Mang+Xing&display=swap" rel="stylesheet">
-    
+    <link
+      href="https://fonts.googleapis.com/css2?family=Zhi+Mang+Xing&display=swap"
+      rel="stylesheet"
+    />
+
     <!-- paypal api -->
-    <script src="https://www.paypal.com/sdk/js?client-id=AX_WprmPtR01VnvzoFrQYkVTn-zifrzuOtg_mv7Yoj-DiHUeewoAmiUDk4037A4rG5vIbri3F409qIoJ&currency=USD"> </script>
+    <script src="https://www.paypal.com/sdk/js?client-id=AX_WprmPtR01VnvzoFrQYkVTn-zifrzuOtg_mv7Yoj-DiHUeewoAmiUDk4037A4rG5vIbri3F409qIoJ&currency=USD"></script>
 
     <!-- pwa -->
-    <link rel="manifest" href="manifest.json" >
-    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
-    <meta name="theme-color" content="#676767">
+    <link rel="manifest" href="manifest.json" />
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+    <meta name="theme-color" content="#676767" />
 
-    
-
-    
-    <title>  China Delight - Forest Hill MD </title>
+    <title>China Delight - Forest Hill MD</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
 
-    <script> 
-    if ('serviceWorker' in navigator) { 
-      navigator.serviceWorker.register("/service-worker.js");
-    }
-      </script>
-
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("/service-worker.js");
+      }
+    </script>
   </body>
-
 </html>

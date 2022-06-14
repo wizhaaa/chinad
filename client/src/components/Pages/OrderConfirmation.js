@@ -147,12 +147,18 @@ function Confirmation() {
   return (
     <div className="Cart">
       <Typography component="div">
-        <Box textAlign="center" m={1} py={8} mx={"1%"}>
+        <Box textAlign="left" m={1} py={8} mx={"1%"}>
           <Box style={{ maxWidth: 650 }}>
             <img
               src="https://1.bp.blogspot.com/-SQd93ExJA70/W9h0023ZyQI/AAAAAAA0VjY/pTA1Op9ysxQQqinq6V1v4aFJvGO7ujnvACLcBGAs/s1600/AW2158645_18.gif"
               alt="celebration-gif"
-              style={{ maxWidth: "80%", maxHeight: "200px" }}
+              style={{
+                maxWidth: "80%",
+                maxHeight: "200px",
+                marginLeft: "auto",
+                marginRight: "auto",
+                display: "block",
+              }}
             />
             <Box mb={5}> </Box>
             <Typography
@@ -160,53 +166,57 @@ function Confirmation() {
               style={{ fontSize: "3.5rem" }}
               gutterBottom
             >
-              🎉   谢谢！🙌
+              谢谢 Order Confirmation
             </Typography>
             <Typography variant="body1" gutterBottom>
               {" "}
-              🙏  (Xièxie)！Thank you {name} for your order! You should have received
-              a confirmation email (at {email} or your junk/spam folder).{" "}
-            </Typography>
-            <Typography variant="h5" gutterBottom>
-              {" "}
-              ❓ <b> Still can't find it? </b>{" "}
+              Thank you {name} for your order! You should have received a
+              confirmation email at <a href={`mailto:${email}`}> {email} </a>.
             </Typography>
             <Typography variant="body1" gutterBottom>
               {" "}
-              Call us at 410-877-9490 and ask if we received your order.{" "}
+              <b> Still can't find it? </b>{" "}
+            </Typography>
+            <Typography variant="body1" gutterBottom>
+              {" "}
+              Check your junk/spam folder or call us at 410-877-9490 and ask if
+              we received your order.{" "}
             </Typography>
             <Box mb={5}> </Box>
             <Typography variant="h5" gutterBottom>
               {" "}
-              🏃‍♀️ <b> What's next?</b>{" "}
+              <b> What's next?</b>{" "}
             </Typography>
             <Typography variant="body1" gutterBottom>
               {" "}
               Come in to pick it up and tell us you placed an online order!{" "}
+              <br />
+              <b> Please Note: </b>
+              We do not deliver. You must come in to pick it up.
             </Typography>
             <Box mb={5}> </Box>{" "}
             <Typography variant="h5" gutterBottom>
               {" "}
-              ⏰ <b> How long?</b>{" "}
+              <b> How long?</b>{" "}
             </Typography>
             <Typography variant="body1" gutterBottom>
               {" "}
               Regular wait times are usually 15-20 minutes.
               <br />
-              Orders placed during dinner time (5-8) on Fridays/Saturdays may
+              Orders placed during dinner time (5-8 PM) on Fridays/Saturdays may
               take over 30 minutes. Major Holidays may take over an hour. Thank
               you for your patience!{" "}
             </Typography>
             <Box mb={5}> </Box>
             <Typography variant="h5" gutterBottom>
               {" "}
-              🔗 quick links{" "}
+              <b> More Info </b>{" "}
             </Typography>
             <Typography gutterBottom>
               {" "}
               <a href="/about">
                 {" "}
-                order times
+                Order times
                 {/* <LaunchIcon
                   style={{ alignItems: "center", height: "1rem" }}
                 />{" "} */}
@@ -215,7 +225,7 @@ function Confirmation() {
               <br />
               <a href="/about">
                 {" "}
-                pricing
+                Pricing
                 {/* <LaunchIcon
                   style={{ alignItems: "center", height: "1rem" }}
                 />{" "} */}
@@ -240,8 +250,8 @@ function Confirmation() {
                 {" "}
                 chinadelightmd@gmail.com{" "}
               </a>
-              with any suggestions or feedback. Anything helps us improve and
-              learn! <br />
+              with any suggestions or feedback.
+              <br />
               🤤 Enjoyed the food? Click{" "}
               <a href="https://g.page/chinadelightforesthill/review?rc">
                 {" "}
@@ -254,17 +264,17 @@ function Confirmation() {
             <Typography>
               {" "}
               <strong> 📆 Order Time </strong> {timePlaced}
-              <br /> <strong> 🏃‍♀️💨 Pick Up Option </strong> {pickUpOption}{" "}
+              <br /> <strong> Pick Up Option </strong> {pickUpOption}{" "}
               {pickUpOption === "custom time" ? (
                 <>
                   {" "}
-                  <br /> <strong> 🏃‍♀💨 Picking Up At </strong> {pickUpTime}{" "}
+                  <br /> <strong> Picking Up At </strong> {pickUpTime}{" "}
                 </>
               ) : null}
               {pickUpOption === "ASAP" ? (
                 <>
                   {" "}
-                  <br /> <strong> ⏰ Estimated Pick Up Time</strong>{" "}
+                  <br /> <strong> Estimated Pick Up Time</strong>{" "}
                   {estimatedTime}{" "}
                 </>
               ) : null}
@@ -272,7 +282,7 @@ function Confirmation() {
               {paymentMethod === "In Person" ? (
                 <div>
                   {" "}
-                  <strong> ⛔ Payment </strong> {paymentMethod} <br />{" "}
+                  <strong> Payment </strong> {paymentMethod} <br />{" "}
                 </div>
               ) : (
                 <div>

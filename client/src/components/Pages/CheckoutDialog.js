@@ -121,6 +121,9 @@ const useStyles = makeStyles((theme) => ({
     zIndex: theme.zIndex.drawer + 1,
     color: "#fff",
   },
+  boldHeading: {
+    fontWeight: 800,
+  },
 }));
 
 const CheckoutDialog = (props) => {
@@ -545,14 +548,19 @@ const CheckoutDialog = (props) => {
           {" "}
           After hitting either "Place Order" or finishing the PayPal payment,
           you should receive an email and be redirected to the Order
-          Confirmation page.{" "}
+          Confirmation page.
+          <br />
+          <br />
+          <strong> Either way, we do not deliver. </strong>
+          <br />
+          <br />{" "}
         </Typography>{" "}
         <Box py={3}> </Box>{" "}
         <Box>
           {" "}
           <Typography variant="h5" gutterBottom>
             {" "}
-            💻 Pay Online?
+            <b> Pre-Pay Online? </b>
           </Typography>
           <Box py={2}> </Box>
           <Box></Box>
@@ -591,20 +599,29 @@ const CheckoutDialog = (props) => {
           {showPayPal && (
             <Box>
               <Box py={2}> </Box>
-              <Typography variant="h5" gutterBottom>
+              <Typography
+                variant="h5"
+                className={classes.boldHeading}
+                gutterBottom
+              >
                 {" "}
-                ⛔ PLEASE READ ⛔{" "}
+                ⛔ <st> ***WARNING*** </st> ⛔{" "}
               </Typography>
               <Typography variant="body1" gutterBottom>
                 {" "}
                 There is a <strong> $0.50 fee </strong> and any special requests
                 not calculated online may require you to pay extra in-person.
                 Please see <a href="/about"> pricing </a> for more details on
-                what costs you can expect. We do not deliver. Paypal may ask for a shipping address as their service requires it but we will not deliver to that address. If you want delivery, try 3rd-party apps like Grubhub, DoorDash, etc. 
-                <Box py={2}> </Box>{" "}
-                <Typography variant="body1" gutterBottom>
-                  If this looks too complicated, you can always pay in-store!
-                </Typography>{" "}
+                what costs you can expect.
+                <br />
+                <br />
+                <strong> We do not deliver. </strong>
+                <br />
+                <br />
+                Paypal may ask for a shipping address as their service requires
+                it but we will not deliver to that address. If you want
+                delivery, try 3rd-party apps like Grubhub, DoorDash, etc.
+                <Box py={2}> </Box>
                 <Box py={2}> </Box>
                 <Typography variant="body1" gutterBottom>
                   Once the PayPal payment goes through, an email will be sent
@@ -643,7 +660,7 @@ const CheckoutDialog = (props) => {
             {" "}
             <Typography variant="h5" gutterBottom>
               {" "}
-              🧍‍♀️ Pay In-Person{" "}
+              <b> Pay In-Person </b>
             </Typography>{" "}
             <Box py={2}> </Box>
             <Button

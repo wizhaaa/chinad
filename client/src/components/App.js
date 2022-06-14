@@ -23,8 +23,10 @@ import "./App.css";
 //Context Provider
 import { CartProvider } from "./CartContext";
 
-//import test module
-import Test from "./DemoTestModule";
+// react google analytics
+import ReactGA from "react-ga";
+const TRACKING_ID = "G-9RK4LGZH98";
+ReactGA.initialize(TRACKING_ID);
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -67,7 +69,7 @@ function App() {
           name="description"
           content="China Delight Chinese Restaurant based in Forest Hill, MD. We do dine-in, carryout, and online orders!"
         />
-        {/* <meta name="author" content="Will Zhang" />
+        <meta name="author" content="Will Zhang" />
         <a href="https://www.chinadelightmd.com/menu"> Menu </a>
         <a href="https://www.chinadelightmd.com/dinner-combo"> Dinner </a>
         <a href="https://www.chinadelightmd.com/chef"> Specials </a>
@@ -75,8 +77,19 @@ function App() {
         <a href="https://www.chinadelightmd.com/appetizers">
           {" "}
           Appetizers{" "}
-        </a>{" "} */}
+        </a>{" "}
         <title> China Delight - Forest Hill MD </title>
+        {/* google ads */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5614337634469357"
+          crossorigin="anonymous"
+        ></script>
+        {/* <!-- Global site tag (gtag.js) - Google Analytics --> */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-9RK4LGZH98"
+        ></script>
       </Helmet>
       <ThemeProvider theme={theme}>
         <Router>
