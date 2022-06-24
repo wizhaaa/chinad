@@ -31,20 +31,18 @@ function Home() {
         <a href="https://www.chinadelightmd.com/chef"> Specials </a>
         <a href="https://www.chinadelightmd.com/sides"> Sides </a>
         <a href="https://www.chinadelightmd.com/appetizers">
-          {" "}
-          Appetizers{" "}
-        </a>{" "} */}
+          
+          Appetizers
+        </a> */}
         <title> China Delight - Forest Hill, MD </title>
       </Helmet>
       <Typography component="div">
         <Box textAlign="center" m={1} py={8}>
           <Typography style={{paddingBottom: "80px"}}>
             <Alert severity="info">
-              {" "}
               <AlertTitle>
-                {" "}
                 <strong> Alert for Friday 6/24 </strong>
-              </AlertTitle>{" "}
+              </AlertTitle>
               Our phone lines are down for the day and will not be able to
               process credit cards in-person. Please pay in cash or by credit
               card online. Sorry for any inconveniences and thank you!
@@ -58,14 +56,14 @@ function Home() {
             gutterBottom
           >
             晚餐时间
-          </Typography>{" "}
+          </Typography>
           <Box py={1}></Box>
           <img
             src="https://media3.giphy.com/media/48PbiL2u5ZUU6HZf55/giphy.gif"
             alt="bg"
             className="homeImage"
             style={{backgroundSize: "cover"}}
-          />{" "}
+          />
           {/* <Box className="imageContainer" textAlign="center">
             <div className="homeBg">
               <Grid container spacing={3}>
@@ -85,11 +83,10 @@ function Home() {
                   </a>
                 </Grid>
               </Grid>
-            </div>{" "}
+            </div>{" "
           </Box> */}
           <Box py={2}></Box>
           <Typography variant="body1" gutterBottom>
-            {" "}
             你好!~ Welcome the new China Delight website!
             <Typography variant="body1" gutterBottom></Typography>
             China Delight is a local Chinese cuisine take-out restaurant in
@@ -98,11 +95,10 @@ function Home() {
           </Typography>
           <Typography variant="body1" gutterBottom></Typography>
           <Typography variant="subtitle" gutterBottom>
-            <em> Disclaimer: The </em>{" "}
+            <em> Disclaimer: The </em>
             <em>
-              {" "}
               photos not exact replications of our dishes and are to serve as
-              references.{" "}
+              references.
             </em>
           </Typography>
           <Box py={4}></Box>
@@ -126,7 +122,7 @@ function Home() {
                   style={{whiteSpace: "nowrap"}}
                 >
                   Menu <NavigateNextIcon color="#ffe9c3" />
-                </a>{" "}
+                </a>
               </Grid>
               <Grid
                 item
@@ -168,59 +164,55 @@ function Home() {
                   Dinner <NavigateNextIcon color="#ffe9c3" />
                 </a>
               </Grid>
-            </Grid>{" "}
+            </Grid>
           </Box>
           <Box py={8}> </Box>
           <Typography variant="body1" gutterBottom>
             <Typography variant="h3" gutterBottom>
-              {" "}
-              Hours{" "}
+              Hours
             </Typography>
             <Grid container spacing={3}>
               <Grid container item xs={6} justify="flex-end">
-                Mondays - Thursdays{" "}
+                Mondays - Thursdays
               </Grid>
               <Grid container item xs={6}>
-                11 AM - 8:30 PM{" "}
+                11 AM - 8:30 PM
               </Grid>
               <Grid container item xs={6} justify="flex-end">
-                Fridays - Saturdays{" "}
+                Fridays - Saturdays
               </Grid>
               <Grid container item xs={6}>
-                11 AM - 8:30 PM{" "}
+                11 AM - 8:30 PM
               </Grid>
               <Grid container item xs={6} justify="flex-end">
-                Sundays{" "}
+                Sundays
               </Grid>
               <Grid container item xs={6}>
-                12 - 8:30{" "}
+                12 - 8:30
               </Grid>
               <Grid container item xs={6} justify="flex-end">
-                Tuesdays{" "}
+                tuesdayAlertClose
               </Grid>
               <Grid container item xs={6}>
-                CLOSED ❌{" "}
+                CLOSED ❌
               </Grid>
             </Grid>
           </Typography>
           <Box py={2}> </Box>
           <Typography variant="body1" gutterBottom>
             <Typography variant="h3" gutterBottom>
-              {" "}
-              Contact{" "}
+              Contact
             </Typography>
             📞 PHONE: 410-877-9490 <br />
-            📩 EMAIL:{" "}
+            📩 EMAIL:
             <a href="mailto:chinadelightmd@gmail.com">
-              {" "}
-              chinadelightmd@gmail.com{" "}
+              chinadelightmd@gmail.com
             </a>
           </Typography>
           <Box py={2}> </Box>
           <Typography variant="body1" gutterBottom>
             <Typography variant="h3" gutterBottom>
-              {" "}
-              Directions{" "}
+              Directions
             </Typography>
             📍 1E Newport Dr, Forest Hill, MD 21050
             <br />

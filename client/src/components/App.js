@@ -1,6 +1,6 @@
 // react library
-import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import React, {useState} from "react";
+import {BrowserRouter as Router, Route, Switch, Link} from "react-router-dom";
 // material-ui library
 import {
   makeStyles,
@@ -12,7 +12,7 @@ import {
 } from "@material-ui/core/";
 
 //helmet & meta tags
-import { Helmet } from "react-helmet";
+import {Helmet} from "react-helmet";
 
 // self made components
 import HeaderNav from "./HeaderNav";
@@ -21,7 +21,7 @@ import theme from "./Theme";
 import "./App.css";
 
 //Context Provider
-import { CartProvider } from "./CartContext";
+import {CartProvider} from "./CartContext";
 
 // react google analytics
 import ReactGA from "react-ga";
@@ -74,10 +74,7 @@ function App() {
         <a href="https://www.chinadelightmd.com/dinner-combo"> Dinner </a>
         <a href="https://www.chinadelightmd.com/chef"> Specials </a>
         <a href="https://www.chinadelightmd.com/sides"> Sides </a>
-        <a href="https://www.chinadelightmd.com/appetizers">
-          {" "}
-          Appetizers{" "}
-        </a>{" "}
+        <a href="https://www.chinadelightmd.com/appetizers">Appetizers</a>
         <title> China Delight - Forest Hill MD </title>
         {/* google ads */}
         <script
