@@ -12,10 +12,10 @@ import {
   Paper,
   makeStyles,
 } from "@material-ui/core";
-import { Launch as LaunchIcon } from "@material-ui/icons";
+import {Launch as LaunchIcon} from "@material-ui/icons";
 
 // context provider
-import { useCartContext } from "../CartContext";
+import {useCartContext} from "../CartContext";
 
 import CheckoutDialog from "./CheckoutDialog";
 
@@ -34,7 +34,7 @@ const formatter = new Intl.NumberFormat("en-US", {
 function Confirmation() {
   const tableClasses = tableStyles();
 
-  const { prevOrder, orderPaid } = useCartContext();
+  const {prevOrder, orderPaid} = useCartContext();
 
   const cart = prevOrder.cart;
   const name = prevOrder.name;
@@ -103,11 +103,11 @@ function Confirmation() {
               <TableRow key={item.title}>
                 <TableCell>
                   <Typography> 🍱 {item.title} </Typography>
-                  <Typography style={{ color: "#5e5e5e" }} variant="body2">
+                  <Typography style={{color: "#5e5e5e"}} variant="body2">
                     {" "}
                     🥠 {itemOptions}{" "}
                   </Typography>{" "}
-                  <Typography style={{ color: "#5e5e5e" }} variant="body2">
+                  <Typography style={{color: "#5e5e5e"}} variant="body2">
                     {" "}
                     👩‍🍳 Requests? {item.requestContent}{" "}
                   </Typography>
@@ -148,7 +148,7 @@ function Confirmation() {
     <div className="Cart">
       <Typography component="div">
         <Box textAlign="left" m={1} py={8} mx={"1%"}>
-          <Box style={{ maxWidth: 650 }}>
+          <Box style={{maxWidth: 650}}>
             <img
               src="https://1.bp.blogspot.com/-SQd93ExJA70/W9h0023ZyQI/AAAAAAA0VjY/pTA1Op9ysxQQqinq6V1v4aFJvGO7ujnvACLcBGAs/s1600/AW2158645_18.gif"
               alt="celebration-gif"
@@ -161,11 +161,7 @@ function Confirmation() {
               }}
             />
             <Box mb={5}> </Box>
-            <Typography
-              variant="h3"
-              style={{ fontSize: "3.5rem" }}
-              gutterBottom
-            >
+            <Typography variant="h3" style={{fontSize: "3.5rem"}} gutterBottom>
               谢谢 Order Confirmation
             </Typography>
             <Typography variant="body1" gutterBottom>
@@ -241,7 +237,7 @@ function Confirmation() {
             <Box mb={3}> </Box>
             <Typography gutterBottom>
               <img
-                style={{ maxWidth: 23 }}
+                style={{maxWidth: 23}}
                 src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/apple/271/man-technologist_1f468-200d-1f4bb.png"
                 alt="typing-man"
               />{" "}
@@ -288,7 +284,7 @@ function Confirmation() {
                 <div>
                   <strong> ✅ Payment </strong> {paymentMethod} <br />{" "}
                   <strong> ✅ Paid </strong> {formatter.format(amountPaid)}{" "}
-                  (includes .50 fee) <br />{" "}
+                  (includes 1.50 fee) <br />{" "}
                   {total - amountPaid === 0 || total - amountPaid < 0 ? null : (
                     <div>
                       {" "}

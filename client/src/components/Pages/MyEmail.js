@@ -193,7 +193,7 @@ const MyEmail = ({ order }) => {
             <div>
               <strong> ✅ Payment </strong> {paymentMethod} <br />{" "}
               <strong> ✅ Paid </strong> {formatter.format(amountPaid)}{" "}
-              (includes .50 fee) <br />{" "}
+              (includes 1.50 fee) <br />{" "}
               {total - amountPaid === 0 || total - amountPaid < 0 ? null : (
                 <div>
                   {" "}

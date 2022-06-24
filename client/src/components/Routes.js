@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React from "react";
+import { Route, Switch } from "react-router-dom";
 
 import Home from "./Pages/Home";
 import About from "./Pages/About";
@@ -27,7 +27,6 @@ import Chef from "./MenuPages/Chef";
 import Diet from "./MenuPages/Diet";
 import Side from "./MenuPages/Side";
 
-import Test from "./DemoTestModule";
 import AxiosTest from "./AxiosTest";
 import MyEmail from "./Pages/MyEmail";
 

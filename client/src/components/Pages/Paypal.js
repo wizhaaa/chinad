@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, {useState, useEffect, useRef} from "react";
 
-import { useCartContext } from "../CartContext";
+import {useCartContext} from "../CartContext";
 
 const Paypal = (props) => {
   let {
@@ -17,7 +17,7 @@ const Paypal = (props) => {
     setPaymentPage,
   } = props;
 
-  const { orderPaid, setOrderPaid } = useCartContext();
+  const {orderPaid, setOrderPaid} = useCartContext();
 
   const formatter = new Intl.NumberFormat("en-US", {
     minimumFractionDigits: 2,
@@ -27,7 +27,7 @@ const Paypal = (props) => {
   const [paidFor, setPaidFor] = useState(false);
   console.log(typeof orderTotal);
   let paypalTotal = orderTotal;
-  paypalTotal = formatter.format(paypalTotal + 0.5);
+  paypalTotal = formatter.format(paypalTotal + 1.5);
   console.log("new total is : ", paypalTotal);
 
   console.log(paypalTotal);

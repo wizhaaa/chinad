@@ -572,7 +572,7 @@ const CheckoutDialog = (props) => {
               <Typography variant="body1">
                 {" "}
                 Thanks for paying! Your online order status will be updated as
-                paid ✅ Amount Paid: {formatter.format(amountPaid)} (Inludes .50
+                paid ✅ Amount Paid: {formatter.format(amountPaid)} (Inludes 1.50
                 fee)
                 <br />
                 {total - amountPaid === 0 || total - amountPaid < 0 ? null : (
@@ -609,7 +609,7 @@ const CheckoutDialog = (props) => {
               </Typography>
               <Typography variant="body1" gutterBottom>
                 {" "}
-                There is a <strong> $0.50 fee </strong> and any special requests
+                There is a <strong> $1.50 fee </strong> and any special requests
                 not calculated online may require you to pay extra in-person.
                 Please see <a href="/about"> pricing </a> for more details on
                 what costs you can expect.
