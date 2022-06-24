@@ -1,8 +1,14 @@
-import React, { useState } from "react";
-import { Helmet } from "react-helmet";
-import { Typography, Button, Grid, Box } from "@material-ui/core";
-import { BrowserRouter as Router, Link } from "react-router-dom";
-import { NavigateNext as NavigateNextIcon } from "@material-ui/icons";
+import React from "react";
+import {Helmet} from "react-helmet";
+import {Typography, Grid, Box} from "@material-ui/core";
+import {NavigateNext as NavigateNextIcon} from "@material-ui/icons";
+
+import MuiAlert from "@material-ui/lab/Alert";
+import {AlertTitle} from "@material-ui/lab";
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 function Home() {
   return (
@@ -32,22 +38,18 @@ function Home() {
       </Helmet>
       <Typography component="div">
         <Box textAlign="center" m={1} py={8}>
-          {
-            // TEMPORARILY CLOSED NOTIFICATION
-            /* <Typography>
-            <div className="home-alert">
-              <h3> Updated: Monday, January {new Date().getDate()} </h3>
-              Apologies for any inconveniences but we are closed as our main
-              staff is not feeling well. Thank you for your support! We hope to
-              open as soon as possible.
-            </div>
-            <img
-              alt="maintence image"
-              className="home-alert-img"
-              src="https://scontent-iad3-2.xx.fbcdn.net/v/t1.6435-9/43065959_1846861985395776_7996339621719965696_n.jpg?_nc_cat=106&ccb=1-5&_nc_sid=730e14&_nc_ohc=KBn1AYsMtHoAX_HdNl1&_nc_ht=scontent-iad3-2.xx&oh=00_AT8CAqKMYLnCB_JNtBrJd-lEtCUowTuz-hIvyGgOwsOpBw&oe=61F8752D"
-            />
-          </Typography> */
-          }
+          <Typography style={{paddingBottom: "80px"}}>
+            <Alert severity="info">
+              {" "}
+              <AlertTitle>
+                {" "}
+                <strong> Alert for Friday 6/24 </strong>
+              </AlertTitle>{" "}
+              Our phone lines are down for the day and will not be able to
+              process credit cards in-person. Please pay in cash or by credit
+              card online. Sorry for any inconveniences and thank you!
+            </Alert>
+          </Typography>
           <Typography
             variant="h3"
             style={{
@@ -62,7 +64,7 @@ function Home() {
             src="https://media3.giphy.com/media/48PbiL2u5ZUU6HZf55/giphy.gif"
             alt="bg"
             className="homeImage"
-            style={{ backgroundSize: "cover" }}
+            style={{backgroundSize: "cover"}}
           />{" "}
           {/* <Box className="imageContainer" textAlign="center">
             <div className="homeBg">
@@ -121,7 +123,7 @@ function Home() {
                   className="homeButton"
                   size="large"
                   href="/menu"
-                  style={{ whiteSpace: "nowrap" }}
+                  style={{whiteSpace: "nowrap"}}
                 >
                   Menu <NavigateNextIcon color="#ffe9c3" />
                 </a>{" "}
@@ -141,7 +143,7 @@ function Home() {
                   className="homeButton"
                   size="large"
                   href="/lunch"
-                  style={{ whiteSpace: "nowrap" }}
+                  style={{whiteSpace: "nowrap"}}
                 >
                   Lunch <NavigateNextIcon color="#ffe9c3" />
                 </a>
@@ -161,7 +163,7 @@ function Home() {
                   className="homeButton"
                   size="large"
                   href="/dinner-combo"
-                  style={{ whiteSpace: "nowrap" }}
+                  style={{whiteSpace: "nowrap"}}
                 >
                   Dinner <NavigateNextIcon color="#ffe9c3" />
                 </a>
@@ -229,7 +231,7 @@ function Home() {
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3075.182788165903!2d-76.3879002845251!3d39.57803061414107!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c7deb7b8b012ab%3A0xd3e57330e03df815!2sChina%20Delight!5e0!3m2!1sen!2sus!4v1617983002384!5m2!1sen!2sus"
               width="960"
               height="600"
-              style={{ border: 0, maxWidth: "100%" }}
+              style={{border: 0, maxWidth: "100%"}}
               allowfullscreen=""
               loading="lazy"
             ></iframe>

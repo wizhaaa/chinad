@@ -1,5 +1,5 @@
-import React, { useState, useContext } from "react";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import React, {useState, useContext} from "react";
+import {BrowserRouter as Router, Link} from "react-router-dom";
 
 import {
   Button as ButtonIcon,
@@ -22,9 +22,9 @@ import {
   Snackbar,
 } from "@material-ui/core";
 import MuiAlert from "@material-ui/lab/Alert";
-import { AlertTitle } from "@material-ui/lab";
+import {AlertTitle} from "@material-ui/lab";
 // context provider
-import { useCartContext } from "../CartContext";
+import {useCartContext} from "../CartContext";
 
 import CheckoutDialog from "./CheckoutDialog";
 
@@ -77,7 +77,7 @@ function Cart() {
     setHolidayAlert(false);
   };
 
-  const { cart, setCart, userCartCount } = useCartContext();
+  const {cart, setCart, userCartCount} = useCartContext();
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => {
     setOpen(true);
@@ -110,7 +110,7 @@ function Cart() {
       today.getFullYear() === 2022
     ) {
       setHolidayAlert(true);
-    } else if (today.getHours() < 12) {
+    } else if (today.getHours() < 11) {
       setMorningAlert(true);
     } else if (userCartCount === 0) {
       setEmptyAlert(true);
@@ -169,11 +169,11 @@ function Cart() {
               <TableRow key={item.title}>
                 <TableCell>
                   <Typography> 🍱 {item.title} </Typography>
-                  <Typography style={{ color: "#5e5e5d" }} variant="body2">
+                  <Typography style={{color: "#5e5e5d"}} variant="body2">
                     {" "}
                     🥠 {itemOptions}{" "}
                   </Typography>{" "}
-                  <Typography style={{ color: "#5e5e5d" }} variant="body2">
+                  <Typography style={{color: "#5e5e5d"}} variant="body2">
                     {" "}
                     👩‍🍳 Requests? {item.requestContent}{" "}
                   </Typography>
@@ -232,8 +232,18 @@ function Cart() {
   return (
     <div className="Cart">
       <Typography component="div">
+        <Alert severity="info">
+          {" "}
+          <AlertTitle>
+            {" "}
+            <strong> Alert for Friday 6/24 </strong>
+          </AlertTitle>{" "}
+          Our phone lines are down for the day and will not be able to process
+          credit cards in-person. Please pay in cash or by credit card online.
+          Sorry for any inconveniences and thank you!
+        </Alert>
         <Box textAlign="center" m={1} py={8} mx={"1%"}>
-          <Typography variant="h4" style={{ fontSize: "4rem" }} gutterBottom>
+          <Typography variant="h4" style={{fontSize: "4rem"}} gutterBottom>
             🥡 My Cart
           </Typography>
           <Box mb={5}></Box>
@@ -264,7 +274,7 @@ function Cart() {
         open={emptyAlert}
         autoHideDuration={4000}
         onClose={emptyAlertClose}
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        anchorOrigin={{vertical: "top", horizontal: "center"}}
       >
         <Alert onClose={emptyAlertClose} severity="error">
           {" "}
@@ -275,7 +285,7 @@ function Cart() {
         open={tuesdayAlert}
         autoHideDuration={4000}
         onClose={tuesdayAlertClose}
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        anchorOrigin={{vertical: "top", horizontal: "center"}}
       >
         <Alert onClose={tuesdayAlertClose} severity="warning">
           {" "}
@@ -289,22 +299,22 @@ function Cart() {
         open={morningAlert}
         autoHideDuration={4000}
         onClose={morningAlertClose}
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        anchorOrigin={{vertical: "top", horizontal: "center"}}
       >
         <Alert onClose={morningAlertClose} severity="warning">
           {" "}
           <AlertTitle>
             <strong> NOT ACCEPTING ONLINE ORDERS IN THE MORNINGS </strong>
           </AlertTitle>{" "}
-          We are not accepting online orders in the morning (before 12 noon) to
-          avoid any inconveniences.{" "}
+          We are not accepting online orders in the morning (before 11) to avoid
+          any inconveniences.{" "}
         </Alert>
       </Snackbar>
       <Snackbar
         open={holidayAlert}
         autoHideDuration={10000}
         onClose={holidayAlertClose}
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        anchorOrigin={{vertical: "top", horizontal: "center"}}
       >
         <Alert onClose={holidayAlertClose} severity="error">
           {" "}
@@ -319,7 +329,7 @@ function Cart() {
           is not feeling well. Thank you for your support! We hope to open as
           soon as our chef and staff are feeling better. Possibly by this
           Wednesday. Thank you again! */}
-          Apologies, our online system is down. 
+          Apologies, our online system is down.
         </Alert>
       </Snackbar>
     </div>
