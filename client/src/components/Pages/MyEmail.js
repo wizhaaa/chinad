@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Email, Item } from "react-html-email";
+import React, {useState} from "react";
+import {Email, Item} from "react-html-email";
 
 // import { useCartContext } from "../CartContext";
 
@@ -36,7 +36,7 @@ const formatter = new Intl.NumberFormat("en-US", {
   minimumFractionDigits: 2,
 });
 
-const MyEmail = ({ order }) => {
+const MyEmail = ({order}) => {
   // const { orderPaid } = useCartContext();
 
   //   const tableClasses = tableStyles();
@@ -193,7 +193,7 @@ const MyEmail = ({ order }) => {
             <div>
               <strong> ✅ Payment </strong> {paymentMethod} <br />{" "}
               <strong> ✅ Paid </strong> {formatter.format(amountPaid)}{" "}
-              (includes 1.50 fee) <br />{" "}
+              (includes 1.15 fee) <br />{" "}
               {total - amountPaid === 0 || total - amountPaid < 0 ? null : (
                 <div>
                   {" "}

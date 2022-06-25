@@ -1,5 +1,5 @@
-import { React, useEffect, useState } from "react";
-import { useTheme } from "@material-ui/core/styles";
+import {React, useEffect, useState} from "react";
+import {useTheme} from "@material-ui/core/styles";
 import {
   Add as AddIcon,
   Close as CloseIcon,
@@ -39,14 +39,14 @@ import {
   Snackbar,
 } from "@material-ui/core";
 import MuiAlert from "@material-ui/lab/Alert";
-import { AlertTitle } from "@material-ui/lab";
+import {AlertTitle} from "@material-ui/lab";
 
-import { wrap } from "module";
-import { useCartContext } from "../CartContext";
+import {wrap} from "module";
+import {useCartContext} from "../CartContext";
 //email
 import MyEmail from "./MyEmail";
-import { renderEmail } from "react-html-email";
-import { Redirect } from "react-router";
+import {renderEmail} from "react-html-email";
+import {Redirect} from "react-router";
 import api from "../api";
 import axios from "axios";
 import Paypal from "./Paypal";
@@ -56,7 +56,7 @@ function Alert(props) {
 }
 
 const useStyles = makeStyles((theme) => ({
-  root: { margin: 10 },
+  root: {margin: 10},
   gridPadding: {
     padding: 15,
   },
@@ -96,7 +96,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular,
   },
-  divider: { margin: theme.spacing(3) },
+  divider: {margin: theme.spacing(3)},
   selectedValue: {
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular,
@@ -127,7 +127,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CheckoutDialog = (props) => {
-  const { onClose, open, total } = props;
+  const {onClose, open, total} = props;
 
   const {
     cart,
@@ -375,15 +375,15 @@ const CheckoutDialog = (props) => {
             👋 Name:
           </Typography>{" "}
           <TextField
-            style={{ width: "75%", paddingBottom: "20px" }}
+            style={{width: "75%", paddingBottom: "20px"}}
             id="outlined-textarea"
             label="name"
             placeholder="Sun Tzu"
             autoComplete="name"
             rowsMax={1}
             variant="outlined"
-            InputLabelProps={{ shrink: true }}
-            inputProps={{ maxLength: 250 }}
+            InputLabelProps={{shrink: true}}
+            inputProps={{maxLength: 250}}
             required
             value={name}
             onChange={handleNameChange}
@@ -395,7 +395,7 @@ const CheckoutDialog = (props) => {
             📧 Email:
           </Typography>{" "}
           <TextField
-            style={{ width: "75%", paddingBottom: "20px" }}
+            style={{width: "75%", paddingBottom: "20px"}}
             id="outlined-textarea"
             label="email"
             placeholder="ilovechinadelight@gmail.com"
@@ -404,8 +404,8 @@ const CheckoutDialog = (props) => {
             autoComplete="email"
             rowsMax={1}
             variant="outlined"
-            InputLabelProps={{ shrink: true }}
-            inputProps={{ maxLength: 250 }}
+            InputLabelProps={{shrink: true}}
+            inputProps={{maxLength: 250}}
             required
             value={email}
             onChange={handleEmailChange}
@@ -417,7 +417,7 @@ const CheckoutDialog = (props) => {
             📞 Phone Number:
           </Typography>{" "}
           <TextField
-            style={{ width: "75%", paddingBottom: "20px" }}
+            style={{width: "75%", paddingBottom: "20px"}}
             id="outlined-textarea"
             label="phone #"
             placeholder="410-877-9490"
@@ -425,8 +425,8 @@ const CheckoutDialog = (props) => {
             autoComplete="tel"
             rowsMax={1}
             variant="outlined"
-            InputLabelProps={{ shrink: true }}
-            inputProps={{ maxLength: 250 }}
+            InputLabelProps={{shrink: true}}
+            inputProps={{maxLength: 250}}
             required
             value={phoneNum}
             onChange={handlePhoneNumChange}
@@ -490,7 +490,7 @@ const CheckoutDialog = (props) => {
           <Box m={3} className={classes.textFields}>
             <TextField
               name="orderRequests"
-              style={{ width: "100%" }}
+              style={{width: "100%"}}
               id="outlined-textarea"
               label="anything else?"
               placeholder="let us know!"
@@ -498,7 +498,7 @@ const CheckoutDialog = (props) => {
               rowsMax={8}
               multiline
               variant="outlined"
-              inputProps={{ maxLength: 250 }}
+              inputProps={{maxLength: 250}}
               value={orderReqs}
               onChange={handleOrderReqsChange}
             />{" "}
@@ -572,8 +572,8 @@ const CheckoutDialog = (props) => {
               <Typography variant="body1">
                 {" "}
                 Thanks for paying! Your online order status will be updated as
-                paid ✅ Amount Paid: {formatter.format(amountPaid)} (Inludes 1.50
-                fee)
+                paid ✅ Amount Paid: {formatter.format(amountPaid)} (Inludes
+                1.15 fee)
                 <br />
                 {total - amountPaid === 0 || total - amountPaid < 0 ? null : (
                   <div>
@@ -609,7 +609,7 @@ const CheckoutDialog = (props) => {
               </Typography>
               <Typography variant="body1" gutterBottom>
                 {" "}
-                There is a <strong> $1.50 fee </strong> and any special requests
+                There is a <strong> $1.15 fee </strong> and any special requests
                 not calculated online may require you to pay extra in-person.
                 Please see <a href="/about"> pricing </a> for more details on
                 what costs you can expect.
@@ -691,15 +691,15 @@ const CheckoutDialog = (props) => {
         aria-labelledby="responsive-dialog-title"
         fullWidth="sm"
         maxWidth="md"
-        classes={{ paper: classes.dialogWrapper }}
+        classes={{paper: classes.dialogWrapper}}
       >
         <DialogTitle
           id="responsive-dialog-title"
           className={classes.dialogTitle}
         >
-          <div style={{ display: "flex" }}>
+          <div style={{display: "flex"}}>
             {" "}
-            <Typography variant="h4" style={{ flexGrow: 1 }}>
+            <Typography variant="h4" style={{flexGrow: 1}}>
               CHECKOUT{" "}
             </Typography>{" "}
             <IconButton color="primary" onClick={handleClose}>
@@ -808,7 +808,7 @@ const CheckoutDialog = (props) => {
         open={formAlert}
         autoHideDuration={4000}
         onClose={formAlertClose}
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        anchorOrigin={{vertical: "top", horizontal: "center"}}
       >
         <Alert onClose={formAlertClose} severity="error">
           {" "}
@@ -819,7 +819,7 @@ const CheckoutDialog = (props) => {
         open={emptyAlert}
         autoHideDuration={4000}
         onClose={emptyAlertClose}
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        anchorOrigin={{vertical: "top", horizontal: "center"}}
       >
         <Alert onClose={emptyAlertClose} severity="error">
           {" "}
@@ -837,7 +837,7 @@ const CheckoutDialog = (props) => {
         <Box textAlign="center">
           <CircularProgress color="primary" />
           <Box p={5}> </Box>
-          <Typography variant="h5" style={{ whiteSpace: "pre-line" }}>
+          <Typography variant="h5" style={{whiteSpace: "pre-line"}}>
             {" "}
             Sending... don't close the window{" "}
           </Typography>
@@ -845,7 +845,7 @@ const CheckoutDialog = (props) => {
           <img
             src="loading.gif"
             alt="celebration-gif"
-            style={{ maxWidth: "80%" }}
+            style={{maxWidth: "80%"}}
           />{" "}
         </Box>
         {/* <Typography variant="h5">

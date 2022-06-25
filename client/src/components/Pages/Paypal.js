@@ -27,7 +27,7 @@ const Paypal = (props) => {
   const [paidFor, setPaidFor] = useState(false);
   console.log(typeof orderTotal);
   let paypalTotal = orderTotal;
-  paypalTotal = formatter.format(paypalTotal + 1.5);
+  paypalTotal = formatter.format(paypalTotal + 1.15);
   console.log("new total is : ", paypalTotal);
 
   console.log(paypalTotal);

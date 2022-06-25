@@ -284,7 +284,7 @@ function Confirmation() {
                 <div>
                   <strong> ✅ Payment </strong> {paymentMethod} <br />{" "}
                   <strong> ✅ Paid </strong> {formatter.format(amountPaid)}{" "}
-                  (includes 1.50 fee) <br />{" "}
+                  (includes 1.15 fee) <br />{" "}
                   {total - amountPaid === 0 || total - amountPaid < 0 ? null : (
                     <div>
                       {" "}
