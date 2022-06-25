@@ -25,20 +25,18 @@ function Home() {
           name="description"
           content="China Delight Chinese Restaurant based in Forest Hill, Maryland. Serve the Bel Air, Fallston, and Jarrestville area. We do dine-in, carryout, and online orders!"
         />
-        {/* <meta name="author" content="Will Zhang" />
+        <meta name="author" content="Will Zhang" />
         <a href="https://www.chinadelightmd.com/menu"> Menu </a>
         <a href="https://www.chinadelightmd.com/dinner-combo"> Dinner </a>
         <a href="https://www.chinadelightmd.com/chef"> Specials </a>
         <a href="https://www.chinadelightmd.com/sides"> Sides </a>
-        <a href="https://www.chinadelightmd.com/appetizers">
-          
-          Appetizers
-        </a> */}
+        <a href="https://www.chinadelightmd.com/appetizers">Appetizers</a>
         <title> China Delight - Forest Hill, MD </title>
       </Helmet>
       <Typography component="div">
         <Box textAlign="center" m={1} py={8}>
-          <Typography style={{paddingBottom: "80px"}}>
+          {/* HOME PAGE ALERT */}
+          {/* <Typography style={{paddingBottom: "80px"}}>
             <Alert severity="info">
               <AlertTitle>
                 <strong> Alert for Friday 6/24 </strong>
@@ -47,7 +45,7 @@ function Home() {
               process credit cards in-person. Please pay in cash or by credit
               card online. Sorry for any inconveniences and thank you!
             </Alert>
-          </Typography>
+          </Typography> */}
           <Typography
             variant="h3"
             style={{

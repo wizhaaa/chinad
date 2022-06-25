@@ -232,7 +232,8 @@ function Cart() {
   return (
     <div className="Cart">
       <Typography component="div">
-        <Alert severity="info">
+        {/* CART PAGE ALERT */}
+        {/* <Alert severity="info">
           {" "}
           <AlertTitle>
             {" "}
@@ -241,7 +242,7 @@ function Cart() {
           Our phone lines are down for the day and will not be able to process
           credit cards in-person. Please pay in cash or by credit card online.
           Sorry for any inconveniences and thank you!
-        </Alert>
+        </Alert> */}
         <Box textAlign="center" m={1} py={8} mx={"1%"}>
           <Typography variant="h4" style={{fontSize: "4rem"}} gutterBottom>
             🥡 My Cart
