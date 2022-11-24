@@ -1,11 +1,5 @@
-import React, { useState, useEffect } from "react";
-import {
-  Typography,
-  Box,
-  Grid,
-  makeStyles,
-  TextField,
-} from "@material-ui/core";
+import React, {useState, useEffect} from "react";
+import {Typography, Box, Grid, makeStyles, TextField} from "@material-ui/core";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
 
@@ -18,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
-  divider: { margin: theme.spacing(6) },
+  divider: {margin: theme.spacing(6)},
   subheadings: {
     marginBottom: 50,
   },
@@ -86,7 +80,7 @@ const Pork = (props) => {
     }
   });
   return (
-    <Box textAlign="center" m={1} py={8} style={{ width: "100%" }}>
+    <Box textAlign="center" m={1} py={8} style={{width: "100%"}}>
       <div>
         {" "}
         <Typography
@@ -94,18 +88,17 @@ const Pork = (props) => {
           className={(classes.menuHeadings, classes.bold)}
           gutterBottom
         >
-          {" "}
-          Pork{" "}
+          Pork
         </Typography>
         <Typography className={classes.subheadings}>
           Land fish served with white rice.
         </Typography>{" "}
       </div>
 
-      <Box marginTop={10} style={{ width: "100%" }}>
+      <Box marginTop={10} style={{width: "100%"}}>
         <TextField
           name="orderRequests"
-          style={{ width: "80%" }}
+          style={{width: "80%"}}
           id="outlined-textarea"
           label="Search for your dish"
           placeholder="Try... Scallions"
@@ -113,7 +106,7 @@ const Pork = (props) => {
           rowsMax={1}
           multiline
           variant="outlined"
-          inputProps={{ maxLength: 50 }}
+          inputProps={{maxLength: 50}}
           InputProps={{
             endAdornment: (
               <InputAdornment>
@@ -126,7 +119,8 @@ const Pork = (props) => {
         />{" "}
         <Box marginTop={5}></Box>
         <Grid container spacing={3}>
-          {filter === "" ? itemGrid : filteredItemGrid}
+          {/* {filter === "" ? itemGrid : filteredItemGrid} */}
+          Oops! Something went wrong.
         </Grid>
       </Box>
     </Box>
