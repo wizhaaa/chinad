@@ -171,7 +171,7 @@ function Home() {
             </Typography>
             <Grid container spacing={3}>
               <Grid container item xs={6} justify="flex-end">
-                Mondays - Thursdays
+                Mondays, Wednesdays, Thursdays
               </Grid>
               <Grid container item xs={6}>
                 11 AM - 8:30 PM
@@ -189,7 +189,7 @@ function Home() {
                 12 - 8:30
               </Grid>
               <Grid container item xs={6} justify="flex-end">
-                tuesdayAlertClose
+                Tuesdays
               </Grid>
               <Grid container item xs={6}>
                 CLOSED ❌

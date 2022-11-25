@@ -105,8 +105,8 @@ function Cart() {
     if (today.getDay() === 2) {
       setTuesdayAlert(true);
     } else if (
-      today.getDate() === 6 &&
-      today.getMonth() === 5 &&
+      today.getDate() === 24 &&
+      today.getMonth() === 10 &&
       today.getFullYear() === 2022
     ) {
       setHolidayAlert(true);
@@ -330,7 +330,7 @@ function Cart() {
           is not feeling well. Thank you for your support! We hope to open as
           soon as our chef and staff are feeling better. Possibly by this
           Wednesday. Thank you again! */}
-          Apologies, our online system is down.
+          Apologies, we are closed for today!
         </Alert>
       </Snackbar>
     </div>
