@@ -102,12 +102,13 @@ function Cart() {
     // testing to allow opening cart
     // handleClickOpen();
     let today = new Date();
-    if (today.getDay() === 2) {
+    let valentines = today.getDate() == 14 && today.getMonth() == 1;
+    if (today.getDay() === 2 && !valentines) {
       setTuesdayAlert(true);
     } else if (
-      today.getDate() === 24 &&
-      today.getMonth() === 10 &&
-      today.getFullYear() === 2022
+      today.getDate() === 29 &&
+      today.getMonth() === 0 &&
+      today.getFullYear() === 2023
     ) {
       setHolidayAlert(true);
     } else if (today.getHours() < 11) {
