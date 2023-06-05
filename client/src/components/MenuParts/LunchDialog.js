@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useTheme } from "@material-ui/core/styles";
+import React, {useState} from "react";
+import {useTheme} from "@material-ui/core/styles";
 import {
   Add as AddIcon,
   Close as CloseIcon,
@@ -34,9 +34,9 @@ import {
   Snackbar,
 } from "@material-ui/core";
 import MuiAlert from "@material-ui/lab/Alert";
-import { AlertTitle } from "@material-ui/lab";
+import {AlertTitle} from "@material-ui/lab";
 
-import { useCartContext } from "../CartContext";
+import {useCartContext} from "../CartContext";
 import Reviews from "./Reviews";
 
 function Alert(props) {
@@ -44,7 +44,7 @@ function Alert(props) {
 }
 
 const useStyles = makeStyles((theme) => ({
-  root: { margin: 10 },
+  root: {margin: 10},
   gridPadding: {
     padding: 15,
   },
@@ -84,7 +84,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular,
   },
-  divider: { margin: theme.spacing(3) },
+  divider: {margin: theme.spacing(3)},
   selectedValue: {
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular,
@@ -107,18 +107,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const LunchDialog = React.memo((props) => {
-  const {
-    onClose,
-    open,
-    onAdd,
-    title,
-    description,
-    img,
-    price,
-    priceSm,
-    priceLg,
-    reviews,
-  } = props;
+  const {onClose, open, onAdd, title, description, img, price, reviews} = props;
 
   const [riceValue, setRiceValue] = useState("White Rice");
   const [sideValue, setSideValue] = useState("No Side");
@@ -130,15 +119,14 @@ const LunchDialog = React.memo((props) => {
   // customer request
   const [requestContent, setRequestContent] = useState("");
 
-
-  // handling alerts 
+  // handling alerts
   const [alertOpen, setAlertOpen] = useState(false);
   const handleAlertClose = () => {
     setAlertOpen(false);
   };
 
   // context cart
-  const { cart, setCart, addNewItem } = useCartContext();
+  const {addNewItem} = useCartContext();
 
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
@@ -160,9 +148,9 @@ const LunchDialog = React.memo((props) => {
         title === "Fried Rice" ||
         title === "Chow Mein"
       ) {
-        options = { type, meatValue, riceValue, sideValue };
+        options = {type, meatValue, riceValue, sideValue};
       } else {
-        options = { type, riceValue, sideValue };
+        options = {type, riceValue, sideValue};
       }
 
       const newItem = {
@@ -180,22 +168,12 @@ const LunchDialog = React.memo((props) => {
 
   //handling price changes
   const handleRiceChange = (e) => {
-    var riceChosen = e.target.value;
+    const riceChosen = e.target.value;
     setRiceValue(riceChosen);
     if (riceChosen === "Lo Mein" || riceChosen === "Pork Fried Rice") {
-      setAddedPrice(1.5);
+      setAddedPrice(2);
     } else {
       setAddedPrice(0);
-    }
-  };
-
-  const handleSideChange = (e) => {
-    const sideChosen = e.target.value;
-    setSideValue(sideChosen);
-    if (!(sideChosen === "No Side")) {
-      setFinalPrice(price + 0.75);
-    } else {
-      setFinalPrice(price);
     }
   };
 
@@ -209,7 +187,7 @@ const LunchDialog = React.memo((props) => {
   };
 
   const handleTextFieldChange = (e) => {
-    var text = e.target.value;
+    const text = e.target.value;
     setRequestContent(text);
   };
 
@@ -312,15 +290,15 @@ const LunchDialog = React.memo((props) => {
         aria-labelledby="responsive-dialog-title"
         fullWidth="sm"
         maxWidth="md"
-        classes={{ paper: classes.dialogWrapper }}
+        classes={{paper: classes.dialogWrapper}}
       >
         <DialogTitle
           id="responsive-dialog-title"
           className={classes.dialogTitle}
         >
-          <div style={{ display: "flex" }}>
+          <div style={{display: "flex"}}>
             {" "}
-            <Typography variant="h6" style={{ flexGrow: 1 }}>
+            <Typography variant="h6" style={{flexGrow: 1}}>
               {title}{" "}
             </Typography>{" "}
             <IconButton color="primary" onClick={handleClose}>
@@ -376,12 +354,12 @@ const LunchDialog = React.memo((props) => {
                           <FormControlLabel
                             value="Lo Mein"
                             control={<Radio />}
-                            label="Lo Mein (+1.5)"
+                            label="Lo Mein (+2)"
                           />
                           <FormControlLabel
                             value="Pork Fried Rice"
                             control={<Radio />}
-                            label="Pork Fried Rice (+1.5)"
+                            label="Pork Fried Rice (+2)"
                           />
                         </RadioGroup>
                       </FormControl>{" "}
@@ -458,7 +436,7 @@ const LunchDialog = React.memo((props) => {
                 {" "}
                 <Box m={3} className={classes.textFields}>
                   <TextField
-                    style={{ width: "100%" }}
+                    style={{width: "100%"}}
                     id="outlined-textarea"
                     label="any special requests?"
                     placeholder="we will try our best to accomodate your needs"
@@ -466,7 +444,7 @@ const LunchDialog = React.memo((props) => {
                     rowsMax={8}
                     multiline
                     variant="outlined"
-                    inputProps={{ maxLength: 250 }}
+                    inputProps={{maxLength: 250}}
                     value={requestContent}
                     onChange={handleTextFieldChange}
                   />{" "}

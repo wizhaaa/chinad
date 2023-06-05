@@ -5,26 +5,18 @@ import {
   CardActions,
   CardContent,
   CardMedia,
-  Button,
   Typography,
   CardHeader,
   makeStyles,
   useTheme,
-  IconButton,
   Fab,
   Box,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  useMediaQuery,
   Snackbar,
 } from "@material-ui/core";
 
 import MuiAlert from "@material-ui/lab/Alert";
 
-import { Add as AddIcon } from "@material-ui/icons";
+import {Add as AddIcon} from "@material-ui/icons";
 
 import LunchDialog from "./LunchDialog";
 
@@ -33,7 +25,7 @@ function Alert(props) {
 }
 
 const useStyles = makeStyles((theme) => ({
-  root: { margin: 10 },
+  root: {margin: 10},
   cards: {
     margin: 5,
   },
@@ -56,18 +48,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const LunchMenuCard = (props) => {
-  const {
-    itemName,
-    itemDescription,
-    img,
-    price,
-    priceSm,
-    priceLg,
-    reviews,
-  } = props;
+  const {itemName, itemDescription, img, price, priceSm, priceLg, reviews} =
+    props;
   const [open, setOpen] = React.useState(false);
   const [alertOpen, setAlertOpen] = React.useState(false);
-  const theme = useTheme();
   const classes = useStyles();
 
   const handleClickOpen = () => {
@@ -91,7 +75,7 @@ const LunchMenuCard = (props) => {
     <Card className={classes.cards}>
       <CardHeader title={itemName}> </CardHeader>{" "}
       <CardMedia className={classes.media} image={img} title={itemName} />
-      <CardContent> {/* {itemDescription} */}</CardContent>
+      <CardContent> </CardContent>
       <CardActions className={classes.container} disableSpacing>
         <Box className={classes.bottomText}>
           {" "}

@@ -1,11 +1,5 @@
-import React, { useState, useEffect } from "react";
-import {
-  Typography,
-  Box,
-  Grid,
-  makeStyles,
-  TextField,
-} from "@material-ui/core";
+import React, {useState, useEffect} from "react";
+import {Typography, Box, Grid, makeStyles, TextField} from "@material-ui/core";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
 
@@ -18,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
-  divider: { margin: theme.spacing(6) },
+  divider: {margin: theme.spacing(6)},
   subheadings: {
     marginBottom: 50,
   },
@@ -52,9 +46,10 @@ const LunchSpecials = (props) => {
     });
   }, []);
 
-  const lunchGrid = lunches.map((lunch) => (
+  const lunchGrid = lunches.map((lunch, index) => (
     <Grid item xs={12} sm={6} md={4}>
       <LunchMenuCard
+        key={index}
         itemName={lunch.name}
         itemDescription={lunch.description}
         img={lunch.img}
@@ -66,11 +61,12 @@ const LunchSpecials = (props) => {
     </Grid>
   ));
 
-  const filteredLunchGrid = lunches.map((lunch) => {
+  const filteredLunchGrid = lunches.map((lunch, index) => {
     if (lunch.name.toLowerCase().includes(filter.toLowerCase())) {
       return (
         <Grid item xs={12} sm={6} md={6}>
           <LunchMenuCard
+            key={index}
             itemName={lunch.name}
             itemDescription={lunch.description}
             img={lunch.img}
@@ -100,11 +96,10 @@ const LunchSpecials = (props) => {
           Served with the choice of:{" "}
           <strong>
             {" "}
-            Fried Rice, White Rice, Lo Mein (+1.5), or Pork Fried Rice (+1.5).{" "}
+            Fried Rice, White Rice, Lo Mein (+2), or Pork Fried Rice (+2).{" "}
           </strong>
-          
           <br />
-          <em style={{ color: "#B18944" }}>
+          <em style={{color: "#B18944"}}>
             {" "}
             Note: Available daily until 3:30 PM{" "}
           </em>
@@ -114,7 +109,7 @@ const LunchSpecials = (props) => {
       <Box marginTop={10}>
         <TextField
           name="orderRequests"
-          style={{ width: "80%" }}
+          style={{width: "80%"}}
           id="outlined-textarea"
           label="Search for your dish"
           placeholder="Try... Egg Foo Young"
@@ -122,7 +117,7 @@ const LunchSpecials = (props) => {
           rowsMax={1}
           multiline
           variant="outlined"
-          inputProps={{ maxLength: 50 }}
+          inputProps={{maxLength: 50}}
           InputProps={{
             endAdornment: (
               <InputAdornment>
