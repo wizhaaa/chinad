@@ -222,7 +222,7 @@ router.get("/api/sides", async (req, res) => {
     } else {
       res.status(400).json({ error: err });
     }
-  });
+  }).sort({"name":1});
 });
 
 export default router;
