@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import {Route, Switch} from "react-router-dom";
 
 import Home from "./Pages/Home";
 import About from "./Pages/About";
@@ -35,117 +35,89 @@ const Routes = () => {
     <div>
       <Switch>
         <Route exact path="/">
-          {" "}
-          <Home />{" "}
+          <Home />
         </Route>
         <Route exact path="/home">
-          {" "}
-          <Home />{" "}
+          <Home />
         </Route>
         <Route exact path="/about">
-          {" "}
-          <About />{" "}
+          <About />
         </Route>
         <Route exact path="/cart">
-          {" "}
-          <Cart />{" "}
+          <Cart />
         </Route>
         <Route exact path="/menu">
-          {" "}
           <Menu />
         </Route>
         {/* menu list */}
         <Route exact path="/lunch">
-          {" "}
-          <LunchSpecials />{" "}
+          <LunchSpecials />
         </Route>
         <Route exact path="/soups">
-          <Soups />{" "}
+          <Soups />
         </Route>
         <Route exact path="/dinner-combo">
-          {" "}
-          <DinnerCombo />{" "}
+          <DinnerCombo />
         </Route>
         <Route exact path="/appetizers">
-          {" "}
-          <Appetizers />{" "}
+          <Appetizers />
         </Route>
         <Route exact path="/sweet-and-sour">
-          {" "}
-          <SweetAndSour />{" "}
+          <SweetAndSour />
         </Route>
         <Route exact path="/egg-foo-young">
-          {" "}
-          <EFY />{" "}
+          <EFY />
         </Route>
         <Route exact path="/fried-rice">
-          {" "}
-          <FR />{" "}
+          <FR />
         </Route>
         <Route exact path="/lo-mein">
-          {" "}
-          <LoMein />{" "}
+          <LoMein />
         </Route>
         <Route exact path="/mei-fun">
-          {" "}
-          <MeiFun />{" "}
+          <MeiFun />
         </Route>
         <Route exact path="/chow-mein">
-          {" "}
-          <ChowMein />{" "}
+          <ChowMein />
         </Route>
         <Route exact path="/poultry">
-          {" "}
-          <Poultry />{" "}
+          <Poultry />
         </Route>
         <Route exact path="/pork">
-          {" "}
-          <Pork />{" "}
-        </Route>{" "}
+          <Pork />
+        </Route>
         <Route exact path="/seafood">
-          {" "}
-          <Seafood />{" "}
-        </Route>{" "}
+          <Seafood />
+        </Route>
         <Route exact path="/beef">
-          {" "}
-          <Beef />{" "}
+          <Beef />
         </Route>
         <Route exact path="/mu-shu">
-          {" "}
-          <MuShu />{" "}
+          <MuShu />
         </Route>
         <Route exact path="/vegetable">
-          {" "}
-          <Vegetable />{" "}
+          <Vegetable />
         </Route>
         <Route exact path="/udon">
-          {" "}
-          <Udon />{" "}
+          <Udon />
         </Route>
         <Route exact path="/chef">
-          {" "}
-          <Chef />{" "}
+          <Chef />
         </Route>
         <Route exact path="/diet">
-          {" "}
-          <Diet />{" "}
+          <Diet />
         </Route>
         <Route exact path="/sides">
-          {" "}
-          <Side />{" "}
+          <Side />
         </Route>
-        
         <Route exact path="/axiostest">
-          {" "}
-          <AxiosTest />{" "}
+          <AxiosTest />
         </Route>
         <Route exact path="/email">
-          {" "}
-          <MyEmail />{" "}
+          <MyEmail />
         </Route>
         <Route exact path="/confirmation">
-          {" "}
-          <OrderConfirmation />{" "}
+          <OrderConfirmation />
         </Route>
       </Switch>
     </div>
