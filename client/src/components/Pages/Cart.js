@@ -248,7 +248,7 @@ function Cart() {
 
   return (
     <div className="Cart">
-      <Typography component="div">
+      <Box component="div">
         {/* CART PAGE ALERT */}
         {/* <Alert severity="info">
           {" "}
@@ -260,7 +260,7 @@ function Cart() {
           credit cards in-person. Please pay in cash or by credit card online.
           Sorry for any inconveniences and thank you!
         </Alert> */}
-        <Box textAlign="center" m={1} py={8} mx={"1%"}>
+        <Box textAlign="center" px={8} py={6}>
           <Typography variant="h4" style={{fontSize: "4rem"}} gutterBottom>
             🥡 My Cart
           </Typography>
@@ -286,7 +286,7 @@ function Cart() {
             </Button> */}
           </Typography>
         </Box>
-      </Typography>
+      </Box>
       <CheckoutDialog open={open} onClose={handleClose} total={total} />{" "}
       <Snackbar
         open={emptyAlert}
