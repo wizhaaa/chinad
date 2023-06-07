@@ -35,9 +35,12 @@ const useStyles = makeStyles((theme) => ({
   },
   toolbar: theme.mixins.toolbar,
   content: {
-    flexGrow: 1,
-    padding: theme.spacing(1),
-    maxWidth: "960px",
+    diplay: "flex",
+    flexFlow: "column nowrap",
+    justifyContent: "center",
+    alignContent: "center",
+    alignItems: "center",
+    width: "100%",
     paddingBottom: theme.spacing(20),
   },
 }));
@@ -95,12 +98,10 @@ function App() {
             <HeaderNav />
             <CssBaseline />
 
-            <div className="App">
-              <main className={classes.content}>
-                <div className={classes.toolbar} />
-                <Routes />{" "}
-              </main>
-            </div>
+            <main className={classes.content}>
+              <div className={classes.toolbar} />
+              <Routes />
+            </main>
           </CartProvider>
         </Router>
       </ThemeProvider>

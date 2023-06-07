@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, {useState, useContext} from "react";
 import {
   Typography,
   Box,
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
-  divider: { margin: theme.spacing(6) },
+  divider: {margin: theme.spacing(6)},
   subheadings: {
     marginBottom: 50,
   },

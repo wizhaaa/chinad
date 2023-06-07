@@ -171,26 +171,33 @@ const CheckoutDialog = (props) => {
 
   let order = {};
   let date = new Date().toString();
-  let minutes = new Date().getMinutes() + 25;
-  let hours = new Date().getHours();
-  let meridiem = "AM";
 
-  if (minutes === 60) {
-    minutes = 0;
-    hours = hours + 1;
-  } else if (minutes > 60) {
-    minutes = minutes - 60;
-    hours = hours + 1;
-  }
+  // Calculate Order Wait Time, for ASAP orders which take 30 minutes usually, or 1 hour on weekends.
+  // For scheduled orders, the wait time is the difference between the scheduled time and the current time.
+  const currTime = new Date();
 
-  if (hours > 12) {
-    hours = hours - 12;
-    meridiem = "PM";
-  } else if (hours === 12) {
-    meridiem = "PM";
-  }
+  // Check if Th, Fr, Sa and time is 4-8pm
+  const busy =
+    currTime.getDay() >= 4 &&
+    currTime.getDay() <= 6 &&
+    currTime.getHours() >= 16 &&
+    currTime.getHours() < 20;
 
-  const estimatedTime = `${hours}:${minutes} ${meridiem}`;
+  const offset = busy ? 60 * 60 * 1000 : 30 * 60 * 1000;
+  const pickUpTime = new Date(currTime.getTime() + offset);
+  // Convert the hours to 12-hour format
+  var hours = pickUpTime.getHours();
+  var amPm = hours >= 12 ? "PM" : "AM";
+  hours = hours % 12;
+  hours = hours === 0 ? 12 : hours;
+
+  // Format the future time as a string
+  var pickUpTimeStr =
+    hours.toString().padStart(2, "0") +
+    ":" +
+    pickUpTime.getMinutes().toString().padStart(2, "0") +
+    " " +
+    amPm;
 
   // useEffect(() => {
   //   if (orderPaid) {
@@ -208,7 +215,7 @@ const CheckoutDialog = (props) => {
       orderReqs: orderReqs,
       total: total,
       timePlaced: date,
-      estimatedTime: estimatedTime,
+      estimatedTime: pickUpTimeStr,
       paymentMethod: paymentMethod,
       amountPaid: amountPaid,
     };
@@ -223,7 +230,7 @@ const CheckoutDialog = (props) => {
       orderReqs: orderReqs,
       total: total,
       timePlaced: date,
-      estimatedTime: estimatedTime,
+      estimatedTime: pickUpTimeStr,
       paymentMethod: paymentMethod,
       amountPaid: amountPaid,
     };
@@ -255,23 +262,19 @@ const CheckoutDialog = (props) => {
   //     .catch((err) => console.log(err));
   // };
 
-  const sendEmail = () => {
+  const sendEmail = async () => {
     const messageHtml = renderEmail(<MyEmail order={order}></MyEmail>);
-    axios({
-      method: "POST",
-      url: "https://chinadelightmd.com/api/send",
-      data: {
-        name: name,
-        email: email,
-        messageHtml: messageHtml,
-      },
-    }).then((response) => {
-      if (response.data.msg === "success") {
-        window.location.href = "/confirmation";
-      } else if (response.data.msg === "fail") {
-        alert("Oops, something went wrong. Try again");
-      }
+    const response = await api.post("/api/send", {
+      name: name,
+      email: email,
+      messageHtml: messageHtml,
     });
+    if (response.data.msg === "success") {
+      //empty our cart
+      window.location.href = "/confirmation";
+    } else if (response.data.msg === "fail") {
+      alert("Oops, something went wrong. Try again");
+    }
   };
 
   const handlePlaceOrder = (e) => {
@@ -279,9 +282,8 @@ const CheckoutDialog = (props) => {
       setEmptyAlert(true);
     } else {
       console.log("placing order ...");
-
-      //commenting out adding order for now
       addOrder(order);
+      window.localStorage.setItem("order", JSON.stringify(order));
       console.log("order added to DB ...");
       sendEmail();
       console.log("sent email ...");

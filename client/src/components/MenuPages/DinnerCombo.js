@@ -1,11 +1,5 @@
-import React, { useState, useEffect } from "react";
-import {
-  Typography,
-  Box,
-  Grid,
-  makeStyles,
-  TextField,
-} from "@material-ui/core";
+import React, {useState, useEffect} from "react";
+import {Typography, Box, Grid, makeStyles, TextField} from "@material-ui/core";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
 
@@ -18,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
-  divider: { margin: theme.spacing(6) },
+  divider: {margin: theme.spacing(6)},
   subheadings: {
     marginBottom: 50,
   },
@@ -107,7 +101,7 @@ const DinnerCombo = (props) => {
       </div>{" "}
       <TextField
         name="orderRequests"
-        style={{ width: "80%" }}
+        style={{width: "80%"}}
         id="outlined-textarea"
         label="Search for your dish"
         placeholder="Try... Crispy Beef"
@@ -115,7 +109,7 @@ const DinnerCombo = (props) => {
         rowsMax={1}
         multiline
         variant="outlined"
-        inputProps={{ maxLength: 50 }}
+        inputProps={{maxLength: 50}}
         InputProps={{
           endAdornment: (
             <InputAdornment>

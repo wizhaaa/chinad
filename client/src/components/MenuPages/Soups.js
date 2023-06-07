@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Typography, Box, Grid, makeStyles } from "@material-ui/core";
+import React, {useState, useEffect} from "react";
+import {Typography, Box, Grid, makeStyles} from "@material-ui/core";
 
 // fetching data from db
 import api from "../api";
@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
-  divider: { margin: theme.spacing(6) },
+  divider: {margin: theme.spacing(6)},
   subheadings: {
     marginBottom: 50,
   },
@@ -68,14 +68,13 @@ const Soups = (props) => {
           className={(classes.menuHeadings, classes.bold)}
           gutterBottom
         >
-          {" "}
-          Soups{" "}
+          Soups
         </Typography>
         <Typography className={classes.subheadings}>
           Something to warm you up on cold nights.
           <br /> Each soup comes with a bag of fried noodles.
           <br /> (Pints come with 1 bag; quarts come with 2 bags)
-        </Typography>{" "}
+        </Typography>
       </div>
 
       <Box marginTop={10}>

@@ -87,9 +87,8 @@ function Home() {
           <Typography variant="body1" gutterBottom>
             你好!~ Welcome the new China Delight website!
             <Typography variant="body1" gutterBottom></Typography>
-            China Delight is a local Chinese cuisine take-out restaurant in
-            Forest Hill, MD. Dine-in is limited for health and safety during the
-            COVID-19 pandemic.
+            China Delight is a local Chinese cuisine take-out and dine-in
+            restaurant in Forest Hill, MD.
           </Typography>
           <Typography variant="body1" gutterBottom></Typography>
           <Typography variant="subtitle" gutterBottom>
@@ -174,13 +173,7 @@ function Home() {
                 Monday - Saturdays
               </Grid>
               <Grid container item xs={6}>
-                11 AM - 8:30 PM
-              </Grid>
-              {/* <Grid container item xs={6} justify="flex-end">
-                Fridays - Saturdays
-              </Grid> */}
-              <Grid container item xs={6}>
-                11 AM - 8:30 PM
+                11 AM - 9:30 PM
               </Grid>
               <Grid container item xs={6} justify="flex-end">
                 Sundays
@@ -192,7 +185,7 @@ function Home() {
                 Tuesdays
               </Grid>
               <Grid container item xs={6}>
-                CLOSED ❌
+                Closed
               </Grid>
             </Grid>
           </Typography>

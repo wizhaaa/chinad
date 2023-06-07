@@ -29,6 +29,7 @@ import Side from "./MenuPages/Side";
 
 import AxiosTest from "./AxiosTest";
 import MyEmail from "./Pages/MyEmail";
+import Admin from "./Pages/Admin";
 
 const Routes = () => {
   return (
@@ -118,6 +119,9 @@ const Routes = () => {
         </Route>
         <Route exact path="/confirmation">
           <OrderConfirmation />
+        </Route>
+        <Route exact path="/admin">
+          <Admin />
         </Route>
       </Switch>
     </div>

@@ -1,5 +1,5 @@
-import React, {useState, useContext} from "react";
-import {BrowserRouter as Router, Link} from "react-router-dom";
+import React, {useState, useEffect} from "react";
+import api from "../api";
 
 import {
   Button as ButtonIcon,
@@ -53,6 +53,17 @@ const PPformatter = new Intl.NumberFormat("en-US", {
 });
 
 function Cart() {
+  const [onlineStatus, setOnlineStatus] = useState(false);
+
+  const getOnlineStatus = async () => {
+    const res = await api.get("/api/online");
+    setOnlineStatus(res.data);
+  };
+
+  useEffect(() => {
+    getOnlineStatus();
+  }, []);
+
   const tableClasses = tableStyles();
   //handle empty cart alert
   const [emptyAlert, setEmptyAlert] = useState(false);
@@ -102,18 +113,25 @@ function Cart() {
     // testing to allow opening cart
     // handleClickOpen();
     let today = new Date();
-    let valentines = today.getDate() == 14 && today.getMonth() == 1;
-    if (today.getDay() === 2 && !valentines) {
-      setTuesdayAlert(true);
-    } else if (
+    // checkers
+    const holiday =
       today.getDate() === 29 &&
       today.getMonth() === 0 &&
-      today.getFullYear() === 2023
-    ) {
+      today.getFullYear() === 2023;
+    const emptyCart = userCartCount === 0;
+    const morning = today.getHours() < 11;
+    let valentines = today.getDate() === 14 && today.getMonth() === 1;
+
+    // using checkers
+    if (onlineStatus === false) {
       setHolidayAlert(true);
-    } else if (today.getHours() < 11) {
+    } else if (!today.getDay() === 2 && !valentines) {
+      setTuesdayAlert(true);
+    } else if (holiday) {
+      setHolidayAlert(true);
+    } else if (morning) {
       setMorningAlert(true);
-    } else if (userCartCount === 0) {
+    } else if (emptyCart) {
       setEmptyAlert(true);
     } else {
       handleClickOpen();
@@ -141,18 +159,17 @@ function Cart() {
           <TableRow>
             <TableCell>
               <Typography gutterBottom>
-                {" "}
                 Subtotal: {formatter.format(subt1)}
                 <br /> Taxes (6%): {formatter.format(taxes)}
                 <br /> Total: {formatter.format(total)}
-                <br />{" "}
+                <br />
               </Typography>
               <Button
                 variant="contained"
                 color="secondary"
                 onClick={handleCheckout}
               >
-                <ShoppingCartIcon /> Checkout{" "}
+                <ShoppingCartIcon /> Checkout
               </Button>
             </TableCell>
           </TableRow>
@@ -224,9 +241,8 @@ function Cart() {
 
   const emptyCart = (
     <Typography>
-      {" "}
-      Woops! Looks like your cart is empty! head over to the{" "}
-      <a href="/menu"> Menu</a> and add items to your cart ~{" "}
+      Woops! Looks like your cart is empty! head over to the
+      <a href="/menu"> Menu</a> and add items to your cart ~
     </Typography>
   );
 
@@ -290,11 +306,10 @@ function Cart() {
         anchorOrigin={{vertical: "top", horizontal: "center"}}
       >
         <Alert onClose={tuesdayAlertClose} severity="warning">
-          {" "}
           <AlertTitle>
-            <strong> CAN NOT CHECKOUT ON TUESDAYS </strong>
-          </AlertTitle>{" "}
-          We are not open on Tuesdays! Apologies for any inconveniences.{" "}
+            <strong> CLOSED ON TUESDAYS </strong>
+          </AlertTitle>
+          We are not open on Tuesdays! Apologies for any inconveniences.
         </Alert>
       </Snackbar>
       <Snackbar
@@ -304,12 +319,11 @@ function Cart() {
         anchorOrigin={{vertical: "top", horizontal: "center"}}
       >
         <Alert onClose={morningAlertClose} severity="warning">
-          {" "}
           <AlertTitle>
-            <strong> NOT ACCEPTING ONLINE ORDERS IN THE MORNINGS </strong>
-          </AlertTitle>{" "}
+            <strong> ONLINE ORDERS CLOSED IN THE MORNING </strong>
+          </AlertTitle>
           We are not accepting online orders in the morning (before 11) to avoid
-          any inconveniences.{" "}
+          any inconveniences.
         </Alert>
       </Snackbar>
       <Snackbar
@@ -319,18 +333,9 @@ function Cart() {
         anchorOrigin={{vertical: "top", horizontal: "center"}}
       >
         <Alert onClose={holidayAlertClose} severity="error">
-          {" "}
           <AlertTitle>
-            <strong> Not accepting online orders today </strong>
-          </AlertTitle>{" "}
-          {/* Due to lack of manpower tonight, we will not be accepting online
-          orders to help reduce the workload on our staff and keep order times
-          in check. Thank you for understanding! We will reopen online orders
-          tomorrow. Apologies for any inconveniences.{" "} */}
-          {/* Apologies for any inconveniences but we are closed as one of our chefs
-          is not feeling well. Thank you for your support! We hope to open as
-          soon as our chef and staff are feeling better. Possibly by this
-          Wednesday. Thank you again! */}
+            <strong>Online Orders Closed </strong>
+          </AlertTitle>
           Apologies, we are closed for today!
         </Alert>
       </Snackbar>
