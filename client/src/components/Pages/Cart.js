@@ -125,7 +125,7 @@ function Cart() {
     // using checkers
     if (onlineStatus === false) {
       setHolidayAlert(true);
-    } else if (!today.getDay() === 2 && !valentines) {
+    } else if (today.getDay() === 2 && !valentines) {
       setTuesdayAlert(true);
     } else if (holiday) {
       setHolidayAlert(true);
