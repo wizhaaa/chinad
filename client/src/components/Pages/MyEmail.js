@@ -1,7 +1,5 @@
-import React, {useState} from "react";
+import React from "react";
 import {Email, Item} from "react-html-email";
-
-// import { useCartContext } from "../CartContext";
 
 // import {
 //   Button as ButtonIcon,
@@ -80,7 +78,7 @@ const MyEmail = ({order}) => {
     if (second < 10) {
       second = "0" + second;
     }
-    var timeString = hour + ":" + minute + ":" + second + " " + ap;
+    var timeString = hour + ":" + minute + " " + ap;
     return timeString;
   }
   const orderTime = getClockTime();
@@ -88,9 +86,7 @@ const MyEmail = ({order}) => {
   const month = new Date().getMonth() + 1;
   const date = new Date().getDate();
   const year = new Date().getFullYear();
-  const fullDate = `${month} - ${date} - ${year}`;
-
-  const emailTotal = order.cart.total;
+  const fullDate = `${month}/${date}/${year}`;
 
   var subtotal = 0;
   cart.forEach(
@@ -100,20 +96,47 @@ const MyEmail = ({order}) => {
   var total = subtotal * 1.06;
 
   const pickUpDetails = (
-    <div>
-      {" "}
-      Pick up Option: {order.pickUpOption}
-      {order.pickUpOption === "custom time" ? (
-        <div> ⏰ Pick up time: {order.pickUpTime} </div>
-      ) : null}{" "}
-    </div>
+    <b>
+      <br />
+      <h3>
+        Pickup {order.pickUpOption === "ASAP" ? "ASAP" : "Custom Pick-Up Time"}{" "}
+        around {estimatedTime}
+        {order.pickUpOption === "custom time" ? (
+          <div> ⏰ Pick up time: {order.pickUpTime} </div>
+        ) : null}{" "}
+      </h3>
+    </b>
+  );
+
+  const paidOnline = (
+    <b>
+      <h3>
+        ✅ Customer Paid Online {formatter.format(amountPaid)} (includes 1.15
+        fee) <br />
+        {total - amountPaid === 0 || total - amountPaid < 0 ? null : (
+          <div>
+            <strong> Amount Due </strong>
+            {formatter.format(total - amountPaid)}
+          </div>
+        )}
+      </h3>
+    </b>
+  );
+
+  const payInPerson = (
+    <b>
+      <h3>
+        💵 Paying In Person
+        <br />
+      </h3>
+    </b>
   );
 
   const filledCart = (
     <div>
       {cart.map((item, index) => {
         const itemOptions = Object.entries(item.options)
-          .map(([key, value]) => {
+          .map(([_, value]) => {
             switch (value) {
               case "Lunch":
                 return "L";
@@ -136,29 +159,26 @@ const MyEmail = ({order}) => {
             <tr key={item.title}>
               <td>
                 <div>
-                  {" "}
                   <h4>
-                    🍱 <b> {item.title} </b>{" "}
-                  </h4>{" "}
+                    ➖<b> {item.title} </b>
+                  </h4>
                 </div>
-                <div> &emsp; {itemOptions} </div>{" "}
+                <div> &emsp; {itemOptions} </div>
                 <div>
-                  {" "}
-                  &emsp;{" "}
+                  &emsp;
                   {item.requestContent === ""
                     ? null
-                    : `> ${item.requestContent}`}{" "}
+                    : `> ${item.requestContent}`}
                 </div>
                 <div>
-                  {" "}
                   <div> &emsp; QTY: {item.quantity}</div>
                   <div>
                     {formatter.format(item.cartUnitPrice)} ( x {item.quantity} )
                     = {formatter.format(itemTotalPrice)}
-                  </div>{" "}
+                  </div>
                 </div>
               </td>
-            </tr>{" "}
+            </tr>
             <br />
           </div>
         );
@@ -169,70 +189,74 @@ const MyEmail = ({order}) => {
   const orderEmail = (
     <Email title="china delit order">
       <Item>
-        {" "}
-        <h1> China Delight Order </h1>
-        <div>🙇‍♀️ Thank you {name} for your order! </div>
-        <div>
-          {" "}
-          Order Time: {fullDate} {orderTime}{" "}
-        </div>
-        Order for: {name}
-        <br /> Email: {email}
-        <br /> Phone: {phone}
-        <div> {pickUpDetails} </div>
-        <div>
-          Subtotal: {formatter.format(subtotal)}
-          <br /> Taxes (6%): {formatter.format(taxes)}
-          <br /> Total: {formatter.format(total)} <br />
-          {paymentMethod === "In Person" ? (
-            <div>
-              {" "}
-              <strong> ⛔ Payment </strong> {paymentMethod} <br />{" "}
-            </div>
-          ) : (
-            <div>
-              <strong> ✅ Payment </strong> {paymentMethod} <br />{" "}
-              <strong> ✅ Paid </strong> {formatter.format(amountPaid)}{" "}
-              (includes 1.15 fee) <br />{" "}
-              {total - amountPaid === 0 || total - amountPaid < 0 ? null : (
+        <div
+          style={{
+            padding: "25px",
+          }}
+        >
+          <h2> China Delight </h2>
+          <h1>
+            {" "}
+            {name.split(" ")[0]}'s Order #{phone}
+          </h1>
+          {name} | {email} | {phone}
+          <div>
+            {fullDate} | {orderTime}
+          </div>
+          <div> {pickUpDetails} </div>
+          <div>{paymentMethod === "In Person" ? payInPerson : paidOnline}</div>
+          <table
+            aria-label="spanning table"
+            style={{
+              padding: "20px 20px",
+              boxShadow: "0px 0px 10px rgba(0,0,0,0.1)",
+              width: "85%",
+            }}
+          >
+            <tr>
+              <th align="center">
                 <div>
-                  {" "}
-                  <strong> ⛔ Have to pay: </strong>{" "}
-                  {formatter.format(total - amountPaid)}{" "}
+                  <h3> Today's Receipt </h3>
                 </div>
-              )}
-            </div>
-          )}
-        </div>
-        <table aria-label="spanning table">
-          <tr>
-            <th align="center">
-              {" "}
-              <div>
-                <h3> ~ order ~ </h3>{" "}
+              </th>
+            </tr>
+            {filledCart}
+            {orderRequests && (
+              <strong> Customer's requests for the order: </strong>
+            )}
+            <br />
+            {orderRequests}
+            <br />
+            <div>
+              <div
+                style={{
+                  width: "100%",
+                  height: "1px",
+                  marginLeft: "-1px",
+                  marginBottom: "8px",
+                  background: "black",
+                }}
+              ></div>
+              <strong> Subtotal:</strong> {formatter.format(subtotal)}
+              <br /> <strong> Taxes (6%): </strong> {formatter.format(taxes)}
+              <br />
+              <br />
+              <div style={{marginBottom: "-50px"}}>
+                <b> Total</b>
               </div>
-            </th>
-          </tr>
-          {filledCart}
-        </table>
-        <br />
-        <br />
-        <div className="divider"> </div>
-        <strong> Customer's requests for the order: </strong>
-        <br />
-        {orderRequests}
-        <br />
-        <br />
-        <div>
-          {" "}
-          <strong> Subtotal:</strong> {formatter.format(subtotal)}
-          <br /> <strong> Taxes (6%): </strong> {formatter.format(taxes)}
-          <br /> <strong> Total: </strong> {formatter.format(total)} <br />
+              <h2>
+                <br /> {formatter.format(total)}
+              </h2>
+              <br />
+            </div>
+          </table>
+          <br />
+          <br />
+          Any questions?
+          <br />
+          Don't hesitate to email us at chinadelightmd@gmail.com. <br />
+          Or, call us at 410-877-9490!
         </div>
-        <div className="divider"> </div>
-        <br />
-        <br /> Any questions? Don't hesitate to email us at
-        chinadelightmd@gmail.com or call us at 410-877-9490! <br />
       </Item>
     </Email>
   );

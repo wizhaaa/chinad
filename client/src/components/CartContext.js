@@ -1,5 +1,5 @@
-import { WatchRounded } from "@material-ui/icons";
-import React, { useContext, useState } from "react";
+import {WatchRounded} from "@material-ui/icons";
+import React, {useContext, useState} from "react";
 import Cart from "./Pages/Cart";
 
 // a react context provider
@@ -17,16 +17,16 @@ const CartContext = React.createContext();
 export const useCartContext = () => {
   const context = useContext(CartContext);
 
-  if (!context) {
-    throw new Error(
-      "useCartContext must be called within a Provider component"
-    );
-  }
+  // if (!context) {
+  //   throw new Error(
+  //     "useCartContext must be called within a Provider component"
+  //   );
+  // }
 
   return context;
 };
 
-export function CartProvider({ children }) {
+export function CartProvider({children}) {
   // values and functions we are allowing every component to access below:
 
   const [cart, setCart] = useLocalStorage("userLocalCart", []);
