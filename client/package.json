@@ -29,7 +29,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "scp -r ./build/* willz@165.22.4.40:/var/www/chinadelightmd.com/html"
   },
   "eslintConfig": {
     "extends": [
