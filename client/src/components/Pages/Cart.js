@@ -115,8 +115,8 @@ function Cart() {
     let today = new Date();
     // checkers
     const holiday =
-      today.getDate() === 29 &&
-      today.getMonth() === 0 &&
+      today.getDate() === 6 &&
+      today.getMonth() === 5 &&
       today.getFullYear() === 2023;
     const emptyCart = userCartCount === 0;
     const morning = today.getHours() < 11;

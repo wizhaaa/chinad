@@ -1,4 +1,4 @@
-import { createMuiTheme } from "@material-ui/core/styles";
+import {createMuiTheme} from "@material-ui/core/styles";
 
 const theme = createMuiTheme({
   typography: {
@@ -47,6 +47,17 @@ const theme = createMuiTheme({
   transitions: {
     // So we have `transition: none;` everywhere
     create: () => "none",
+  },
+  components: {
+    // Name of the component
+    MuiButton: {
+      styleOverrides: {
+        // Name of the slot
+        root: {
+          // Some CSS
+      },
+      },
+    },
   },
 });
 

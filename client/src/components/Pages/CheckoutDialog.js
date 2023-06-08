@@ -129,15 +129,7 @@ const useStyles = makeStyles((theme) => ({
 const CheckoutDialog = (props) => {
   const {onClose, open, total} = props;
 
-  const {
-    cart,
-    setCart,
-    orderID,
-    setOrderID,
-    setPrevOrder,
-    orderPaid,
-    setOrderPaid,
-  } = useCartContext();
+  const {cart, setCart, setPrevOrder, orderPaid} = useCartContext();
 
   const [orderReqs, setOrderReqs] = useState("");
   const [name, setName] = useState("");
@@ -199,12 +191,6 @@ const CheckoutDialog = (props) => {
     " " +
     amPm;
 
-  // useEffect(() => {
-  //   if (orderPaid) {
-  //     setPaymentMethod("Paid Online");
-  //   }
-  // }, []);
-
   if (pickUpOption === "ASAP") {
     order = {
       name: name,
@@ -241,26 +227,8 @@ const CheckoutDialog = (props) => {
   };
 
   const addOrder = (newOrder) => {
-    api
-      .post("/api/order/add", newOrder)
-      // .then((res) => setOrderID(res.data.id))
-      .catch((err) => console.log(err));
+    api.post("/api/order/add", newOrder).catch((err) => console.log(err));
   };
-
-  // const sendEmail = (newOrder) => {
-  //   api
-  //     .post("/api/send", newOrder)
-  //     .then((res) => {
-  //       alert("email sending...");
-  //       console.log("respsone is", res.data.msg);
-  //       if (res.data.msg === "success") {
-  //         alert("Email sent, awesome!");
-  //       } else if (res.data.msg === "fail") {
-  //         alert("Oops, something went wrong. Try again");
-  //       }
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
 
   const sendEmail = async () => {
     const messageHtml = renderEmail(<MyEmail order={order}></MyEmail>);
@@ -270,7 +238,6 @@ const CheckoutDialog = (props) => {
       messageHtml: messageHtml,
     });
     if (response.data.msg === "success") {
-      //empty our cart
       window.location.href = "/confirmation";
     } else if (response.data.msg === "fail") {
       alert("Oops, something went wrong. Try again");
@@ -352,7 +319,7 @@ const CheckoutDialog = (props) => {
   );
 
   const page1 = (
-    <Grid container>
+    <Grid container style={{textAlign: "left"}}>
       <form
         onSubmit={(e) => {
           setPaymentPage(!paymentPage);
@@ -361,98 +328,112 @@ const CheckoutDialog = (props) => {
         }}
       >
         <Grid item xs={12}>
-          <Typography variant="h6" gutterBottom>
-            {" "}
-            Please fill out the info to place your order
+          <Typography
+            style={{
+              fontSize: "1.3rem",
+              fontWeight: "800",
+            }}
+          >
+            Personal Information
           </Typography>
-          <Typography variant="body1" gutterBottom>
-            {" "}
-            <em>items marked with an * are required </em>
-          </Typography>
+          <Divider className={classes.divider} />
         </Grid>
-        <Divider className={classes.divider} />
-        <Grid item xs={12}>
-          <Typography variant="body1" gutterBottom>
-            {" "}
-            👋 Name:
-          </Typography>{" "}
-          <TextField
-            style={{width: "75%", paddingBottom: "20px"}}
-            id="outlined-textarea"
-            label="name"
-            placeholder="Sun Tzu"
-            autoComplete="name"
-            rowsMax={1}
-            variant="outlined"
-            InputLabelProps={{shrink: true}}
-            inputProps={{maxLength: 250}}
-            required
-            value={name}
-            onChange={handleNameChange}
-          />
-        </Grid>{" "}
-        <Grid item xs={12}>
-          <Typography variant="body1" gutterBottom>
-            {" "}
-            📧 Email:
-          </Typography>{" "}
-          <TextField
-            style={{width: "75%", paddingBottom: "20px"}}
-            id="outlined-textarea"
-            label="email"
-            placeholder="ilovechinadelight@gmail.com"
-            type="email"
-            pattern=".+@globlex.com"
-            autoComplete="email"
-            rowsMax={1}
-            variant="outlined"
-            InputLabelProps={{shrink: true}}
-            inputProps={{maxLength: 250}}
-            required
-            value={email}
-            onChange={handleEmailChange}
-          />
-        </Grid>{" "}
-        <Grid item xs={12}>
-          <Typography variant="body1" gutterBottom>
-            {" "}
-            📞 Phone Number:
-          </Typography>{" "}
-          <TextField
-            style={{width: "75%", paddingBottom: "20px"}}
-            id="outlined-textarea"
-            label="phone #"
-            placeholder="410-877-9490"
-            type="tel"
-            autoComplete="tel"
-            rowsMax={1}
-            variant="outlined"
-            InputLabelProps={{shrink: true}}
-            inputProps={{maxLength: 250}}
-            required
-            value={phoneNum}
-            onChange={handlePhoneNumChange}
-          />
-        </Grid>{" "}
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <Typography
+              style={{
+                fontSize: "1.1rem",
+                fontWeight: "700",
+              }}
+            >
+              Name
+            </Typography>
+            <TextField
+              style={{width: "100%", paddingBottom: "20px"}}
+              id="outlined-textarea"
+              placeholder="Sun Tzu"
+              autoComplete="name"
+              rowsMax={1}
+              variant="outlined"
+              InputLabelProps={{shrink: true}}
+              inputProps={{maxLength: 250}}
+              required
+              value={name}
+              onChange={handleNameChange}
+            />
+          </Grid>
+          <Grid item md={6} xs={12}>
+            <Typography
+              style={{
+                fontSize: "1.1rem",
+                fontWeight: "700",
+              }}
+            >
+              Email
+            </Typography>
+            <TextField
+              style={{width: "100%", paddingBottom: "20px"}}
+              id="outlined-textarea"
+              placeholder="ilovechinadelight@gmail.com"
+              pattern=".+@globlex.com"
+              autoComplete="email"
+              rowsMax={1}
+              variant="outlined"
+              InputLabelProps={{shrink: true}}
+              inputProps={{maxLength: 250}}
+              required
+              value={email}
+              onChange={handleEmailChange}
+            />
+          </Grid>
+          <Grid item md={6} xs={12}>
+            <Typography
+              style={{
+                fontSize: "1.1rem",
+                fontWeight: "700",
+              }}
+            >
+              Phone Number
+            </Typography>
+            <TextField
+              style={{width: "100%", paddingBottom: "20px"}}
+              id="outlined-textarea"
+              placeholder="410-877-9490"
+              type="tel"
+              autoComplete="tel"
+              rowsMax={1}
+              variant="outlined"
+              InputLabelProps={{shrink: true}}
+              inputProps={{maxLength: 250}}
+              required
+              value={phoneNum}
+              onChange={handlePhoneNumChange}
+            />
+          </Grid>
+        </Grid>
         <Grid item xs={12}>
           <Box>
             <Typography gutterBottom>
               Please note: If your requests contain extra sauce, extra meat, or
               anything extra, they are liable to extra fees not calculated in
               the final price below. Please see <a href="/about">pricing</a> for
-              more details on what costs you can expect.{" "}
+              more details on what costs you can expect.
             </Typography>
           </Box>
         </Grid>
         <Divider className={classes.divider} />
         <Grid item xs={12}>
           <Box pb={5}>
-            <Typography variant="h5" gutterBottom>
-              ⏰ Pick Up time:{" "}
-            </Typography>{" "}
+            <Typography
+              style={{
+                fontSize: "1.3rem",
+                fontWeight: "800",
+              }}
+            >
+              Pick Up Time:
+            </Typography>
             <Typography gutterBottom>
               <FormControl component="fieldset">
-                <FormLabel component="legend"> select one: </FormLabel>
                 <RadioGroup
                   aria-label="pickup"
                   name="pickup"
@@ -467,35 +448,30 @@ const CheckoutDialog = (props) => {
                   <FormControlLabel
                     value="custom time"
                     control={<Radio />}
-                    label="custom time"
+                    label="Custom"
                   />
                 </RadioGroup>{" "}
                 {pickUpOption === "custom time" ? customTimeChooser : null}
               </FormControl>
             </Typography>
           </Box>
-        </Grid>{" "}
-        <Grid item xs={12}>
-          {" "}
-          <Typography>
-            {" "}
-            Orders usually take 15-20 minutes. <br />
-            Friday and Saturdays nights can get very busy and orders can take 30
-            minutes or more on holidays.
-            <br /> Please see <a href="/about">order times</a> for more details
-            on estimated order times.
-          </Typography>
         </Grid>
         <Divider className={classes.divider} />
         <Grid item xs={12}>
-          {" "}
+          <Typography
+            style={{
+              fontSize: "1.3rem",
+              fontWeight: "800",
+            }}
+          >
+            Special Requests?
+          </Typography>
           <Box m={3} className={classes.textFields}>
             <TextField
               name="orderRequests"
               style={{width: "100%"}}
               id="outlined-textarea"
-              label="anything else?"
-              placeholder="let us know!"
+              placeholder="Let Us Know!"
               rows={4}
               rowsMax={8}
               multiline
@@ -503,20 +479,24 @@ const CheckoutDialog = (props) => {
               inputProps={{maxLength: 250}}
               value={orderReqs}
               onChange={handleOrderReqsChange}
-            />{" "}
+            />
           </Box>
-        </Grid>{" "}
-        <Grid item xs={12}>
-          {" "}
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          style={{
+            textAlign: "right",
+          }}
+        >
           <Button
-            variant="contained"
+            variant="outlined"
             size="large"
             color="secondary"
             aria-label="pay"
             type="submit"
           >
-            {" "}
-            Payment 👉{" "}
+            Next
           </Button>
         </Grid>
       </form>
@@ -526,10 +506,10 @@ const CheckoutDialog = (props) => {
   );
 
   const page2 = (
-    <Grid container>
+    <Grid container style={{textAlign: "left"}}>
       <Grid item xs={12}>
         <Button
-          variant="contained"
+          variant="outlined"
           size="large"
           color="secondary"
           aria-label="pay"
@@ -538,50 +518,56 @@ const CheckoutDialog = (props) => {
             setFirstPage(!firstPage);
           }}
         >
-          {" "}
-          👈 Back
-        </Button>{" "}
-        <Box py={3}> </Box>{" "}
-        <Typography variant="h5" gutterBottom>
-          {" "}
-          Choose a payment method{" "}
-        </Typography>{" "}
-        <Typography variant="body1" gutterBottom>
-          {" "}
-          After hitting either "Place Order" or finishing the PayPal payment,
-          you should receive an email and be redirected to the Order
-          Confirmation page.
+          Back
+        </Button>
+        <Box py={1.5}> </Box>
+        <Typography
+          style={{
+            fontSize: "1.7rem",
+            fontWeight: "800",
+          }}
+          gutterBottom
+        >
+          Choose a payment method
+        </Typography>
+        <Typography variant="body1">
+          After finishing the order or finish the paypal payment, you will be
+          redirected to the order confirmation page and should receive an email
+          confirmation from{" "}
+          <a href="mailto:chinadelightmd@gmail.com.">
+            chinadelightmd@gmail.com.
+          </a>
           <br />
           <br />
-          <strong> Either way, we do not deliver. </strong>
+          <strong> Please note, we do not deliver in either case. </strong>
           <br />
-          <br />{" "}
-        </Typography>{" "}
-        <Box py={3}> </Box>{" "}
+          <br />
+        </Typography>
+        <Box py={3}> </Box>
         <Box>
-          {" "}
-          <Typography variant="h5" gutterBottom>
-            {" "}
-            <b> Pre-Pay Online? </b>
+          <Typography
+            style={{
+              fontSize: "1.3rem",
+              fontWeight: "800",
+            }}
+            gutterBottom
+          >
+            Want to Pay Online?
           </Typography>
-          <Box py={2}> </Box>
+          <Box py={1}> </Box>
           <Box></Box>
-        </Box>{" "}
+        </Box>
         <Box>
           {orderPaid ? (
             <Box textAlign="center" width="100%">
-              {" "}
               <Typography variant="body1">
-                {" "}
-                Thanks for paying! Your online order status will be updated as
-                paid ✅ Amount Paid: {formatter.format(amountPaid)} (Inludes
-                1.15 fee)
+                Thank you! Your online order status will be updated as paid ✅
+                Amount Paid: {formatter.format(amountPaid)} (Inludes 1.15 fee)
                 <br />
                 {total - amountPaid === 0 || total - amountPaid < 0 ? null : (
                   <div>
-                    {" "}
-                    <strong> Have to Pay: </strong>{" "}
-                    {formatter.format(total - amountPaid)}{" "}
+                    <strong> Have to Pay: </strong>
+                    {formatter.format(total - amountPaid)}
                   </div>
                 )}
               </Typography>
@@ -594,23 +580,22 @@ const CheckoutDialog = (props) => {
               aria-label="pay"
               onClick={() => setShowPayPal(!showPayPal)}
             >
-              {" "}
-              {showPayPal ? "❌ NEVERMIND" : "💳 Pay Now"}
+              {showPayPal ? "NEVERMIND" : "Pay Online"}
             </Button>
           )}
           {showPayPal && (
             <Box>
               <Box py={2}> </Box>
               <Typography
-                variant="h5"
-                className={classes.boldHeading}
+                style={{
+                  fontSize: "1.2rem",
+                  fontWeight: "650",
+                }}
                 gutterBottom
               >
-                {" "}
-                ⛔ <st> ***WARNING*** </st> ⛔{" "}
+                DISCLAIMER
               </Typography>
               <Typography variant="body1" gutterBottom>
-                {" "}
                 There is a <strong> $1.15 fee </strong> and any special requests
                 not calculated online may require you to pay extra in-person.
                 Please see <a href="/about"> pricing </a> for more details on
@@ -618,19 +603,17 @@ const CheckoutDialog = (props) => {
                 <br />
                 <br />
                 <strong> We do not deliver. </strong>
-                <br />
-                <br />
-                Paypal may ask for a shipping address as their service requires
-                it but we will not deliver to that address. If you want
-                delivery, try 3rd-party apps like Grubhub, DoorDash, etc.
-                <Box py={2}> </Box>
+                PayPal may ask for a shipping address as their service requires
+                it but we will not deliver to that address. If you want food
+                delivered, try 3rd-party apps like Grubhub, DoorDash, UberEats
+                etc.
                 <Box py={2}> </Box>
                 <Typography variant="body1" gutterBottom>
                   Once the PayPal payment goes through, an email will be sent
                   and you will be redirected to the confirmation page. If
                   nothing happens, call us to see if we got your order. Make
-                  sure to add all your items in your cart and do NOT reload or
-                  leave the page.
+                  sure to add all your items in your cart and
+                  <strong> do not reload or leave the page.</strong>
                 </Typography>
               </Typography>
               <Box py={2}> </Box>
@@ -654,27 +637,37 @@ const CheckoutDialog = (props) => {
             </Box>
           )}
         </Box>
-      </Grid>{" "}
+      </Grid>
       <Grid item xs={12}>
         <Box py={5}> </Box>
         {showPayPal ? null : (
           <div>
-            {" "}
-            <Typography variant="h5" gutterBottom>
-              {" "}
-              <b> Pay In-Person </b>
-            </Typography>{" "}
-            <Box py={2}> </Box>
+            <Typography
+              style={{
+                fontSize: "1.3rem",
+                fontWeight: "800",
+              }}
+              gutterBottom
+            >
+              I'll Pay In Person
+            </Typography>
+            <Box
+              pb={3}
+              style={{
+                fontSize: "1.1rem",
+              }}
+            >
+              Amount Due: {formatter.format(total)}
+            </Box>
             <Button
               variant="contained"
               size="large"
-              color="secondary"
+              color="primary"
               aria-label="checkout"
               type="submit"
               onClick={handlePlaceOrder}
             >
-              {" "}
-              🎉 Place Order!{" "}
+              Finish Order
             </Button>
           </div>
         )}
@@ -699,19 +692,25 @@ const CheckoutDialog = (props) => {
           id="responsive-dialog-title"
           className={classes.dialogTitle}
         >
-          <div style={{display: "flex"}}>
-            {" "}
-            <Typography variant="h4" style={{flexGrow: 1}}>
-              CHECKOUT{" "}
-            </Typography>{" "}
+          <div
+            style={{
+              display: "flex",
+              flexFlow: "row nowrap",
+              justifyContent: "space-between",
+            }}
+          >
+            <Typography
+              color="secondary"
+              style={{fontSize: "2rem", fontWeight: "800"}}
+            >
+              CHECKOUT
+            </Typography>
             <IconButton color="primary" onClick={handleClose}>
-              {" "}
               <CloseIcon />
             </IconButton>
           </div>
         </DialogTitle>
         <DialogContent dividers>
-          {" "}
           <Box textAlign="center">
             <Box py={3}></Box>
             {firstPage && page1}
@@ -768,13 +767,21 @@ const CheckoutDialog = (props) => {
 
         <DialogActions className="dialogContainer">
           <Box pr={5}>
-            <Typography variant="h4"> {formatter.format(total)} </Typography>
+            <Typography
+              color="primary"
+              style={{
+                fontSize: "2.5rem",
+                fontWeight: "800",
+              }}
+            >
+              {formatter.format(total)}
+            </Typography>
           </Box>
 
           <Box pt={1.5} px={1.5}>
             {firstPage ? (
               <Button
-                variant="contained"
+                variant="outlined"
                 size="large"
                 color="secondary"
                 aria-label="pay"
@@ -787,20 +794,18 @@ const CheckoutDialog = (props) => {
                   }
                 }}
               >
-                Next 👉{" "}
+                Next
               </Button>
             ) : (
               <Button
                 variant="contained"
                 size="large"
-                color="secondary"
-                aria-label="pay"
-                onClick={() => {
-                  setPaymentPage(!paymentPage);
-                  setFirstPage(!firstPage);
-                }}
+                color="primary"
+                aria-label="checkout"
+                type="submit"
+                onClick={handlePlaceOrder}
               >
-                👈 Back{" "}
+                Finish Order
               </Button>
             )}
           </Box>
