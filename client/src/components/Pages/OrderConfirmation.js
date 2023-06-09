@@ -47,7 +47,7 @@ function Confirmation() {
   const orderReqs = prevOrder.orderReqs;
 
   const estimatedTime = prevOrder.estimatedTime;
-  const pickUpTimeArr = pickUpTime.split(":");
+  const pickUpTimeArr = pickUpTime ? pickUpTime.split(":") : ["00", "00"];
   const pickUpHour = pickUpTimeArr[0];
   const pickUpMinute = pickUpTimeArr[1];
   const pickUpTime12Hour =
