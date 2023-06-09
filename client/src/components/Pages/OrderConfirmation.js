@@ -47,6 +47,13 @@ function Confirmation() {
   const orderReqs = prevOrder.orderReqs;
 
   const estimatedTime = prevOrder.estimatedTime;
+  const pickUpTimeArr = pickUpTime.split(":");
+  const pickUpHour = pickUpTimeArr[0];
+  const pickUpMinute = pickUpTimeArr[1];
+  const pickUpTime12Hour =
+    Number(pickUpHour) > 12 ? Number(pickUpHour) - 12 : pickUpHour;
+  const meridiem = Number(pickUpHour) >= 12 ? "PM" : "AM";
+  const pickUpTime12HourStr = `${pickUpTime12Hour}:${pickUpMinute} ${meridiem}`;
 
   const paymentMethod = prevOrder.paymentMethod;
   const amountPaid = prevOrder.amountPaid;
@@ -236,7 +243,10 @@ function Confirmation() {
               style={{fontSize: "2.5rem", fontWeight: "900"}}
               gutterBottom
             >
-              <b> {pickUpOption === "ASAP" ? estimatedTime : pickUpTime} </b>
+              <b>
+                {" "}
+                {pickUpOption === "ASAP" ? estimatedTime : pickUpTime12HourStr}
+              </b>
             </Typography>
           </Box>
           <Box mb={5}> </Box>

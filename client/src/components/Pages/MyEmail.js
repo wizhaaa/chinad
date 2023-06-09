@@ -95,14 +95,26 @@ const MyEmail = ({order}) => {
   var taxes = subtotal * 0.06;
   var total = subtotal * 1.06;
 
+  // convert pickUpTime to 12 hour format
+  const pickUpTime = order.pickUpTime;
+  const pickUpTimeArr = pickUpTime.split(":");
+  const pickUpHour = pickUpTimeArr[0];
+  const pickUpMinute = pickUpTimeArr[1];
+  const pickUpTime12Hour =
+    Number(pickUpHour) > 12 ? Number(pickUpHour) - 12 : pickUpHour;
+  const meridiem = Number(pickUpHour) >= 12 ? "PM" : "AM";
+  const pickUpTime12HourStr = `${pickUpTime12Hour}:${pickUpMinute} ${meridiem}`;
+
   const pickUpDetails = (
     <b>
       <br />
       <h3>
-        Pickup {order.pickUpOption === "ASAP" ? "ASAP" : "Custom Pick-Up Time"}{" "}
-        around {estimatedTime}
+        Pickup{" "}
+        {order.pickUpOption === "ASAP"
+          ? `ASAP around ${estimatedTime}`
+          : "Custom Pick-Up Time"}{" "}
         {order.pickUpOption === "custom time" ? (
-          <div> ⏰ Pick up time: {order.pickUpTime} </div>
+          <div> ⏰ Pick up time: {pickUpTime12HourStr} </div>
         ) : null}{" "}
       </h3>
     </b>
@@ -111,8 +123,8 @@ const MyEmail = ({order}) => {
   const paidOnline = (
     <b>
       <h3>
-        ✅ Customer Paid Online {formatter.format(amountPaid)} (includes 1.15
-        fee) <br />
+        Customer Paid Online {formatter.format(amountPaid)} (includes 1.15 fee)
+        ✅ <br />
         {total - amountPaid === 0 || total - amountPaid < 0 ? null : (
           <div>
             <strong> Amount Due </strong>
@@ -135,52 +147,74 @@ const MyEmail = ({order}) => {
   const filledCart = (
     <div>
       {cart.map((item, index) => {
-        const itemOptions = Object.entries(item.options)
-          .map(([_, value]) => {
-            switch (value) {
-              case "Lunch":
-                return "L";
-              case "Dinner":
-                return "#";
-              case "White Rice":
-                return "WR";
-              case "Fried Rice":
-                return "FR";
-              default:
-                return value;
-            }
-          })
-          .join(", ");
+        const sizeToStr = () => {
+          switch (item.options.sizeValue) {
+            case "Pint":
+              return "Pt.";
+            case "Quart":
+              return "Qt.";
+            default:
+              return "";
+          }
+        };
+        const itemSize = sizeToStr();
+        const itemOptions =
+          itemSize +
+          " " +
+          Object.entries(item.options)
+            .map(([key, value]) => {
+              if (key === "sizeValue") {
+                return "";
+              }
+              switch (value) {
+                case "Lunch":
+                  return "L";
+                case "Dinner":
+                  return "#";
+                case "White Rice":
+                  return "WR";
+                case "Fried Rice":
+                  return "FR";
+                default:
+                  return value;
+              }
+            })
+            .join(", ");
         const itemTotalPrice = item.cartUnitPrice * item.quantity;
+        const requestContent = (
+          <>
+            <b> Note: </b> <em>`${item.requestContent}</em>
+          </>
+        );
 
         return (
-          <div>
-            <br />
-            <tr key={item.title}>
-              <td>
+          <tr key={item.title}>
+            <td>
+              <div>
+                <h4>
+                  🍱
+                  <b>
+                    {" "}
+                    ({item.quantity}) {itemSize} {item.title}
+                  </b>
+                </h4>
+              </div>
+              <div> &emsp; {itemOptions} </div>
+              <br />
+              <br />
+              <div>
+                &emsp;
+                {item.requestContent === "" ? null : requestContent}
+              </div>
+              <div>
+                <div> &emsp; QTY: {item.quantity}</div>
                 <div>
-                  <h4>
-                    ➖<b> {item.title} </b>
-                  </h4>
+                  {formatter.format(item.cartUnitPrice)} (x{item.quantity}) ={" "}
+                  {formatter.format(itemTotalPrice)}
                 </div>
-                <div> &emsp; {itemOptions} </div>
-                <div>
-                  &emsp;
-                  {item.requestContent === ""
-                    ? null
-                    : `> ${item.requestContent}`}
-                </div>
-                <div>
-                  <div> &emsp; QTY: {item.quantity}</div>
-                  <div>
-                    {formatter.format(item.cartUnitPrice)} ( x {item.quantity} )
-                    = {formatter.format(itemTotalPrice)}
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <br />
-          </div>
+              </div>
+            </td>
+          </tr>
         );
       })}
     </div>
@@ -221,34 +255,42 @@ const MyEmail = ({order}) => {
               </th>
             </tr>
             {filledCart}
-            {orderRequests && (
-              <strong> Customer's requests for the order: </strong>
-            )}
-            <br />
-            {orderRequests}
-            <br />
-            <div>
-              <div
-                style={{
-                  width: "100%",
-                  height: "1px",
-                  marginLeft: "-1px",
-                  marginBottom: "8px",
-                  background: "black",
-                }}
-              ></div>
-              <strong> Subtotal:</strong> {formatter.format(subtotal)}
-              <br /> <strong> Taxes (6%): </strong> {formatter.format(taxes)}
-              <br />
-              <br />
-              <div style={{marginBottom: "-50px"}}>
-                <b> Total</b>
-              </div>
-              <h2>
-                <br /> {formatter.format(total)}
-              </h2>
-              <br />
-            </div>
+
+            <tr>
+              <td>
+                <div>
+                  <br />
+                  <br />
+                  {orderRequests && (
+                    <strong> Customer's requests for the order: </strong>
+                  )}
+                  <br />
+                  {orderRequests}
+                  <br />
+                  <div
+                    style={{
+                      width: "100%",
+                      height: "1px",
+                      marginLeft: "-1px",
+                      marginBottom: "8px",
+                      background: "black",
+                    }}
+                  ></div>
+                  <strong> Subtotal:</strong> {formatter.format(subtotal)}
+                  <br /> <strong> Taxes (6%): </strong>{" "}
+                  {formatter.format(taxes)}
+                  <br />
+                  <br />
+                  <div>
+                    <b> Total</b>
+                  </div>
+                  <div style={{fontSize: "2rem", fontWeight: "800"}}>
+                    {formatter.format(total)}
+                  </div>
+                  <br />
+                </div>
+              </td>
+            </tr>
           </table>
           <br />
           <br />
