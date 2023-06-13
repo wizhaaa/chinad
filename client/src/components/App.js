@@ -1,15 +1,8 @@
 // react library
-import React, {useState} from "react";
-import {BrowserRouter as Router, Route, Switch, Link} from "react-router-dom";
+import React from "react";
+import {BrowserRouter as Router} from "react-router-dom";
 // material-ui library
-import {
-  makeStyles,
-  ThemeProvider,
-  CssBaseline,
-  Container,
-  useMediaQuery,
-  createMuiTheme,
-} from "@material-ui/core/";
+import {makeStyles, ThemeProvider, CssBaseline} from "@material-ui/core/";
 
 //helmet & meta tags
 import {Helmet} from "react-helmet";
@@ -46,16 +39,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function App() {
-  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
-  // const theme = React.useMemo(
-  //   () =>
-  //     createMuiTheme({
-  //       palette: {
-  //         type: prefersDarkMode ? "dark" : "light",
-  //       },
-  //     }),
-  //   [prefersDarkMode]
-  // );
   const classes = useStyles();
 
   return (

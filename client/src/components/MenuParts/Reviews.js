@@ -1,12 +1,5 @@
-import React, { useState } from "react";
-import {
-  SentimentVeryDissatisfied as SentimentVeryDissatisfiedIcon,
-  SentimentDissatisfied as SentimentDissatisfiedIcon,
-  SentimentSatisfied as SentimentSatisfiedIcon,
-  SentimentSatisfiedAlt as SentimentSatisfiedAltIcon,
-  SentimentVerySatisfied as SentimentVerySatisfiedIcon,
-  Favorite as FavoriteIcon,
-} from "@material-ui/icons";
+import React, {useState} from "react";
+import {Favorite as FavoriteIcon} from "@material-ui/icons";
 import {
   Box,
   Button,
@@ -18,10 +11,9 @@ import {
   Snackbar,
 } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
-import PropTypes from "prop-types";
 import Pagination from "@material-ui/lab/Pagination";
 import MuiAlert from "@material-ui/lab/Alert";
-import { AlertTitle } from "@material-ui/lab";
+import {AlertTitle} from "@material-ui/lab";
 
 import api from "../api";
 
@@ -30,7 +22,7 @@ function Alert(props) {
 }
 
 const useStyles = makeStyles((theme) => ({
-  root: { margin: 10 },
+  root: {margin: 10},
   gridPadding: {
     padding: 15,
   },
@@ -70,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular,
   },
-  divider: { margin: theme.spacing(3) },
+  divider: {margin: theme.spacing(3)},
   selectedValue: {
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular,
@@ -102,7 +94,7 @@ const StyledRating = withStyles({
 
 const Review = React.memo((props) => {
   const classes = useStyles();
-  const { title, reviews, category } = props;
+  const {title, reviews, category} = props;
   const [reviewed, setReviewed] = useLocalStorage("reviewed", false);
 
   // handling alerts
@@ -169,19 +161,19 @@ const Review = React.memo((props) => {
   const handleReviewChange = (e) => {
     var text = e.target.value;
     setNewReview((prev) => {
-      return { ...prev, reviewContent: text };
+      return {...prev, reviewContent: text};
     });
   };
   const handleNameChange = (e) => {
     var text = e.target.value;
     setNewReview((prev) => {
-      return { ...prev, name: text };
+      return {...prev, name: text};
     });
   };
   const handleRatingChange = (e) => {
     var rating = e.target.value;
     setNewReview((prev) => {
-      return { ...prev, rating: rating };
+      return {...prev, rating: rating};
     });
   };
 
@@ -219,7 +211,7 @@ const Review = React.memo((props) => {
         />
         <Box py={1}> </Box>
         <TextField
-          style={{ width: "100%" }}
+          style={{width: "100%"}}
           id="outlined-textarea"
           label="your name"
           placeholder="Sun Tzu"
@@ -227,14 +219,14 @@ const Review = React.memo((props) => {
           rowsMax={1}
           multiline
           variant="outlined"
-          InputLabelProps={{ shrink: true }}
-          inputProps={{ maxLength: 250 }}
+          InputLabelProps={{shrink: true}}
+          inputProps={{maxLength: 250}}
           required
           value={newReview.name}
           onChange={handleNameChange}
         />{" "}
         <TextField
-          style={{ width: "100%" }}
+          style={{width: "100%"}}
           id="outlined-textarea"
           label="review this item!"
           placeholder="Love this dish! Very spicy so beware!"
@@ -242,8 +234,8 @@ const Review = React.memo((props) => {
           rowsMax={4}
           multiline
           variant="outlined"
-          inputProps={{ maxLength: 250 }}
-          InputLabelProps={{ shrink: true }}
+          inputProps={{maxLength: 250}}
+          InputLabelProps={{shrink: true}}
           required
           value={newReview.reviewContent}
           onChange={handleReviewChange}
@@ -259,7 +251,7 @@ const Review = React.memo((props) => {
   return (
     <Typography gutterBottom>
       <div display="flex" justifyContent="space-evenly" alignItems="center">
-        <span style={{ paddingBottom: 10, paddingRight: 10 }}>
+        <span style={{paddingBottom: 10, paddingRight: 10}}>
           <StyledRating
             name="customized-color"
             value={itemAverageRating}
@@ -292,7 +284,7 @@ const Review = React.memo((props) => {
           />
           <Box py={1}> </Box>
           <TextField
-            style={{ width: "100%" }}
+            style={{width: "100%"}}
             id="outlined-textarea"
             label="Your name:"
             placeholder="Sun Tzu"
@@ -300,14 +292,14 @@ const Review = React.memo((props) => {
             rowsMax={1}
             multiline
             variant="outlined"
-            InputLabelProps={{ shrink: true }}
-            inputProps={{ maxLength: 250 }}
+            InputLabelProps={{shrink: true}}
+            inputProps={{maxLength: 250}}
             required
             value={newReview.name}
             onChange={handleNameChange}
           />{" "}
           <TextField
-            style={{ width: "100%" }}
+            style={{width: "100%"}}
             id="outlined-textarea"
             label="Your review:"
             placeholder="Love this dish! Very spicy so beware!"
@@ -315,8 +307,8 @@ const Review = React.memo((props) => {
             rowsMax={4}
             multiline
             variant="outlined"
-            inputProps={{ maxLength: 250 }}
-            InputLabelProps={{ shrink: true }}
+            inputProps={{maxLength: 250}}
+            InputLabelProps={{shrink: true}}
             required
             value={newReview.reviewContent}
             onChange={handleReviewChange}

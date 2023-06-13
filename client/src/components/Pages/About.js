@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 
-import { withStyles, makeStyles } from "@material-ui/core/styles";
+import {withStyles, makeStyles} from "@material-ui/core/styles";
 import {
   Typography,
   Box,
@@ -14,14 +14,10 @@ import {
   TableHead,
   TableRow,
   Paper,
-  Divider,
 } from "@material-ui/core";
-import {
-  ExpandMore as ExpandMoreIcon,
-  Launch as LaunchIcon,
-} from "@material-ui/icons";
+import {ExpandMore as ExpandMoreIcon} from "@material-ui/icons";
 
-import { ingredients, pricing, orderTimes } from "../Data/AboutData";
+import {ingredients, pricing} from "../Data/AboutData";
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -93,29 +89,6 @@ function About() {
                 {item.name}
               </StyledTableCell>
               <StyledTableCell align="right">{item.cost}</StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-  );
-
-  const orderTimesTable = (
-    <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell> Item </StyledTableCell>
-            <StyledTableCell align="right"> Estimated Times </StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {orderTimes.map((item) => (
-            <StyledTableRow key={item.name}>
-              <StyledTableCell component="th" scope="row">
-                {item.name}
-              </StyledTableCell>
-              <StyledTableCell align="right">{item.time}</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>

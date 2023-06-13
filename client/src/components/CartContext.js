@@ -1,6 +1,4 @@
-import {WatchRounded} from "@material-ui/icons";
 import React, {useContext, useState} from "react";
-import Cart from "./Pages/Cart";
 
 // a react context provider
 // place the main export (<CartProvider>) wrapping around all children React Components.

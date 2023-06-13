@@ -1,14 +1,8 @@
-import { React, useState } from "react";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import {React, useState} from "react";
+import {Link} from "react-router-dom";
 
 import {
-  Add as AddIcon,
   Menu as MenuIcon,
-  ShoppingCart as ShoppingCartIcon,
-  Home as HomeIcon,
-  Info as InfoIcon,
-  RestaurantMenu as RestaurantMenuIcon,
-  Close as CloseIcon,
   ShoppingBasket as ShoppingBasketIcon,
 } from "@material-ui/icons";
 
@@ -29,22 +23,22 @@ import {
   Badge,
 } from "@material-ui/core";
 
-import { useTheme } from "@material-ui/core/styles";
+import {useTheme} from "@material-ui/core/styles";
 
-import { topList, menuList } from "./Data/NavList";
+import {topList, menuList} from "./Data/NavList";
 
-import { useCartContext } from "./CartContext";
+import {useCartContext} from "./CartContext";
 
 //styling
 import useStyles from "./MaterialStyles";
 
 function ResponsiveDrawer(props) {
-  const { window } = props;
+  const {window} = props;
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const { userCartCount } = useCartContext();
+  const {userCartCount} = useCartContext();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -59,7 +53,7 @@ function ResponsiveDrawer(props) {
 
       <List>
         {topList.map((item, index) => {
-          const { text, icon, routeTo } = item;
+          const {text, icon, routeTo} = item;
 
           return (
             <Link key={text} className={classes.navLinks} to={routeTo}>
@@ -75,7 +69,7 @@ function ResponsiveDrawer(props) {
       <Divider />
       <List>
         {menuList.map((item, index) => {
-          const { text, icon, routeTo } = item;
+          const {text, icon, routeTo} = item;
           return (
             <Link key={text} className={classes.navLinks} to={routeTo}>
               {" "}
@@ -128,7 +122,7 @@ function ResponsiveDrawer(props) {
             </IconButton>
           </Link>
         </Toolbar>
-      </AppBar> 
+      </AppBar>
       <nav className={classes.drawer} aria-label="mailbox folders">
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
 

@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from "react";
+import React, {useEffect, useRef} from "react";
 
 import {useCartContext} from "../CartContext";
 
@@ -12,7 +12,6 @@ const Paypal = (props) => {
     setBackdrop,
     handleClose,
     order,
-    setPaymentMethod,
     setFinalPage,
     setPaymentPage,
   } = props;
@@ -24,13 +23,8 @@ const Paypal = (props) => {
     maximumFractionDigits: 2,
   });
   const paypal = useRef();
-  const [paidFor, setPaidFor] = useState(false);
-  console.log(typeof orderTotal);
   let paypalTotal = orderTotal;
   paypalTotal = formatter.format(paypalTotal + 1.15);
-  console.log("new total is : ", paypalTotal);
-
-  console.log(paypalTotal);
 
   const handlePlaceOrder = () => {
     order["amountPaid"] = paypalTotal;
@@ -79,7 +73,7 @@ const Paypal = (props) => {
         },
         onError: (err) => {
           console.log(err);
-          alert("Sorry, something went wrong...");
+          alert("Sorry, looks like something went wrong. Please try again.");
         },
       })
       .render(paypal.current);
@@ -87,7 +81,6 @@ const Paypal = (props) => {
 
   return (
     <div>
-      {" "}
       {orderPaid ? null : (
         <div>
           <div ref={paypal}></div>

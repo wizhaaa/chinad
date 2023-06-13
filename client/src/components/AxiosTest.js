@@ -1,25 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import axios from "axios";
 
-import { Button as ButtonIcon, Delete as DeleteIcon } from "@material-ui/icons";
 import {
-  IconButton,
-  Button,
   Typography,
   Box,
   Table,
-  TableBody,
   TableCell,
   TableContainer,
-  TableHead,
   TableRow,
   Paper,
-  makeStyles,
 } from "@material-ui/core";
 
 const AxiosTest = () => {
   const [body, setBody] = useState("initial body");
-  const [mydata, setmydata] = useState("initial data");
 
   const [cart, setCart] = useState([]);
 
@@ -89,11 +82,11 @@ const AxiosTest = () => {
                 <TableRow key={item.title}>
                   <TableCell>
                     <Typography> 🍱 {item.title} </Typography>
-                    <Typography style={{ color: "#d1d1d1" }} variant="body2">
+                    <Typography style={{color: "#d1d1d1"}} variant="body2">
                       {" "}
                       🥠 {itemOptions}{" "}
                     </Typography>{" "}
-                    <Typography style={{ color: "#d1d1d1" }} variant="body2">
+                    <Typography style={{color: "#d1d1d1"}} variant="body2">
                       {" "}
                       👩‍🍳 requests? {item.textFieldValue}{" "}
                     </Typography>

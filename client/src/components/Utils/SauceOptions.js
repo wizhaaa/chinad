@@ -1,14 +1,20 @@
-import { React, useState } from "react"; 
+import {React} from "react";
+import {ExpandMore as ExpandMoreIcon} from "@material-ui/icons";
 import {
-  ExpandMore as ExpandMoreIcon,
-} from "@material-ui/icons";
-import {
-  Accordion, AccordionDetails, AccordionSummary, Typography, FormControl, FormLabel,
-  FormControlLabel, Radio, RadioGroup, makeStyles
-} from "@material-ui/core"
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Typography,
+  FormControl,
+  FormLabel,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
+  makeStyles,
+} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
-  root: { margin: 10 },
+  root: {margin: 10},
   gridPadding: {
     padding: 15,
   },
@@ -48,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular,
   },
-  divider: { margin: theme.spacing(3) },
+  divider: {margin: theme.spacing(3)},
   selectedValue: {
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular,
@@ -71,57 +77,54 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SauceOptions = (props) => {
-  const { sauceValue, handleSauceChange } = props;
+  const {sauceValue, handleSauceChange} = props;
   const classes = useStyles();
-  
-
 
   return (
-      <div>
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography className={classes.heading}>Sauce: </Typography>
-            <Typography className={classes.selectedValue}>
-              {sauceValue}
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              <FormControl component="fieldset">
-                <FormLabel component="legend"> Select one: </FormLabel>
-                <RadioGroup
-                  aria-label="style"
-                  name="style"
-                  value={sauceValue}
-                  onChange={handleSauceChange}
-                >
-                  <FormControlLabel
-                    value="Brown Sauce"
-                    control={<Radio />}
-                    label="Brown Sauce"
-                  />
-                  <FormControlLabel
-                    value="White Sauce "
-                    control={<Radio />}
-                    label="White Sauce"
+    <div>
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography className={classes.heading}>Sauce: </Typography>
+          <Typography className={classes.selectedValue}>
+            {sauceValue}
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+            <FormControl component="fieldset">
+              <FormLabel component="legend"> Select one: </FormLabel>
+              <RadioGroup
+                aria-label="style"
+                name="style"
+                value={sauceValue}
+                onChange={handleSauceChange}
+              >
+                <FormControlLabel
+                  value="Brown Sauce"
+                  control={<Radio />}
+                  label="Brown Sauce"
                 />
                 <FormControlLabel
-                    value="No Sauce "
-                    control={<Radio />}
-                    label="No Sauce"
-                  />
-                </RadioGroup>
-              </FormControl>{" "}
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
-      </div>
+                  value="White Sauce "
+                  control={<Radio />}
+                  label="White Sauce"
+                />
+                <FormControlLabel
+                  value="No Sauce "
+                  control={<Radio />}
+                  label="No Sauce"
+                />
+              </RadioGroup>
+            </FormControl>
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
+    </div>
   );
-  
-}
- 
-export default SauceOptions
+};
+
+export default SauceOptions;

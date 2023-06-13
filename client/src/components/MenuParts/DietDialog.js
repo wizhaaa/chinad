@@ -1,5 +1,5 @@
-import { React, useState } from "react";
-import { useTheme } from "@material-ui/core/styles";
+import {React, useState} from "react";
+import {useTheme} from "@material-ui/core/styles";
 import {
   Add as AddIcon,
   Close as CloseIcon,
@@ -33,11 +33,11 @@ import {
   Divider,
 } from "@material-ui/core";
 
-import { useCartContext } from "../CartContext";
+import {useCartContext} from "../CartContext";
 import Review from "./Reviews";
 
 const useStyles = makeStyles((theme) => ({
-  root: { margin: 10 },
+  root: {margin: 10},
   gridPadding: {
     padding: 15,
   },
@@ -77,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular,
   },
-  divider: { margin: theme.spacing(3) },
+  divider: {margin: theme.spacing(3)},
   selectedValue: {
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular,
@@ -126,7 +126,7 @@ const DietDialog = (props) => {
   const [ricePrice, setRicePrice] = useState(0);
 
   const [requestContent, setRequestContent] = useState("");
-  const { cart, setCart, addNewItem } = useCartContext();
+  const {addNewItem} = useCartContext();
 
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
@@ -140,7 +140,7 @@ const DietDialog = (props) => {
     onAdd();
     const type = "Diet";
     let options = {};
-    options = { type, riceValue };
+    options = {type, riceValue};
     let cartUnitPrice = finalPrice + ricePrice;
 
     const newItem = {
@@ -277,15 +277,15 @@ const DietDialog = (props) => {
         aria-labelledby="responsive-dialog-title"
         fullWidth="sm"
         maxWidth="md"
-        classes={{ paper: classes.dialogWrapper }}
+        classes={{paper: classes.dialogWrapper}}
       >
         <DialogTitle
           id="responsive-dialog-title"
           className={classes.dialogTitle}
         >
-          <div style={{ display: "flex" }}>
+          <div style={{display: "flex"}}>
             {" "}
-            <Typography variant="h6" style={{ flexGrow: 1 }}>
+            <Typography variant="h6" style={{flexGrow: 1}}>
               {title}{" "}
             </Typography>{" "}
             <IconButton color="primary" onClick={handleClose}>
@@ -312,7 +312,7 @@ const DietDialog = (props) => {
                 {" "}
                 <Box m={3} className={classes.textFields}>
                   <TextField
-                    style={{ width: "100%" }}
+                    style={{width: "100%"}}
                     id="outlined-textarea"
                     label="any special requests?"
                     placeholder="we will try out best to accomodate your needs"
@@ -320,7 +320,7 @@ const DietDialog = (props) => {
                     rowsMax={8}
                     multiline
                     variant="outlined"
-                    inputProps={{ maxLength: 250 }}
+                    inputProps={{maxLength: 250}}
                     value={requestContent}
                     onChange={handleRequestContentChange}
                   />{" "}

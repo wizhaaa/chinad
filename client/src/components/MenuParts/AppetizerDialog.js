@@ -1,5 +1,5 @@
-import { React, useState } from "react";
-import { useTheme } from "@material-ui/core/styles";
+import {React, useState} from "react";
+import {useTheme} from "@material-ui/core/styles";
 import {
   Add as AddIcon,
   Close as CloseIcon,
@@ -35,10 +35,10 @@ import {
 
 import Review from "./Reviews";
 
-import { useCartContext } from "../CartContext";
+import {useCartContext} from "../CartContext";
 
 const useStyles = makeStyles((theme) => ({
-  root: { margin: 10 },
+  root: {margin: 10},
   gridPadding: {
     padding: 15,
   },
@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular,
   },
-  divider: { margin: theme.spacing(3) },
+  divider: {margin: theme.spacing(3)},
   selectedValue: {
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular,
@@ -101,18 +101,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const AppetizerDialog = (props) => {
-  const {
-    onClose,
-    open,
-    onAdd,
-    title,
-    description,
-    img,
-    price,
-    priceSm,
-    priceLg,
-    reviews,
-  } = props;
+  const {onClose, open, onAdd, title, description, img, price, reviews} = props;
 
   const [styleValue, setStyleValue] = useState("Fried");
   const [fillingValue, setFillingValue] = useState("Pork");
@@ -124,7 +113,7 @@ const AppetizerDialog = (props) => {
   const [requestContent, setRequestContent] = useState("");
 
   // context cart
-  const { cart, setCart, addNewItem } = useCartContext();
+  const {addNewItem} = useCartContext();
 
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
@@ -139,9 +128,9 @@ const AppetizerDialog = (props) => {
     const type = "Appetizer";
     let options = {};
     if (title === "Dumplings") {
-      options = { type, styleValue, fillingValue };
+      options = {type, styleValue, fillingValue};
     } else {
-      options = { type };
+      options = {type};
     }
 
     const newItem = {
@@ -326,15 +315,15 @@ const AppetizerDialog = (props) => {
         aria-labelledby="responsive-dialog-title"
         fullWidth="sm"
         maxWidth="md"
-        classes={{ paper: classes.dialogWrapper }}
+        classes={{paper: classes.dialogWrapper}}
       >
         <DialogTitle
           id="responsive-dialog-title"
           className={classes.dialogTitle}
         >
-          <div style={{ display: "flex" }}>
+          <div style={{display: "flex"}}>
             {" "}
-            <Typography variant="h6" style={{ flexGrow: 1 }}>
+            <Typography variant="h6" style={{flexGrow: 1}}>
               {title}{" "}
             </Typography>{" "}
             <IconButton color="primary" onClick={handleClose}>
@@ -365,7 +354,7 @@ const AppetizerDialog = (props) => {
                 {" "}
                 <Box m={3} className={classes.textFields}>
                   <TextField
-                    style={{ width: "100%" }}
+                    style={{width: "100%"}}
                     id="outlined-textarea"
                     label="any special requests?"
                     placeholder="we will try our best to accomodate your needs"
@@ -373,7 +362,7 @@ const AppetizerDialog = (props) => {
                     rowsMax={8}
                     multiline
                     variant="outlined"
-                    inputProps={{ maxLength: 250 }}
+                    inputProps={{maxLength: 250}}
                     value={requestContent}
                     onChange={handleTextFieldChange}
                   />{" "}

@@ -1,5 +1,5 @@
-import { React, useState } from "react";
-import { useTheme } from "@material-ui/core/styles";
+import {React, useState} from "react";
+import {useTheme} from "@material-ui/core/styles";
 import {
   Add as AddIcon,
   Close as CloseIcon,
@@ -33,12 +33,12 @@ import {
   Divider,
 } from "@material-ui/core";
 
-import { useCartContext } from "../CartContext";
+import {useCartContext} from "../CartContext";
 import Review from "./Reviews";
 import SauceOptions from "../Utils/SauceOptions";
 
 const useStyles = makeStyles((theme) => ({
-  root: { margin: 10 },
+  root: {margin: 10},
   gridPadding: {
     padding: 15,
   },
@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular,
   },
-  divider: { margin: theme.spacing(3) },
+  divider: {margin: theme.spacing(3)},
   selectedValue: {
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular,
@@ -121,7 +121,6 @@ const SeafoodDialog = (props) => {
     initialPrice = price;
   }
   const [sizeValue, setSizeValue] = useState("Pint");
-  const [meatValue, setMeatValue] = useState("Chicken");
   const [quantity, setQuantity] = useState(1);
   const [finalPrice, setFinalPrice] = useState(initialPrice);
   const [ricePrice, setRicePrice] = useState(0);
@@ -129,7 +128,7 @@ const SeafoodDialog = (props) => {
   const [sauceValue, setSauceValue] = useState("White Sauce");
 
   const [requestContent, setRequestContent] = useState("");
-  const { cart, setCart, addNewItem } = useCartContext();
+  const {addNewItem} = useCartContext();
 
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
@@ -143,17 +142,20 @@ const SeafoodDialog = (props) => {
     onAdd();
     const type = "Entree";
     let options = {};
-    if (price === null && (title === "Shrimp w. Broccoli"
-      || title === "Shrimp w. Mixed Vegetables")) {
-      options = { type, sizeValue, riceValue, sauceValue }
-    }
-    else if (price === null) {
-      options = { type, sizeValue, riceValue };
-    } else if (title === "Shrimp w. Broccoli"
-      || title === "Shrimp w. Mixed Vegetables") {
-      options = { type, riceValue, sauceValue }
+    if (
+      price === null &&
+      (title === "Shrimp w. Broccoli" || title === "Shrimp w. Mixed Vegetables")
+    ) {
+      options = {type, sizeValue, riceValue, sauceValue};
+    } else if (price === null) {
+      options = {type, sizeValue, riceValue};
+    } else if (
+      title === "Shrimp w. Broccoli" ||
+      title === "Shrimp w. Mixed Vegetables"
+    ) {
+      options = {type, riceValue, sauceValue};
     } else {
-      options = { type, riceValue };
+      options = {type, riceValue};
     }
 
     let cartUnitPrice = finalPrice + ricePrice;
@@ -202,10 +204,10 @@ const SeafoodDialog = (props) => {
     }
   };
 
-  const handleSauceChange = (e) => { 
-    const sauceChosen = e.target.value
-    setSauceValue(sauceChosen)
-  }
+  const handleSauceChange = (e) => {
+    const sauceChosen = e.target.value;
+    setSauceValue(sauceChosen);
+  };
 
   const handleQuantityChange = (e) => {
     setQuantity(e.target.value);
@@ -311,15 +313,15 @@ const SeafoodDialog = (props) => {
         aria-labelledby="responsive-dialog-title"
         fullWidth="sm"
         maxWidth="md"
-        classes={{ paper: classes.dialogWrapper }}
+        classes={{paper: classes.dialogWrapper}}
       >
         <DialogTitle
           id="responsive-dialog-title"
           className={classes.dialogTitle}
         >
-          <div style={{ display: "flex" }}>
+          <div style={{display: "flex"}}>
             {" "}
-            <Typography variant="h6" style={{ flexGrow: 1 }}>
+            <Typography variant="h6" style={{flexGrow: 1}}>
               {title}{" "}
             </Typography>{" "}
             <IconButton color="primary" onClick={handleClose}>
@@ -342,14 +344,18 @@ const SeafoodDialog = (props) => {
                 {price === null ? sizeOptions : null}
                 {riceOptions}
                 {title === "Shrimp w. Broccoli" ||
-                  title === "Shrimp w. Mixed Vegetables" ?
-                  <SauceOptions sauceValue={sauceValue}
-                  handleSauceChange={handleSauceChange} /> : null}              </Grid>
+                title === "Shrimp w. Mixed Vegetables" ? (
+                  <SauceOptions
+                    sauceValue={sauceValue}
+                    handleSauceChange={handleSauceChange}
+                  />
+                ) : null}{" "}
+              </Grid>
               <Grid item xs={12}>
                 {" "}
                 <Box m={3} className={classes.textFields}>
                   <TextField
-                    style={{ width: "100%" }}
+                    style={{width: "100%"}}
                     id="outlined-textarea"
                     label="any special requests?"
                     placeholder="we will try out best to accomodate your needs"
@@ -357,7 +363,7 @@ const SeafoodDialog = (props) => {
                     rowsMax={8}
                     multiline
                     variant="outlined"
-                    inputProps={{ maxLength: 250 }}
+                    inputProps={{maxLength: 250}}
                     value={requestContent}
                     onChange={handleRequestContentChange}
                   />{" "}

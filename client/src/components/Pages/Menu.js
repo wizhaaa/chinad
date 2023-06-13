@@ -1,17 +1,13 @@
-import React, {useState, useContext} from "react";
+import React from "react";
 import {
   Typography,
   Box,
-  Grid,
   makeStyles,
   Divider,
   Fab,
   Button,
 } from "@material-ui/core";
-import {
-  Launch as LaunchIcon,
-  ArrowUpward as ArrowUpwardIcon,
-} from "@material-ui/icons";
+import {ArrowUpward as ArrowUpwardIcon} from "@material-ui/icons";
 
 import LunchSpecials from "../MenuPages/LunchSpecials";
 import Soups from "../MenuPages/Soups";
@@ -168,16 +164,14 @@ function Menu() {
           <Button>
             {" "}
             <a href="#diet"> Diet </a>{" "}
-          </Button>{" "}
+          </Button>
           <Button>
-            {" "}
             <a href="#side"> Sides </a>{" "}
           </Button>
           <div className="toTop">
             <Fab className="toTop" color="primary" href="#top">
-              {" "}
-              <ArrowUpwardIcon />{" "}
-            </Fab>{" "}
+              <ArrowUpwardIcon />
+            </Fab>
           </div>
           <div id="lunch"> </div>
           <Divider className={classes.divider} />

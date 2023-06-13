@@ -17,8 +17,6 @@ import {AccountCircle, CalendarToday} from "@material-ui/icons";
 // context provider
 import {useCartContext} from "../CartContext";
 
-import CheckoutDialog from "./CheckoutDialog";
-
 const tableStyles = makeStyles((theme) => ({
   table: {
     maxWidth: 650,
@@ -34,7 +32,7 @@ const formatter = new Intl.NumberFormat("en-US", {
 function Confirmation() {
   const tableClasses = tableStyles();
 
-  const {prevOrder, orderPaid} = useCartContext();
+  const {prevOrder} = useCartContext();
 
   const cart = prevOrder.cart;
   const name = prevOrder.name;
@@ -57,12 +55,6 @@ function Confirmation() {
 
   const paymentMethod = prevOrder.paymentMethod;
   const amountPaid = prevOrder.amountPaid;
-
-  const [open, setOpen] = React.useState(false);
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   var subt1 = 0;
   cart.forEach((item) => (subt1 = subt1 + item.cartUnitPrice * item.quantity));
