@@ -7,7 +7,6 @@ import {
   Select,
   MenuItem,
   FormControl,
-  InputLabel,
 } from "@material-ui/core";
 
 import {ViewWeek, CalendarToday, QueryBuilder} from "@material-ui/icons";
@@ -384,27 +383,6 @@ function Graph() {
       "Nov",
       "Dec",
     ];
-    const monthsLabel = [
-      "J",
-      "F",
-      "M",
-      "A",
-      "M",
-      "J",
-      "J",
-      "A",
-      "S",
-      "O",
-      "N",
-      "D",
-    ];
-
-    const minVal =
-      Math.min(...months.map((month) => allStats[stat][year].months[month])) *
-      0.8;
-    const maxVal =
-      Math.max(...months.map((month) => allStats[stat][year].months[month])) -
-      minVal;
 
     const row = (month, i) => {
       const monthVal = allStats[stat][year].months[month];
@@ -495,6 +473,7 @@ function Graph() {
             fontSize: "1.5rem",
             fontWeight: "700",
             textAlign: "start",
+            padding: "10px",
           }}
         >
           <CalendarToday

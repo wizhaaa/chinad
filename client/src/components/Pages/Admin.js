@@ -12,8 +12,6 @@ function Admin() {
   const [allStats, setAllStats] = useState({});
   const [loaded, setLoaded] = useState(false);
 
-  const [year, setYear] = useState("y2022");
-
   const getOnlineStatus = async () => {
     const res = await api.get("/api/online");
     setStatus(res.data);

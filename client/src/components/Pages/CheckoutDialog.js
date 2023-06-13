@@ -224,8 +224,8 @@ const CheckoutDialog = (props) => {
     onClose();
   };
 
-  const addOrder = (newOrder) => {
-    api.post("/api/order/add", newOrder).catch((err) => console.log(err));
+  const addOrder = async (newOrder) => {
+    await api.post("/api/order/add", newOrder).catch((err) => console.log(err));
   };
 
   const sendEmail = async () => {
@@ -242,15 +242,17 @@ const CheckoutDialog = (props) => {
     }
   };
 
-  const handlePlaceOrder = (e) => {
+  const handlePlaceOrder = async (e) => {
     if (Object.keys(cart).length <= 0) {
       setEmptyAlert(true);
     } else {
+      handleClose();
+      setBackdrop(true);
       console.log("placing order ...");
-      addOrder(order);
+      await addOrder(order);
       window.localStorage.setItem("order", JSON.stringify(order));
       console.log("order added to DB ...");
-      sendEmail();
+      await sendEmail();
       console.log("sent email ...");
       // redirect
       // window.location.href = "/"
