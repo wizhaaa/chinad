@@ -183,7 +183,7 @@ const MyEmail = ({order}) => {
         const itemTotalPrice = item.cartUnitPrice * item.quantity;
         const requestContent = (
           <>
-            <b> Note: </b> <em>`${item.requestContent}</em>
+            <b> Note: </b> <em>{item.requestContent}</em>
           </>
         );
 
