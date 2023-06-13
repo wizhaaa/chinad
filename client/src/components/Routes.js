@@ -30,6 +30,7 @@ import Side from "./MenuPages/Side";
 import AxiosTest from "./AxiosTest";
 import MyEmail from "./Pages/MyEmail";
 import Admin from "./Pages/Admin";
+import Graph from "./Utils/Graph";
 
 const Routes = () => {
   return (
@@ -122,6 +123,9 @@ const Routes = () => {
         </Route>
         <Route exact path="/admin">
           <Admin />
+        </Route>
+        <Route exact path="/graph">
+          <Graph />
         </Route>
       </Switch>
     </div>
