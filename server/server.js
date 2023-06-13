@@ -12,6 +12,12 @@ const PORT = process.env.SERVER_PORT;
 const DB_URI = process.env.SECRET_DB_URI;
 //const DB = "reactDB;
 
+// mongoDB Raw Connection
+const client = new MongoClient(DB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -53,6 +59,9 @@ app.use(router);
 import reviews from "./Routes/ReviewRoutes.js";
 app.use(reviews);
 
+import admin from "./Routes/Admin.js";
+app.use(admin);
+
 // email
 import nodemailer from "nodemailer";
 
@@ -84,8 +93,9 @@ app.post("/api/send", (req, res, next) => {
 
   var mail = {
     from: "China Delight",
-    to: `chinadelightmd@icloud.com, ${process.env.CHINA_DELIGHT_EMAIL}, ${email}`,
-    cc: `chinadelightnoreply@gmail.com`,
+    to: `${email}`,
+    // to: `chinadelightmd@icloud.com, ${process.env.CHINA_DELIGHT_EMAIL}, ${email}`,
+    // cc: `chinadelightnoreply@gmail.com`,
     subject: `China Delight Order for ${name}`,
     html: message,
   };
@@ -104,32 +114,13 @@ app.post("/api/send", (req, res, next) => {
 });
 
 // customer order schema and model
-
-let orderSchema = new mongoose.Schema({
-  name: String,
-  email: String,
-  phone: String,
-  pickUpOption: String,
-  pickUpTime: String,
-  cart: Array,
-  orderReqs: String,
-  total: Number,
-  timePlaced: String,
-  estimatedTime: String,
-});
-const Order = mongoose.model("Order", orderSchema);
-
-let onlineStatusSchema = new mongoose.Schema({
-  name: String,
-  online: Boolean,
-});
-const OnlineStatus = mongoose.model("utils", onlineStatusSchema);
+import {customerOrders, Util} from "./Models/Models.js";
 
 // Routes
 
 // read all our order documents
 app.get("/api/orders", async (req, res) => {
-  await Order.find({}, {__v: 0}, (err, docs) => {
+  await customerOrders.find({}, {__v: 0}, (err, docs) => {
     if (!err) {
       res.json(docs);
     } else {
@@ -140,11 +131,23 @@ app.get("/api/orders", async (req, res) => {
 
 // to add an order
 app.post("/api/order/add", async (req, res) => {
-  let order = new Order({...req.body});
-  await order.save((err, result) => {
+  const order = req.body;
+  const day = order.timePlaced.split(" ")[0];
+  const month = order.timePlaced.split(" ")[1];
+  const year = order.timePlaced.split(" ")[3];
+  const time = order.timePlaced.split(" ")[4];
+  let newOrder = new customerOrders({
+    ...req.body,
+    day,
+    month,
+    year,
+    time,
+    hour,
+  });
+  await newOrder.save((err, result) => {
     if (!err) {
-      delete result._doc.__v;
-      res.json(result._doc);
+      // delete result._doc.__v;
+      res.status(200).json(result._doc);
       console.log("order added to the database");
     } else {
       res.status(400).json({error: err});
@@ -154,67 +157,15 @@ app.post("/api/order/add", async (req, res) => {
 
 // fetch our matching order
 
-app.get("/api/orders/:orderID", async (req, res) => {
-  const id = String(req.params.orderID);
-  await Order.find({_id: req.params.orderID}, {__v: 0}, (err, docs) => {
-    if (!err) {
-      res.json(docs);
-    } else {
-      res.status(400).json({error: err});
-    }
-  });
-});
-
-// app.use(express.static(path.join(__dirname, "build")));
-// app.get("/*", (req, res) => {
-//   res.sendFile(path.join(__dirname, "build", "index.html"));
-// });
-
-app.get("/api/online", async (req, res) => {
-  await OnlineStatus.find({name: "Online Status"}, {__v: 0}, (err, docs) => {
-    if (!err) {
-      res.send(docs[0].online);
-    } else {
-      res.status(401).json({
-        msg: "Error fetching online status",
-      });
-    }
-  });
-});
-
-app.get("/api/status", async (req, res) => {
-  res.status(201).json({msg: "API IS LIVE"});
-});
-
-app.post("/api/online/off", async (req, res) => {
-  await OnlineStatus.findOneAndUpdate(
-    {name: "Online Status"},
-    {$set: {online: false}},
-    {new: true},
+app.get("/api/orders/find/:orderID", async (req, res) => {
+  await customerOrders.find(
+    {_id: req.params.orderID},
+    {__v: 0},
     (err, docs) => {
       if (!err) {
-        res.status(200).send(`Status updated to ${false}`);
+        res.json(docs);
       } else {
-        res.status(401).json({
-          msg: "Error fetching online status",
-        });
-      }
-    }
-  );
-});
-
-app.post("/api/online/on", async (req, res) => {
-  await OnlineStatus.findOneAndUpdate(
-    {name: "Online Status"},
-    {$set: {online: true}},
-    {new: true},
-    (err, docs) => {
-      if (!err) {
-        res.status(200).send(`Status updated to ${true}`);
-      } else {
-        res.status(401).json({
-          msg: "Error fetching online status",
-        });
+        res.status(400).json({error: err});
       }
     }
   );
@@ -222,6 +173,11 @@ app.post("/api/online/on", async (req, res) => {
 
 process.on("uncaughtException", function (err) {
   console.log(err);
+});
+
+// Status of the API.
+app.get("/api/status", async (req, res) => {
+  res.status(201).json({msg: "API IS LIVE"});
 });
 
 app.listen(PORT, () => {
