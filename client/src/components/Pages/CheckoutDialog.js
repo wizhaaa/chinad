@@ -1,16 +1,9 @@
-import {React, useEffect, useState} from "react";
+import {React, useState} from "react";
 import {useTheme} from "@material-ui/core/styles";
-import {
-  Add as AddIcon,
-  Close as CloseIcon,
-  ExpandMore as ExpandMoreIcon,
-  Launch as LaunchIcon,
-  TrainRounded,
-} from "@material-ui/icons";
+import {Close as CloseIcon} from "@material-ui/icons";
 import {
   Grid,
   Box,
-  Fab,
   Button,
   Typography,
   IconButton,
@@ -19,17 +12,10 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
   Radio,
   RadioGroup,
   FormControlLabel,
   FormControl,
-  FormLabel,
-  InputLabel,
-  MenuItem,
-  Select,
   TextField,
   useMediaQuery,
   makeStyles,
@@ -41,14 +27,11 @@ import {
 import MuiAlert from "@material-ui/lab/Alert";
 import {AlertTitle} from "@material-ui/lab";
 
-import {wrap} from "module";
 import {useCartContext} from "../CartContext";
 //email
 import MyEmail from "./MyEmail";
 import {renderEmail} from "react-html-email";
-import {Redirect} from "react-router";
 import api from "../api";
-import axios from "axios";
 import Paypal from "./Paypal";
 
 function Alert(props) {
@@ -175,7 +158,7 @@ const CheckoutDialog = (props) => {
     currTime.getHours() >= 16 &&
     currTime.getHours() < 20;
 
-  const offset = busy ? 60 * 60 * 1000 : 30 * 60 * 1000;
+  const offset = busy ? 60 * 60 * 1000 : 40 * 60 * 1000;
   const pickUpTime = new Date(currTime.getTime() + offset);
   // Convert the hours to 12-hour format
   var hours = pickUpTime.getHours();
@@ -191,6 +174,19 @@ const CheckoutDialog = (props) => {
     " " +
     amPm;
 
+  // Determine device type:
+  let userAgent = navigator.userAgent;
+  const mobileRegex =
+    /Andrio|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
+  const desktopRegex = /Chrome|Safari|Firefox|Edge|MSIE|Opera/i;
+
+  let deviceType = "desktop";
+  if (mobileRegex.test(userAgent)) {
+    deviceType = "mobile";
+  } else if (desktopRegex.test(userAgent)) {
+    deviceType = "desktop";
+  }
+
   if (pickUpOption === "ASAP") {
     order = {
       name: name,
@@ -204,6 +200,7 @@ const CheckoutDialog = (props) => {
       estimatedTime: pickUpTimeStr,
       paymentMethod: paymentMethod,
       amountPaid: amountPaid,
+      deviceType: deviceType,
     };
   } else {
     order = {
@@ -219,6 +216,7 @@ const CheckoutDialog = (props) => {
       estimatedTime: pickUpTimeStr,
       paymentMethod: paymentMethod,
       amountPaid: amountPaid,
+      deviceType: deviceType,
     };
   }
 
@@ -866,39 +864,3 @@ const CheckoutDialog = (props) => {
 };
 
 export default CheckoutDialog;
-
-function useLocalStorage(key, initialValue) {
-  // State to store our value
-  // Pass initial state function to useState so logic is only executed once
-  const [storedValue, setStoredValue] = useState(() => {
-    try {
-      // Get from local storage by key
-      const item = window.localStorage.getItem(key);
-      // Parse stored json or if none return initialValue
-      return item ? JSON.parse(item) : initialValue;
-    } catch (error) {
-      // If error also return initialValue
-      console.log(error);
-      return initialValue;
-    }
-  });
-
-  // Return a wrapped version of useState's setter function that ...
-  // ... persists the new value to localStorage.
-  const setValue = (value) => {
-    try {
-      // Allow value to be a function so we have same API as useState
-      const valueToStore =
-        value instanceof Function ? value(storedValue) : value;
-      // Save state
-      setStoredValue(valueToStore);
-      // Save to local storage
-      window.localStorage.setItem(key, JSON.stringify(valueToStore));
-    } catch (error) {
-      // A more advanced implementation would handle the error case
-      console.log(error);
-    }
-  };
-
-  return [storedValue, setValue];
-}
