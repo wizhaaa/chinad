@@ -3,7 +3,6 @@ dotenv.config();
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
-import path from "path";
 const app = express();
 
 import MongoClient from "mongodb";
@@ -93,9 +92,9 @@ app.post("/api/send", (req, res, next) => {
 
   var mail = {
     from: "China Delight",
-    to: `${email}`,
-    // to: `chinadelightmd@icloud.com, ${process.env.CHINA_DELIGHT_EMAIL}, ${email}`,
-    // cc: `chinadelightnoreply@gmail.com`,
+    // to: `${email}`,
+    to: `chinadelightmd@icloud.com, ${process.env.CHINA_DELIGHT_EMAIL}, ${email}`,
+    cc: `chinadelightmd@icloud.com`,
     subject: `China Delight Order for ${name}`,
     html: message,
   };
@@ -131,25 +130,29 @@ app.get("/api/orders", async (req, res) => {
 
 // to add an order
 app.post("/api/order/add", async (req, res) => {
+  console.log("Trying to add an order. ");
   const order = req.body;
+  console.log("Order is : ", order);
   const day = order.timePlaced.split(" ")[0];
   const month = order.timePlaced.split(" ")[1];
   const year = order.timePlaced.split(" ")[3];
   const time = order.timePlaced.split(" ")[4];
+  const hour = "h" + time.split(":")[0];
   let newOrder = new customerOrders({
     ...req.body,
     day,
     month,
     year,
-    time,
     hour,
   });
+  console.log("New order is : ", newOrder);
   await newOrder.save((err, result) => {
     if (!err) {
-      // delete result._doc.__v;
-      res.status(200).json(result._doc);
+      delete result._doc.__v;
       console.log("order added to the database");
+      res.status(200).json(result._doc);
     } else {
+      console.log("error adding order to the database");
       res.status(400).json({error: err});
     }
   });
