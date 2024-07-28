@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useTheme } from "@material-ui/core/styles";
+import React, {useState} from "react";
+import {useTheme} from "@material-ui/core/styles";
 import {
   Add as AddIcon,
   Close as CloseIcon,
@@ -33,11 +33,11 @@ import {
   Divider,
 } from "@material-ui/core";
 
-import { useCartContext } from "../CartContext";
+import {useCartContext} from "../CartContext";
 import Review from "./Reviews";
 
 const useStyles = makeStyles((theme) => ({
-  root: { margin: 10 },
+  root: {margin: 10},
   gridPadding: {
     padding: 15,
   },
@@ -77,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular,
   },
-  divider: { margin: theme.spacing(3) },
+  divider: {margin: theme.spacing(3)},
   selectedValue: {
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular,
@@ -100,18 +100,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const DinnerDialog = (props) => {
-  const {
-    onClose,
-    open,
-    onAdd,
-    title,
-    description,
-    img,
-    price,
-    priceSm,
-    priceLg,
-    reviews,
-  } = props;
+  const {onClose, open, onAdd, title, description, img, price, reviews} = props;
 
   const [riceValue, setRiceValue] = useState("White Rice");
   const [sideValue, setSideValue] = useState("None");
@@ -121,9 +110,7 @@ const DinnerDialog = (props) => {
   const [quantity, setQuantity] = useState(1);
   const [meatValue, setMeatValue] = useState("Chicken");
 
-  const [expanded, setExpanded] = useState(false);
-
-  const { cart, setCart, addNewItem } = useCartContext();
+  const {cart, setCart, addNewItem} = useCartContext();
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
   const classes = useStyles();
@@ -142,9 +129,9 @@ const DinnerDialog = (props) => {
       title === "Fried Rice" ||
       title === "Chow Mein"
     ) {
-      options = { type, meatValue, riceValue, sideValue };
+      options = {type, meatValue, riceValue, sideValue};
     } else {
-      options = { type, riceValue, sideValue };
+      options = {type, riceValue, sideValue};
     }
     let cartUnitPrice = finalPrice + addedPrice;
 
@@ -172,7 +159,7 @@ const DinnerDialog = (props) => {
     const sideChosen = e.target.value;
     setSideValue(sideChosen);
     if (!(sideChosen === "None")) {
-      setFinalPrice(price + 1);
+      setFinalPrice(price + 1.5);
     } else {
       setFinalPrice(price);
     }
@@ -291,15 +278,15 @@ const DinnerDialog = (props) => {
         aria-labelledby="responsive-dialog-title"
         fullWidth="sm"
         maxWidth="md"
-        classes={{ paper: classes.dialogWrapper }}
+        classes={{paper: classes.dialogWrapper}}
       >
         <DialogTitle
           id="responsive-dialog-title"
           className={classes.dialogTitle}
         >
-          <div style={{ display: "flex" }}>
+          <div style={{display: "flex"}}>
             {" "}
-            <Typography variant="h6" style={{ flexGrow: 1 }}>
+            <Typography variant="h6" style={{flexGrow: 1}}>
               {title}{" "}
             </Typography>{" "}
             <IconButton color="primary" onClick={handleClose}>
@@ -373,7 +360,7 @@ const DinnerDialog = (props) => {
                     id="panel1a-header"
                   >
                     <Typography className={classes.heading}>
-                      Soup? ( + $1 ) : {sideValue}
+                      Soup? (+$1.50) : {sideValue}
                     </Typography>
                     <Typography className={classes.selectedValue}></Typography>{" "}
                   </AccordionSummary>
@@ -422,7 +409,7 @@ const DinnerDialog = (props) => {
                 {" "}
                 <Box m={3} className={classes.textFields}>
                   <TextField
-                    style={{ width: "100%" }}
+                    style={{width: "100%"}}
                     id="outlined-textarea"
                     label="any special requests?"
                     placeholder="we will try out best to accomodate your needs"
@@ -430,7 +417,7 @@ const DinnerDialog = (props) => {
                     rowsMax={8}
                     multiline
                     variant="outlined"
-                    inputProps={{ maxLength: 250 }}
+                    inputProps={{maxLength: 250}}
                     value={requestContent}
                     onChange={handleTextFieldChange}
                   />{" "}
@@ -470,7 +457,7 @@ const DinnerDialog = (props) => {
             <FormControl variant="outlined" className={classes.formControl}>
               <InputLabel id="demo-simple-select-outlined-label">
                 {" "}
-                qty{" "}
+                QTY{" "}
               </InputLabel>
               <Select
                 labelId="demo-simple-select-outlined-label"

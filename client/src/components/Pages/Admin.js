@@ -10,10 +10,15 @@ function Admin() {
   const [status, setStatus] = useState("null");
   const [localStatus, setLocalStatus] = useState(status);
   const [allStats, setAllStats] = useState({});
+  const [topTenDishes, setTopTenDishes] = useState([]);
   const [loaded, setLoaded] = useState(false);
 
   const getOnlineStatus = async () => {
     const res = await api.get("/api/online");
+    const wes = await api.get("/api/stats/popular");
+    const popularDishData = wes.data.topTen;
+    console.log("result", popularDishData);
+    setTopTenDishes(popularDishData);
     setStatus(res.data);
     setLocalStatus(res.data);
   };
@@ -55,14 +60,8 @@ function Admin() {
   };
 
   // Dashboard & Helpers
-  function formatToUSD(number) {
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-    }).format(number);
-  }
 
-  const Dashboard = ({stats = allStats, title = "Year to date"}) => {
+  const TopTen = () => {
     return (
       <Box
         sx={{
@@ -84,77 +83,25 @@ function Admin() {
             textAlign: "start",
           }}
         >
-          {title}
+          Most Popular Dishes
         </Box>
-        <Grid
-          container
-          spacing={2}
+        <Box
           sx={{
-            width: "100%",
+            display: "flex",
+            flexFlow: "column wrap",
+            justifyContent: "left",
+            textAlign: "left",
+            gap: "20px",
           }}
         >
-          <Grid item xs={12} sm={12} md={6}>
-            <Box
-              sx={{
-                padding: "30px",
-                backgroundColor: "#fff",
-                borderRadius: "20px",
-                boxShadow: "0px 0px 10px rgba(0,0,0,0.1)",
-              }}
-            >
-              <Typography>Total Online Revenue</Typography>
-              <Box
-                sx={{
-                  fontSize: "2rem",
-                  fontWeight: "700",
-                }}
-              >
-                {formatToUSD(stats.revenue.all)}
+          {Object.keys(topTenDishes).map((dish) => {
+            return (
+              <Box>
+                {dish} : {topTenDishes[dish]}
               </Box>
-            </Box>
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <Box
-              sx={{
-                padding: "30px",
-                backgroundColor: "#fff",
-                borderRadius: "20px",
-                boxShadow: "0px 0px 10px rgba(0,0,0,0.1)",
-              }}
-            >
-              <Typography>Total Orders</Typography>
-              <Box
-                sx={{
-                  fontSize: "2rem",
-                  fontWeight: "700",
-                }}
-              >
-                {stats.count.all}
-              </Box>
-            </Box>
-          </Grid>
-
-          <Grid item xs={12} sm={6} md={3}>
-            <Box
-              sx={{
-                padding: "30px",
-                backgroundColor: "#fff",
-                borderRadius: "20px",
-                boxShadow: "0px 0px 10px rgba(0,0,0,0.1)",
-              }}
-            >
-              <Typography>Average Order Total</Typography>
-              <Box
-                sx={{
-                  fontSize: "2rem",
-                  fontWeight: "700",
-                }}
-              >
-                {formatToUSD(stats.averageOrderTotal.all)}
-              </Box>
-            </Box>
-          </Grid>
-        </Grid>
+            );
+          })}
+        </Box>
       </Box>
     );
   };
@@ -274,6 +221,7 @@ function Admin() {
             </Typography>
           </Box>
         </Box>
+        <TopTen />
         <Graph />
       </Box>
     );

@@ -4,6 +4,7 @@ import {Order, customerOrders, Util} from "../Models/Models.js";
 
 const admin = express.Router();
 
+/* Statistics */
 admin.get("/api/orders/migrate", async (req, res) => {
   const emailsToIgnore = [
     "chinadelightmd@gmail.com",
@@ -70,7 +71,7 @@ admin.get("/api/orders/migrate", async (req, res) => {
     .status(200)
     .send(`Looked at ${totalOrdersLookedAt} orders and added ${orderNumber}.`);
 });
-
+/* Get Stats (from document) */
 admin.get("/api/stats", async (req, res) => {
   try {
     const data = await Util.find({name: "Stats"}, {__v: 0});
@@ -80,16 +81,61 @@ admin.get("/api/stats", async (req, res) => {
   }
 });
 
-admin.get("/api/orders/count", async (_, res) => {
-  await customerOrders.find({}, {__v: 0}, (err, docs) => {
-    if (!err) {
-      res.json(docs[830]);
-    } else {
-      res.status(400).json({error: err});
-    }
+/* Find the 10 most popular dishes */
+admin.post("/api/stats/calculate/popular", async (_, res) => {
+  const dishDict = {};
+  const orders = await customerOrders.find({}, {__v: 0});
+  orders.map((order) => {
+    order.cart.map((dish) => {
+      const title = dish.title
+        .toLowerCase()
+        .trim()
+        .replace(/[^\w\s]/g, ""); // Convert to lowercase, remove leading/trailing spaces, and remove punctuation marks
+      console.log(`Looking at ${title} in the dictionary`);
+      const existingTitle = Object.keys(dishDict).find(
+        (key) =>
+          key
+            .toLowerCase()
+            .trim()
+            .replace(/[^\w\s]/g, "") === title
+      );
+      if (existingTitle) {
+        dishDict[existingTitle] += dish.quantity;
+      } else {
+        dishDict[title] = dish.quantity;
+      }
+    });
+  });
+  const sortedDishes = Object.keys(dishDict).sort(
+    (a, b) => dishDict[b] - dishDict[a]
+  );
+  const topTen = sortedDishes.slice(0, 10).reduce((result, key) => {
+    result[key] = dishDict[key];
+    return result;
+  }, {});
+
+  const doc = {
+    topTen: topTen,
+    dishCount: dishDict,
+  };
+  await Util.findOneAndUpdate(
+    {name: "Popular Dishes"},
+    {utilData: doc},
+    {upsert: true}
+  );
+
+  res.status(200).json({
+    topTen: topTen,
+    dishDict: dishDict,
   });
 });
 
+admin.get("/api/stats/popular", async (_, res) => {
+  const data = await Util.find({name: "Popular Dishes"}, {__v: 0});
+  res.status(200).json(data[0].utilData);
+});
+
+/* Calculate Stats and return stats document */
 admin.get("/api/orders/stats/count", async (_, res) => {
   const defaultMonths = () => {
     return {
@@ -140,6 +186,7 @@ admin.get("/api/orders/stats/count", async (_, res) => {
   };
   const defaultYear = () => {
     const stats = {total: 0};
+    stats.total = 0;
     stats.months = defaultMonths();
     stats.days = defaultDays();
     stats.hours = defaultHours();
@@ -152,6 +199,7 @@ admin.get("/api/orders/stats/count", async (_, res) => {
     stats.y2021 = defaultYear();
     stats.y2022 = defaultYear();
     stats.y2023 = defaultYear();
+    stats.y2024 = defaultYear();
     return stats;
   };
 
@@ -222,6 +270,7 @@ admin.get("/api/orders/stats/count", async (_, res) => {
   res.status(201).json(stats);
 });
 
+/* Test if API is working */
 admin.get("/api/orders/api", async (req, res) => {
   res.status(200).send("Orders API is running.");
 });
