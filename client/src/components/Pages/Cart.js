@@ -106,10 +106,7 @@ function Cart() {
     // handleClickOpen();
     let today = new Date();
     // checkers
-    const holiday =
-      today.getDate() === 6 &&
-      today.getMonth() === 5 &&
-      today.getFullYear() === 2023;
+    const holiday = today.getDate() === 28 && today.getMonth() === 10;
     const emptyCart = userCartCount === 0;
     const morning = today.getHours() < 11;
     let valentines = today.getDate() === 14 && today.getMonth() === 1;
