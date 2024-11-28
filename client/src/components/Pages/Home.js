@@ -36,16 +36,24 @@ function Home() {
       <Typography component="div">
         <Box textAlign="center" m={1} py={8}>
           {/* HOME PAGE ALERT */}
-          {/* <Typography style={{paddingBottom: "80px"}}>
-            <Alert severity="info">
-              <AlertTitle>
-                <strong> Alert for Friday 6/24 </strong>
+          <Typography style={{paddingBottom: "80px"}}>
+            <Alert
+              severity="info"
+              style={{background: "#B41E22", fontSize: "1.15rem"}}
+            >
+              <AlertTitle style={{fontSize: "1.25rem"}}>
+                <strong> Holiday Hours Notice </strong>
               </AlertTitle>
-              Our phone lines are down for the day and will not be able to
-              process credit cards in-person. Please pay in cash or by credit
-              card online. Sorry for any inconveniences and thank you!
+              China Delight will be <strong> closed </strong> on Thanksgiving
+              Day.
+              <br />
+              We will be <strong>open</strong> on Christmas Eve (Tuesday,
+              December 24th), Christmas Day, and New Years Eve (Tuesday,
+              December 31st) and New Years Day.
+              <br />
+              Thank you for understanding!
             </Alert>
-          </Typography> */}
+          </Typography>
           <Typography
             variant="h3"
             style={{
