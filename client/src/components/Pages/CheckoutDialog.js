@@ -236,7 +236,7 @@ const CheckoutDialog = (props) => {
       messageHtml: messageHtml,
     });
     if (response.data.msg === "success") {
-      window.location.href = "/confirmation";
+      window.location.href = "/v0/confirmation";
     } else if (response.data.msg === "fail") {
       alert("Oops, something went wrong. Try again");
     }
@@ -416,7 +416,7 @@ const CheckoutDialog = (props) => {
             <Typography gutterBottom>
               Please note: If your requests contain extra sauce, extra meat, or
               anything extra, they are liable to extra fees not calculated in
-              the final price below. Please see <a href="/about">pricing</a> for
+              the final price below. Please see <a href="/v0/about">pricing</a> for
               more details on what costs you can expect.
             </Typography>
           </Box>
@@ -598,7 +598,7 @@ const CheckoutDialog = (props) => {
               <Typography variant="body1" gutterBottom>
                 There is a <strong> $1.15 fee </strong> and any special requests
                 not calculated online may require you to pay extra in-person.
-                Please see <a href="/about"> pricing </a> for more details on
+                Please see <a href="/v0/about"> pricing </a> for more details on
                 what costs you can expect.
                 <br />
                 <br />

@@ -112,7 +112,7 @@ function ResponsiveDrawer(props) {
           </Typography>
 
           {/* Shopping Cart Icon */}
-          <Link className={classes.navLinks} to="/cart">
+          <Link className={classes.navLinks} to="/v0/cart">
             {" "}
             <IconButton color="inherit" button>
               {" "}

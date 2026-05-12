@@ -71,7 +71,7 @@ function Menu() {
           <Typography variant="body1" gutterBottom>
             Note: If your requests contain extra sauce, extra meat, or anything
             extra, they are liable to extra fees not calculated in the final
-            price below. Please see <a href="/about"> pricing</a> for more
+            price below. Please see <a href="/v0/about"> pricing</a> for more
             details on what costs you can expect.{" "}
           </Typography>
           <br />

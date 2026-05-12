@@ -231,7 +231,7 @@ function Cart() {
   const emptyCart = (
     <Typography>
       Woops! Looks like your cart is empty! head over to the
-      <a href="/menu"> Menu</a> and add items to your cart ~
+      <a href="/v0/menu"> Menu</a> and add items to your cart ~
     </Typography>
   );
 

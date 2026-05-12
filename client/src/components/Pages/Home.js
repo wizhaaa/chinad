@@ -3,13 +3,6 @@ import {Helmet} from "react-helmet";
 import {Typography, Grid, Box} from "@material-ui/core";
 import {NavigateNext as NavigateNextIcon} from "@material-ui/icons";
 
-import MuiAlert from "@material-ui/lab/Alert";
-import {AlertTitle} from "@material-ui/lab";
-
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
-
 function Home() {
   return (
     <div className="Home">
@@ -35,7 +28,7 @@ function Home() {
       </Helmet>
       <Typography component="div">
         <Box textAlign="center" m={1} py={8}>
-          {/* HOME PAGE ALERT */}
+          {/* HOME PAGE ALERT — hidden, bring back when there's a real notice
           <Typography style={{paddingBottom: "80px"}}>
             <Alert
               severity="info"
@@ -54,59 +47,60 @@ function Home() {
               Thank you for understanding!
             </Alert>
           </Typography>
+          */}
+
+          {/* LANTERN HERO */}
+          <Box className="lanternHero">
+            <img
+              src="https://media3.giphy.com/media/48PbiL2u5ZUU6HZf55/giphy.gif"
+              alt="China Delight"
+              className="lanternHeroImage"
+            />
+            <Box className="lanternHeroOverlay">
+              <Typography
+                className="lanternHeroChinese"
+                style={{fontFamily: "Zhi Mang Xing, cursive"}}
+              >
+                欢 迎 光 临
+              </Typography>
+              <Typography variant="h2" className="lanternHeroTitle">
+                China Delight
+              </Typography>
+              <Typography className="lanternHeroSub">
+                Forest Hill, Maryland · Authentic Chinese Cuisine
+              </Typography>
+              <Box className="lanternHeroCtas">
+                <a className="ctaPrimary" href="/v0/menu">
+                  Order Online <NavigateNextIcon />
+                </a>
+                <a className="ctaGhost" href="/v0/menu">
+                  View Menu
+                </a>
+              </Box>
+            </Box>
+          </Box>
+
+          <Box py={4}></Box>
+          <Typography variant="body1" gutterBottom className="lanternIntro">
+            你好!~ Welcome to China Delight — a local Chinese cuisine take-out
+            and dine-in restaurant in Forest Hill, MD.
+          </Typography>
           <Typography
-            variant="h3"
-            style={{
-              fontFamily: "Zhi Mang Xing, cursive",
-            }}
+            variant="subtitle"
             gutterBottom
+            className="lanternDisclaimer"
           >
-            晚餐时间
-          </Typography>
-          <Box py={1}></Box>
-          <img
-            src="https://media3.giphy.com/media/48PbiL2u5ZUU6HZf55/giphy.gif"
-            alt="bg"
-            className="homeImage"
-            style={{backgroundSize: "cover"}}
-          />
-          {/* <Box className="imageContainer" textAlign="center">
-            <div className="homeBg">
-              <Grid container spacing={3}>
-                <Grid item xs={12} sm={4}>
-                  <a className="homeButton" size="large" href="/menu">
-                    Order
-                  </a>
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                  <a className="homeButton" size="large" href="/lunch">
-                    Lunch
-                  </a>
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                  <a className="homeButton" size="large" href="/dinner">
-                    Dinner
-                  </a>
-                </Grid>
-              </Grid>
-            </div>{" "
-          </Box> */}
-          <Box py={2}></Box>
-          <Typography variant="body1" gutterBottom>
-            你好!~ Welcome the new China Delight website!
-            <Typography variant="body1" gutterBottom></Typography>
-            China Delight is a local Chinese cuisine take-out and dine-in
-            restaurant in Forest Hill, MD.
-          </Typography>
-          <Typography variant="body1" gutterBottom></Typography>
-          <Typography variant="subtitle" gutterBottom>
-            <em> Disclaimer: The </em>
             <em>
-              photos not exact replications of our dishes and are to serve as
-              references.
+              Disclaimer: photos are not exact replications of our dishes and
+              are to serve as references.
             </em>
           </Typography>
           <Box py={4}></Box>
+
+          {/* FEATURED TILES */}
+          <Typography variant="h4" className="lanternSectionTitle" gutterBottom>
+            — Featured —
+          </Typography>
           <Box className="homeGallery">
             <Grid container spacing={4}>
               <Grid
@@ -123,7 +117,7 @@ function Home() {
                 <a
                   className="homeButton"
                   size="large"
-                  href="/menu"
+                  href="/v0/menu"
                   style={{whiteSpace: "nowrap"}}
                 >
                   Menu <NavigateNextIcon color="#ffe9c3" />
@@ -143,7 +137,7 @@ function Home() {
                 <a
                   className="homeButton"
                   size="large"
-                  href="/lunch"
+                  href="/v0/lunch"
                   style={{whiteSpace: "nowrap"}}
                 >
                   Lunch <NavigateNextIcon color="#ffe9c3" />
@@ -163,7 +157,7 @@ function Home() {
                 <a
                   className="homeButton"
                   size="large"
-                  href="/dinner-combo"
+                  href="/v0/dinner-combo"
                   style={{whiteSpace: "nowrap"}}
                 >
                   Dinner <NavigateNextIcon color="#ffe9c3" />
@@ -172,61 +166,69 @@ function Home() {
             </Grid>
           </Box>
           <Box py={8}> </Box>
-          <Typography variant="body1" gutterBottom>
-            <Typography variant="h3" gutterBottom>
-              Hours
-            </Typography>
-            <Grid container spacing={3}>
-              <Grid container item xs={6} justify="flex-end">
-                Monday - Saturdays
+
+          {/* INFO BAR: Hours / Visit / Contact */}
+          <Box className="lanternInfoBar">
+            <Grid container spacing={4}>
+              <Grid item xs={12} sm={4} className="lanternInfoCol">
+                <Typography variant="h4" className="lanternInfoTitle">
+                  Hours
+                </Typography>
+                <Box className="lanternInfoBody">
+                  <div>
+                    <strong>Mon – Sat</strong>
+                    <span>11 AM – 9:30 PM</span>
+                  </div>
+                  <div>
+                    <strong>Sunday</strong>
+                    <span>12 PM – 8:30 PM</span>
+                  </div>
+                  <div>
+                    <strong>Tuesday</strong>
+                    <span>Closed</span>
+                  </div>
+                </Box>
               </Grid>
-              <Grid container item xs={6}>
-                11 AM - 9:30 PM
+
+              <Grid item xs={12} sm={4} className="lanternInfoCol">
+                <Typography variant="h4" className="lanternInfoTitle">
+                  Visit
+                </Typography>
+                <Box className="lanternInfoBody">
+                  <div>📍 1E Newport Dr</div>
+                  <div>Forest Hill, MD 21050</div>
+                  <em>On Rt. 24, across from Enotria</em>
+                </Box>
               </Grid>
-              <Grid container item xs={6} justify="flex-end">
-                Sundays
-              </Grid>
-              <Grid container item xs={6}>
-                12 - 8:30
-              </Grid>
-              <Grid container item xs={6} justify="flex-end">
-                Tuesdays
-              </Grid>
-              <Grid container item xs={6}>
-                Closed
+
+              <Grid item xs={12} sm={4} className="lanternInfoCol">
+                <Typography variant="h4" className="lanternInfoTitle">
+                  Contact
+                </Typography>
+                <Box className="lanternInfoBody">
+                  <div>📞 410-877-9490</div>
+                  <div>
+                    📩{" "}
+                    <a href="mailto:chinadelightmd@gmail.com">
+                      chinadelightmd@gmail.com
+                    </a>
+                  </div>
+                </Box>
               </Grid>
             </Grid>
-          </Typography>
-          <Box py={2}> </Box>
-          <Typography variant="body1" gutterBottom>
-            <Typography variant="h3" gutterBottom>
-              Contact
-            </Typography>
-            📞 PHONE: 410-877-9490 <br />
-            📩 EMAIL:
-            <a href="mailto:chinadelightmd@gmail.com">
-              chinadelightmd@gmail.com
-            </a>
-          </Typography>
-          <Box py={2}> </Box>
-          <Typography variant="body1" gutterBottom>
-            <Typography variant="h3" gutterBottom>
-              Directions
-            </Typography>
-            📍 1E Newport Dr, Forest Hill, MD 21050
-            <br />
-            <em> On Rt. 24 (Rock Spring Road), right across Enotria </em>
-            <Box py={1.5}> </Box>
+
+            <Box py={3}></Box>
             <iframe
               title="china delight map"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3075.182788165903!2d-76.3879002845251!3d39.57803061414107!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c7deb7b8b012ab%3A0xd3e57330e03df815!2sChina%20Delight!5e0!3m2!1sen!2sus!4v1617983002384!5m2!1sen!2sus"
               width="960"
-              height="600"
+              height="450"
+              className="lanternMap"
               style={{border: 0, maxWidth: "100%"}}
-              allowfullscreen=""
+              allowFullScreen=""
               loading="lazy"
             ></iframe>
-          </Typography>
+          </Box>
         </Box>
       </Typography>
     </div>

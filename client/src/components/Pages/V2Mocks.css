@@ -1,0 +1,440 @@
+/* =========================================================
+   V2 MOCKS — cart-button design exploration
+   ========================================================= */
+
+.v2-mocks-root .v2-menu-header {
+  text-align: left;
+  padding-bottom: 32px;
+}
+.v2-mocks-root .v2-menu-header .v2-eyebrow,
+.v2-mocks-root .v2-menu-header .v2-hero-zh {
+  text-align: left;
+}
+.v2-mocks-root .v2-menu-lede {
+  margin: 0;
+  max-width: 640px;
+}
+
+.v2-mocks-main {
+  padding: 32px 32px 96px;
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+}
+.v2-mock-section { scroll-margin-top: 100px; }
+.v2-mock-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--v2-ink);
+}
+.v2-mock-title {
+  font-family: var(--v2-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 1.4rem;
+  color: var(--v2-ink);
+  margin: 0 0 4px;
+}
+.v2-mock-desc {
+  font-family: var(--v2-sans);
+  font-size: 0.88rem;
+  color: var(--v2-ink-soft);
+  margin: 0;
+  line-height: 1.5;
+  max-width: 720px;
+}
+
+/* mini-nav frame stack */
+.cb-frame-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.cb-frame {
+  position: relative;
+  background: var(--v2-paper);
+  border: 1px solid var(--v2-gold-faint);
+  border-radius: 6px;
+  padding: 18px 22px;
+}
+.cb-frame-label {
+  position: absolute;
+  top: 6px;
+  right: 12px;
+  font-family: var(--v2-sans);
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--v2-ink-faint);
+}
+.cb-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+.cb-nav-wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.cb-nav-seal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--v2-seal);
+  color: var(--v2-paper);
+  font-family: var(--v2-zh);
+  font-size: 0.9rem;
+  font-weight: 600;
+  transform: rotate(-4deg);
+}
+.cb-nav-text {
+  font-family: "Fraunces", "Playfair Display", Georgia, serif;
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: var(--v2-ink);
+}
+.cb-nav-links {
+  display: inline-flex;
+  align-items: center;
+  gap: 24px;
+}
+.cb-nav-link {
+  font-family: var(--v2-sans);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--v2-ink-soft);
+}
+
+@media (max-width: 700px) {
+  .v2-mocks-main { padding: 24px 16px 64px; gap: 36px; }
+  .cb-frame { padding: 14px 16px; }
+  .cb-nav-text { font-size: 1rem; }
+  .cb-nav-links { gap: 14px; }
+  .cb-nav-link { font-size: 0.7rem; letter-spacing: 0.16em; }
+}
+
+/* =========================================================
+   01 — CURRENT (regal frame, gold corner brackets)
+   Same as the live cart pill but inside a span.
+   ========================================================= */
+.cb-current {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 28px;
+  color: var(--v2-paper);
+  border: 1px solid var(--v2-gold);
+  border-radius: 3px;
+  font-family: var(--v2-serif);
+  font-size: 0.92rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  background-color: var(--v2-ink);
+  background-image:
+    linear-gradient(var(--v2-gold), var(--v2-gold)),
+    linear-gradient(var(--v2-gold), var(--v2-gold)),
+    linear-gradient(var(--v2-gold), var(--v2-gold)),
+    linear-gradient(var(--v2-gold), var(--v2-gold)),
+    linear-gradient(var(--v2-gold), var(--v2-gold)),
+    linear-gradient(var(--v2-gold), var(--v2-gold)),
+    linear-gradient(var(--v2-gold), var(--v2-gold)),
+    linear-gradient(var(--v2-gold), var(--v2-gold));
+  background-position:
+    5px 5px, 5px 5px,
+    calc(100% - 5px - 1.5px) 5px, calc(100% - 5px - 9px) 5px,
+    5px calc(100% - 5px - 9px), 5px calc(100% - 5px - 1.5px),
+    calc(100% - 5px - 1.5px) calc(100% - 5px - 9px),
+    calc(100% - 5px - 9px) calc(100% - 5px - 1.5px);
+  background-size:
+    1.5px 9px, 9px 1.5px,
+    1.5px 9px, 9px 1.5px,
+    1.5px 9px, 9px 1.5px,
+    1.5px 9px, 9px 1.5px;
+  background-repeat: no-repeat;
+  box-shadow:
+    inset 0 0 0 2px var(--v2-ink),
+    inset 0 0 0 3px rgba(168, 133, 62, 0.55);
+}
+.cb-current-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  background: var(--v2-gold);
+  color: var(--v2-ink);
+  border-radius: 2px;
+  font-family: var(--v2-sans);
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+/* =========================================================
+   02 — MINIMAL (plain text-link)
+   ========================================================= */
+.cb-minimal {
+  font-family: var(--v2-sans);
+  font-size: 0.86rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--v2-ink);
+  border-bottom: 1px solid transparent;
+  padding-bottom: 1px;
+  transition: border-color 0.2s ease;
+  cursor: default;
+}
+.cb-minimal em {
+  font-style: italic;
+  color: var(--v2-ink-faint);
+  font-family: var(--v2-display);
+  margin-left: 4px;
+}
+.cb-minimal:hover { border-bottom-color: var(--v2-ink); }
+
+/* =========================================================
+   03 — ICON PILL with gold counter circle
+   ========================================================= */
+.cb-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px 7px 12px;
+  background: var(--v2-ink);
+  color: var(--v2-paper);
+  border-radius: 999px;
+  font-family: var(--v2-sans);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  position: relative;
+}
+.cb-pill svg { color: var(--v2-gold); }
+.cb-pill-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--v2-gold);
+  color: var(--v2-ink);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  margin-left: 2px;
+}
+
+/* =========================================================
+   04 — LANTERN
+   ========================================================= */
+.cb-lantern {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  width: 38px;
+}
+.cb-lantern-cap {
+  width: 18px;
+  height: 4px;
+  background: var(--v2-gold);
+  border-radius: 2px 2px 0 0;
+}
+.cb-lantern-body {
+  width: 100%;
+  height: 28px;
+  background:
+    radial-gradient(circle at 50% 40%, #c8302a 0%, #9c2018 100%);
+  border-radius: 50% / 30%;
+  border: 1.5px solid var(--v2-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 2px 6px -2px rgba(154, 32, 24, 0.5);
+}
+.cb-lantern-body::before,
+.cb-lantern-body::after {
+  /* horizontal banding lines */
+  content: "";
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  height: 1px;
+  background: rgba(255, 220, 180, 0.35);
+}
+.cb-lantern-body::before { top: 8px; }
+.cb-lantern-body::after  { bottom: 8px; }
+.cb-lantern-num {
+  position: relative;
+  z-index: 1;
+  font-family: var(--v2-zh);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #ffeac0;
+  line-height: 1;
+}
+.cb-lantern-tassel {
+  width: 1px;
+  height: 8px;
+  background: var(--v2-gold);
+  margin-top: 1px;
+}
+
+/* =========================================================
+   05 — STAMP (square seal)
+   ========================================================= */
+.cb-stamp {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  background: var(--v2-seal);
+  color: var(--v2-paper);
+  font-family: var(--v2-zh);
+  font-weight: 700;
+  font-size: 1.3rem;
+  transform: rotate(-3deg);
+  box-shadow:
+    inset 0 0 0 2px var(--v2-seal),
+    inset 0 0 0 3px rgba(255, 235, 215, 0.45),
+    0 4px 10px -4px rgba(154, 32, 24, 0.5);
+}
+.cb-stamp-zh { line-height: 1; }
+.cb-stamp-num {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--v2-ink);
+  color: var(--v2-gold);
+  font-family: var(--v2-sans);
+  font-size: 0.7rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(3deg);
+  border: 1.5px solid var(--v2-gold);
+}
+
+/* =========================================================
+   06 — SCROLL TAB (cream tab w/ vertical seal-red badge)
+   ========================================================= */
+.cb-scroll {
+  display: inline-flex;
+  align-items: stretch;
+  background: var(--v2-paper-warm);
+  border: 1px solid var(--v2-gold-soft);
+  border-top-left-radius: 12px 6px;
+  border-top-right-radius: 12px 6px;
+  border-bottom-left-radius: 12px 6px;
+  border-bottom-right-radius: 12px 6px;
+  overflow: hidden;
+}
+.cb-scroll-label {
+  padding: 6px 14px;
+  font-family: var(--v2-serif);
+  font-size: 0.95rem;
+  color: var(--v2-ink);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+}
+.cb-scroll-badge {
+  width: 22px;
+  background: var(--v2-seal);
+  color: var(--v2-paper);
+  font-family: var(--v2-zh);
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-left: 1px solid var(--v2-gold-soft);
+}
+
+/* =========================================================
+   07 — GHOST OUTLINE
+   ========================================================= */
+.cb-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border: 1px solid var(--v2-gold);
+  background: transparent;
+  color: var(--v2-ink);
+  font-family: var(--v2-sans);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.cb-ghost:hover {
+  background: var(--v2-ink);
+  color: var(--v2-paper);
+}
+.cb-ghost-dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--v2-seal);
+  color: var(--v2-paper);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+/* =========================================================
+   08 — TALLY (text + numeral chip)
+   ========================================================= */
+.cb-tally {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.cb-tally-label {
+  font-family: var(--v2-sans);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--v2-ink);
+}
+.cb-tally-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--v2-paper-warm);
+  border: 1px solid var(--v2-ink);
+  color: var(--v2-ink);
+  font-family: var(--v2-display);
+  font-style: italic;
+  font-weight: 700;
+  font-size: 0.92rem;
+}

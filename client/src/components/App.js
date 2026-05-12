@@ -1,6 +1,6 @@
 // react library
 import React from "react";
-import {BrowserRouter as Router} from "react-router-dom";
+import {BrowserRouter as Router, useLocation} from "react-router-dom";
 // material-ui library
 import {makeStyles, ThemeProvider, CssBaseline} from "@material-ui/core/";
 
@@ -10,6 +10,7 @@ import {Helmet} from "react-helmet";
 // self made components
 import HeaderNav from "./HeaderNav";
 import Routes from "./Routes";
+import V2FloatingCart from "./Pages/V2FloatingCart";
 import theme from "./Theme";
 import "./App.css";
 
@@ -37,6 +38,37 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(20),
   },
 }));
+
+function AppShell() {
+  const classes = useStyles();
+  const {pathname} = useLocation();
+  // v0 is the legacy v1 site — keep its drawer chrome.
+  // Everything else (default routes + /v2/* + /v3/*) is chromeless.
+  const isLegacy = pathname.startsWith("/v0");
+
+  if (!isLegacy) {
+    return (
+      <>
+        <CssBaseline />
+        <main style={{width: "100%"}}>
+          <Routes />
+        </main>
+        <V2FloatingCart />
+      </>
+    );
+  }
+
+  return (
+    <>
+      <HeaderNav />
+      <CssBaseline />
+      <main className={classes.content}>
+        <div className={classes.toolbar} />
+        <Routes />
+      </main>
+    </>
+  );
+}
 
 function App() {
   const classes = useStyles();
@@ -78,13 +110,7 @@ function App() {
         <Router>
           {/* <Test /> */}
           <CartProvider>
-            <HeaderNav />
-            <CssBaseline />
-
-            <main className={classes.content}>
-              <div className={classes.toolbar} />
-              <Routes />
-            </main>
+            <AppShell />
           </CartProvider>
         </Router>
       </ThemeProvider>

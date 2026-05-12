@@ -268,10 +268,10 @@ function Confirmation() {
               Check your spam/junk if you can't find it - or call us at
               410-877-9490 and ask if we received your order.
             </Typography>
-            See <a href="/about">Order times</a> for more details on estimated
+            See <a href="/v0/about">Order times</a> for more details on estimated
             order times.
             <br />
-            See <a href="/about">Pricing</a> for more details on what costs you
+            See <a href="/v0/about">Pricing</a> for more details on what costs you
             can expect.
           </Typography>
           <Box mb={3}> </Box>
